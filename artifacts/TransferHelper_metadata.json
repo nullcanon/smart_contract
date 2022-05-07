@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.8.13+commit.abaa5c0e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"msc_token/UsdtPresell.sol": "TransferHelper"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"msc_token/UsdtPresell.sol": {
+			"keccak256": "0x76d81c6c2d7af0aa4a9046557c336f2d473b645c09c894d8c9ae585545956ad7",
+			"urls": [
+				"bzz-raw://9a3be069adfcbbe4d3c0fb4ec855a40dd760a4a5b15963cf8366981b42ab7441",
+				"dweb:/ipfs/QmQfM6HWKx72ctcz3oWjyPtU3mSJwhuNpDWqRm2eKAF2Mj"
+			]
+		}
+	},
+	"version": 1
+}
