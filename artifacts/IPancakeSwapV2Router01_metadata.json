@@ -768,7 +768,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/BeeToken.sol": "IPancakeSwapV2Router01"
+			"smart_contract/BeeToken.sol": "IPancakeSwapV2Router01"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -776,18 +776,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/BeeToken.sol": {
-			"keccak256": "0x6d338139a97406cdd4dc248d352f0b506d224f8e235494e235ef882f5cdf93ce",
+		"smart_contract/BeeToken.sol": {
+			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f72feb3337459f4166c8dfcb616654109f235a78a3702a9d5283ef3fa3d7a0ae",
-				"dweb:/ipfs/QmaRHBqtYdYiZcggkaciVe9Y8RxpQ7S7MK7TStbRyzXtt1"
+				"bzz-raw://8f14fb2551d2e87277a41a5d65b95d112c35d915d5922ae305dbc2d6696d2506",
+				"dweb:/ipfs/Qma6M6YDDuLDtjPDUCPc5CZTRWgCUojbnzERy9vwKxQwMm"
 			]
 		}
 	},

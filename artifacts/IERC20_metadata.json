@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -190,35 +190,8 @@
 			}
 		],
 		"devdoc": {
-			"events": {
-				"Approval(address,address,uint256)": {
-					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
-				},
-				"Transfer(address,address,uint256)": {
-					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
-				}
-			},
 			"kind": "dev",
-			"methods": {
-				"allowance(address,address)": {
-					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
-				},
-				"approve(address,uint256)": {
-					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
-				},
-				"balanceOf(address)": {
-					"details": "Returns the amount of tokens owned by `account`."
-				},
-				"totalSupply()": {
-					"details": "Returns the amount of tokens in existence."
-				},
-				"transfer(address,uint256)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				},
-				"transferFrom(address,address,uint256)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -229,25 +202,26 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/Msc.sol": "IERC20"
+			"smart_contract/BeeToken.sol": "IERC20"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/Msc.sol": {
-			"keccak256": "0x36db5a2ad753ae7c858b235f1427552839c9ee0e6dc360a30f531e42a8235dac",
+		"smart_contract/BeeToken.sol": {
+			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://66b5de975ed64b9a5741e57a85961e50454544c2de2485622e9c67cd28f1297b",
-				"dweb:/ipfs/QmccTEe6HStd9G8hM65hALVVaRDq66K5D4bDE5GpBKiDfc"
+				"bzz-raw://8f14fb2551d2e87277a41a5d65b95d112c35d915d5922ae305dbc2d6696d2506",
+				"dweb:/ipfs/Qma6M6YDDuLDtjPDUCPc5CZTRWgCUojbnzERy9vwKxQwMm"
 			]
 		}
 	},

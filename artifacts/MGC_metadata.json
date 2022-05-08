@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -389,21 +389,21 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/ERC20.sol": "MGC"
+			"smart_contract/ERC20.sol": "MGC"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/ERC20.sol": {
+		"smart_contract/ERC20.sol": {
 			"keccak256": "0x2fae624297e1d5f01962059040d3bd2bb29f2673664c6c3a4f00b8cf264e2f33",
 			"license": "MIT",
 			"urls": [
