@@ -2,11 +2,11 @@
 pragma solidity ^0.8.0;
 
 
-import "./node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "./node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
-import "./node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "./node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
-import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 
 
@@ -27,6 +27,16 @@ contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
         }
         _mintBatch(msg.sender, ids, amounts, "");
         tokenSupply = tokenSupply + idsNumber;
+    }
+
+    function transferWithNumber(uint256 start, uint256 idsNumber, address to) public {
+        uint256[] memory ids = new uint256[](idsNumber);
+        uint256[] memory amounts = new uint256[](idsNumber);
+        for (uint256 i = start; i < (idsNumber + start); i++) {
+            ids[i] = i;
+            amounts[i] = 1;
+        }
+        safeBatchTransferFrom(msg.sender, to, ids, amounts, "");
     }
 
 

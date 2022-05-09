@@ -35,7 +35,7 @@ contract Synthesizer is ERC1155Holder {
         IERC1155(queenbeeMintAddress).safeTransferFrom( msg.sender, address(this), queenbeeId, 1 , "");
         IERC1155(queenbeeMintAddress).burn();
 
-        require(IERC20(moneyMintAddress).allowance(msg.sender, feeAddress) >= feeAmount, "Token allowance too low");
+        require(IERC20(beeTokenMintAddress).allowance(msg.sender, feeAddress) >= feeAmount, "Token allowance too low");
         IERC20(beeTokenMintAddress).transferFrom(msg.sender, feeAddress, feeAmount);
 
         // TODO queenbeeId
