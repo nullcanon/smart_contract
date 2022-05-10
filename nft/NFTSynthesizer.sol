@@ -24,16 +24,16 @@ contract Synthesizer is ERC1155Holder {
         uint256 queenbeeId
     ) public {
         IERC1155(luckybeeMintAddress).safeTransferFrom( msg.sender, address(this), luckybeeId, 1 , "");
-        IERC1155(luckybeeMintAddress).burn();
+        IERC1155(luckybeeMintAddress).burn(address(this), luckybeeId, 1);
 
         IERC1155(hashbeeMintAddress).safeTransferFrom( msg.sender, address(this), hashbeeId, 1 , "");
-        IERC1155(hashbeeMintAddress).burn();
+        IERC1155(hashbeeMintAddress).burn(address(this), hashbeeId, 1);
 
         IERC1155(knightbeeMintAddress).safeTransferFrom( msg.sender, address(this), knightbeeId, 1 , "");
-        IERC1155(knightbeeMintAddress).burn();
+        IERC1155(knightbeeMintAddress).burn(address(this), knightbeeId, 1);
 
         IERC1155(queenbeeMintAddress).safeTransferFrom( msg.sender, address(this), queenbeeId, 1 , "");
-        IERC1155(queenbeeMintAddress).burn();
+        IERC1155(queenbeeMintAddress).burn(address(this), queenbeeId, 1);
 
         require(IERC20(beeTokenMintAddress).allowance(msg.sender, feeAddress) >= feeAmount, "Token allowance too low");
         IERC20(beeTokenMintAddress).transferFrom(msg.sender, feeAddress, feeAmount);
