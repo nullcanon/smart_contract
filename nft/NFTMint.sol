@@ -223,16 +223,12 @@ library LibArrayForUint256Utils {
 }
 
 contract MintNft is ERC1155Holder, Ownable {
-    address private luckybeeMintAddress;
-    address private hashbeeMintAddress;
-    address private knightbeeMintAddress;
-    address private queenbeeMintAddress;
-    address private bumbleBeeMintAddress;
 
     address private feeTokenMintAddress = 0xB0bc99bdb71a4320a9aD357f68EBfBe6fFeBFc8A;
 
     address private feeReceiveAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
-    uint256 private feeAmount = 1 * 10 ** 18;
+
+    mapping(address => uint256) private feeAmount;
 
     mapping(address => uint256[]) private mintTokenId;
 
@@ -240,14 +236,30 @@ contract MintNft is ERC1155Holder, Ownable {
     event addNft(address indexed nftContractAddress, uint256 idsNumber);
     event withdrawNft(address indexed nftContractAddress);
 
+    mapping(address => bool) private whiteList;
+
+    function changeWhiteList(address user,  bool opt) external onlyOwner {
+        whiteList[user] = opt;
+    }
+
+    function changeWhiteListBatch(address[] memory userlist, bool opt) external onlyOwner {
+        for (uint256 i = 0; i < userlist.length; i++) {
+            whiteList[userlist[i]] = opt;
+        }
+    }
+
+    function inWhiteList(address user) public view returns (bool) {
+        return whiteList[user];
+    }
 
     function mintNft(
         address nftContractAddress
     ) public {
         // check nftContractAddress
+        require(inWhiteList(msg.sender), "Not white list user");
 
-        require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount, "Token allowance too low");
-        IERC20(feeTokenMintAddress).transferFrom(msg.sender, feeReceiveAddress, feeAmount);
+        require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount[nftContractAddress], "Token allowance too low");
+        IERC20(feeTokenMintAddress).transferFrom(msg.sender, feeReceiveAddress, feeAmount[nftContractAddress]);
 
 
         (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(mintTokenId[nftContractAddress]);
@@ -304,8 +316,20 @@ contract MintNft is ERC1155Holder, Ownable {
         feeReceiveAddress = tokenAddress;
     }
 
-    function setFeeAmount(uint256 amount) public onlyOwner {
-        feeAmount = amount;
+    function setFeeAmount(address nftContractAddress, uint256 amount) public onlyOwner {
+        feeAmount[nftContractAddress] = amount;
+    }
+
+    function getFeeAmount(address nftContractAddress) public view returns (uint256) {
+        return feeAmount[nftContractAddress];
+    }
+
+    function getFeeMintAddress() public view returns (address) {
+        return feeTokenMintAddress;
+    }
+
+    function getFeeReceiveAddress() public view returns (address) {
+        return feeReceiveAddress;
     }
 
     function holdNumber(address nftContractAddress) public view returns (uint256) {

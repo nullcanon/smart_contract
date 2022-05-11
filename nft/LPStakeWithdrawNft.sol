@@ -64,6 +64,11 @@ contract Farming is Ownable {
         emit NFTAdded(contractAddress, id, total, price);
     }
 
+    function addNFTBatch() public {
+
+    }
+
+
     function stake(uint256 amount) external {
         lpToken.safeTransferFrom(
             msg.sender,
