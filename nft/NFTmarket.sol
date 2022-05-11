@@ -115,6 +115,10 @@ contract marketPlaceBoilerPlate is ReentrancyGuard {
         }
         return items;
     }
+
+    function setFeeAddress(address tokenAddress) public onlyOwner {
+        feeTokenMintAddress = tokenAddress;
+    }
       
 }
 

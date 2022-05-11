@@ -22,8 +22,8 @@ contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
         uint256[] memory ids = new uint256[](idsNumber);
         uint256[] memory amounts = new uint256[](idsNumber);
         for (uint256 i = tokenSupply; i < (idsNumber + tokenSupply); i++) {
-            ids[i] = i;
-            amounts[i] = 1;
+            ids[i - tokenSupply] = i;
+            amounts[i - tokenSupply] = 1;
         }
         _mintBatch(msg.sender, ids, amounts, "");
         tokenSupply = tokenSupply + idsNumber;
@@ -33,8 +33,8 @@ contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
         uint256[] memory ids = new uint256[](idsNumber);
         uint256[] memory amounts = new uint256[](idsNumber);
         for (uint256 i = start; i < (idsNumber + start); i++) {
-            ids[i] = i;
-            amounts[i] = 1;
+            ids[i - start] = i;
+            amounts[i - start] = 1;
         }
         safeBatchTransferFrom(msg.sender, to, ids, amounts, "");
     }

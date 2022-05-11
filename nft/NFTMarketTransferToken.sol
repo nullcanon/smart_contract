@@ -7,20 +7,27 @@ import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/tok
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol";
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/utils/ERC1155Holder.sol";
+import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol";
+import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+
+
 
 // nft market 
 // support : erc1155
 // support : use token buy
 
-contract marketPlace is ReentrancyGuard , ERC1155Holder{
+contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
+    using SafeMath for uint256;
     using Counters for Counters.Counter;
     Counters.Counter private _itemIds;
     Counters.Counter private _itemsSold;
+
+    address private feeAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    uint private feeNumerator = 300;
+    uint private feeDenominator = 10000;
     
-     address public owner;
      
      constructor() {
-         owner = msg.sender;
      }
      
      struct MarketItem {
@@ -165,8 +172,12 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder{
                 );
 
             require(IERC20(moneyMintAddress).allowance(msg.sender, address(this)) >= price, "Token allowance too low");
-            bool sent = IERC20(moneyMintAddress).transferFrom(msg.sender, address(idToMarketItem[itemId].seller), price);
-            require(sent, "Token transfer failed");
+            uint256 fee = price.mul(feeNumerator).div(feeDenominator);
+            bool sent = IERC20(moneyMintAddress).transferFrom(msg.sender, feeAddress, fee);
+            require(sent, "Token fee transfer failed");
+
+            sent = IERC20(moneyMintAddress).transferFrom(msg.sender, idToMarketItem[itemId].seller, price.sub(fee));
+            require(sent, "Token seller transfer failed");
 
             IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
             idToMarketItem[itemId].owner = payable(msg.sender);
@@ -191,8 +202,13 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder{
                 );
 
             require(IERC20(tokenMintAddress).allowance(msg.sender, address(this)) >= price, "Token allowance too low");
-            bool sent = IERC20(tokenMintAddress).transferFrom(msg.sender, idToMarketItem[itemId].seller, price);
-            require(sent, "Token transfer failed");
+
+            uint256 fee = price.mul(feeNumerator).div(feeDenominator);
+            bool sent = IERC20(tokenMintAddress).transferFrom(msg.sender, feeAddress, fee);
+            require(sent, "Token fee transfer failed");
+
+            sent = IERC20(tokenMintAddress).transferFrom(msg.sender, idToMarketItem[itemId].seller, price.sub(fee));
+            require(sent, "Token seller transfer failed");
 
             IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, 1 , "");
             idToMarketItem[itemId].owner = payable(msg.sender);
@@ -237,7 +253,31 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder{
         }
         return items;
     }
-      
+    
+    function setFeeAddress(address _feeAddress) public onlyOwner {
+        feeAddress = _feeAddress;
+    }
+
+    function setFeeNumerator(uint _feeNumerator) public onlyOwner {
+        feeNumerator = _feeNumerator;
+    }
+    
+    function setFeeDenominator(uint _feeDenominator) public onlyOwner {
+        feeDenominator = _feeDenominator;
+    } 
+
+    function getFeeAddress() public view returns (address) {
+        return feeAddress;
+    }
+
+    function getFeeNumerator() public view returns (uint) {
+        return feeNumerator;
+    }
+
+    function getFeeDenominator() public view returns (uint) {
+        return feeDenominator;
+    }
+
 }
 
 /// Thanks for inspiration: https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/

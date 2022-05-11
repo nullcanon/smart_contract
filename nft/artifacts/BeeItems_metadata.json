@@ -586,10 +586,10 @@
 	},
 	"sources": {
 		"smart_contract/nft/ERC1155.sol": {
-			"keccak256": "0xa9b4f74b44ef5752f15bf16380ad6e24316a27ff9e0e089a3964b184da93dce6",
+			"keccak256": "0xada04c1c194995647b1e7048790b252925c97d6e6e98baccb76e1986116b900d",
 			"urls": [
-				"bzz-raw://3eb6985e9f7568d9a3f86766ccd5ee00ac8ff06c02ec6301c644d1f23c78d748",
-				"dweb:/ipfs/QmTeyhuXhnwsQCsL1hs8KNmACwiszzXCMQMMgPAnfUdVmc"
+				"bzz-raw://30f8e8cf92bff3752f01089ec880e3491a657c17dde2c05bb960755a61588c75",
+				"dweb:/ipfs/QmU7wSL6CAhdvDG3QDvtk4yUMNZdc7Db5noQnaz5Fj7Dmw"
 			]
 		},
 		"smart_contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
