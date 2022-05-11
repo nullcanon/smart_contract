@@ -223,14 +223,14 @@ library LibArrayForUint256Utils {
 
 }
 
-contract Farming is Ownable ,ERC1155Holder{
+contract Farming is Ownable , ERC1155Holder{
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
     
     struct UserInfo {
         uint256 amount;           // current staked LP
         uint256 lastUpdateTime;   // unix timestamp for last details update (when pointsDebt calculated)
-        uint256 pointsDebt;       // total points collected before latest deposit
+        uint256 pointsDebt;       // total points collected before latest deposit 结算数量
     }
     
     struct NFTInfo {
