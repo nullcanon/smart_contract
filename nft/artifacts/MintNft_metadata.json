@@ -129,12 +129,12 @@
 						"type": "address"
 					},
 					{
-						"internalType": "bool",
-						"name": "opt",
-						"type": "bool"
+						"internalType": "uint256",
+						"name": "quota",
+						"type": "uint256"
 					}
 				],
-				"name": "changeWhiteList",
+				"name": "addWhiteList",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -147,14 +147,33 @@
 						"type": "address[]"
 					},
 					{
-						"internalType": "bool",
-						"name": "opt",
-						"type": "bool"
+						"internalType": "uint256",
+						"name": "quota",
+						"type": "uint256"
 					}
 				],
-				"name": "changeWhiteListBatch",
+				"name": "addWhiteListBatch",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "buyQuota",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -398,6 +417,42 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quota",
+						"type": "uint256"
+					}
+				],
+				"name": "subWhiteList",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "userlist",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "quota",
+						"type": "uint256"
+					}
+				],
+				"name": "subWhiteListBatch",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -482,11 +537,11 @@
 	},
 	"sources": {
 		"smart_contract/nft/NFTMint.sol": {
-			"keccak256": "0xdfa8b5983a9d7e8027be1aa00d438a312d6aedcc6c2e08138e7fc3a1e352c61d",
+			"keccak256": "0x70d16f35b560ed9dfcad004a4e6a806cfd6160cca8ca6b0d47e24c92224a2e06",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4a04016c8a92361115e817333be1e1860ae08345ee9953303a8dda307ce81f65",
-				"dweb:/ipfs/QmRJddPHUETHCQPrMHMCmpfAzwVkhJW9K3kfLgpDn366mm"
+				"bzz-raw://ce5c3ce0355a671c3bae3b76cba27fc37c4a3f05f71ded527e4a979fb5eabbfb",
+				"dweb:/ipfs/QmVKokJbQi5M1QuoaV8Zp2J9s2HbfNYaVzEBN3sr7ANZPj"
 			]
 		},
 		"smart_contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {

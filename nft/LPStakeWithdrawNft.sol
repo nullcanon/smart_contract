@@ -243,7 +243,7 @@ contract Farming is Ownable , ERC1155Holder{
     uint256 public emissionRate;       // points generated per LP token per second staked
     IERC20 public lpToken;             // token being staked
     
-    NFTInfo[] public nfts;
+    uint256[] public nftIds;
     mapping(address => UserInfo) public users;
 
     event NFTAdded(address indexed contractAddress, uint256 id, uint256 total, uint256 price);
@@ -279,10 +279,32 @@ contract Farming is Ownable , ERC1155Holder{
         emit NFTAdded(contractAddress, id, total, price);
     }
 
-    function addNFTBatch() external onlyOwner {
+    function addNFTBatch(
+        address nftContractAddress,
+        uint256[] ids,
+        uint256[] amounts,
 
+    ) external  {
+        LibArrayForUint256Utils.extend(nftIds ,ids);
+        IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
 
+    function addNftBatchWithNumber(
+        address nftContractAddress,
+        uint256 start,
+        uint256 idsNumber
+    ) public {
+        uint256[] memory ids = new uint256[](idsNumber);
+        uint256[] memory amounts = new uint256[](idsNumber);
+        for (uint256 i = start; i < (idsNumber + start); i++) {
+            ids[i-start] = i;
+            amounts[i-start] = 1;
+        }
+
+        LibArrayForUint256Utils.extend(nftIds ,ids);
+
+        IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
+    }
 
     function stake(uint256 amount) external {
         lpToken.safeTransferFrom(

@@ -236,19 +236,37 @@ contract MintNft is ERC1155Holder, Ownable {
     event addNft(address indexed nftContractAddress, uint256 idsNumber);
     event withdrawNft(address indexed nftContractAddress);
 
-    mapping(address => bool) private whiteList;
+    mapping(address => uint) private whiteList;
 
-    function changeWhiteList(address user,  bool opt) external onlyOwner {
-        whiteList[user] = opt;
+    function addWhiteList(address user,  uint quota) public onlyOwner {
+        whiteList[user] += quota;
     }
 
-    function changeWhiteListBatch(address[] memory userlist, bool opt) external onlyOwner {
+    function addWhiteListBatch(address[] memory userlist, uint quota) external onlyOwner {
         for (uint256 i = 0; i < userlist.length; i++) {
-            whiteList[userlist[i]] = opt;
+            addWhiteList(userlist[i], quota);
+        }
+    }
+
+    function subWhiteList(address user,  uint quota) public onlyOwner {
+        if(whiteList[user] >= quota){
+            whiteList[user] -= quota;
+        } else {
+            whiteList[user] = 0;
+        }
+    }
+
+    function subWhiteListBatch(address[] memory userlist, uint quota) external onlyOwner {
+        for (uint256 i = 0; i < userlist.length; i++) {
+            subWhiteList(userlist[i], quota);
         }
     }
 
     function inWhiteList(address user) public view returns (bool) {
+        return whiteList[user] > 0;
+    }
+
+    function buyQuota(address user) public view returns (uint) {
         return whiteList[user];
     }
 
@@ -266,6 +284,8 @@ contract MintNft is ERC1155Holder, Ownable {
         LibArrayForUint256Utils.removeByIndex(mintTokenId[nftContractAddress], index);
 
         IERC1155(nftContractAddress).safeTransferFrom( address(this) , msg.sender, minTokenId , 1 , "");
+
+        subWhiteList(msg.sender, 1);
 
         emit mint(nftContractAddress, msg.sender);
     }
