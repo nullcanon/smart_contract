@@ -26,19 +26,20 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
     uint private feeNumerator = 300;
     uint private feeDenominator = 10000;
     
-     
+    enum Status{ DEAL, ORDER, CANCLE }
+
      constructor() {
      }
      
      struct MarketItem {
-         uint itemId;
-         address nftContract;
-         uint256 tokenId;
-         address payable seller;
-         address payable owner;
-         address moneyMintAddress;
-         uint256 price;
-         bool sold;
+        uint itemId;
+        address nftContract;
+        uint256 tokenId;
+        address payable seller;
+        address payable owner;
+        address moneyMintAddress;
+        uint256 price;
+        Status sold;
      }
      
      mapping(uint256 => MarketItem) private idToMarketItem;
@@ -51,13 +52,29 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
         address owner,
         address moneyMintAddress,
         uint256 price,
-        bool sold
+        Status sold
+     );
+
+    event MarketItemCancel (
+        uint indexed itemId,
+        address indexed nftContract,
+        uint256 indexed tokenId,
+        address seller,
+        address moneyMintAddress,
+        uint256 price,
+        Status sold
      );
      
      event MarketItemSold (
-         uint indexed itemId,
-         address owner
-         );
+        uint indexed itemId,
+        address indexed nftContract,
+        uint256 indexed tokenId,
+        address seller,
+        address owner,
+        address moneyMintAddress,
+        uint256 price,
+        Status sold
+    );
      
     
     
@@ -79,7 +96,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
                 payable(address(0)),
                 address(0),
                 price,
-                false
+                Status.ORDER
             );
             
             IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
@@ -92,7 +109,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
                 address(0),
                 address(0),
                 price,
-                false
+                Status.ORDER
             );
         }
 
@@ -101,7 +118,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
         address moneyMintAddress,
         uint256 tokenId,
         uint256 price
-        ) public payable nonReentrant {
+        ) public nonReentrant {
             require(price > 0, "Price must be greater than 0");
             
             _itemIds.increment();
@@ -115,7 +132,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
                 payable(address(0)),
                 moneyMintAddress,
                 price,
-                false
+                Status.ORDER
             );
             
             IERC1155(nftContract).safeTransferFrom( msg.sender, address(this), tokenId, 1 , "");
@@ -128,31 +145,54 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
                 address(0),
                 moneyMintAddress,
                 price,
-                false
+                Status.ORDER
             );
         }
     
-
+    function cancelMarketItemErc1155(uint256 itemId) public nonReentrant {
+        Status sold = idToMarketItem[itemId].sold;
+        require(sold == Status.ORDER, "This Sale has alredy finnished");
+        require(msg.sender == idToMarketItem[itemId].seller, "Do not have permission");
+        address nftContract = idToMarketItem[itemId].nftContract;
+        uint256 tokenId = idToMarketItem[itemId].tokenId;
+        IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, 1 , "");
+        idToMarketItem[itemId].sold = Status.CANCLE;
+        emit MarketItemCancel(
+            itemId,
+            nftContract,
+            tokenId,
+            address(this),
+            idToMarketItem[itemId].moneyMintAddress,
+            idToMarketItem[itemId].price,
+            Status.CANCLE
+        );
+    }
     
     function createMarketSale(
         address nftContract,
         uint256 itemId
         ) public payable nonReentrant {
-            uint price = idToMarketItem[itemId].price;
-            uint tokenId = idToMarketItem[itemId].tokenId;
-            bool sold = idToMarketItem[itemId].sold;
+            uint256 price = idToMarketItem[itemId].price;
+            uint256 tokenId = idToMarketItem[itemId].tokenId;
+            Status sold = idToMarketItem[itemId].sold;
             require(msg.value == price, "Please submit the asking price in order to complete the purchase");
-            require(sold != true, "This Sale has alredy finnished");
+            require(sold == Status.ORDER, "This Sale has alredy finnished");
             emit MarketItemSold(
                 itemId,
-                msg.sender
-                );
+                nftContract,
+                tokenId,
+                idToMarketItem[itemId].seller,
+                msg.sender,
+                idToMarketItem[itemId].moneyMintAddress,
+                price,
+                Status.DEAL
+            );
 
             idToMarketItem[itemId].seller.transfer(msg.value);
             IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
             idToMarketItem[itemId].owner = payable(msg.sender);
             _itemsSold.increment();
-            idToMarketItem[itemId].sold = true;
+            idToMarketItem[itemId].sold = Status.DEAL;
     }
 
     function createMarketSaleWithToken(
@@ -160,16 +200,22 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
         address moneyMintAddress,
         uint256 itemId,
         uint256 price
-        ) public payable nonReentrant {
+        ) public nonReentrant {
             uint priceMarket = idToMarketItem[itemId].price;
             uint tokenId = idToMarketItem[itemId].tokenId;
-            bool sold = idToMarketItem[itemId].sold;
+            Status sold = idToMarketItem[itemId].sold;
             require(priceMarket == price, "Please submit the asking price in order to complete the purchase");
-            require(sold != true, "This Sale has alredy finnished");
+            require(sold == Status.ORDER, "This Sale has alredy finnished");
             emit MarketItemSold(
                 itemId,
-                msg.sender
-                );
+                nftContract,
+                tokenId,
+                idToMarketItem[itemId].seller,
+                msg.sender,
+                idToMarketItem[itemId].moneyMintAddress,
+                price,
+                Status.DEAL
+            );
 
             require(IERC20(moneyMintAddress).allowance(msg.sender, address(this)) >= price, "Token allowance too low");
             uint256 fee = price.mul(feeNumerator).div(feeDenominator);
@@ -182,7 +228,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
             IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
             idToMarketItem[itemId].owner = payable(msg.sender);
             _itemsSold.increment();
-            idToMarketItem[itemId].sold = true;
+            idToMarketItem[itemId].sold = Status.DEAL;
     }
 
     function createMarketSaleWithTokenErc1155(
@@ -190,16 +236,22 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
         address tokenMintAddress,
         uint256 itemId,
         uint256 price
-        ) public payable nonReentrant {
+        ) public nonReentrant {
             uint priceMarket = idToMarketItem[itemId].price;
             uint tokenId = idToMarketItem[itemId].tokenId;
-            bool sold = idToMarketItem[itemId].sold;
+            Status sold = idToMarketItem[itemId].sold;
             require(priceMarket == price, "Please submit the asking price in order to complete the purchase");
-            require(sold != true, "This Sale has alredy finnished");
+            require(sold == Status.ORDER, "This Sale has alredy finnished");
             emit MarketItemSold(
                 itemId,
-                msg.sender
-                );
+                nftContract,
+                tokenId,
+                idToMarketItem[itemId].seller,
+                msg.sender,
+                idToMarketItem[itemId].moneyMintAddress,
+                price,
+                Status.DEAL
+            );
 
             require(IERC20(tokenMintAddress).allowance(msg.sender, address(this)) >= price, "Token allowance too low");
 
@@ -213,7 +265,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
             IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, 1 , "");
             idToMarketItem[itemId].owner = payable(msg.sender);
             _itemsSold.increment();
-            idToMarketItem[itemId].sold = true;
+            idToMarketItem[itemId].sold = Status.DEAL;
     }
         
     function fetchMarketItems() public view returns (MarketItem[] memory) {

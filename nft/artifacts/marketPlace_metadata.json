@@ -40,6 +40,55 @@
 					{
 						"indexed": false,
 						"internalType": "address",
+						"name": "moneyMintAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum marketPlace.Status",
+						"name": "sold",
+						"type": "uint8"
+					}
+				],
+				"name": "MarketItemCancel",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
 						"name": "owner",
 						"type": "address"
 					},
@@ -57,9 +106,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "bool",
+						"internalType": "enum marketPlace.Status",
 						"name": "sold",
-						"type": "bool"
+						"type": "uint8"
 					}
 				],
 				"name": "MarketItemCreated",
@@ -75,10 +124,46 @@
 						"type": "uint256"
 					},
 					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
 						"indexed": false,
 						"internalType": "address",
 						"name": "owner",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "moneyMintAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum marketPlace.Status",
+						"name": "sold",
+						"type": "uint8"
 					}
 				],
 				"name": "MarketItemSold",
@@ -102,6 +187,19 @@
 				],
 				"name": "OwnershipTransferred",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					}
+				],
+				"name": "cancelMarketItemErc1155",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -151,7 +249,7 @@
 				],
 				"name": "createMarketItemErc1155",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -197,7 +295,7 @@
 				],
 				"name": "createMarketSaleWithToken",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -225,7 +323,7 @@
 				],
 				"name": "createMarketSaleWithTokenErc1155",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -270,9 +368,9 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "bool",
+								"internalType": "enum marketPlace.Status",
 								"name": "sold",
-								"type": "bool"
+								"type": "uint8"
 							}
 						],
 						"internalType": "struct marketPlace.MarketItem[]",
@@ -336,9 +434,9 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "bool",
+								"internalType": "enum marketPlace.Status",
 								"name": "sold",
-								"type": "bool"
+								"type": "uint8"
 							}
 						],
 						"internalType": "struct marketPlace.MarketItem[]",
@@ -592,7 +690,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -615,11 +713,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xd36b66ca51ec57e4808eae862a94f5bff2c7896acb39750ec9781d5ad3bb62a7",
+			"keccak256": "0xc85ab01c5105954996ec92013be2e1c6090e32ef2fe724df418996a86a9cc0a5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ad5d333903fcd4f5f65066f8e89d567e114fd940829e55ccdf5626889c250ca5",
-				"dweb:/ipfs/QmfSLtVqCELMVeTrviAH6iSkecjvZdDxyeKM8ZBhESDJuN"
+				"bzz-raw://e5c969d0fb562fb9489dcdf1e402ba72af65fc71bd4a7c8c9201c75158ba7dd6",
+				"dweb:/ipfs/QmVR3tpNeCcfCAy1NtHfG6sdDbTPVvuhTLQ8iMgSFs6Hja"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
@@ -687,11 +785,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol": {
-			"keccak256": "0xcc1f848216524a626cf541ff2397edc61ec42b7e49c68322daf9eb17fe503523",
+			"keccak256": "0x6eb7717b3fed3cd34685c2f9b3500168d77e90fafe0b6f891d4d7e2381aa6061",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b04dfbda4360fd5f44a2715b1ba7d5a4f520fd1ee2cccc2b80e1d5a280e2199f",
-				"dweb:/ipfs/QmPKuZYe7bZLcqzLkqQkxV4f1bbJ5HDmTNgDVwboHqRsML"
+				"bzz-raw://18c6d80a2d3b9e35d2f358a901ea8ab3c77f3eab30083d9dd85aed42438c0aee",
+				"dweb:/ipfs/QmPqFjCEwthAz2DdgaAxSox6axWhb2rVvUA6xNS6NUfiZG"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol": {
@@ -775,11 +873,11 @@
 			]
 		},
 		"smart_contract/nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x4f2f3d9e8ddc0b8ce5ffde9579bf41d8153502dae2fbb864dae48303fcfaa450",
+			"keccak256": "0xee35132d68cfc0a5d4410aee0d1dc0321a9b2ddeea4e4771d49587b77cd114c0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://61b22debc1903f63fddd6e6f0eca3ee4007628bf82390cbf1caa598e467ecdde",
-				"dweb:/ipfs/QmQVED8czPCbvBWWU2LPRedhF9mMQTs21LFdLNCEAYamzJ"
+				"bzz-raw://ce4a4f6481577aa59734a30dae5650496f4ffd97c6c619d844589accbeb45348",
+				"dweb:/ipfs/QmSDAzTTwTTfcvQrfFxxsinujzDwpMPLU77qDStn5qRVgo"
 			]
 		}
 	},
