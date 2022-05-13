@@ -410,4 +410,13 @@ contract Synthesizer is ERC1155Holder, Ownable {
     function getFeeAmount() public view returns (uint256) {
         return feeAmount;
     }
+
+    function getNftAmount() public view returns (uint256) {
+        return nftIds.length;
+    }
+
+    function getNextNftTokenId() public view returns (uint256) {
+        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds);
+        return minTokenId;
+    }
 }

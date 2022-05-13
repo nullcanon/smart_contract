@@ -216,6 +216,32 @@
 			},
 			{
 				"inputs": [],
+				"name": "getNextNftTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getNftAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getQueenbeeMintAddress",
 				"outputs": [
 					{
@@ -604,11 +630,11 @@
 			]
 		},
 		"smart_contract/nft/NFTSynthesizer.sol": {
-			"keccak256": "0x196c0ac8d3a3164a1e6d7b6809f9c8493ccbb45b35294643a8b5b1fac06a278a",
+			"keccak256": "0x4d38902d66d119833f76472177abff54630284c342d5867fa81f1ae01b54366b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://526bfad84e668e8a6fd6c2a28b8573cbd7727122731d30c8d563f80d2ddd8230",
-				"dweb:/ipfs/QmQYaKPu8bwZNQhDenbshnZrsCpTGfXjrDNuFT2ATQd8wZ"
+				"bzz-raw://7103eae0712f306c2d6991c09858f1500b0fec4cb3d4036ed9a9bf8e3d8ca86a",
+				"dweb:/ipfs/QmYqFaWsPpHNp1X2tZjL4RQzt3cw1me4phJHUTdCRXiQdC"
 			]
 		}
 	},
