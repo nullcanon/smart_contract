@@ -3,14 +3,11 @@ pragma solidity ^0.8.0;
 
 
 import "../node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 
 
-contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
+contract BeeItems is  ERC1155 , Ownable{
 
     uint256 public tokenSupply;
 
@@ -54,5 +51,19 @@ contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
 
     function getTokenSupply() public view returns (uint256) {
         return tokenSupply;
+    }
+
+    function brun(
+        address account,
+        uint256 id,
+        uint256 value) public {
+
+        require(
+            account == _msgSender() || isApprovedForAll(account, _msgSender()),
+            "ERC1155: caller is not owner nor approved"
+        );
+
+        _burn(account, id, value);
+        --tokenSupply;
     }
 }
