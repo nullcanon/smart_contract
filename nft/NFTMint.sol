@@ -236,45 +236,45 @@ contract MintNft is ERC1155Holder, Ownable {
     event addNft(address indexed nftContractAddress, uint256 idsNumber);
     event withdrawNft(address indexed nftContractAddress);
 
-    mapping(address => uint) private whiteList;
+    mapping(address => mapping(address => uint)) private whiteList;
 
-    function addWhiteList(address user,  uint quota) public onlyOwner {
-        whiteList[user] += quota;
+    function addWhiteList(address nftContractAddress, address user,  uint quota) public onlyOwner {
+        whiteList[nftContractAddress][user] += quota;
     }
 
-    function addWhiteListBatch(address[] memory userlist, uint quota) external onlyOwner {
+    function addWhiteListBatch(address nftContractAddress, address[] memory userlist, uint quota) external onlyOwner {
         for (uint256 i = 0; i < userlist.length; i++) {
-            addWhiteList(userlist[i], quota);
+            addWhiteList(nftContractAddress, userlist[i], quota);
         }
     }
 
-    function subWhiteList(address user,  uint quota) public onlyOwner {
-        if(whiteList[user] >= quota){
-            whiteList[user] -= quota;
+    function subWhiteList(address nftContractAddress, address user,  uint quota) public onlyOwner {
+        if(whiteList[nftContractAddress][user] >= quota){
+            whiteList[nftContractAddress][user] -= quota;
         } else {
-            whiteList[user] = 0;
+            whiteList[nftContractAddress][user] = 0;
         }
     }
 
-    function subWhiteListBatch(address[] memory userlist, uint quota) external onlyOwner {
+    function subWhiteListBatch(address nftContractAddress, address[] memory userlist, uint quota) external onlyOwner {
         for (uint256 i = 0; i < userlist.length; i++) {
-            subWhiteList(userlist[i], quota);
+            subWhiteList(nftContractAddress, userlist[i], quota);
         }
     }
 
-    function inWhiteList(address user) public view returns (bool) {
-        return whiteList[user] > 0;
+    function inWhiteList(address nftContractAddress, address user) public view returns (bool) {
+        return whiteList[nftContractAddress][user] > 0;
     }
 
-    function buyQuota(address user) public view returns (uint) {
-        return whiteList[user];
+    function mintQuota(address nftContractAddress, address user) public view returns (uint) {
+        return whiteList[nftContractAddress][user];
     }
 
     function mintNft(
         address nftContractAddress
     ) public {
         // check nftContractAddress
-        require(inWhiteList(msg.sender), "Not white list user");
+        require(inWhiteList(nftContractAddress, msg.sender), "Not white list user");
 
         require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount[nftContractAddress], "Token allowance too low");
         IERC20(feeTokenMintAddress).transferFrom(msg.sender, feeReceiveAddress, feeAmount[nftContractAddress]);
@@ -285,7 +285,7 @@ contract MintNft is ERC1155Holder, Ownable {
 
         IERC1155(nftContractAddress).safeTransferFrom( address(this) , msg.sender, minTokenId , 1 , "");
 
-        subWhiteList(msg.sender, 1);
+        whiteList[nftContractAddress][msg.sender] -= 1;
 
         emit mint(nftContractAddress, msg.sender);
     }

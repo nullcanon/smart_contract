@@ -495,7 +495,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/nft/NFTSynthesizer.sol": "Synthesizer"
+			"nft/NFTSynthesizer.sol": "Synthesizer"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -629,7 +629,7 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"smart_contract/nft/NFTSynthesizer.sol": {
+		"nft/NFTSynthesizer.sol": {
 			"keccak256": "0x4d38902d66d119833f76472177abff54630284c342d5867fa81f1ae01b54366b",
 			"license": "MIT",
 			"urls": [

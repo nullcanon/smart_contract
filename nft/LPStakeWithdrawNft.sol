@@ -1,11 +1,11 @@
 // contracts/Farming.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.7.4;
+pragma solidity 0.8.13;
 
-import "../node_modules/@openzeppelin/contracts/math/SafeMath.sol";
+import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
@@ -240,51 +240,28 @@ contract Farming is Ownable , ERC1155Holder{
         uint256 price;          // points required to claim NFT
     }
     
-    uint256 public emissionRate;       // points generated per LP token per second staked
     IERC20 public lpToken;             // token being staked
     
     uint256[] public nftIds;
     mapping(address => UserInfo) public users;
+
+    uint256 private lpUnitValue = 1065;
+    uint256 private timeUnitValue = 864000;
+    uint256 private threshold = lpUnitValue * timeUnitValue * 10 ** 18;
 
     event NFTAdded(address indexed contractAddress, uint256 id, uint256 total, uint256 price);
     event Staked(address indexed user, uint256 amount);
     event Claim(address indexed user, uint256 nftId, uint256 quantity);
     event Withdrawn(address indexed user, uint256 amount);
     
-    constructor(uint256 _emissionRate, IERC20 _lpToken) public {
-        emissionRate = _emissionRate;
-        lpToken = _lpToken;
-    }
-    
-    function addNFT(
-        address contractAddress,    // Only ERC-1155 NFT Supported!
-        uint256 id,
-        uint256 total,              // amount of NFTs deposited to farm (need to approve before)
-        uint256 price
-    ) external onlyOwner {
-        IERC1155(contractAddress).safeTransferFrom(
-            msg.sender,
-            address(this),
-            id,
-            total,
-            ""
-        );
-        nfts.push(NFTInfo({
-            contractAddress: contractAddress,
-            id: id,
-            remaining: total,
-            price: price
-        }));
-
-        emit NFTAdded(contractAddress, id, total, price);
+    constructor() {
     }
 
     function addNFTBatch(
         address nftContractAddress,
-        uint256[] ids,
-        uint256[] amounts,
-
-    ) external  {
+        uint256[] memory ids,
+        uint256[] memory amounts
+    ) external  onlyOwner{
         LibArrayForUint256Utils.extend(nftIds ,ids);
         IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
@@ -293,7 +270,7 @@ contract Farming is Ownable , ERC1155Holder{
         address nftContractAddress,
         uint256 start,
         uint256 idsNumber
-    ) public {
+    ) public onlyOwner {
         uint256[] memory ids = new uint256[](idsNumber);
         uint256[] memory amounts = new uint256[](idsNumber);
         for (uint256 i = start; i < (idsNumber + start); i++) {
@@ -326,36 +303,30 @@ contract Farming is Ownable , ERC1155Holder{
     }
     
     // claim nft if points threshold reached
-    function claim(uint256 nftId, uint256 quantity) public {
-        NFTInfo storage nft = nfts[nftId];
-        require(nft.remaining > 0, "All NFTs farmed");
-        require(pointsBalance(msg.sender) >= nft.price.mul(quantity), "Insufficient Points");
+    function claim(address nftContractAddress) public {
+        require(nftIds.length > 0, "All NFTs farmed");
+        require(pointsBalance(msg.sender) >= threshold, "Insufficient Points");
         UserInfo storage user = users[msg.sender];
         
         // deduct points
-        user.pointsDebt = pointsBalance(msg.sender).sub(nft.price.mul(quantity));
+        user.pointsDebt = pointsBalance(msg.sender).sub(threshold);
         user.lastUpdateTime = block.timestamp;
         
+        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds);
+        LibArrayForUint256Utils.removeByIndex(nftIds, index);
+
         // transfer nft
-        IERC1155(nft.contractAddress).safeTransferFrom(
+        IERC1155(nftContractAddress).safeTransferFrom(
             address(this),
             msg.sender,
-            nft.id,
-            quantity,
+            minTokenId,
+            1,
             ""
         );
-        
-        nft.remaining = nft.remaining.sub(quantity);
 
-        emit Claim(msg.sender, nftId, quantity);
+        emit Claim(msg.sender, minTokenId, 1);
     }
     
-    function claimBatch(uint256[] calldata nftIds, uint256[] calldata quantity) external {
-        require(nftIds.length == quantity.length, "Incorrect array length");
-        for(uint64 i=0; i< nftIds.length; i++) {
-            claim(nftIds[i], quantity[i]);
-        }
-    }
     
     function withdraw(uint256 amount) public {
         UserInfo storage user = users[msg.sender];
@@ -385,25 +356,68 @@ contract Farming is Ownable , ERC1155Holder{
     
     function _unDebitedPoints(UserInfo memory user) internal view returns (uint256) {
         uint256 blockTime = block.timestamp;
-        return blockTime.sub(user.lastUpdateTime).mul(emissionRate).mul(user.amount);
+        return blockTime.sub(user.lastUpdateTime).mul(user.amount);
     }
     
     function nftCount() public view returns (uint256) {
-        return nfts.length;
+        return nftIds.length;
+    }
+
+    function getNextNftTokenId() public view returns (uint256) {
+        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds);
+        return minTokenId;
+    }
+
+    function getThreshold() public view returns (uint256) {
+        return threshold;
+    }
+
+    function urgentWithdraw(address nftContractAddress) public onlyOwner{
+        uint256 length = nftIds.length;
+        uint256[] memory amounts = new uint256[](length);
+        for (uint256 i = 0; i < length; i++) {
+            amounts[i] = 1;
+        }
+        IERC1155(nftContractAddress).safeBatchTransferFrom( address(this), msg.sender, nftIds, amounts, "");
+        delete nftIds;
+    }
+
+    function setLpMintAddress(address mint) public onlyOwner {
+        lpToken = IERC20(mint);
+    }
+
+    function setLpUnitValue(uint256 value) public onlyOwner {
+        lpUnitValue = value;
+    }
+
+    function setTimeUnitValue(uint256 value) public onlyOwner {
+        timeUnitValue = value;
     }
     
-    // Required function to allow receiving ERC-1155
-    function onERC1155Received(
-        address /*operator*/,
-        address /*from*/,
-        uint256 /*id*/,
-        uint256 /*value*/,
-        bytes calldata /*data*/
-    )
-        external
-        pure
-        returns(bytes4)
-    {
-        return bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"));
+    function getLpMintAddress() public view returns (address) {
+        return address(lpToken) ;
     }
+
+    function getLpUnitValue() public view returns (uint256) {
+        return lpUnitValue;
+    }
+
+    function getTimeUnitValue() public view returns (uint256) {
+        return timeUnitValue;
+    }
+
+    function getUserStakeAmount(address user) public view returns (uint256) {
+        return users[user].amount;
+    }
+
+    function getUserNextNftTime(address user) public view returns (uint256){
+        // （阈值 - 当前产出）/当前质押数量 = 时间 
+        uint256 v = pointsBalance(user);
+        while(v > threshold) {
+            v = v.sub(threshold);
+        }
+        uint256 userStakedAmount = getUserStakeAmount(user);
+        return threshold.sub(v).div(userStakedAmount);
+    }
+
 }

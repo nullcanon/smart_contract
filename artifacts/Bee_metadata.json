@@ -509,7 +509,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/BeeToken.sol": "Bee"
+			"BeeToken.sol": "Bee"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -517,13 +517,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/BeeToken.sol": {
+		"BeeToken.sol": {
 			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
 			"license": "MIT",
 			"urls": [
