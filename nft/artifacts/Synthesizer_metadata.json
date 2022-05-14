@@ -503,7 +503,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -630,11 +630,11 @@
 			]
 		},
 		"nft/NFTSynthesizer.sol": {
-			"keccak256": "0x4d38902d66d119833f76472177abff54630284c342d5867fa81f1ae01b54366b",
+			"keccak256": "0x7f68a7ec2597c7a00ad310fa44df1081df19d3e754a302cff95f3c8b83387291",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7103eae0712f306c2d6991c09858f1500b0fec4cb3d4036ed9a9bf8e3d8ca86a",
-				"dweb:/ipfs/QmYqFaWsPpHNp1X2tZjL4RQzt3cw1me4phJHUTdCRXiQdC"
+				"bzz-raw://a53d9406d3076d56412fbb35b88ee8f680f17a795526c5f86246314c8dcfb9db",
+				"dweb:/ipfs/QmVEcx2QyJuc7xzx7Jq4fNJ3yPwtafLLyU9ZADcEnG25w6"
 			]
 		}
 	},

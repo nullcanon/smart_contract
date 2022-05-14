@@ -569,7 +569,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/BeePresell.sol": "BeePresell"
+			"BeePresell.sol": "BeePresell"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -577,13 +577,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/BeePresell.sol": {
+		"BeePresell.sol": {
 			"keccak256": "0xae04a8e14022cec9d1bd9486591e96fe26725c8f8ae97b27dc75a81585c77183",
 			"license": "MIT",
 			"urls": [

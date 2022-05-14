@@ -222,7 +222,7 @@ library LibArrayForUint256Utils {
 
 }
 
-contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
+contract BeeItems is  ERC1155 , Ownable{
 
     uint256 public tokenSupply;
 
@@ -267,6 +267,20 @@ contract BeeItems is  ERC1155, ERC1155Burnable , Ownable{
     function getTokenSupply() public view returns (uint256) {
         return tokenSupply;
     }
+
+    function brun(
+        address account,
+        uint256 id,
+        uint256 value) public {
+
+        require(
+            account == _msgSender() || isApprovedForAll(account, _msgSender()),
+            "ERC1155: caller is not owner nor approved"
+        );
+
+        _burn(account, id, value);
+        --tokenSupply;
+    }
 }
 
 contract Synthesizer is ERC1155Holder, Ownable {
@@ -296,16 +310,16 @@ contract Synthesizer is ERC1155Holder, Ownable {
         uint256 queenbeeId
     ) public {
         IERC1155(luckybeeMintAddress).safeTransferFrom( msg.sender, address(this), luckybeeId, 1 , "");
-        BeeItems(luckybeeMintAddress).burn(address(this), luckybeeId, 1);
+        BeeItems(luckybeeMintAddress).brun(address(this), luckybeeId, 1);
 
         IERC1155(hashbeeMintAddress).safeTransferFrom( msg.sender, address(this), hashbeeId, 1 , "");
-        BeeItems(hashbeeMintAddress).burn(address(this), hashbeeId, 1);
+        BeeItems(hashbeeMintAddress).brun(address(this), hashbeeId, 1);
 
         IERC1155(knightbeeMintAddress).safeTransferFrom( msg.sender, address(this), knightbeeId, 1 , "");
-        BeeItems(knightbeeMintAddress).burn(address(this), knightbeeId, 1);
+        BeeItems(knightbeeMintAddress).brun(address(this), knightbeeId, 1);
 
         IERC1155(queenbeeMintAddress).safeTransferFrom( msg.sender, address(this), queenbeeId, 1 , "");
-        BeeItems(queenbeeMintAddress).burn(address(this), queenbeeId, 1);
+        BeeItems(queenbeeMintAddress).brun(address(this), queenbeeId, 1);
 
         IERC20(beeTokenMintAddress).transferFrom(msg.sender, feeAddress, feeAmount);
 

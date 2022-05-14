@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BeeToken.sol": "Context"
+			"BeePresell.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"BeeToken.sol": {
-			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
+		"BeePresell.sol": {
+			"keccak256": "0xae04a8e14022cec9d1bd9486591e96fe26725c8f8ae97b27dc75a81585c77183",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f14fb2551d2e87277a41a5d65b95d112c35d915d5922ae305dbc2d6696d2506",
-				"dweb:/ipfs/Qma6M6YDDuLDtjPDUCPc5CZTRWgCUojbnzERy9vwKxQwMm"
+				"bzz-raw://774f6bf6c685281111b96d6e115f2fad3e61701eaf6df8066ba92b47c8463da6",
+				"dweb:/ipfs/QmcDsvknWJrRMtW78odRe3uXU2wvYvXeMnbW3cqd93ZupT"
 			]
 		}
 	},
