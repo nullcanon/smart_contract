@@ -970,7 +970,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BeeToken.sol": "IPancakeSwapV2Router02"
+			"smart_contract/BeeToken.sol": "IPancakeSwapV2Router02"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -984,7 +984,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"BeeToken.sol": {
+		"smart_contract/BeeToken.sol": {
 			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
 			"license": "MIT",
 			"urls": [

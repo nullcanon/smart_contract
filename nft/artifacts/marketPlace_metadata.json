@@ -448,6 +448,67 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "fetchMarketItemsWithUser",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "itemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "moneyMintAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum marketPlace.Status",
+								"name": "sold",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct marketPlace.MarketItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "getFeeAddress",
 				"outputs": [
@@ -481,6 +542,25 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "item",
+						"type": "uint256"
+					}
+				],
+				"name": "getItemsStatus",
+				"outputs": [
+					{
+						"internalType": "enum marketPlace.Status",
+						"name": "",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -841,11 +921,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol": {
-			"keccak256": "0x32c202bd28995dd20c4347b7c6467a6d3241c74c8ad3edcbb610cd9205916c45",
+			"keccak256": "0xca92905e1626e8567483de21bc1208284865ed7be71d54ca320a140ac25fd290",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8179c356adb19e70d6b31a1eedc8c5c7f0c00e669e2540f4099e3844c6074d30",
-				"dweb:/ipfs/QmWFbivarEobbqhS1go64ootVuHfVohBseerYy9FTEd1W2"
+				"bzz-raw://53c8d5bc6af499853ddf86eb2a6d7448f18a78313a04b8652a83007d04954577",
+				"dweb:/ipfs/QmQV6pF3FQoqR16kSK9FNg6bKfWLbcfHBTCKS7p2ERTkEF"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/introspection/ERC165.sol": {
@@ -873,11 +953,11 @@
 			]
 		},
 		"smart_contract/nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0xee35132d68cfc0a5d4410aee0d1dc0321a9b2ddeea4e4771d49587b77cd114c0",
+			"keccak256": "0x0c7361342379576b47a6a74544207b0cc453a4535117a3192995ebab8eb6f0c2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ce4a4f6481577aa59734a30dae5650496f4ffd97c6c619d844589accbeb45348",
-				"dweb:/ipfs/QmSDAzTTwTTfcvQrfFxxsinujzDwpMPLU77qDStn5qRVgo"
+				"bzz-raw://f1521cdea7ae75cf71a28d0edf2c8b833f04a54859e98a01eacdf02128c62767",
+				"dweb:/ipfs/Qmc2w99MreWPeXtHfPujd8AGGeMJtVFrLLjKUVHAfJxuVD"
 			]
 		}
 	},

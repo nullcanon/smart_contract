@@ -294,6 +294,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getWithdrawAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "lpToken",
 				"outputs": [
 					{
@@ -620,7 +633,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/LPStakeWithdrawNft.sol": "Farming"
+			"smart_contract/nft/LPStakeWithdrawNft.sol": "Farming"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -634,15 +647,15 @@
 		"remappings": []
 	},
 	"sources": {
-		"nft/LPStakeWithdrawNft.sol": {
-			"keccak256": "0x6949609f8a51d0520bddd82d76ef068cc0465c81e5bc72b9bc2bbc6df98fa0f4",
+		"smart_contract/nft/LPStakeWithdrawNft.sol": {
+			"keccak256": "0xd4f9e332061d573a22ecd0cd5ecc68b79ce86ee97afbb2da3e8a63435cb92c1d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://53b2b1d9d61814f7bd4e6cab5c1a3b2c450aac0abb2f49526bc855043c44c563",
-				"dweb:/ipfs/QmaLSPNmDkXQ6xymJgsjghHn71Zy8X2gZrTL73QvEgyjkt"
+				"bzz-raw://590ee02159f0d8eaa18f5aba94314fd6776c1166ca9636d921a622f2822d8642",
+				"dweb:/ipfs/QmUUS4m29xBStCELi9uZUvT7aqT4fXokM7VXb68tvdy5w6"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
 			"keccak256": "0xd2bd30ee25ef65894d0a4f974eb71cc59907d62ab26fe1d2e96e5b4572178d8f",
 			"license": "MIT",
 			"urls": [
@@ -650,7 +663,7 @@
 				"dweb:/ipfs/QmavLfbnmjjSSWWjd6ouNok7mcj7XtCnX7DkLaDZP8qykj"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
 			"keccak256": "0x56929133c3d37641ae44d2fef6a4fba2c6fbc1faa1925ab777fae2e0be557bb2",
 			"license": "MIT",
 			"urls": [
@@ -658,7 +671,7 @@
 				"dweb:/ipfs/QmNNBSxw2tyPrZYEsbDFMQrt9ii4fCw32NobYwYTFDManz"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
 			"keccak256": "0x4ba2a338f978e2583504415d02a4b84a08d41080f94615f3e941582e4aab457c",
 			"license": "MIT",
 			"urls": [
@@ -666,7 +679,7 @@
 				"dweb:/ipfs/QmQgDRFe1y9zzVN3RzoAxYFkFkpCER8FwbF3UgdyDpQvT4"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
 			"keccak256": "0xff419f22f3a06f6cd02691a009684a7f867d6d4e172b2f52737b50f834a72396",
 			"license": "MIT",
 			"urls": [
@@ -674,7 +687,7 @@
 				"dweb:/ipfs/QmU8wSfCv3H4pWFnKzrA9ZY7WDerZ3DrxaR4dU8qmqZdQh"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
 			"keccak256": "0x5576eca134a9c67ca351f0b4e7d6b821ae694ff13708ee449420b7c2d746818a",
 			"license": "MIT",
 			"urls": [
@@ -682,7 +695,7 @@
 				"dweb:/ipfs/Qma4Y3TwioVsCk4ZFivEvoYgcG2v2m3CnKomRVPVDYBv2B"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0xd3498b152364c51284e38a01585debf7f69c6908fbab1da8f11a75ba5b89c251",
 			"license": "MIT",
 			"urls": [
@@ -690,7 +703,7 @@
 				"dweb:/ipfs/QmSJp6A2Ku5F1nZvRp8PnmKtCocurhVcXiZtKC7L86zY6b"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
 			"keccak256": "0x1d8c67ff4df5cae6fe8e310ad03346ee68a394357f1f300f25e7dcd239237768",
 			"license": "MIT",
 			"urls": [
@@ -698,7 +711,7 @@
 				"dweb:/ipfs/QmYvtHQ7mLC2tjjdz6Q3HAGWR25WjgvNh8KGkTdhjRVm9t"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/Address.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/utils/Address.sol": {
 			"keccak256": "0x5ecc35dbdbecd0fb1ef55aaac24c52625952b288220eb19f828f8a09a9c10229",
 			"license": "MIT",
 			"urls": [
@@ -706,7 +719,7 @@
 				"dweb:/ipfs/QmSx7BqU1YDXLzafmUp6rAWiDMmR3vyJ1zM7hBWgvT5qxp"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/Context.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
 			"keccak256": "0x81d5fc973a522c8909d60be6a201869d46aa47b030b8813f60616404628c2b94",
 			"license": "MIT",
 			"urls": [
@@ -714,7 +727,7 @@
 				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
 			"keccak256": "0x3d3fe7b1901114d50828f5c77ba7f09a2a6a65223620c837364d31b60e5982ac",
 			"license": "MIT",
 			"urls": [
@@ -722,7 +735,7 @@
 				"dweb:/ipfs/QmWq8SxNw4q6n1B8i9sFZVaodB6wrcyBPsKPWMsaUyCECH"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
 			"keccak256": "0x540685d7ece3faa56f38253270ff11b18e63949fb8659c408123b1874674492e",
 			"license": "MIT",
 			"urls": [
@@ -730,7 +743,7 @@
 				"dweb:/ipfs/QmVHocBeANMkq4TzVM7q9At5NSg1TEpT9D9vgJ5dGcvcPN"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
+		"smart_contract/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
 			"keccak256": "0x2bc6c5dcc8227e2c72debda8b30d912ea9acf7b3938b2729d2de3bf9e5546e19",
 			"license": "MIT",
 			"urls": [

@@ -245,6 +245,7 @@ contract Farming is Ownable , ERC1155Holder{
     uint256[] public nftIds;
     mapping(address => UserInfo) public users;
 
+    uint256 private withdrawAmount = 0;
     uint256 private lpUnitValue = 1065;
     uint256 private timeUnitValue = 864000;
     uint256 private threshold = lpUnitValue * timeUnitValue * 10 ** 18;
@@ -342,6 +343,8 @@ contract Farming is Ownable , ERC1155Holder{
             amount
         );
 
+        ++withdrawAmount;
+
         emit Withdrawn(msg.sender, amount);
     }
     
@@ -388,10 +391,12 @@ contract Farming is Ownable , ERC1155Holder{
 
     function setLpUnitValue(uint256 value) public onlyOwner {
         lpUnitValue = value;
+        threshold = lpUnitValue * timeUnitValue * 10 ** 18;
     }
 
     function setTimeUnitValue(uint256 value) public onlyOwner {
         timeUnitValue = value;
+        threshold = lpUnitValue * timeUnitValue * 10 ** 18;
     }
     
     function getLpMintAddress() public view returns (address) {
@@ -417,7 +422,14 @@ contract Farming is Ownable , ERC1155Holder{
             v = v.sub(threshold);
         }
         uint256 userStakedAmount = getUserStakeAmount(user);
+        if(userStakedAmount == 0) {
+            return 0;
+        }
         return threshold.sub(v).div(userStakedAmount);
+    }
+
+    function getWithdrawAmount() public view returns (uint256){
+        return withdrawAmount;
     }
 
 }

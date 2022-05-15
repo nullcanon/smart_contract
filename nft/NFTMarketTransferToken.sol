@@ -157,6 +157,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
         uint256 tokenId = idToMarketItem[itemId].tokenId;
         IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, 1 , "");
         idToMarketItem[itemId].sold = Status.CANCLE;
+        idToMarketItem[itemId].owner = payable(msg.sender);
         emit MarketItemCancel(
             itemId,
             nftContract,
@@ -283,6 +284,27 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
             }
         }
         return items;
+    }
+
+    function fetchMarketItemsWithUser(address user) public view returns (MarketItem[] memory) {
+        uint itemCount = _itemIds.current();
+        uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
+        uint currentIndex = 0;
+
+        MarketItem[] memory items = new MarketItem[](unsoldItemCount);
+        for (uint i = 0; i < itemCount; i++) {
+            if (idToMarketItem[i + 1].owner == address(0) && idToMarketItem[i + 1].seller == user) {
+                uint currentId = i + 1;
+                MarketItem storage currentItem = idToMarketItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
+
+    function getItemsStatus(uint256 item) public view returns (Status) {
+        return idToMarketItem[item].sold;
     }
 
     function fetchMarketItemsLimit(uint start, uint offset) public view returns (MarketItem[] memory) {

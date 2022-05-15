@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BeePresell.sol": "Context"
+			"smart_contract/ERC20.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"BeePresell.sol": {
-			"keccak256": "0xae04a8e14022cec9d1bd9486591e96fe26725c8f8ae97b27dc75a81585c77183",
+		"smart_contract/ERC20.sol": {
+			"keccak256": "0x2fae624297e1d5f01962059040d3bd2bb29f2673664c6c3a4f00b8cf264e2f33",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://774f6bf6c685281111b96d6e115f2fad3e61701eaf6df8066ba92b47c8463da6",
-				"dweb:/ipfs/QmcDsvknWJrRMtW78odRe3uXU2wvYvXeMnbW3cqd93ZupT"
+				"bzz-raw://d17063352a97a49b8f5f8c2fdd481763f5ac98cc5a4855310eb503c3102aa2c4",
+				"dweb:/ipfs/QmPsrFgumhqfMsqredbrQ6QvSv3pKs3jztasPnLTBUNTCC"
 			]
 		}
 	},
