@@ -209,11 +209,11 @@
 			]
 		},
 		"smart_contract/nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x120f23738a53afa583696275c49bdb512e9e732f95ee7e7f7277a8192557f380",
+			"keccak256": "0x43a1af89a1d9067276239d7934c9a799c13d3acfbf6bd71fb7b48d2a4b869637",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://403499382a2d4be95c14210b1d60dd20adca6eb16aea5a07e63986d6f1bb990e",
-				"dweb:/ipfs/QmXoAamJ8LxsB6qWJR29CXE4T2DdtaCdrdfrUB8GCoP15h"
+				"bzz-raw://5d41bff7f178c17ad0f90f5ed1018d1ba32bcff36c4b2723650e1ec3298257b1",
+				"dweb:/ipfs/QmedMfVotpYWAsUw1dFP5P1eEzWL95QwweRC8GLrX3J728"
 			]
 		}
 	},
