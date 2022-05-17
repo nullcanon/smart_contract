@@ -567,6 +567,32 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getOrderItemIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOrderMarketNumbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -731,6 +757,34 @@
 					}
 				],
 				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftContractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "itemIds",
+						"type": "uint256[]"
+					}
+				],
+				"name": "urgentWithdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -953,11 +1007,11 @@
 			]
 		},
 		"smart_contract/nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x0c7361342379576b47a6a74544207b0cc453a4535117a3192995ebab8eb6f0c2",
+			"keccak256": "0x97fa12a29e05dced87c552b14789b8ecc131a1731f83b77ab8386f7236e0fd40",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f1521cdea7ae75cf71a28d0edf2c8b833f04a54859e98a01eacdf02128c62767",
-				"dweb:/ipfs/Qmc2w99MreWPeXtHfPujd8AGGeMJtVFrLLjKUVHAfJxuVD"
+				"bzz-raw://fb0dca2fff8e81144d47a2dba0ebc2edb773875a423fa0c0c11cbc2291a8e66f",
+				"dweb:/ipfs/QmXpmA4bV1164iWt1y4f7P5vrkNBrJ43q2bZS7in4JSu7A"
 			]
 		}
 	},

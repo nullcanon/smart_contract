@@ -197,11 +197,11 @@
 	},
 	"sources": {
 		"smart_contract/BeeToken.sol": {
-			"keccak256": "0x2d8d5a1e386d86e14974cfccd8816fe2a9866fca4d81367ca9e76bc60c3c6372",
+			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f14fb2551d2e87277a41a5d65b95d112c35d915d5922ae305dbc2d6696d2506",
-				"dweb:/ipfs/Qma6M6YDDuLDtjPDUCPc5CZTRWgCUojbnzERy9vwKxQwMm"
+				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
+				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
 			]
 		}
 	},
