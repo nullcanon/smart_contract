@@ -528,7 +528,9 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
 
     function fetchMarketItemsLimit(uint start, uint offset) public view returns (MarketItem[] memory) {
         require(start <= offset, "start must less than offset");
-        require(start + offset < orderMarketItemIds.length, "start over length");
+        if(start + offset > orderMarketItemIds.length) {
+            offset = orderMarketItemIds.length - start;
+        }
         MarketItem[] memory items = new MarketItem[](offset);
         for (uint i = start; i < offset; i++) {
             uint256 itemId = orderMarketItemIds[start];
