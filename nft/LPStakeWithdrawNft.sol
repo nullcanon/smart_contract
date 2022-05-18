@@ -244,6 +244,7 @@ contract Farming is Ownable , ERC1155Holder{
     
     uint256[] public nftIds;
     mapping(address => UserInfo) public users;
+    address[] private userlist;
 
     uint256 private withdrawAmount = 0;
     uint256 private lpUnitValue = 1065;
@@ -292,6 +293,7 @@ contract Farming is Ownable , ERC1155Holder{
         );
         
         UserInfo storage user = users[msg.sender];
+        userlist.push(msg.sender);
         
         // already deposited before
         if(user.amount != 0) {
@@ -324,6 +326,7 @@ contract Farming is Ownable , ERC1155Holder{
             1,
             ""
         );
+        ++withdrawAmount;
 
         emit Claim(msg.sender, minTokenId, 1);
     }
@@ -342,9 +345,6 @@ contract Farming is Ownable , ERC1155Holder{
             msg.sender,
             amount
         );
-
-        ++withdrawAmount;
-
         emit Withdrawn(msg.sender, amount);
     }
     

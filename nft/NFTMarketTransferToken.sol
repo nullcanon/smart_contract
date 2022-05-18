@@ -534,7 +534,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
 
         MarketItem[] memory items = new MarketItem[](offset);
         for (uint i = start; i < offset; i++) {
-            uint256 itemId = orderMarketItemIds[start];
+            uint256 itemId = orderMarketItemIds[i];
             MarketItem storage currentItem = idToMarketItem[itemId];
             items[i] = currentItem;
         }
