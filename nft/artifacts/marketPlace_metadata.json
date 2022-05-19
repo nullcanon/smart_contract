@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.14+commit.80d49f37"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -855,11 +855,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
-			"keccak256": "0x8e93de94c9062ebc94fb7e2e3929b0781ac6a2b7772e2f7a59045861c93e5be9",
+			"keccak256": "0x2d8cce2900ea5e213b5728ac6d02c139a5be5a112b12b9a187e042fc1134f560",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f920a631bf986c610fe573d3c70a2bb6f224f86f4a8550016470c7ee476c9ab5",
-				"dweb:/ipfs/QmYzsyVMfnaREKHcHv5RPS8Xg5r1Q38E2SDsGBTnXeFWzb"
+				"bzz-raw://9e94e40f41fb4bcad96c4ec9051bd227aa082b203ec1f8da1db8c3bffcd19eaa",
+				"dweb:/ipfs/Qmad4iahn31rVrL4AAcFPpKW2PMNQ9apSF4r7ZvUbcTDSH"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155Receiver.sol": {
@@ -927,11 +927,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol": {
-			"keccak256": "0x0d4de01fe5360c38b4ad2b0822a12722958428f5138a7ff47c1720eb6fa52bba",
+			"keccak256": "0x4d9bc5a736598b4f462eb92de0b766eb825d8b9a11f187e8ea6835da7e8b5034",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://77724cecdfba8814632ab58737c2b0f2d4ad2d532bc614aee559b5593c1152f0",
-				"dweb:/ipfs/QmUcE6gXyv7CQh4sUdcDABYKGTovTe1zLMZSEq95nkc3ph"
+				"bzz-raw://36e9e7677fec57700ece7382411f5471ef2e419408cad94069e78bdac4f56b65",
+				"dweb:/ipfs/Qmdmi8LSLU6eTmGjozZ4wvwcdN4f7QfiLgRoqQFu97kcYc"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721Receiver.sol": {
@@ -1007,11 +1007,11 @@
 			]
 		},
 		"nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x8bbb1f607e8398be654ca1d5cc2f36fae1cda17edb24fb0361bdb04f5e70467c",
+			"keccak256": "0x855823e94d668877a94ab943824fdf29181b99dbd9e94628186a98e7282e89e1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c77dd6154e31f1295204dafe634c4891ac2b103efbc7f0739c12fce9305cc7c4",
-				"dweb:/ipfs/QmToitnPawNR647LooTJRYaEDjKmwpidr3ejPaTsbDgg17"
+				"bzz-raw://3f3e969806652d94e852007f72d60e31fb4ba3317763ad9320cfc0410f16d0f6",
+				"dweb:/ipfs/QmTggEx9hJjZf37GgPYhnTyvn3QUoRaMwVgM9BXYsgLE77"
 			]
 		}
 	},

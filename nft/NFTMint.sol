@@ -224,9 +224,9 @@ library LibArrayForUint256Utils {
 
 contract MintNft is ERC1155Holder, Ownable {
 
-    address private feeTokenMintAddress = 0xB0bc99bdb71a4320a9aD357f68EBfBe6fFeBFc8A;
+    address private feeTokenMintAddress = 0xE070ccA5cdFB3F2B434fB91eAF67FA2084f324D7;
 
-    address private feeReceiveAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address private feeReceiveAddress = 0x6aAC70bf621B374a09f6B1959629BE9116c17aB4;
 
     mapping(address => uint256) private feeAmount;
 

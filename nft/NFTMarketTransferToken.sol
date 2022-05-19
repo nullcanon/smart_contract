@@ -233,7 +233,7 @@ contract marketPlace is ReentrancyGuard , ERC1155Holder, Ownable{
     Counters.Counter private _itemIds;
     Counters.Counter private _itemsSold;
 
-    address private feeAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address private feeAddress = 0x6aAC70bf621B374a09f6B1959629BE9116c17aB4;
     uint private feeNumerator = 300;
     uint private feeDenominator = 10000;
     

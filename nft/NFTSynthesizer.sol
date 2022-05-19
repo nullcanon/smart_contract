@@ -292,7 +292,7 @@ contract Synthesizer is ERC1155Holder, Ownable {
 
     address private beeTokenMintAddress;
 
-    address private feeAddress;
+    address private feeAddress = 0x6aAC70bf621B374a09f6B1959629BE9116c17aB4;
     uint256 private feeAmount = 200 * 10 ** 18;
 
     uint256[] private nftIds;

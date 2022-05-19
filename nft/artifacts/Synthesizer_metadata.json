@@ -526,11 +526,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
-			"keccak256": "0x8e93de94c9062ebc94fb7e2e3929b0781ac6a2b7772e2f7a59045861c93e5be9",
+			"keccak256": "0x2d8cce2900ea5e213b5728ac6d02c139a5be5a112b12b9a187e042fc1134f560",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f920a631bf986c610fe573d3c70a2bb6f224f86f4a8550016470c7ee476c9ab5",
-				"dweb:/ipfs/QmYzsyVMfnaREKHcHv5RPS8Xg5r1Q38E2SDsGBTnXeFWzb"
+				"bzz-raw://9e94e40f41fb4bcad96c4ec9051bd227aa082b203ec1f8da1db8c3bffcd19eaa",
+				"dweb:/ipfs/Qmad4iahn31rVrL4AAcFPpKW2PMNQ9apSF4r7ZvUbcTDSH"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155Receiver.sol": {
@@ -630,11 +630,11 @@
 			]
 		},
 		"nft/NFTSynthesizer.sol": {
-			"keccak256": "0x7f68a7ec2597c7a00ad310fa44df1081df19d3e754a302cff95f3c8b83387291",
+			"keccak256": "0x8273c94c472a5ba18657c5a859458781c3202cf78702fbfab984eadb7eeb8999",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a53d9406d3076d56412fbb35b88ee8f680f17a795526c5f86246314c8dcfb9db",
-				"dweb:/ipfs/QmVEcx2QyJuc7xzx7Jq4fNJ3yPwtafLLyU9ZADcEnG25w6"
+				"bzz-raw://6e4ca7c01521fe0fba79114842091722fa1cd10b9d1d50ce2bb1bdba19d261b1",
+				"dweb:/ipfs/QmTZFHrTrWbEnaPy54xn76NWXCG4fG7mqWm93ZyXksAJLz"
 			]
 		}
 	},
