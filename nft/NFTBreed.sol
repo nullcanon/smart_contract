@@ -223,38 +223,31 @@ library LibArrayForUint256Utils {
 
 }
 
-contract Farming is Ownable , ERC1155Holder{
+contract Breed is Ownable , ERC1155Holder{
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
+
+    struct NftInfo {
+        address contractAddress;
+        uint256 tokenId;
+    }
     
     struct UserInfo {
-        uint256 amount;           // current staked LP
-        uint256 lastUpdateTime;   // unix timestamp for last details update (when pointsDebt calculated)
-        uint256 pointsDebt;       // total points collected before latest deposit 结算数量
+        NftInfo nftA;
+        NftInfo nftB;
+        uint256 startTimestamp;
     }
-    
-    struct NFTInfo {
-        address contractAddress;
-        uint256 id;             // NFT id
-        uint256 remaining;      // NFTs remaining to farm
-        uint256 price;          // points required to claim NFT
-    }
-    
-    IERC20 public lpToken;             // token being staked
-    
-    uint256[] public nftIds;
-    mapping(address => UserInfo) public users;
-
-    uint256 private withdrawAmount = 0;
-    uint256 private lpUnitValue = 1065;
-    uint256 private timeUnitValue = 864000;
-    uint256 private threshold = lpUnitValue * timeUnitValue * 10 ** 18;
 
     uint256 private breedTime = 2 hours
+    IERC20 public feeToken;
+    uint256 private feeAddress;
+    uint256 private feeAmount;
+    
+    mapping(address => UserInfo) public users;
+    mapping(address => (mapping(address => uint256))) public nftHasBreedTokenId;
 
-    event NFTAdded(address indexed contractAddress, uint256 id, uint256 total, uint256 price);
-    event Staked(address indexed user, uint256 amount);
-    event Claim(address indexed user, uint256 nftId, uint256 quantity);
+    event Mating(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
+    event Cancel(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
     event Withdrawn(address indexed user, uint256 amount);
     
     constructor() {
@@ -286,81 +279,53 @@ contract Farming is Ownable , ERC1155Holder{
         IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
 
-    function mating(uint256 amount) external {
-        lpToken.safeTransferFrom(
+    function mating( address nftContractA, uint256 tokenIdA, address nftContractB, uint256 tokenIdB) external {
+        UserInfo storage user = users[msg.sender];
+        require(user.startTimestamp == 0, "Only breed once at a time");
+
+        feeToken.safeTransferFrom(
             msg.sender,
             address(this),
-            amount
+            feeAddress
         );
+        IERC1155(nftContractA).safeTransferFrom(msg.sender, address(this), tokenIdA, 1, "");
+        IERC1155(nftContractB).safeTransferFrom(msg.sender, address(this), tokenIdB, 1, "");
         
-        UserInfo storage user = users[msg.sender];
-        
-        // already deposited before
-        if(user.amount != 0) {
-            user.pointsDebt = pointsBalance(msg.sender);
-        }
-        user.amount = user.amount.add(amount);
-        user.lastUpdateTime = block.timestamp;
-
-        emit Staked(msg.sender, amount);
+        user.startTimestamp = block.timestamp;
+        user.nftA.contractAddress = nftContractA;
+        user.nftA.tokenId = tokenIdA;
+        user.nftB.contractAddress = nftContractB;
+        user.nftB.tokenId = tokenIdB;
+        emit Mating(msg.sender, user.nftA.contractAddress, user.nftB.contractAddress, user.nftA.tokenId, user.nftB.tokenId);
     }
+
+    function cancel() public {
+        UserInfo storage user = users[msg.sender];
+        require(user.startTimestamp != 0, "not start mating");
+
+        IERC1155(user.nftContractA).safeTransferFrom(address(this), msg.sender, user.tokenIdA, 1, "");
+        IERC1155(user.nftContractB).safeTransferFrom(address(this), msg.sender, user.tokenIdB, 1, "");
+        user.startTimestamp = 0;
+        emit Cancel(msg.sender, user.nftA.contractAddress, user.nftB.contractAddress, user.nftA.tokenId, user.nftB.tokenId);
+    }
+
     
-    // claim nft if points threshold reached
     function claim(address nftContractAddress) public {
-        require(nftIds.length > 0, "All NFTs farmed");
-        require(pointsBalance(msg.sender) >= threshold, "Insufficient Points");
+        uint256 nowTimestamp = block.timestamp;
         UserInfo storage user = users[msg.sender];
-        
-        // deduct points
-        user.pointsDebt = pointsBalance(msg.sender).sub(threshold);
-        user.lastUpdateTime = block.timestamp;
-        
-        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds);
-        LibArrayForUint256Utils.removeByIndex(nftIds, index);
+        require(user.startTimestamp != 0, "not start mating");
+        require(user.startTimestamp + breedTime >= nowTimestamp, "not finish mating");
 
-        // transfer nft
-        IERC1155(nftContractAddress).safeTransferFrom(
-            address(this),
-            msg.sender,
-            minTokenId,
-            1,
-            ""
-        );
+        // nft type
+        
 
-        emit Claim(msg.sender, minTokenId, 1);
+
+        emit Claim(msg.sender, user.nftA.contractAddress, user.nftB.contractAddress, user.nftA.tokenId, user.nftB.tokenId);
     }
     
-    
-    function withdraw(uint256 amount) public {
-        UserInfo storage user = users[msg.sender];
-        require(user.amount >= amount, "Insufficient staked");
-        
-        // update users
-        user.pointsDebt = pointsBalance(msg.sender);
-        user.amount = user.amount.sub(amount);
-        user.lastUpdateTime = block.timestamp;
-        
-        lpToken.safeTransfer(
-            msg.sender,
-            amount
-        );
-
-        ++withdrawAmount;
-
-        emit Withdrawn(msg.sender, amount);
-    }
 
     function nftCount() public view returns (uint256) {
         return nftIds.length;
-    }
-
-    function getNextNftTokenId() public view returns (uint256) {
-        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds);
-        return minTokenId;
-    }
-
-    function getThreshold() public view returns (uint256) {
-        return threshold;
     }
 
     function urgentWithdraw(address nftContractAddress) public onlyOwner{
@@ -373,47 +338,12 @@ contract Farming is Ownable , ERC1155Holder{
         delete nftIds;
     }
 
-    function setLpMintAddress(address mint) public onlyOwner {
-        lpToken = IERC20(mint);
+    function setFeeMintAddress(address mint) public onlyOwner {
+        feeToken = IERC20(mint);
     }
 
-    function setLpUnitValue(uint256 value) public onlyOwner {
-        lpUnitValue = value;
-        threshold = lpUnitValue * timeUnitValue * 10 ** 18;
-    }
-
-    function setTimeUnitValue(uint256 value) public onlyOwner {
-        timeUnitValue = value;
-        threshold = lpUnitValue * timeUnitValue * 10 ** 18;
-    }
-    
-    function getLpMintAddress() public view returns (address) {
-        return address(lpToken) ;
-    }
-
-    function getLpUnitValue() public view returns (uint256) {
-        return lpUnitValue;
-    }
-
-    function getTimeUnitValue() public view returns (uint256) {
-        return timeUnitValue;
-    }
-
-    function getUserStakeAmount(address user) public view returns (uint256) {
-        return users[user].amount;
-    }
-
-    function getUserNextNftTime(address user) public view returns (uint256){
-        // （阈值 - 当前产出）/当前质押数量 = 时间 
-        uint256 v = pointsBalance(user);
-        while(v > threshold) {
-            v = v.sub(threshold);
-        }
-        uint256 userStakedAmount = getUserStakeAmount(user);
-        if(userStakedAmount == 0) {
-            return 0;
-        }
-        return threshold.sub(v).div(userStakedAmount);
+    function getFeeMintAddress() public view returns (address) {
+        return address(feeToken) ;
     }
 
     function getWithdrawAmount() public view returns (uint256){

@@ -339,6 +339,14 @@ contract Farming is Ownable , ERC1155Holder{
         // update users
         user.pointsDebt = pointsBalance(msg.sender);
         user.amount = user.amount.sub(amount);
+        if (user.amount == 0) {
+            if(user.pointsDebt > threshold) {
+                uint number = user.pointsDebt.div(threshold);
+                user.pointsDebt = threshold.mul(number);
+            } else {
+                user.pointsDebt = 0;
+            }
+        }
         user.lastUpdateTime = block.timestamp;
         
         lpToken.safeTransfer(

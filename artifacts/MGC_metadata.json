@@ -389,7 +389,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ERC20.sol": "MGC"
+			"ERC20.sol": "MGC"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -403,7 +403,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ERC20.sol": {
+		"ERC20.sol": {
 			"keccak256": "0x2fae624297e1d5f01962059040d3bd2bb29f2673664c6c3a4f00b8cf264e2f33",
 			"license": "MIT",
 			"urls": [
