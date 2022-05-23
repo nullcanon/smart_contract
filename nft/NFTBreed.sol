@@ -242,6 +242,12 @@ contract Breed is Ownable , ERC1155Holder{
     IERC20 public feeToken;
     uint256 private feeAddress;
     uint256 private feeAmount;
+    uint randNonce = 0;
+
+    address private luckybeeMintAddress;
+    address private hashbeeMintAddress;
+    address private knightbeeMintAddress;
+    address private queenbeeMintAddress;
     
     mapping(address => UserInfo) public users;
     mapping(address => (mapping(address => uint256))) public nftHasBreedTokenId;
@@ -252,6 +258,8 @@ contract Breed is Ownable , ERC1155Holder{
     
     constructor() {
     }
+
+
 
     function addNFTBatch(
         address nftContractAddress,
@@ -316,8 +324,21 @@ contract Breed is Ownable , ERC1155Holder{
         require(user.startTimestamp != 0, "not start mating");
         require(user.startTimestamp + breedTime >= nowTimestamp, "not finish mating");
 
+        uint random = uint(keccak256(now, msg.sender, randNonce)) % 100;
+        randNonce++;
+
+        address nftMint;
         // nft type
-        
+        if(random < 57) {
+            nftMint = luckybeeMintAddress;
+        } else if (random >= 57 && random < 82 ) {
+            nftMint = hashbeeMintAddress;
+        } else if (random >= 82 && random < 97) {
+            nftMint = knightbeeMintAddress;
+        } else {
+            nftMint = queenbeeMintAddress;
+        }
+        IERC1155(nftMint).safeTransferFrom(address(this), msg.sender, tokenIdB, 1, "");
 
 
         emit Claim(msg.sender, user.nftA.contractAddress, user.nftB.contractAddress, user.nftA.tokenId, user.nftB.tokenId);
@@ -328,7 +349,7 @@ contract Breed is Ownable , ERC1155Holder{
         return nftIds.length;
     }
 
-    function urgentWithdraw(address nftContractAddress) public onlyOwner{
+    function urgentWithdraw(address nftContractAddress) public onlyOwner {
         uint256 length = nftIds.length;
         uint256[] memory amounts = new uint256[](length);
         for (uint256 i = 0; i < length; i++) {
