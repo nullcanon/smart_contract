@@ -236,9 +236,11 @@ contract Breed is Ownable , ERC1155Holder{
         NftInfo nftA;
         NftInfo nftB;
         uint256 startTimestamp;
+        // nft_type => (token_id => breed_time)
+        mapping(address => (mapping(uint256 => uint))) nftBreedTimes;
     }
 
-    uint256 private breedTime = 2 hours
+    uint256 private breedInterval = 2 hours
     IERC20 public feeToken;
     uint256 private feeAddress;
     uint256 private feeAmount;
@@ -250,7 +252,8 @@ contract Breed is Ownable , ERC1155Holder{
     address private queenbeeMintAddress;
     
     mapping(address => UserInfo) public users;
-    mapping(address => (mapping(address => uint256))) public nftHasBreedTokenId;
+    mapping(address => uint256[]) private nftIds;
+    mapping(address => uint) private breedTimeLimit;
 
     event Mating(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
     event Cancel(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
@@ -259,13 +262,22 @@ contract Breed is Ownable , ERC1155Holder{
     constructor() {
     }
 
-
+    function setConfig(address luckybeeMint, address hashbeeMint, address knightbeeMint, address queenbeeMint) external onlyOwner {
+        luckybeeMintAddress = hashbeeMint;
+        hashbeeMintAddress = hashbeeMint;
+        knightbeeMintAddress = knightbeeMint;
+        queenbeeMintAddress = queenbeeMint;
+        breedTimeLimit[luckybeeMintAddress] = 1;
+        breedTimeLimit[hashbeeMintAddress] = 1;
+        breedTimeLimit[knightbeeMintAddress] = 1;
+        breedTimeLimit[queenbeeMintAddress] = 2;
+    }
 
     function addNFTBatch(
         address nftContractAddress,
         uint256[] memory ids,
         uint256[] memory amounts
-    ) external  onlyOwner{
+    ) external onlyOwner {
         LibArrayForUint256Utils.extend(nftIds ,ids);
         IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
@@ -283,13 +295,16 @@ contract Breed is Ownable , ERC1155Holder{
         }
 
         LibArrayForUint256Utils.extend(nftIds ,ids);
-
         IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
 
     function mating( address nftContractA, uint256 tokenIdA, address nftContractB, uint256 tokenIdB) external {
         UserInfo storage user = users[msg.sender];
         require(user.startTimestamp == 0, "Only breed once at a time");
+
+        require(user.nftBreedTimes[nftContractA] < breedTimeLimit[nftContractA], "Time limit");
+        require(user.nftBreedTimes[nftContractB] < breedTimeLimit[nftContractB], "Time limit");
+
 
         feeToken.safeTransferFrom(
             msg.sender,
@@ -322,7 +337,7 @@ contract Breed is Ownable , ERC1155Holder{
         uint256 nowTimestamp = block.timestamp;
         UserInfo storage user = users[msg.sender];
         require(user.startTimestamp != 0, "not start mating");
-        require(user.startTimestamp + breedTime >= nowTimestamp, "not finish mating");
+        require(user.startTimestamp + breedInterval >= nowTimestamp, "not finish mating");
 
         uint random = uint(keccak256(now, msg.sender, randNonce)) % 100;
         randNonce++;
@@ -338,11 +353,16 @@ contract Breed is Ownable , ERC1155Holder{
         } else {
             nftMint = queenbeeMintAddress;
         }
-        IERC1155(nftMint).safeTransferFrom(address(this), msg.sender, tokenIdB, 1, "");
 
+        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds[nftMint]);
+        LibArrayForUint256Utils.removeByIndex(nftIds[nftMint], index);
 
+        IERC1155(nftMint).safeTransferFrom(address(this), msg.sender, minTokenId, 1, "");
+        UserInfo storage user = users[msg.sender];
+        user.nftBreedTimes[nftMint][minTokenId] += 1;
         emit Claim(msg.sender, user.nftA.contractAddress, user.nftB.contractAddress, user.nftA.tokenId, user.nftB.tokenId);
     }
+
     
 
     function nftCount() public view returns (uint256) {
