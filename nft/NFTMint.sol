@@ -238,6 +238,12 @@ contract MintNft is ERC1155Holder, Ownable {
 
     mapping(address => mapping(address => uint)) private whiteList;
 
+    mapping(address => bool) private openWhileList;
+
+    function opWhiteList(address nftContractAddress, bool op) public onlyOwner {
+        openWhileList[nftContractAddress] = op;
+    }
+
     function addWhiteList(address nftContractAddress, address user,  uint quota) public onlyOwner {
         whiteList[nftContractAddress][user] += quota;
     }
@@ -274,7 +280,9 @@ contract MintNft is ERC1155Holder, Ownable {
         address nftContractAddress
     ) public {
         // check nftContractAddress
-        require(inWhiteList(nftContractAddress, msg.sender), "Not white list user");
+        if(!openWhileList[nftContractAddress]) {
+            require(inWhiteList(nftContractAddress, msg.sender), "Not white list user");
+        } 
 
         require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount[nftContractAddress], "Token allowance too low");
         IERC20(feeTokenMintAddress).transferFrom(msg.sender, feeReceiveAddress, feeAmount[nftContractAddress]);
@@ -298,7 +306,7 @@ contract MintNft is ERC1155Holder, Ownable {
     ) public {
         uint256[] memory ids = new uint256[](idsNumber);
         uint256[] memory amounts = new uint256[](idsNumber);
-        for (uint256 i = start; i < (idsNumber + start); i++) {
+        for (uint256 i = (idsNumber + start - 1); i >= start; i--) {
             ids[i-start] = i;
             amounts[i-start] = 1;
             mintTokenId[nftContractAddress].push(i);
@@ -307,6 +315,7 @@ contract MintNft is ERC1155Holder, Ownable {
         emit addNft(nftContractAddress, idsNumber);
     }
 
+    // desc
     function addNftBatch(
         address nftContractAddress,
         uint256[] memory ids,
