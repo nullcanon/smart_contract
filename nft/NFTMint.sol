@@ -282,6 +282,7 @@ contract MintNft is ERC1155Holder, Ownable {
         // check nftContractAddress
         if(!openWhileList[nftContractAddress]) {
             require(inWhiteList(nftContractAddress, msg.sender), "Not white list user");
+            whiteList[nftContractAddress][msg.sender] -= 1;
         } 
 
         require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount[nftContractAddress], "Token allowance too low");
@@ -292,8 +293,6 @@ contract MintNft is ERC1155Holder, Ownable {
         LibArrayForUint256Utils.removeByIndex(mintTokenId[nftContractAddress], index);
 
         IERC1155(nftContractAddress).safeTransferFrom( address(this) , msg.sender, minTokenId , 1 , "");
-
-        whiteList[nftContractAddress][msg.sender] -= 1;
 
         emit mint(nftContractAddress, msg.sender);
     }
@@ -306,6 +305,7 @@ contract MintNft is ERC1155Holder, Ownable {
     ) public {
         uint256[] memory ids = new uint256[](idsNumber);
         uint256[] memory amounts = new uint256[](idsNumber);
+        require(start > 0, "start must more than zero");
         for (uint256 i = (idsNumber + start - 1); i >= start; i--) {
             ids[i-start] = i;
             amounts[i-start] = 1;
@@ -363,5 +363,9 @@ contract MintNft is ERC1155Holder, Ownable {
 
     function holdNumber(address nftContractAddress) public view returns (uint256) {
         return mintTokenId[nftContractAddress].length;
+    }
+
+    function isOpenWhiteList(address nftContract) public view returns (bool) {
+        return openWhileList[nftContract];
     }
 }

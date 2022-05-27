@@ -259,6 +259,25 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					}
+				],
+				"name": "isOpenWhiteList",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "nftContractAddress",
 						"type": "address"
 					}
@@ -367,6 +386,24 @@
 						"type": "bytes4"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftContractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "op",
+						"type": "bool"
+					}
+				],
+				"name": "opWhiteList",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -567,11 +604,11 @@
 	},
 	"sources": {
 		"nft/NFTMint.sol": {
-			"keccak256": "0xd35fde6fb44104986abae6b08b2a74c26cc59b78428263737871f2bb1a34d388",
+			"keccak256": "0x9dff968559529eb3c6603a6d2ae4d5e5e3d5ca8cfbbea3d8050b74076d058578",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d43fd48d15a24475d9618d952f3cbc1594f0a589503028afced4d920d96e2d2d",
-				"dweb:/ipfs/QmeJ6LK4EvXDX93N4W6oFQyuabzpMMtfA97dLeNuQckh55"
+				"bzz-raw://235a09df7c12e5229d74b9c265b37057f16f09191b7a990980814f3219636645",
+				"dweb:/ipfs/QmTQMZcZoFiKuQNi4QSrcJjszHv39qew4nwrzYEYp9ScKu"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {

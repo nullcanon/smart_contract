@@ -169,7 +169,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/SignatureWithdrawToken.sol": "VerifySignature"
+			"nft/SignatureDemo.sol": "VerifySignature"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -183,7 +183,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"nft/SignatureWithdrawToken.sol": {
+		"nft/SignatureDemo.sol": {
 			"keccak256": "0x93684f2d15760cc7808e0f9afc3ae87eef74e06ee08c910ed6e2a559700080da",
 			"license": "MIT",
 			"urls": [

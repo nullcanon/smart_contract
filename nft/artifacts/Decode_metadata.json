@@ -1,0 +1,124 @@
+{
+	"compiler": {
+		"version": "0.4.26+commit.4563c3fc"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "r",
+						"type": "bytes32"
+					},
+					{
+						"name": "s",
+						"type": "bytes32"
+					},
+					{
+						"name": "v1",
+						"type": "bytes1"
+					}
+				],
+				"name": "ecrecoverDecode",
+				"outputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "source",
+						"type": "bytes"
+					}
+				],
+				"name": "bytesToBytes32",
+				"outputs": [
+					{
+						"name": "result",
+						"type": "bytes32"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "decode",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "data",
+						"type": "bytes"
+					},
+					{
+						"name": "start",
+						"type": "uint256"
+					},
+					{
+						"name": "len",
+						"type": "uint256"
+					}
+				],
+				"name": "slice",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"nft/test.sol": "Decode"
+		},
+		"evmVersion": "byzantium",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"nft/test.sol": {
+			"keccak256": "0x6b9ad9ccb675a5d47db86675acb233a24fc04ffe506b1b9ec199a627e9cfe3b7",
+			"urls": [
+				"bzzr://8921dc11095df37ebc10a33967f117eaa35d28ea1953709f06311a3858c8a7d9"
+			]
+		}
+	},
+	"version": 1
+}

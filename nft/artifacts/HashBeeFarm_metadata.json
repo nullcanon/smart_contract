@@ -342,7 +342,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/SignatureWithdraw.sol": "HashBeeFarm"
+			"nft/SignatureWithdrawERC20.sol": "HashBeeFarm"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -356,7 +356,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"nft/SignatureWithdraw.sol": {
+		"nft/SignatureWithdrawERC20.sol": {
 			"keccak256": "0xedb0773ebb485cba3c2ec6f85e328467aa3d3920006177042b75da3ab089deb7",
 			"urls": [
 				"bzz-raw://a70da7f4de52c5d014b81b4a9a09e423fac6128e688a86404d1d1c3a4b195bb8",
