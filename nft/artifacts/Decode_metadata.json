@@ -102,7 +102,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/test.sol": "Decode"
+			"smart_contract/nft/test.sol": "Decode"
 		},
 		"evmVersion": "byzantium",
 		"libraries": {},
@@ -113,7 +113,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"nft/test.sol": {
+		"smart_contract/nft/test.sol": {
 			"keccak256": "0x6b9ad9ccb675a5d47db86675acb233a24fc04ffe506b1b9ec199a627e9cfe3b7",
 			"urls": [
 				"bzzr://8921dc11095df37ebc10a33967f117eaa35d28ea1953709f06311a3858c8a7d9"

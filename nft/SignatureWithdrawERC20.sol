@@ -3,17 +3,20 @@ pragma solidity ^0.8.13;
 import "../node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
-contract HashBeeFarm is ERC1155Holder, Ownable {
+contract ClaimERC20 is Ownable {
     mapping(address => uint) private userNonce;
     address private signer;
+    address private erc20mint;
+
+    event Claim(address indexed, uint256 indexed, uint indexed);
 
    function getMessageHash(
         address _to,
+        uint256 _amount,
         uint _nonce
     ) public pure returns (bytes32) {
-        return keccak256(abi.encodePacked(_to, _nonce));
+        return keccak256(abi.encodePacked(_to, _amount, _nonce));
     }
 
     function getEthSignedMessageHash(bytes32 _messageHash)
@@ -38,15 +41,16 @@ contract HashBeeFarm is ERC1155Holder, Ownable {
     {
         (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signature);
 
-        return ecrecover(_ethSignedMessageHash, v, r, s);
+        return ecrecover(_ethSignedMessageHash, v + 27, r, s);
     }
 
     function verify(
         address _to,
+        uint256 _amount,
         uint _nonce,
         bytes memory signature
     ) public view returns (bool) {
-        bytes32 messageHash = getMessageHash(_to, _nonce);
+        bytes32 messageHash = getMessageHash(_to, _amount, _nonce);
         bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
 
         return recoverSigner(ethSignedMessageHash, signature) == signer;
@@ -89,19 +93,36 @@ contract HashBeeFarm is ERC1155Holder, Ownable {
 
     function claim(        
         address _to,
+        uint256 _amount,
         uint _nonce,
         bytes memory signature
     ) public {
-        require(verify(_to, _nonce, signature), "signature verify faild");
+        require(verify(_to, _amount, _nonce, signature), "signature verify faild");
         require(userNonce[_to] < _nonce, "nonce verify faild");
         userNonce[_to] = userNonce[_to] + 1;
 
-        // IERC1155(nftContractAddress).safeTransferFrom( address(this) , _to, minTokenId , 1 , "");
+        IERC20(erc20mint).transfer(_to, _amount);
+        emit Claim(_to, _amount, _nonce);
     }
 
     function setSigner(address _signer) public onlyOwner {
         signer = _signer;
     }
 
+    function setToken(address _token) public onlyOwner {
+        erc20mint = _token;
+    }
+
+    function urgentWithdraw(address _token) public onlyOwner {
+        IERC20(_token).transfer( msg.sender, IERC20(erc20mint).balanceOf(address(this)));
+    }
+
+    function getSigner() public view returns (address) {
+        return signer;
+    }
+
+    function getToken() public  view returns (address) {
+        return erc20mint;
+    }
 
 }
