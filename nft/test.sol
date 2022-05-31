@@ -38,4 +38,21 @@ contract Decode{
         result := mload(add(source, 32))
     }
   }
+
+   uint count;
+  function testGas() public {
+    
+    for(uint i = 0; i < 10; ++i) {
+        ++count;
+    }
+  
+  }
+
+    function testGas2() public {
+      uint32 a = 1;
+      uint c = 3;
+      uint32 b = 2;
+      uint d = 4;
+  }
+
 }

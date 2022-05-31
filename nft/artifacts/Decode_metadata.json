@@ -7,6 +7,15 @@
 		"abi": [
 			{
 				"constant": false,
+				"inputs": [],
+				"name": "testGas",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
 				"inputs": [
 					{
 						"name": "r",
@@ -28,6 +37,15 @@
 						"type": "address"
 					}
 				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "testGas2",
+				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -102,7 +120,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/nft/test.sol": "Decode"
+			"nft/test.sol": "Decode"
 		},
 		"evmVersion": "byzantium",
 		"libraries": {},
@@ -113,10 +131,10 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/nft/test.sol": {
-			"keccak256": "0x6b9ad9ccb675a5d47db86675acb233a24fc04ffe506b1b9ec199a627e9cfe3b7",
+		"nft/test.sol": {
+			"keccak256": "0xf9071ad691f7e43c9ae1680e9329851630e17a9426eea919c917e61351a54b94",
 			"urls": [
-				"bzzr://8921dc11095df37ebc10a33967f117eaa35d28ea1953709f06311a3858c8a7d9"
+				"bzzr://72138012b8c034b07e9ad7aa83b16b6c0ecb8e5d107e98066856d41bcabb6fa0"
 			]
 		}
 	},

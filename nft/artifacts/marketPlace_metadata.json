@@ -847,11 +847,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xc85ab01c5105954996ec92013be2e1c6090e32ef2fe724df418996a86a9cc0a5",
+			"keccak256": "0xef45c6e91816b76a362f5999eb20e4088762fce894bbe6bf7708e9c38155c105",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e5c969d0fb562fb9489dcdf1e402ba72af65fc71bd4a7c8c9201c75158ba7dd6",
-				"dweb:/ipfs/QmVR3tpNeCcfCAy1NtHfG6sdDbTPVvuhTLQ8iMgSFs6Hja"
+				"bzz-raw://76ac1500779adc277dd8a02f14a24d5ca9f34c6469f7f5503474e71add35ac37",
+				"dweb:/ipfs/QmQzV3mYkuQP6qXJCetb4PyJKLWAWrC5gAr8kKULGHGjSk"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
@@ -919,11 +919,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol": {
-			"keccak256": "0xeb28c07599720969da705f074f04eac55ac3125d656c016cc7e768b5a6b25b7e",
+			"keccak256": "0x6edad7bb09b2cb5167ca812c4ffa9ae5fd58156d825668fab05102fcedf380ea",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b48d8f05ebb17781c3160907c93e32380662f8e0718a1381e068839dcfa7f892",
-				"dweb:/ipfs/QmaV9xorp7zbHjMCA6T4DKzqCoy4LKnHhemuHLoLZodZV1"
+				"bzz-raw://78b19c33d3e328d77ce5bbc97ea18b9a117931ec8dd0424a3976423659fbe16e",
+				"dweb:/ipfs/QmdS3nCGdFuuQxB6TtxupjGczCHD8pWQAhHoz4fXeNp2fx"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol": {

@@ -257,7 +257,7 @@ contract Breed is Ownable , ERC1155Holder{
 
     event Mating(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
     event Cancel(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
-    event Withdrawn(address indexed user, uint256 amount);
+    event Claim(address indexed user, address indexed nftContractA, address indexed nftContractB, uint256 tokenIdA, uint256 tokenIdB);
     
     constructor() {
     }
@@ -298,6 +298,13 @@ contract Breed is Ownable , ERC1155Holder{
         IERC1155(nftContractAddress).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, "");
     }
 
+    function getUserOvipositionTime(address user) public view returns (uint256){
+        if (users[user].startTimestamp == 0) {
+            return 0;
+        }
+        return users[user].startTimestamp + breedInterval;
+    }
+
     function mating( address nftContractA, uint256 tokenIdA, address nftContractB, uint256 tokenIdB) external {
         UserInfo storage user = users[msg.sender];
         require(user.startTimestamp == 0, "Only breed once at a time");
@@ -333,7 +340,7 @@ contract Breed is Ownable , ERC1155Holder{
     }
 
     
-    function claim(address nftContractAddress) public {
+    function claim() public {
         uint256 nowTimestamp = block.timestamp;
         UserInfo storage user = users[msg.sender];
         require(user.startTimestamp != 0, "not start mating");

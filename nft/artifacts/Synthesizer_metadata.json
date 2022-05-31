@@ -518,11 +518,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xc85ab01c5105954996ec92013be2e1c6090e32ef2fe724df418996a86a9cc0a5",
+			"keccak256": "0xef45c6e91816b76a362f5999eb20e4088762fce894bbe6bf7708e9c38155c105",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e5c969d0fb562fb9489dcdf1e402ba72af65fc71bd4a7c8c9201c75158ba7dd6",
-				"dweb:/ipfs/QmVR3tpNeCcfCAy1NtHfG6sdDbTPVvuhTLQ8iMgSFs6Hja"
+				"bzz-raw://76ac1500779adc277dd8a02f14a24d5ca9f34c6469f7f5503474e71add35ac37",
+				"dweb:/ipfs/QmQzV3mYkuQP6qXJCetb4PyJKLWAWrC5gAr8kKULGHGjSk"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
@@ -542,11 +542,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/extensions/ERC1155Burnable.sol": {
-			"keccak256": "0x65283046c52a6bd3e57e456cc5eeab0dd86c00979b84495dc0109b609747fd16",
+			"keccak256": "0x7e76ec77f61db00f1a7e95d8b4291472bfaaae899f73d9a6c6aafb055889e568",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cae1aa0113f29cb099e7ff5c2b8f559ede5fc9a8f1d57746e5ecea8fff9157de",
-				"dweb:/ipfs/QmQrymH5ACUZcoWYSYZTQTGM1xVEZpnuQce8etBWTB33xm"
+				"bzz-raw://253603caf45db0851a3b2437e7cd8a86d8beed6886b0ed5aedc1971e61792d14",
+				"dweb:/ipfs/QmZWFt4jGgyQXpyHD3FR5vkFJPwxo3g4iDjbZSDkhCRZif"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
@@ -598,11 +598,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
-			"keccak256": "0x2ccf9d2313a313d41a791505f2b5abfdc62191b5d4334f7f7a82691c088a1c87",
+			"keccak256": "0xa708703e3d62e8bb7c31d28c238e756ebcc12b9af57e6fa941cf9adc1daba8ae",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3a57d0854b2fdce6ebff933a48dca2445643d1eccfc27f00292e937f26c6a58",
-				"dweb:/ipfs/QmW45rZooS9TqR4YXUbjRbtf2Bpb5ouSarBvfW1LdGprvV"
+				"bzz-raw://78110f6e83d8210e27221d3be77d31c4468d40435dd2a9986dff92829ab8f3e3",
+				"dweb:/ipfs/QmXEsx612M31QmNzVc7X7Qcrpeug81ykfERhdsjxakntGA"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {

@@ -6678,20 +6678,20 @@
 											{
 												"externalReferences": [
 													{
-														"source": {
-															"declaration": 121,
-															"isOffset": false,
-															"isSlot": false,
-															"src": "1493:6:0",
-															"valueSize": 1
-														}
-													},
-													{
 														"result": {
 															"declaration": 124,
 															"isOffset": false,
 															"isSlot": false,
 															"src": "1473:6:0",
+															"valueSize": 1
+														}
+													},
+													{
+														"source": {
+															"declaration": 121,
+															"isOffset": false,
+															"isSlot": false,
+															"src": "1493:6:0",
 															"valueSize": 1
 														}
 													}
