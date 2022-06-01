@@ -237,10 +237,10 @@ contract Breed is Ownable , ERC1155Holder{
         NftInfo nftB;
         uint256 startTimestamp;
         // nft_type => (token_id => breed_time)
-        mapping(address => (mapping(uint256 => uint))) nftBreedTimes;
+        mapping(address => mapping(uint256 => uint)) nftBreedTimes;
     }
 
-    uint256 private breedInterval = 2 hours
+    uint256 private breedInterval = 2 hours;
     IERC20 public feeToken;
     uint256 private feeAddress;
     uint256 private feeAmount;
