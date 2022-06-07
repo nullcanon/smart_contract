@@ -919,11 +919,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol": {
-			"keccak256": "0x6edad7bb09b2cb5167ca812c4ffa9ae5fd58156d825668fab05102fcedf380ea",
+			"keccak256": "0x44d5161ff3fa1e06de859b4d12bfdc5b7738c174a49ed55aca435ae1a8e2d7a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://78b19c33d3e328d77ce5bbc97ea18b9a117931ec8dd0424a3976423659fbe16e",
-				"dweb:/ipfs/QmdS3nCGdFuuQxB6TtxupjGczCHD8pWQAhHoz4fXeNp2fx"
+				"bzz-raw://17706155cf3e9bdc3ef7567ed1774436fd4e342f3bd68481c322d3cc3aa60ffc",
+				"dweb:/ipfs/QmV1DG4QqYVoxU6yV4Q6xreWg8YquvYjwEoUsK5VH2QEhh"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol": {

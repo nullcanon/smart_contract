@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/LPStakeWithdrawNft.sol": "LibArrayForUint256Utils"
+			"nft/NFTBreed.sol": "LibArrayForUint256Utils"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -26,18 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"nft/LPStakeWithdrawNft.sol": {
-			"keccak256": "0x20582fcd9d59dbc1718a50829bb664dcb2ae60dd256c24f3c27fa375922b0de3",
+		"nft/NFTBreed.sol": {
+			"keccak256": "0x7882bb287e870a3031bb314fb5005e0246b26758e29a83376e5588af9e2b6c21",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://350720bbf90b00533ac6f008b61d6871139eb60a25d3f6c0b1e33346a7c5f4d1",
-				"dweb:/ipfs/QmbwcFjnJxHpxtnUnHidy6Zn2BFbjUnnT878232aZBDqWo"
+				"bzz-raw://685247369a5b906b89de1946c666341fc7b61aba5d70b039867808e0f0897ba9",
+				"dweb:/ipfs/QmbnVYoAShbREJPSHpMW1faurYyN49zgTkiaMrkHncZfNP"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
