@@ -379,7 +379,7 @@ contract Breed is Ownable , ERC1155Holder{
         uint256 nowTimestamp = block.timestamp;
         UserInfo storage user = users[msg.sender];
         require(user.startTimestamp != 0, "not start mating");
-        require(user.startTimestamp + breedInterval >= nowTimestamp, "not finish mating");
+        require(nowTimestamp - user.startTimestamp >= breedInterval, "not finish mating");
 
         address nftMint = user.t;
         (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(nftIds[nftMint]);
