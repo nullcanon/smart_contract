@@ -433,4 +433,12 @@ contract Breed is Ownable , ERC1155Holder{
     function setBreedInterval(uint256 interval) public onlyOwner {
         breedInterval = interval;
     }
+
+    function getBreedInterval() public view returns (uint256){
+        return breedInterval;
+    }
+
+    function getFeeAmount() public view returns (uint256){
+        return feeAmount;
+    }
 }

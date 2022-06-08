@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BatchTransfer.sol": "SafeMath"
+			"BeeToken.sol": "SafeMath"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,11 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"BatchTransfer.sol": {
-			"keccak256": "0xd870f1cdf7d4fa1063e152bce97b519227479241511b3d1e04318dceba94b90c",
+		"BeeToken.sol": {
+			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://64c390d0e437bc695cb1b97ee468468429449087a5d36e06b69eb621ff358706",
-				"dweb:/ipfs/QmdXEw3rhqVe9vrvjuNN5WPWk96F2ArdaSxfNeZK85ms5P"
+				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
+				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
 			]
 		}
 	},

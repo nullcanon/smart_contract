@@ -242,6 +242,32 @@
 			},
 			{
 				"inputs": [],
+				"name": "getBreedInterval",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getFeeAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getFeeMintAddress",
 				"outputs": [
 					{
@@ -710,18 +736,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"nft/NFTBreed.sol": {
-			"keccak256": "0x53547c830edd98bde3de8ef2155eed257a657c74af2ec6c5c8f159100516dcab",
+			"keccak256": "0x5d2c12ec4ec3afd36816660bc3ed85cf086ee2f0a20ce722826127faf39367a2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d3b3d88775a3c953e8f639dae44c9d682226c678490958dea9c41d11e35b3626",
-				"dweb:/ipfs/QmWrCVJa1eZ2uLrNFYbQ3UuvSTmC5iV5UhHN9PjgSug4cc"
+				"bzz-raw://199b1a414369bd1de9742a1937e94855d4c1802c10da4a986a7af6d16abfea90",
+				"dweb:/ipfs/QmZ55gBP3F33qryQ6E5KmZToGF5M9sRixTAp2ckgew8QKT"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {

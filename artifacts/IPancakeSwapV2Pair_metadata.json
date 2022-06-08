@@ -670,7 +670,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/BeeToken.sol": "IPancakeSwapV2Pair"
+			"BeeToken.sol": "IPancakeSwapV2Pair"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -684,7 +684,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/BeeToken.sol": {
+		"BeeToken.sol": {
 			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
 			"license": "MIT",
 			"urls": [
