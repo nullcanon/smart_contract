@@ -386,6 +386,9 @@ contract Breed is Ownable , ERC1155Holder{
         LibArrayForUint256Utils.removeByIndex(nftIds[nftMint], index);
 
         IERC1155(nftMint).safeTransferFrom(address(this), msg.sender, minTokenId, 1, "");
+        IERC1155(user.nftA.contractAddress).safeTransferFrom(address(this), msg.sender, user.nftA.tokenId, 1, "");
+        IERC1155(user.nftB.contractAddress).safeTransferFrom(address(this), msg.sender, user.nftB.tokenId, 1, "");
+        user.startTimestamp = 0;
         emit Claim(msg.sender, nftMint, minTokenId);
     }
     
