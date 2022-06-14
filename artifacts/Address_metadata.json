@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BeeToken.sol": "Address"
+			"BatchTransfer.sol": "Address"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"BeeToken.sol": {
-			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
-			"license": "MIT",
+		"BatchTransfer.sol": {
+			"keccak256": "0x4b87ec7cc406bd1c828458bc3669c68344410d311322459552b606e2d3b87824",
 			"urls": [
-				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
-				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
+				"bzz-raw://2070247c0aad4260c6d612e4129c4ad8e8ab5fab9ce56e5ac13fefcea3fead9f",
+				"dweb:/ipfs/QmSsPNyeqLNRUcpPN5SYqo1VwVfuXShpj9taeP2eDNnqPZ"
 			]
 		}
 	},

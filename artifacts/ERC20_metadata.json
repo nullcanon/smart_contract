@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.14+commit.80d49f37"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -313,17 +313,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"BatchTransfer.sol": {
-			"keccak256": "0xd870f1cdf7d4fa1063e152bce97b519227479241511b3d1e04318dceba94b90c",
+			"keccak256": "0x4b87ec7cc406bd1c828458bc3669c68344410d311322459552b606e2d3b87824",
 			"urls": [
-				"bzz-raw://64c390d0e437bc695cb1b97ee468468429449087a5d36e06b69eb621ff358706",
-				"dweb:/ipfs/QmdXEw3rhqVe9vrvjuNN5WPWk96F2ArdaSxfNeZK85ms5P"
+				"bzz-raw://2070247c0aad4260c6d612e4129c4ad8e8ab5fab9ce56e5ac13fefcea3fead9f",
+				"dweb:/ipfs/QmSsPNyeqLNRUcpPN5SYqo1VwVfuXShpj9taeP2eDNnqPZ"
 			]
 		}
 	},

@@ -249,7 +249,7 @@ contract ERC20Transfer {
         owner = msg.sender;
     }
 
-    function batch_transfer(address _token, address[] memory to, uint amount) public {
+    function batch_transfer(address _token, address[] memory to, uint256 amount) public {
         require(msg.sender == owner);
         ERC20 token = ERC20(_token);
         for (uint i = 0; i < to.length; i++) {
@@ -257,7 +257,7 @@ contract ERC20Transfer {
         }
     }
 
-    function batch_transfer2(address _token, address[] memory to, uint[] memory amount) public {
+    function batch_transfer2(address _token, address[] memory to, uint256[] memory amount) public {
         require(msg.sender == owner);
         require( (to.length == amount.length) && to.length >= 1, "length err");
 
