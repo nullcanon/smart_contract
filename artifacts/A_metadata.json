@@ -59,7 +59,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/Atest.sol": "A"
+			"Atest.sol": "A"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -73,7 +73,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/Atest.sol": {
+		"Atest.sol": {
 			"keccak256": "0xbc5df1f7f6a3759d507b5a201127b5da36d67d04e37e1730519da7c97ea5b3f4",
 			"license": "MIT",
 			"urls": [
