@@ -40,6 +40,12 @@
 					{
 						"indexed": false,
 						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
 						"name": "moneyMintAddress",
 						"type": "address"
 					},
@@ -278,6 +284,24 @@
 						"type": "address"
 					},
 					{
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					}
+				],
+				"name": "createMarketSaleErc1155",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
 						"internalType": "address",
 						"name": "moneyMintAddress",
 						"type": "address"
@@ -324,188 +348,6 @@
 				"name": "createMarketSaleWithTokenErc1155",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "fetchMarketItems",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "itemId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "nftContract",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "tokenId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address payable",
-								"name": "seller",
-								"type": "address"
-							},
-							{
-								"internalType": "address payable",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "address",
-								"name": "moneyMintAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "enum marketPlace.Status",
-								"name": "sold",
-								"type": "uint8"
-							}
-						],
-						"internalType": "struct marketPlace.MarketItem[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "start",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "offset",
-						"type": "uint256"
-					}
-				],
-				"name": "fetchMarketItemsLimit",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "itemId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "nftContract",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "tokenId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address payable",
-								"name": "seller",
-								"type": "address"
-							},
-							{
-								"internalType": "address payable",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "address",
-								"name": "moneyMintAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "enum marketPlace.Status",
-								"name": "sold",
-								"type": "uint8"
-							}
-						],
-						"internalType": "struct marketPlace.MarketItem[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "user",
-						"type": "address"
-					}
-				],
-				"name": "fetchMarketItemsWithUser",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "itemId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "nftContract",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "tokenId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address payable",
-								"name": "seller",
-								"type": "address"
-							},
-							{
-								"internalType": "address payable",
-								"name": "owner",
-								"type": "address"
-							},
-							{
-								"internalType": "address",
-								"name": "moneyMintAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "enum marketPlace.Status",
-								"name": "sold",
-								"type": "uint8"
-							}
-						],
-						"internalType": "struct marketPlace.MarketItem[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -816,7 +658,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/NFTMarketTransferToken.sol": "marketPlace"
+			"nft/NFTMarketAitd.sol": "marketPlace"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -951,11 +793,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
-			"keccak256": "0xa708703e3d62e8bb7c31d28c238e756ebcc12b9af57e6fa941cf9adc1daba8ae",
+			"keccak256": "0xeecbec41bdb0eaa85bdd61c58db40d73cc9c77bf16586a0d79944d7a5af20a92",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://78110f6e83d8210e27221d3be77d31c4468d40435dd2a9986dff92829ab8f3e3",
-				"dweb:/ipfs/QmXEsx612M31QmNzVc7X7Qcrpeug81ykfERhdsjxakntGA"
+				"bzz-raw://bfb3b58ffff7160ab25d647b712c61928cca998bd837645dd0239d9ac7fcaf9f",
+				"dweb:/ipfs/QmawPt42btqusmPGxf5htAXzQ5Pe1noysGUrEtnGdBjfcF"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
@@ -1006,12 +848,12 @@
 				"dweb:/ipfs/QmQJquTMtc6fgm5JQzGdsGpA2fqBe3MHWEdt2qzaLySMdN"
 			]
 		},
-		"nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x855823e94d668877a94ab943824fdf29181b99dbd9e94628186a98e7282e89e1",
+		"nft/NFTMarketAitd.sol": {
+			"keccak256": "0x2246b2dcfad5ef091593c463b1864ed5fc9b9a86d83b9d51a942c4c3d8c4b4d5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3f3e969806652d94e852007f72d60e31fb4ba3317763ad9320cfc0410f16d0f6",
-				"dweb:/ipfs/QmTggEx9hJjZf37GgPYhnTyvn3QUoRaMwVgM9BXYsgLE77"
+				"bzz-raw://bd30a91a8f172e213ba83c3e2c9549e8c54fd036dfee9d6c27fa399cf425a809",
+				"dweb:/ipfs/QmdRDCiWFHXiB9V1WAF4hU5qpGckXkE3Qfo2De23wphNbU"
 			]
 		}
 	},
