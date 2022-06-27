@@ -772,12 +772,6 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 
 contract BeePresell is Ownable {
 
-    struct UserInfo {
-        address upper;//
-        address[] lowers;//
-        uint256 startBlock;//
-    }
-
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
     address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
@@ -800,9 +794,10 @@ contract BeePresell is Ownable {
     uint32 private preMax = 1024;
     uint64 private startAt;
     uint64 private endAt;
-    uint32 
+    uint32 private timeStep = 86400; // 1day
+    uint256 private priceStep = 5 * 10 ** 18;
+    uint256 private baseMoney = 100 * 10 ** 18;
     
-    mapping(address => UserInfo) public inviteInfo;
 
     IERC20 public immutable usdtToken;
     IERC20 public immutable sellToken;
@@ -810,7 +805,12 @@ contract BeePresell is Ownable {
     mapping(address => bool) public userInviteBalancelMap;
     mapping(address => bool) public hasBuy;
 
-
+    event BuyPresell(
+        address index user,
+        uint256 priceForUsdt,
+        uint256 mscAmount,
+        uint256 usdtAmount,
+    );
 
     constructor(
         uint64 _startAt,
@@ -828,15 +828,13 @@ contract BeePresell is Ownable {
     function getMscAmountOut(uint256 amountIn) public view return (uint256) {
         return IUniswapV2Router02(pancakeRoute2).getAmountsOut(amountIn ,[usdtMintAddress, mscMintAddress]);
     }
-
     
-    function getMscAmount() public view return (uint256) {
+    function getPresellMscAmount() public view return (uint256) {
+        uint curtime = block.timestamp;
+        uint32 step = (curtime - startAt) / timeStep;
+        uint256 money = baseMoney + step * priceStep;
 
         return getMscAmountOut();
-    }
-
-    function getLowersCount() public view returns (uint32) {
-        return lowersCounter;
     }
 
     function getUsdtAmount() public view returns (uint256) {
@@ -853,13 +851,6 @@ contract BeePresell is Ownable {
 
     function getUserPreSellCoinAmount(address user) public view returns (uint256) {
         return userPresellBalanceMap[user];
-    }
-
-    function getUserInviteAirdropCoinAmount(address user) public view returns (uint256) {
-        if (lowersCounter == 0 || inviteInfo[user].lowers.length == 0) {
-            return 0;
-        }
-        return inviteAirdropCoinAmount / lowersCounter * inviteInfo[user].lowers.length;
     }
 
     function getStartTime() public view returns (uint64) {
@@ -882,64 +873,6 @@ contract BeePresell is Ownable {
         return withdrawCounter;
     }
 
-    function getUserLowersCount(address user) public view returns (uint256) {
-        return inviteInfo[user].lowers.length;
-    }
-
-    function getUserLowers(address user) public view returns (address[] memory) {
-        return inviteInfo[user].lowers;
-    }
-
-    function getUserLowersSlice(address user, uint256 start,  uint256 end) public view returns (address[] memory) {
-        address[] storage lowers = inviteInfo[user].lowers;
-        uint256 len = lowers.length;
-        if (len > 0) {
-            require(start < end && start < len && end <= len, "lower iterator out of range.");
-            address[] memory addrSet = new address[](end - start);
-            uint256 j = 0;
-            for (uint256 i = start; i < end; i++) {
-                addrSet[j] = lowers[i];
-                j++;
-            }
-            return addrSet;
-        }
-        return new address[](0);
-    }
-
-
-    function getUserUpper(address user) public view returns (address) {
-        return inviteInfo[user].upper;
-    }
-
-    function acceptInvitation(address _inviter) public returns (bool) {
-        require(startAt < block.timestamp, "not start");
-        require(endAt > block.timestamp, "has end");
-        require(hasBuy[_inviter], "Bee:upper not buy");
-        require(hasBuy[msg.sender], "Bee:user not buy");
-
-        require(msg.sender != _inviter, "Bee:FORBIDDEN");
-
-        UserInfo storage user = inviteInfo[msg.sender];
-        UserInfo storage upper = inviteInfo[_inviter];
-
-        require(upper.upper != msg.sender, "The inviter is a lower to the user");
-
-        require(user.upper != _inviter, "Repeated invitation");
-
-        require(user.upper == address(0), "Already have a upper");
-
-        user.upper = _inviter;
-        user.startBlock = block.number;
-
-        upper.startBlock = block.number;
-        upper.lowers.push(msg.sender);
-
-        userInviteBalancelMap[_inviter] = true;
-        ++lowersCounter;
-
-        return true;
-    }
-
     function buyTokens() public {
         require(startAt < block.timestamp, "not start");
 
@@ -956,6 +889,7 @@ contract BeePresell is Ownable {
         userPresellBalanceMap[msg.sender] = preSellCoinPreAmount;
         hasBuy[msg.sender] = true;
         counter++;
+        emit BuyPresell();
     }
 
     function withdrawPresellTokens() public {
@@ -968,17 +902,6 @@ contract BeePresell is Ownable {
 
         userPresellBalanceMap[msg.sender] = 0;
         withdrawCounter++;
-    }
-
-    function withdrawInviteAirdropTokens() public {
-        require(endAt < block.timestamp, "presell not end");
-
-        require(userInviteBalancelMap[msg.sender] == true, 'user not invite');
-
-        bool sent = sellToken.transfer(msg.sender, getUserInviteAirdropCoinAmount(msg.sender));
-        require(sent, "Token transfer failed");
-
-        userInviteBalancelMap[msg.sender] = false;
     }
 
     function exigencyWithdraw(uint256 amount) public onlyOwner {

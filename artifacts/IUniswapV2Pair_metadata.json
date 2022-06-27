@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -670,25 +670,26 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/Msc.sol": "IUniswapV2Pair"
+			"CosToken.sol": "IUniswapV2Pair"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/Msc.sol": {
-			"keccak256": "0x36db5a2ad753ae7c858b235f1427552839c9ee0e6dc360a30f531e42a8235dac",
+		"CosToken.sol": {
+			"keccak256": "0x31f390eb5cf0de6ff57db018a1c38581b257959db252dc9063d53c6cd9ad4573",
+			"license": "Unlicensed",
 			"urls": [
-				"bzz-raw://66b5de975ed64b9a5741e57a85961e50454544c2de2485622e9c67cd28f1297b",
-				"dweb:/ipfs/QmccTEe6HStd9G8hM65hALVVaRDq66K5D4bDE5GpBKiDfc"
+				"bzz-raw://5cbf4b74803cc4733904705460f1c7e64f88891fe816990dbb1d5f10a6d01170",
+				"dweb:/ipfs/QmeL2HGwqC6hgGDoKn3VKTfpdCFJPC3jcbceCptXwvr5s6"
 			]
 		}
 	},

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -190,8 +190,32 @@
 			}
 		],
 		"devdoc": {
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"allowance(address,address)": {
+					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+				},
+				"approve(address,uint256)": {
+					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
+				},
+				"balanceOf(address)": {
+					"details": "Returns the amount of tokens owned by `account`."
+				},
+				"transfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -202,7 +226,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BatchTransfer.sol": "IERC20"
+			"CosToken.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -216,11 +240,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"BatchTransfer.sol": {
-			"keccak256": "0x4b87ec7cc406bd1c828458bc3669c68344410d311322459552b606e2d3b87824",
+		"CosToken.sol": {
+			"keccak256": "0x31f390eb5cf0de6ff57db018a1c38581b257959db252dc9063d53c6cd9ad4573",
+			"license": "Unlicensed",
 			"urls": [
-				"bzz-raw://2070247c0aad4260c6d612e4129c4ad8e8ab5fab9ce56e5ac13fefcea3fead9f",
-				"dweb:/ipfs/QmSsPNyeqLNRUcpPN5SYqo1VwVfuXShpj9taeP2eDNnqPZ"
+				"bzz-raw://5cbf4b74803cc4733904705460f1c7e64f88891fe816990dbb1d5f10a6d01170",
+				"dweb:/ipfs/QmeL2HGwqC6hgGDoKn3VKTfpdCFJPC3jcbceCptXwvr5s6"
 			]
 		}
 	},

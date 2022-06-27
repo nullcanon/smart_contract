@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -186,7 +186,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/CosToken.sol": "IUesInviteV1"
+			"CosToken.sol": "IUesInviteV1"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -194,13 +194,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/CosToken.sol": {
+		"CosToken.sol": {
 			"keccak256": "0x31f390eb5cf0de6ff57db018a1c38581b257959db252dc9063d53c6cd9ad4573",
 			"license": "Unlicensed",
 			"urls": [

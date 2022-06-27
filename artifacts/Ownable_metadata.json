@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -60,20 +60,7 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"constructor": {
-					"details": "Initializes the contract setting the deployer as the initial owner."
-				},
-				"owner()": {
-					"details": "Returns the address of the current owner."
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -84,7 +71,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BeeToken.sol": "Ownable"
+			"CosToken.sol": "Ownable"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -92,18 +79,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"BeeToken.sol": {
-			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
-			"license": "MIT",
+		"CosToken.sol": {
+			"keccak256": "0x31f390eb5cf0de6ff57db018a1c38581b257959db252dc9063d53c6cd9ad4573",
+			"license": "Unlicensed",
 			"urls": [
-				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
-				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
+				"bzz-raw://5cbf4b74803cc4733904705460f1c7e64f88891fe816990dbb1d5f10a6d01170",
+				"dweb:/ipfs/QmeL2HGwqC6hgGDoKn3VKTfpdCFJPC3jcbceCptXwvr5s6"
 			]
 		}
 	},
