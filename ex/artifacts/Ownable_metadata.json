@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.14+commit.80d49f37"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -84,7 +84,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/exchangeUsdtToken.sol": "Ownable"
+			"ex/MGCPresell.sol": "Ownable"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -92,18 +92,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ex/exchangeUsdtToken.sol": {
-			"keccak256": "0x1573676fdd3cff8989e0937d004d816092e4e01a51a8de93e812f1f0d2e18dae",
+		"ex/MGCPresell.sol": {
+			"keccak256": "0xdc04e8fcb6c0e5a9bf36eabf230852e6148c61eb2fd2cb11810efbfa3d449779",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4140f23e4cb04dc1b6021b706d104ac60ac913e06de69c39b1dc203d2d513240",
-				"dweb:/ipfs/QmbECcafsa2AsNMsrc7DdcMp79syKE3TPzSHcwQEfBtJJV"
+				"bzz-raw://dfa9318c75b2cc1130269079d6ffd38290fbcd5033f3694ebd777484b88fe1f9",
+				"dweb:/ipfs/QmVzd1teJyo6JxHnnyYSmk5WHdv63BWJEr3eBvKa8WUDZy"
 			]
 		}
 	},

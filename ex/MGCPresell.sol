@@ -771,6 +771,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 }
 
 contract BeePresell is Ownable {
+    using SafeMath for uint256;
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
@@ -782,39 +783,38 @@ contract BeePresell is Ownable {
 
     // BSC testnet 1
     // BSC mainnet 500
-    uint256 private usdtAmount = 500 * 10 ** 18;
-    uint256 private preSellCoinPreAmount = 4500 * 10 ** 18;
-    uint256 private inviteAirdropCoinAmount = 409600 * 10 ** 18;
-    uint32 private counter;
-    uint32 private withdrawCounter;
-    uint32 private lowersCounter;
+    uint256 private preSellCoinPreAmount = 500 * 10 ** 18;
 
     // BSC testnet 10
     // BSC mainnet 1024
-    uint32 private preMax = 1024;
-    uint64 private startAt;
-    uint64 private endAt;
-    uint32 private timeStep = 86400; // 1day
+    uint256 private startAt;
+    uint256 private endAt;
+    uint256 private timeStep = 86400; // 1day
     uint256 private priceStep = 5 * 10 ** 18;
     uint256 private baseMoney = 100 * 10 ** 18;
-    
+
+    uint32 private counter;
+    uint32 private withdrawCounter;
+    uint32 private preMax = 1024;
 
     IERC20 public immutable usdtToken;
+    IERC20 public immutable mscToken;
     IERC20 public immutable sellToken;
+    
     mapping(address => uint256) public userPresellBalanceMap;
-    mapping(address => bool) public userInviteBalancelMap;
     mapping(address => bool) public hasBuy;
 
     event BuyPresell(
-        address index user,
-        uint256 priceForUsdt,
+        address indexed user,
         uint256 mscAmount,
-        uint256 usdtAmount,
+        uint256 usdtAmount
     );
 
+    event Withdraw(address indexed user);
+
     constructor(
-        uint64 _startAt,
-        uint64 _endAt
+        uint256 _startAt,
+        uint256 _endAt
         ) {
         require(_startAt >= block.timestamp, "start at < now");
         require(_endAt >= _startAt, "end at < start at");
@@ -822,23 +822,41 @@ contract BeePresell is Ownable {
         startAt = _startAt;
         endAt = _endAt;
         usdtToken = IERC20(usdtMintAddress);
+        mscToken = IERC20(mscMintAddress);
         sellToken = IERC20(presellTokenMintAddress);
     }
 
-    function getMscAmountOut(uint256 amountIn) public view return (uint256) {
-        return IUniswapV2Router02(pancakeRoute2).getAmountsOut(amountIn ,[usdtMintAddress, mscMintAddress]);
+    function getMscAmountOut(uint256 usdtAmountIn) public view returns (uint256) {
+        address[] memory path = new address[](2);
+        path[0] = usdtMintAddress;
+        path[1] = mscMintAddress;
+        uint[] memory amounts = IUniswapV2Router02(pancakeRoute2).getAmountsOut(usdtAmountIn, path);
+        return amounts[1];
+    }
+
+    function getMscPrice(uint256 mscAmountIn) public view returns (uint256) {
+        address[] memory path = new address[](2);
+        path[0] = mscMintAddress;
+        path[1] = usdtMintAddress;
+        uint[] memory amounts = IUniswapV2Router02(pancakeRoute2).getAmountsOut(mscAmountIn, path);
+        return amounts[1];
+    }
+
+    function getStep() public view returns uint256 {
+        uint curtime = block.timestamp;
+        return curtime.sub(startAt).div(timeStep);
     }
     
-    function getPresellMscAmount() public view return (uint256) {
-        uint curtime = block.timestamp;
-        uint32 step = (curtime - startAt) / timeStep;
-        uint256 money = baseMoney + step * priceStep;
-
-        return getMscAmountOut();
+    function getPresellMscAndUsdtAmount() public view returns (uint256, uint256) {
+        uint256 step = getStep();
+        uint256 money = baseMoney.add(step).mul(priceStep);
+        uint256 usdtAmount = money.mul(80).div(100);
+        uint256 usdtToMscAmount = money.sub(usdtAmount);
+        return (getMscAmountOut(usdtToMscAmount), usdtAmount);
     }
 
-    function getUsdtAmount() public view returns (uint256) {
-        return usdtAmount;
+    function getBaseAmount() public view returns (uint256) {
+        return baseMoney;
     }
 
     function getPresellMax() public view returns (uint32) {
@@ -853,11 +871,11 @@ contract BeePresell is Ownable {
         return userPresellBalanceMap[user];
     }
 
-    function getStartTime() public view returns (uint64) {
+    function getStartTime() public view returns (uint256) {
         return startAt;
     }
 
-    function getEndTime() public view returns (uint64) {
+    function getEndTime() public view returns (uint256) {
         return endAt;
     }
 
@@ -882,14 +900,20 @@ contract BeePresell is Ownable {
 
         require(!hasBuy[msg.sender],"already purchased");
 
+        (uint256 mscAmount, uint256 usdtAmount) = getPresellMscAndUsdtAmount();
+
         require(usdtToken.allowance(msg.sender, address(this)) >= usdtAmount, "usdtToken allowance too low");
+        require(mscToken.allowance(msg.sender, address(this)) >= mscAmount, "mscToken allowance too low");
 
         bool sent = usdtToken.transferFrom(msg.sender, marketAddress, usdtAmount);
-        require(sent, "Token transfer failed");
+        require(sent, "Usdt transfer failed");
+
+        sent = mscToken.transferFrom(msg.sender, marketAddress, mscAmount);
+        require(sent, "Msc transfer failed");
         userPresellBalanceMap[msg.sender] = preSellCoinPreAmount;
         hasBuy[msg.sender] = true;
         counter++;
-        emit BuyPresell();
+        emit BuyPresell(msg.sender, mscAmount, usdtAmount);
     }
 
     function withdrawPresellTokens() public {
@@ -902,22 +926,31 @@ contract BeePresell is Ownable {
 
         userPresellBalanceMap[msg.sender] = 0;
         withdrawCounter++;
-    }
-
-    function exigencyWithdraw(uint256 amount) public onlyOwner {
-        bool sent = sellToken.transfer(msg.sender, amount);
-        require(sent, "Token transfer failed");
+        emit Withdraw(msg.sender);
     }
 
     function setMarketAddress(address newAddress) public onlyOwner {
         marketAddress = newAddress;
     }
     
-
-    function setAmount(uint256 newAmount) public onlyOwner {
-        usdtAmount = newAmount;
+    function setBaseAmount(uint256 newAmount) public onlyOwner {
+        baseMoney = newAmount;
     }
 
-    // TODO
-    // withdraw ERC20, withdraw BNB
+    function setPriceStep(uint256 step) public onlyOwner {
+        priceStep = step;
+    }
+
+    function setTimeStep(uint256 step) public onlyOwner {
+        timeStep = step;
+    }
+
+    // Withdraw ETH that gets stuck in contract by accident
+    function emergencyWithdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
+    }
 }
