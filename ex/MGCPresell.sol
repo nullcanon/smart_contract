@@ -770,28 +770,39 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
     ) external;
 }
 
-contract BeePresell is Ownable {
+contract MGCPresell is Ownable {
     using SafeMath for uint256;
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
-    //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
-    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
-    address public mscMintAddress = 0xeacAd6c99965cDE0f31513dd72DE79FA24610767;
-    address public presellTokenMintAddress = 0xE070ccA5cdFB3F2B434fB91eAF67FA2084f324D7;
+    //BSC testnet: 0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684
+    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+
+    //BSC testnet: 0x8BaBbB98678facC7342735486C851ABD7A0d17Ca //msc测试地址用eth代替
+    address public mscMintAddress = 0x8BaBbB98678facC7342735486C851ABD7A0d17Ca;
+
+    // testnet: 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd
+    address public presellTokenMintAddress = 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd;
     address public marketAddress = 0x3caa5ABC857473F8a31B619f0F7Fe7BfBde35816;
-    address public pancakeRoute2 = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
+
+    //bsc: 0x10ED43C718714eb63d5aA57B78B54704E256024E
+    //bsc testnet: 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
+    address public pancakeRoute2 = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
 
     // BSC testnet 1
     // BSC mainnet 500
-    uint256 private preSellCoinPreAmount = 500 * 10 ** 18;
+    uint256 private preSellCoinPreAmount = 1 * 10 ** 18;
 
     // BSC testnet 10
     // BSC mainnet 1024
     uint256 private startAt;
     uint256 private endAt;
-    uint256 private timeStep = 86400; // 1day
+
+    // tesenet 600, mainnet 86400
+    uint256 private timeStep = 600; // 1day
     uint256 private priceStep = 5 * 10 ** 18;
-    uint256 private baseMoney = 100 * 10 ** 18;
+
+    //testnet 10, mainnet 100
+    uint256 private baseMoney = 10 * 10 ** 18;
 
     uint32 private counter;
     uint32 private withdrawCounter;
@@ -842,7 +853,7 @@ contract BeePresell is Ownable {
         return amounts[1];
     }
 
-    function getStep() public view returns uint256 {
+    function getStep() public view returns (uint256) {
         uint curtime = block.timestamp;
         return curtime.sub(startAt).div(timeStep);
     }
@@ -953,4 +964,5 @@ contract BeePresell is Ownable {
     function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
         IERC20(token).transfer(msg.sender, amount);
     }
+
 }

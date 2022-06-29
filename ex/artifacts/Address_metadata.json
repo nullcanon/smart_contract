@@ -26,18 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"ex/MGCPresell.sol": {
-			"keccak256": "0xdc04e8fcb6c0e5a9bf36eabf230852e6148c61eb2fd2cb11810efbfa3d449779",
+			"keccak256": "0x5fc5fe064d417397a781454e27849df7e41f9c1b786d1180c3d601d2725b10b3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dfa9318c75b2cc1130269079d6ffd38290fbcd5033f3694ebd777484b88fe1f9",
-				"dweb:/ipfs/QmVzd1teJyo6JxHnnyYSmk5WHdv63BWJEr3eBvKa8WUDZy"
+				"bzz-raw://903f923f079cdb2e8e64a5954fb6570a69486d3b05cf82d4635f4d964d8b5211",
+				"dweb:/ipfs/QmbzLBjamvWWwNfj7o3yYkMUJU9Dq6FEFGrY4hyy7gMHcm"
 			]
 		}
 	},
