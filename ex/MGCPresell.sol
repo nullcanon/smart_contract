@@ -799,29 +799,33 @@ contract MGCPresell is Ownable {
 
     // tesenet 600, mainnet 86400
     uint256 private timeStep = 600; // 1day
-    uint256 private priceStep = 5 * 10 ** 18;
 
-    //testnet 10, mainnet 100
-    uint256 private baseMoney = 10 * 10 ** 18;
+    // mainnet 5 * 10 ** 18
+    uint256 private priceStep = 5 * 10 ** 16;
+
+    //testnet 1, mainnet 10 * 10 ** 18
+    uint256 private baseMoney = 1 * 10 ** 18;
 
     uint32 private counter;
     uint32 private withdrawCounter;
     uint32 private preMax = 1024;
+    uint32 private buyMax = 5;
 
     IERC20 public immutable usdtToken;
     IERC20 public immutable mscToken;
     IERC20 public immutable sellToken;
     
     mapping(address => uint256) public userPresellBalanceMap;
-    mapping(address => bool) public hasBuy;
+    mapping(address => uint32) public userPurchased;
 
     event BuyPresell(
         address indexed user,
+        uint32  buyNumber,
         uint256 mscAmount,
         uint256 usdtAmount
     );
 
-    event Withdraw(address indexed user);
+    event Withdraw(address indexed user, uint256 amount);
 
     constructor(
         uint256 _startAt,
@@ -855,12 +859,19 @@ contract MGCPresell is Ownable {
 
     function getStep() public view returns (uint256) {
         uint curtime = block.timestamp;
+        if(curtime < startAt) {
+            return 0;
+        }
         return curtime.sub(startAt).div(timeStep);
+    }
+
+    function getPriceStep() public view returns (uint256) {
+        return priceStep;
     }
     
     function getPresellMscAndUsdtAmount() public view returns (uint256, uint256) {
         uint256 step = getStep();
-        uint256 money = baseMoney.add(step).mul(priceStep);
+        uint256 money = baseMoney.add(step.mul(priceStep));
         uint256 usdtAmount = money.mul(80).div(100);
         uint256 usdtToMscAmount = money.sub(usdtAmount);
         return (getMscAmountOut(usdtToMscAmount), usdtAmount);
@@ -890,8 +901,8 @@ contract MGCPresell is Ownable {
         return endAt;
     }
 
-    function getUserHasBuy(address user) public view returns (bool) {
-        return hasBuy[user];
+    function getUserBuyQuantity(address user) public view returns (uint32) {
+        return userPurchased[user];
     }
 
     function getPreSellCounter() public view returns (uint64) {
@@ -902,16 +913,25 @@ contract MGCPresell is Ownable {
         return withdrawCounter;
     }
 
-    function buyTokens() public {
+    function getBuyMax() public view returns (uint32) {
+        return buyMax;
+    }
+
+
+    function buyTokens(uint32 quantity) public {
         require(startAt < block.timestamp, "not start");
 
         require(endAt > block.timestamp, "has end");
 
         require(counter <= preMax, "Pre-orders are sold out");
 
-        require(!hasBuy[msg.sender],"already purchased");
+        require(quantity > 0, "quantity must more than zero");
+
+        require(userPurchased[msg.sender] + quantity <= buyMax,"already purchased max");
 
         (uint256 mscAmount, uint256 usdtAmount) = getPresellMscAndUsdtAmount();
+        mscAmount = mscAmount.mul(quantity);
+        usdtAmount = usdtAmount.mul(quantity);
 
         require(usdtToken.allowance(msg.sender, address(this)) >= usdtAmount, "usdtToken allowance too low");
         require(mscToken.allowance(msg.sender, address(this)) >= mscAmount, "mscToken allowance too low");
@@ -921,10 +941,10 @@ contract MGCPresell is Ownable {
 
         sent = mscToken.transferFrom(msg.sender, marketAddress, mscAmount);
         require(sent, "Msc transfer failed");
-        userPresellBalanceMap[msg.sender] = preSellCoinPreAmount;
-        hasBuy[msg.sender] = true;
-        counter++;
-        emit BuyPresell(msg.sender, mscAmount, usdtAmount);
+        userPresellBalanceMap[msg.sender] = preSellCoinPreAmount.mul(quantity);
+        userPurchased[msg.sender] += quantity;
+        counter += quantity;
+        emit BuyPresell(msg.sender, quantity, mscAmount, usdtAmount);
     }
 
     function withdrawPresellTokens() public {
@@ -932,12 +952,14 @@ contract MGCPresell is Ownable {
 
         require(userPresellBalanceMap[msg.sender] > 0, 'user balance zero');
 
-        bool sent = sellToken.transfer(msg.sender, userPresellBalanceMap[msg.sender]);
+        uint256 amount = userPresellBalanceMap[msg.sender];
+
+        bool sent = sellToken.transfer(msg.sender, amount);
         require(sent, "Token transfer failed");
 
         userPresellBalanceMap[msg.sender] = 0;
         withdrawCounter++;
-        emit Withdraw(msg.sender);
+        emit Withdraw(msg.sender, amount);
     }
 
     function setMarketAddress(address newAddress) public onlyOwner {
@@ -954,6 +976,10 @@ contract MGCPresell is Ownable {
 
     function setTimeStep(uint256 step) public onlyOwner {
         timeStep = step;
+    }
+
+    function setBuyMax(uint32 max) public onlyOwner {
+        buyMax = max;
     }
 
     // Withdraw ETH that gets stuck in contract by accident
