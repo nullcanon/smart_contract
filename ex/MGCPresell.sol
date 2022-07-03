@@ -782,7 +782,7 @@ contract MGCPresell is Ownable {
 
     // testnet: 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd
     address public presellTokenMintAddress = 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd;
-    address public marketAddress = 0x3caa5ABC857473F8a31B619f0F7Fe7BfBde35816;
+    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
 
     //bsc: 0x10ED43C718714eb63d5aA57B78B54704E256024E
     //bsc testnet: 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
@@ -941,7 +941,7 @@ contract MGCPresell is Ownable {
 
         sent = mscToken.transferFrom(msg.sender, marketAddress, mscAmount);
         require(sent, "Msc transfer failed");
-        userPresellBalanceMap[msg.sender] = preSellCoinPreAmount.mul(quantity);
+        userPresellBalanceMap[msg.sender] += preSellCoinPreAmount.mul(quantity);
         userPurchased[msg.sender] += quantity;
         counter += quantity;
         emit BuyPresell(msg.sender, quantity, mscAmount, usdtAmount);

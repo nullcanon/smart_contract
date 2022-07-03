@@ -638,11 +638,11 @@
 	},
 	"sources": {
 		"ex/MGCPresell.sol": {
-			"keccak256": "0xdb116911f67af7575040a2ca095e77e96096eee569fb2b5f2fc399634230fbfa",
+			"keccak256": "0x0264022c76dc19d0442917a6aa88f18cf2c0bb6a983c9c0c4089bf1b29988773",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://12d7c262ffcb69e3e60fb0f9350217fc288178d4b9b6847afc5cd9b04f24964d",
-				"dweb:/ipfs/QmRegMPnY3QddurnogZLNeEMpX7uhyRDEajW9jbAgZ1upb"
+				"bzz-raw://cb460284606b250acec9b2098b656a8541849306a1716588c5882a00fc238918",
+				"dweb:/ipfs/QmZkkcKg8XdpDuUgiV6RSixgNh8SvcbpdfXPu1qbj7iCZc"
 			]
 		}
 	},
