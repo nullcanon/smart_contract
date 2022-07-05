@@ -775,22 +775,23 @@ contract MGCPresell is Ownable {
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684
-    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
 
     //BSC testnet: 0x8BaBbB98678facC7342735486C851ABD7A0d17Ca //msc测试地址用eth代替
-    address public mscMintAddress = 0x8BaBbB98678facC7342735486C851ABD7A0d17Ca;
+    //mainnet: 0xeacAd6c99965cDE0f31513dd72DE79FA24610767
+    address public mscMintAddress = 0xeacAd6c99965cDE0f31513dd72DE79FA24610767;
 
     // testnet: 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd
     address public presellTokenMintAddress = 0x35f7e1Bdb53cEFf51Cb2095068DCd9675E27AEAd;
-    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public marketAddress = 0x0AcBE26e03d67Fe316277A0FA8B35eB76b562cA6;
 
     //bsc: 0x10ED43C718714eb63d5aA57B78B54704E256024E
     //bsc testnet: 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
-    address public pancakeRoute2 = 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3;
+    address public pancakeRoute2 = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
 
     // BSC testnet 1
     // BSC mainnet 500
-    uint256 private preSellCoinPreAmount = 1 * 10 ** 18;
+    uint256 private preSellCoinPreAmount = 500 * 10 ** 18;
 
     // BSC testnet 10
     // BSC mainnet 1024
@@ -798,22 +799,22 @@ contract MGCPresell is Ownable {
     uint256 private endAt;
 
     // tesenet 600, mainnet 86400
-    uint256 private timeStep = 600; // 1day
+    uint256 private timeStep = 86400; // 1day
 
     // mainnet 5 * 10 ** 18
     uint256 private priceStep = 5 * 10 ** 16;
 
-    //testnet 1, mainnet 10 * 10 ** 18
-    uint256 private baseMoney = 1 * 10 ** 18;
+    //testnet 1, mainnet 100 * 10 ** 18
+    uint256 private baseMoney = 100 * 10 ** 18;
 
     uint32 private counter;
     uint32 private withdrawCounter;
-    uint32 private preMax = 1024;
+    uint32 private preMax = 1024000;
     uint32 private buyMax = 5;
 
     IERC20 public immutable usdtToken;
     IERC20 public immutable mscToken;
-    IERC20 public immutable sellToken;
+    IERC20 public sellToken;
     
     mapping(address => uint256) public userPresellBalanceMap;
     mapping(address => uint32) public userPurchased;
@@ -838,6 +839,11 @@ contract MGCPresell is Ownable {
         endAt = _endAt;
         usdtToken = IERC20(usdtMintAddress);
         mscToken = IERC20(mscMintAddress);
+        sellToken = IERC20(presellTokenMintAddress);
+    }
+
+    function setSellToken(address mint) public onlyOwner {
+        presellTokenMintAddress =  mint;
         sellToken = IERC20(presellTokenMintAddress);
     }
 
@@ -960,6 +966,10 @@ contract MGCPresell is Ownable {
         userPresellBalanceMap[msg.sender] = 0;
         withdrawCounter++;
         emit Withdraw(msg.sender, amount);
+    }
+
+    function setPresellMax(uint32 v) public onlyOwner {
+        preMax = v;
     }
 
     function setMarketAddress(address newAddress) public onlyOwner {

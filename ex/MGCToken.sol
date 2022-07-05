@@ -356,7 +356,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract MGC is Context, IERC20, IERC20Metadata, Ownable{
+contract Bee is Context, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -370,11 +370,9 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     address public immutable uniswapUsdtV2Pair;
     mapping (address => bool) private _isExcludeds;
     mapping (address=>bool) public DEXs;
-    address public lpShareAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
-    address public nftShareAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
+    address public marketAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
     address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
-
-    address public pancakeSwapRouter02Address = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
+    uint256 public fee = 13;
     
     constructor () {
         _mint(_msgSender(), 210000000 * 1e18);
@@ -382,7 +380,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0xB6BA90af76D139AB3170c7df0139636dB6120F7e
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(pancakeSwapRouter02Address);
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
@@ -436,7 +434,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         _transfer(sender, recipient, amount);
 
         uint256 currentAllowance = _allowances[sender][_msgSender()];
-        require(currentAllowance >= amount, "MGC: transfer amount exceeds allowance");
+        require(currentAllowance >= amount, "BEE: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
@@ -450,7 +448,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
 
     function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
         uint256 currentAllowance = _allowances[_msgSender()][spender];
-        require(currentAllowance >= subtractedValue, "MGC: decreased allowance below zero");
+        require(currentAllowance >= subtractedValue, "BEE: decreased allowance below zero");
         unchecked {
             _approve(_msgSender(), spender, currentAllowance - subtractedValue);
         }
@@ -463,6 +461,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         } else {
             DEXs[_pair] = true;
         }
+       
     }
 
     function _transfer(
@@ -470,20 +469,17 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         address recipient,
         uint256 amount
     ) internal virtual {
-        require(sender != address(0), "MGC: transfer from the zero address");
-        require(recipient != address(0), "MGC: transfer to the zero address");
+        require(sender != address(0), "BEE: transfer from the zero address");
+        require(recipient != address(0), "BEE: transfer to the zero address");
         uint256 senderBalance = _balances[sender];
-        require(senderBalance >= amount, "MGC: transfer amount exceeds balance");
+        require(senderBalance >= amount, "BEE: transfer amount exceeds balance");
         uint256 _amount = amount;
         if ( ((DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !_isExcludeds[sender] &&
             !_isExcludeds[recipient] ) {
-            _balances[lpShareAddress] = _balances[lpShareAddress].add(amount.mul(10).div(1000));
-            emit Transfer(sender, lpShareAddress, amount.div(1000).mul(10));
-
-            _balances[nftShareAddress] = _balances[nftShareAddress].add(amount.mul(3).div(1000));
-            emit Transfer(sender, nftShareAddress, amount.mul(3).div(1000));
-            _amount = amount.div(1000).mul(987);
+            _balances[marketAddress] = _balances[marketAddress].add(amount.mul(fee).div(1000));
+            emit Transfer(sender, marketAddress, amount.mul(fee).div(1000));
+            _amount = amount.mul(1000-fee).div(1000);
         }
 
         _balances[sender] = senderBalance.sub(amount);
@@ -498,9 +494,9 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function _burn(address account, uint256 amount) internal virtual {
-        require(account != address(0), "MGC: burn from the zero address");
+        require(account != address(0), "BEE: burn from the zero address");
         uint256 accountBalance = _balances[account];
-        require(accountBalance >= amount, "MGC: burn amount exceeds balance");
+        require(accountBalance >= amount, "BEE: burn amount exceeds balance");
         unchecked {
             _balances[account] = accountBalance - amount;
         }
@@ -539,7 +535,11 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function setMarketAddress(address addr) public onlyOwner {
-        lpShareAddress = addr;
+        marketAddress = addr;
+    }
+
+    function setFee(uint256 setfee) public onlyOwner {
+        fee = setfee;
     }
 
     receive() external payable {}
