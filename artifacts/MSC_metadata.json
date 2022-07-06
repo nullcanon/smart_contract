@@ -899,7 +899,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/Msc.sol": "MSC"
+			"Msc.sol": "MSC"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -913,7 +913,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/Msc.sol": {
+		"Msc.sol": {
 			"keccak256": "0x36db5a2ad753ae7c858b235f1427552839c9ee0e6dc360a30f531e42a8235dac",
 			"urls": [
 				"bzz-raw://66b5de975ed64b9a5741e57a85961e50454544c2de2485622e9c67cd28f1297b",

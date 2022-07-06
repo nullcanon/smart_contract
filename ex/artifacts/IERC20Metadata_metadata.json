@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -249,18 +249,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"ex/MGCToken.sol": {
-			"keccak256": "0x9c99f300ca07c05e13da4ad6c89cc5ea89ca8a256c100b0d2d37d7e2a019e405",
+			"keccak256": "0x09fae68d10ee6959ebf99491e6b749e7eb438c4a05694d6315fd41f2821e305b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://98588f10cb4777f59ffed12d8ae88107393489c2103bbba2af6ac38ec929cd85",
-				"dweb:/ipfs/QmTJ2oMvCUYNLk4NL8rGBGvmfL3v9pGSdTwzpz34HPvLUA"
+				"bzz-raw://65bf3d960e6292088f123c51a7053f57eb849359cd7652c81e116fef568bbd1f",
+				"dweb:/ipfs/QmZvLweQEWR3XZcv1UkF9CMDR7PWQcpFQn1pYtuC8G2HLp"
 			]
 		}
 	},

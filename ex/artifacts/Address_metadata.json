@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCPresell.sol": "Address"
+			"ex/MGCToken.sol": "Address"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCPresell.sol": {
-			"keccak256": "0x6db25c138cde63b87773a5e44133aa2755a904df91eb7a49da43fcddc8d0879f",
+		"ex/MGCToken.sol": {
+			"keccak256": "0x09fae68d10ee6959ebf99491e6b749e7eb438c4a05694d6315fd41f2821e305b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://799279028047920288cdb067f5c53fbeeef1c890f26009b8bb6888cf7aa95280",
-				"dweb:/ipfs/QmPKUvozB7as3iSe2pJR62kLhoQ5w2QSa2HYdAiDjiAB1n"
+				"bzz-raw://65bf3d960e6292088f123c51a7053f57eb849359cd7652c81e116fef568bbd1f",
+				"dweb:/ipfs/QmZvLweQEWR3XZcv1UkF9CMDR7PWQcpFQn1pYtuC8G2HLp"
 			]
 		}
 	},

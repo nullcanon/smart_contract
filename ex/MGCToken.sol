@@ -372,7 +372,9 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
     mapping (address=>bool) public DEXs;
     address public marketAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
     address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
-    uint256 public fee = 13;
+    bool tradingOpen = false;
+    uint256 launchTime;
+
     
     constructor () {
         _mint(_msgSender(), 210000000 * 1e18);
@@ -434,7 +436,7 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         _transfer(sender, recipient, amount);
 
         uint256 currentAllowance = _allowances[sender][_msgSender()];
-        require(currentAllowance >= amount, "BEE: transfer amount exceeds allowance");
+        require(currentAllowance >= amount, "MGC: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
@@ -448,7 +450,7 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
 
     function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
         uint256 currentAllowance = _allowances[_msgSender()][spender];
-        require(currentAllowance >= subtractedValue, "BEE: decreased allowance below zero");
+        require(currentAllowance >= subtractedValue, "MGC: decreased allowance below zero");
         unchecked {
             _approve(_msgSender(), spender, currentAllowance - subtractedValue);
         }
@@ -464,22 +466,37 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
        
     }
 
+    function openTrading() external onlyOwner {
+        tradingOpen = true;
+        launchTime = block.timestamp;
+    }
+
+    function closeTrading() external onlyOwner {
+        tradingOpen = false;
+    }
+
     function _transfer(
         address sender,
         address recipient,
         uint256 amount
     ) internal virtual {
-        require(sender != address(0), "BEE: transfer from the zero address");
-        require(recipient != address(0), "BEE: transfer to the zero address");
+        require(sender != address(0), "MGC: transfer from the zero address");
+        require(recipient != address(0), "MGC: transfer to the zero address");
         uint256 senderBalance = _balances[sender];
-        require(senderBalance >= amount, "BEE: transfer amount exceeds balance");
+        require(senderBalance >= amount, "MGC: transfer amount exceeds balance");
         uint256 _amount = amount;
         if ( ((DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !_isExcludeds[sender] &&
             !_isExcludeds[recipient] ) {
-            _balances[marketAddress] = _balances[marketAddress].add(amount.mul(fee).div(1000));
-            emit Transfer(sender, marketAddress, amount.mul(fee).div(1000));
-            _amount = amount.mul(1000-fee).div(1000);
+            require(tradingOpen, "Trade not open.");
+
+            if (block.timestamp == launchTime) {
+                require(false, "Trade not open.");
+            }
+
+            _balances[marketAddress] = _balances[marketAddress].add(amount.mul(13).div(1000));
+            emit Transfer(sender, marketAddress, amount.mul(13).div(1000));
+            _amount = amount.mul(987).div(1000);
         }
 
         _balances[sender] = senderBalance.sub(amount);
@@ -494,9 +511,9 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function _burn(address account, uint256 amount) internal virtual {
-        require(account != address(0), "BEE: burn from the zero address");
+        require(account != address(0), "MGC: burn from the zero address");
         uint256 accountBalance = _balances[account];
-        require(accountBalance >= amount, "BEE: burn amount exceeds balance");
+        require(accountBalance >= amount, "MGC: burn amount exceeds balance");
         unchecked {
             _balances[account] = accountBalance - amount;
         }
@@ -536,10 +553,6 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
 
     function setMarketAddress(address addr) public onlyOwner {
         marketAddress = addr;
-    }
-
-    function setFee(uint256 setfee) public onlyOwner {
-        fee = setfee;
     }
 
     receive() external payable {}
