@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -193,6 +193,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "closeTrading",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
@@ -242,6 +249,31 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "emergencyWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "emergencyWithdrawToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -267,7 +299,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "lpShareAddress",
+				"name": "marketAddress",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -293,33 +325,14 @@
 			},
 			{
 				"inputs": [],
-				"name": "nftShareAddress",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"name": "openTrading",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
 				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "pancakeSwapRouter02Address",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -543,18 +556,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"ex/MGCToken.sol": {
-			"keccak256": "0x9c99f300ca07c05e13da4ad6c89cc5ea89ca8a256c100b0d2d37d7e2a019e405",
+			"keccak256": "0x4d3eed76f2e4989f5d4ebcd791c7d4f98027d814a1200cd01c6b9529fcaf3efc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://98588f10cb4777f59ffed12d8ae88107393489c2103bbba2af6ac38ec929cd85",
-				"dweb:/ipfs/QmTJ2oMvCUYNLk4NL8rGBGvmfL3v9pGSdTwzpz34HPvLUA"
+				"bzz-raw://dd269028afce5b88fa0555c491e8c063d38a53f334ccf1b6ec426dcf509da0a0",
+				"dweb:/ipfs/QmcgKXUmf6bHK7MWhhSWuPyK4UETx3dH31vxKoQZ2e6ppt"
 			]
 		}
 	},

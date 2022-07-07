@@ -193,6 +193,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "closeTrading",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
@@ -239,19 +246,6 @@
 				"name": "deliver",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "fee",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -306,6 +300,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "openTrading",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -333,19 +334,6 @@
 					}
 				],
 				"name": "setExcludeds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "setfee",
-						"type": "uint256"
-					}
-				],
-				"name": "setFee",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -550,11 +538,11 @@
 	},
 	"sources": {
 		"ex/MGCToken.sol": {
-			"keccak256": "0x09fae68d10ee6959ebf99491e6b749e7eb438c4a05694d6315fd41f2821e305b",
+			"keccak256": "0x2bc7ae6f9ee00740fdefc3e344152bd4de6b3c18df038d77b82f202117c88005",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://65bf3d960e6292088f123c51a7053f57eb849359cd7652c81e116fef568bbd1f",
-				"dweb:/ipfs/QmZvLweQEWR3XZcv1UkF9CMDR7PWQcpFQn1pYtuC8G2HLp"
+				"bzz-raw://0a0652121fd3e7417256494c5d164e26b9b7a0e86362e8be4aa2033833e88899",
+				"dweb:/ipfs/QmYWEvx5TcdqAdgCWoK1yX6shDQFc6HYAcZS3BKt62CEPG"
 			]
 		}
 	},

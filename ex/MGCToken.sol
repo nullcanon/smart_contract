@@ -356,7 +356,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract Bee is Context, IERC20, IERC20Metadata, Ownable{
+contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -370,8 +370,9 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
     address public immutable uniswapUsdtV2Pair;
     mapping (address => bool) private _isExcludeds;
     mapping (address=>bool) public DEXs;
-    address public marketAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
-    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
+    mapping (address=>bool) public whiteList;
+    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
     bool tradingOpen = false;
     uint256 launchTime;
 
@@ -381,8 +382,8 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
-        // pancake Testnet 0xB6BA90af76D139AB3170c7df0139636dB6120F7e
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
@@ -392,6 +393,7 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         uniswapV2Router = _uniswapV2Router;
         DEXs[address(uniswapV2Pair)] = true;
         DEXs[address(uniswapUsdtV2Pair)] = true;
+        whiteList[admin] = true;
     }
 
     function name() public view virtual override returns (string memory) {
@@ -487,7 +489,8 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         uint256 _amount = amount;
         if ( ((DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !_isExcludeds[sender] &&
-            !_isExcludeds[recipient] ) {
+            !_isExcludeds[recipient] &&
+            !whiteList[msg.sender]) {
             require(tradingOpen, "Trade not open.");
 
             if (block.timestamp == launchTime) {
@@ -557,8 +560,12 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
 
     receive() external payable {}
 
-    // function emergencyWithdraw() external onlyOwner {
-    //     payable(owner()).send(address(this).balance);
-    // }
+    function emergencyWithdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
+    }
 
 }
