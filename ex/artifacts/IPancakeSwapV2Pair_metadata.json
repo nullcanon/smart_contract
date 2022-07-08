@@ -685,11 +685,11 @@
 	},
 	"sources": {
 		"ex/MGCToken.sol": {
-			"keccak256": "0x4d3eed76f2e4989f5d4ebcd791c7d4f98027d814a1200cd01c6b9529fcaf3efc",
+			"keccak256": "0xa0fd5c1874bdba42cede51e4d79ad8d4f95f8f64240ce75398c60802d35b7340",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dd269028afce5b88fa0555c491e8c063d38a53f334ccf1b6ec426dcf509da0a0",
-				"dweb:/ipfs/QmcgKXUmf6bHK7MWhhSWuPyK4UETx3dH31vxKoQZ2e6ppt"
+				"bzz-raw://24b21c5848256191acf446cc27b36e1356ba3ae6a71cd6988d3e1fa8fa6618e1",
+				"dweb:/ipfs/QmeiLs7LRp6fLKhXJB6w9sG37b7zMkazVSE894r9EFhhkC"
 			]
 		}
 	},

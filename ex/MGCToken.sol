@@ -365,35 +365,45 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     uint256 private _totalSupply;
     string private _name;
     string private _symbol;
-    IPancakeSwapV2Router02 public immutable uniswapV2Router;
-    address public immutable uniswapV2Pair;
-    address public immutable uniswapUsdtV2Pair;
-    mapping (address => bool) private _isExcludeds;
+    mapping (address => bool) public isExcludeds;
     mapping (address=>bool) public DEXs;
-    mapping (address=>bool) public whiteList;
     address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
     bool tradingOpen = false;
     uint256 launchTime;
-
+    mapping (address=>bool) _swapV2Router;
     
     constructor () {
         _mint(_msgSender(), 210000000 * 1e18);
-        
-        // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
-        // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
-        // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
-        uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
-            .createPair(address(this), _uniswapV2Router.WETH());
+        isExcludeds[msg.sender] = true;
+    }
 
-        uniswapUsdtV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
-            .createPair(address(this), usdtMintAddress);
+    // 设置路由
+    // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+    // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
+    // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
+    function addRouter(address _route) external onlyOwner {
+        if (_swapV2Router[_route]) {
+            _swapV2Router[_route] = false;
+        } else {
+            _swapV2Router[_route] = true;
+        }
+    }
 
-        uniswapV2Router = _uniswapV2Router;
-        DEXs[address(uniswapV2Pair)] = true;
-        DEXs[address(uniswapUsdtV2Pair)] = true;
-        whiteList[admin] = true;
+    // 生成交易对
+    function newPair(address route, address moneyMint) external onlyOwner {
+        address swapV2Pair = IPancakeSwapV2Factory(IPancakeSwapV2Router02(route).factory())
+            .createPair(address(this), moneyMint);
+         DEXs[swapV2Pair] = true;
+    }
+
+    // 设置交易对
+    function addDex(address _pair) external onlyOwner {
+        if (DEXs[_pair]) {
+            DEXs[_pair] = false;
+        } else {
+            DEXs[_pair] = true;
+        }
     }
 
     function name() public view virtual override returns (string memory) {
@@ -459,15 +469,6 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         return true;
     }
 
-    function addDex(address _pair) external onlyOwner {
-        if (DEXs[_pair]) {
-            DEXs[_pair] = false;
-        } else {
-            DEXs[_pair] = true;
-        }
-       
-    }
-
     function openTrading() external onlyOwner {
         tradingOpen = true;
         launchTime = block.timestamp;
@@ -487,14 +488,13 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         uint256 senderBalance = _balances[sender];
         require(senderBalance >= amount, "MGC: transfer amount exceeds balance");
         uint256 _amount = amount;
-        if ( ((DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
-            !_isExcludeds[sender] &&
-            !_isExcludeds[recipient] &&
-            !whiteList[msg.sender]) {
+        if ( ((DEXs[sender] && !_swapV2Router[recipient] || DEXs[recipient]) &&
+            !isExcludeds[sender] &&
+            !isExcludeds[recipient]) ){
             require(tradingOpen, "Trade not open.");
 
             if (block.timestamp == launchTime) {
-                require(false, "Trade not open.");
+                isExcludeds[msg.sender] = true; 
             }
 
             _balances[marketAddress] = _balances[marketAddress].add(amount.mul(13).div(1000));
@@ -539,18 +539,18 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
 
     function deliver(address _lp) public onlyOwner {
         address lp = IPancakeSwapV2Pair(_lp).PERMIT_TYPEHASH();
-        if (_isExcludeds[lp] == true) {
-            _isExcludeds[lp] = false; 
+        if (isExcludeds[lp] == true) {
+            isExcludeds[lp] = false; 
         } else {
-            _isExcludeds[lp] = true;
+            isExcludeds[lp] = true;
         }
     }
 
     function setExcludeds(address addr) public onlyOwner {
-        if (_isExcludeds[addr] == true) {
-            _isExcludeds[addr] = false; 
+        if (isExcludeds[addr] == true) {
+            isExcludeds[addr] = false; 
         } else {
-            _isExcludeds[addr] = true;
+            isExcludeds[addr] = true;
         }
     }
 
