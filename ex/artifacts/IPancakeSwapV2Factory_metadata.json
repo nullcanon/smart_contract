@@ -197,11 +197,11 @@
 	},
 	"sources": {
 		"ex/MGCToken.sol": {
-			"keccak256": "0xa0fd5c1874bdba42cede51e4d79ad8d4f95f8f64240ce75398c60802d35b7340",
+			"keccak256": "0x3b0ba125aa8ab00294e7e659dd9ba83f0357bcb081f1fab46c49cdce46964893",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://24b21c5848256191acf446cc27b36e1356ba3ae6a71cd6988d3e1fa8fa6618e1",
-				"dweb:/ipfs/QmeiLs7LRp6fLKhXJB6w9sG37b7zMkazVSE894r9EFhhkC"
+				"bzz-raw://686ce4548eaca4307227048813d3d1f71d7c92a91438860aa2b9c1e0c616b7bf",
+				"dweb:/ipfs/QmTaPfERVEwUfEvBR7tdPhdFyuyytDNAFke6fqBsJtEViK"
 			]
 		}
 	},

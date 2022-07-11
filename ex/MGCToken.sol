@@ -367,8 +367,10 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     string private _symbol;
     mapping (address => bool) public isExcludeds;
     mapping (address=>bool) public DEXs;
-    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
-    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+
+    // main net 0xAE4ff5fA914149F551CfA7085f1b08C0a0AF4876
+    address public marketAddress = 0xAE4ff5fA914149F551CfA7085f1b08C0a0AF4876;
+
     bool tradingOpen = false;
     uint256 launchTime;
     mapping (address=>bool) _swapV2Router;
@@ -378,7 +380,6 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         isExcludeds[msg.sender] = true;
     }
 
-    // 设置路由
     // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
     // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
     // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
@@ -390,14 +391,14 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
         }
     }
 
-    // 生成交易对
+    // create pair
     function newPair(address route, address moneyMint) external onlyOwner {
         address swapV2Pair = IPancakeSwapV2Factory(IPancakeSwapV2Router02(route).factory())
             .createPair(address(this), moneyMint);
          DEXs[swapV2Pair] = true;
     }
 
-    // 设置交易对
+    // set pair
     function addDex(address _pair) external onlyOwner {
         if (DEXs[_pair]) {
             DEXs[_pair] = false;
@@ -411,7 +412,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function symbol() public view virtual override returns (string memory) {
-        return "MGC";
+        return "MGC_TEST";
     }
 
     function decimals() public view virtual override returns (uint8) {
@@ -494,7 +495,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
             require(tradingOpen, "Trade not open.");
 
             if (block.timestamp == launchTime) {
-                isExcludeds[msg.sender] = true; 
+                require(false, "Fuck bot.");
             }
 
             _balances[marketAddress] = _balances[marketAddress].add(amount.mul(13).div(1000));
