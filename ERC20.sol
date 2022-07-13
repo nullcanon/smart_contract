@@ -491,8 +491,8 @@ contract ERC20 is Context, IERC20, IERC20Metadata, Ownable{
 
 
 
-contract MGC is ERC20 {
-    constructor() ERC20("MGC", "MGC") {
+contract RD is ERC20 {
+    constructor() ERC20("RD", "RD") {
         _mint(msg.sender, 10500000 * 10 ** 18);
     }
 }
