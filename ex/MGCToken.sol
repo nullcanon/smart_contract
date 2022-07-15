@@ -369,7 +369,7 @@ contract MGC is Context, IERC20, IERC20Metadata, Ownable{
     mapping (address=>bool) public DEXs;
 
     // main net 0xAE4ff5fA914149F551CfA7085f1b08C0a0AF4876
-    address public marketAddress = 0xAE4ff5fA914149F551CfA7085f1b08C0a0AF4876;
+    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
 
     bool tradingOpen = false;
     uint256 launchTime;

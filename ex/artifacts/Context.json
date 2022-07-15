@@ -31,12 +31,17 @@
 	},
 	"data": {
 		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
 			"linkReferences": {},
 			"object": "",
 			"opcodes": "",
 			"sourceMap": ""
 		},
 		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
 			"linkReferences": {},
 			"object": "",
 			"opcodes": "",
@@ -45,12 +50,5 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {}
 	},
-	"abi": [
-		{
-			"inputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "constructor"
-		}
-	]
+	"abi": []
 }

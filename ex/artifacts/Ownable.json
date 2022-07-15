@@ -31,12 +31,17 @@
 	},
 	"data": {
 		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
 			"linkReferences": {},
 			"object": "",
 			"opcodes": "",
 			"sourceMap": ""
 		},
 		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
 			"linkReferences": {},
 			"object": "",
 			"opcodes": "",
@@ -50,12 +55,6 @@
 		}
 	},
 	"abi": [
-		{
-			"inputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "constructor"
-		},
 		{
 			"anonymous": false,
 			"inputs": [
@@ -76,7 +75,6 @@
 			"type": "event"
 		},
 		{
-			"constant": true,
 			"inputs": [],
 			"name": "owner",
 			"outputs": [
@@ -86,21 +84,17 @@
 					"type": "address"
 				}
 			],
-			"payable": false,
 			"stateMutability": "view",
 			"type": "function"
 		},
 		{
-			"constant": false,
 			"inputs": [],
 			"name": "renounceOwnership",
 			"outputs": [],
-			"payable": false,
 			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
-			"constant": false,
 			"inputs": [
 				{
 					"internalType": "address",
@@ -110,7 +104,6 @@
 			],
 			"name": "transferOwnership",
 			"outputs": [],
-			"payable": false,
 			"stateMutability": "nonpayable",
 			"type": "function"
 		}

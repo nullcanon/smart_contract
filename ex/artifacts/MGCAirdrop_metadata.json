@@ -25,6 +25,94 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "number",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdrawn",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "emergencyWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "emergencyWithdrawToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "getUserPresellQuantity",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "hasWithdraw",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -47,6 +135,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "setPerUintAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
@@ -56,14 +157,18 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
-				"constructor": {
-					"details": "Initializes the contract setting the deployer as the initial owner."
-				},
 				"owner()": {
 					"details": "Returns the address of the current owner."
 				},
@@ -84,7 +189,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCPresell.sol": "Ownable"
+			"ex/MGCAirdrop.sol": "MGCAirdrop"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -98,6 +203,13 @@
 		"remappings": []
 	},
 	"sources": {
+		"ex/MGCAirdrop.sol": {
+			"keccak256": "0x6abb21841059b39fe6b8157f8f82a5a14508337f5e2c058b0db4c1a42c210111",
+			"urls": [
+				"bzz-raw://cfd18df463a27cbffee0cfc566197411669e2635dcc133f0e6f96a26a3af850c",
+				"dweb:/ipfs/QmRyvE7PdZqMekkyiVfvm8tARwjiqfs3CwBCLaXkhnSnkQ"
+			]
+		},
 		"ex/MGCPresell.sol": {
 			"keccak256": "0x6db25c138cde63b87773a5e44133aa2755a904df91eb7a49da43fcddc8d0879f",
 			"license": "MIT",
