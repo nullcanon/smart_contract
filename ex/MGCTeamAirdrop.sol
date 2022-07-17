@@ -16,6 +16,16 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+    function _msgData() internal view virtual returns (bytes memory) {
+        this; 
+        return msg.data;
+    }
+}
+
 abstract contract Ownable is Context {
     address private _owner;
 
@@ -76,7 +86,7 @@ abstract contract Ownable is Context {
 
 
 contract MGCTeamAirdrop is Ownable {
-    uint256 perUintAmount;
+    uint256 perUintAmount = 20000 * 10 ** 18;
     address mgctoken = 0x7773FeAF976599a9d6A3a7B5dc43d02AC166F255;
 
     mapping(address => bool) public userList;
@@ -103,7 +113,7 @@ contract MGCTeamAirdrop is Ownable {
         perUintAmount = amount;
     }
 
-    function appendUser(address[] accounts) public onlyOwner {
+    function appendUser(address[] memory accounts) public onlyOwner {
         for (uint256 i = 0; i < accounts.length; i++) {
             userList[accounts[i]] = true;
         }

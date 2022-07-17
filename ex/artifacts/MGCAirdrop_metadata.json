@@ -1,10 +1,29 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Exchange",
+				"type": "event"
+			},
 			{
 				"anonymous": false,
 				"inputs": [
@@ -35,6 +54,25 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "UserWithdrawn",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
 						"internalType": "uint32",
 						"name": "number",
 						"type": "uint32"
@@ -48,6 +86,51 @@
 				],
 				"name": "Withdrawn",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "addExchangeBacklist",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "accounts",
+						"type": "address[]"
+					}
+				],
+				"name": "appendUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "canBeExchange",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -70,6 +153,32 @@
 					}
 				],
 				"name": "emergencyWithdrawToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "exchangeBacklist",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "exchangeWithdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -113,6 +222,38 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isUserList",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mgctoken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -120,6 +261,19 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "perUintAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -148,12 +302,77 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "setUserPerUintAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sharetoken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
 					}
 				],
 				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userList",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userPerUintAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userWithdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -189,7 +408,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCAirdrop.sol": "MGCAirdrop"
+			"smart_contract/ex/MGCAirdrop.sol": "MGCAirdrop"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -197,20 +416,20 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCAirdrop.sol": {
-			"keccak256": "0x6abb21841059b39fe6b8157f8f82a5a14508337f5e2c058b0db4c1a42c210111",
+		"smart_contract/ex/MGCAirdrop.sol": {
+			"keccak256": "0x69a7545a465f4e48749f553a29a23d5e1cbbde5a20b024723bf467fb7c416346",
 			"urls": [
-				"bzz-raw://cfd18df463a27cbffee0cfc566197411669e2635dcc133f0e6f96a26a3af850c",
-				"dweb:/ipfs/QmRyvE7PdZqMekkyiVfvm8tARwjiqfs3CwBCLaXkhnSnkQ"
+				"bzz-raw://8a0522a0c5b688cd9442f224035b14a439f1593b8f50b1b8e561eb61302d2ff7",
+				"dweb:/ipfs/Qmc6aVrDtTsmKZKcuy4yYcDF4sjZ8fBJsCn4LTxveJcUzs"
 			]
 		},
-		"ex/MGCPresell.sol": {
+		"smart_contract/ex/MGCPresell.sol": {
 			"keccak256": "0x6db25c138cde63b87773a5e44133aa2755a904df91eb7a49da43fcddc8d0879f",
 			"license": "MIT",
 			"urls": [

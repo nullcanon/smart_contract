@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -546,7 +546,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCToken.sol": "MGC"
+			"smart_contract/ex/MGCToken.sol": "MGC"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -554,13 +554,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCToken.sol": {
+		"smart_contract/ex/MGCToken.sol": {
 			"keccak256": "0x64217fc9d9df74dd971b6f979e01f66816dabac1ec30f27ad17aee6ee51b5476",
 			"license": "MIT",
 			"urls": [
