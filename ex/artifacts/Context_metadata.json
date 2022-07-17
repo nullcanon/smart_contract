@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ex/MGCTeamAirdrop.sol": "Context"
+			"smart_contract/ex/MGCVipAirdrop.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -26,17 +26,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ex/MGCTeamAirdrop.sol": {
-			"keccak256": "0x738a10e08e0f2b210000ef61a772a61acd7620f84f50140da752cb372de7ed09",
+		"smart_contract/ex/MGCVipAirdrop.sol": {
+			"keccak256": "0x19594caa41fb066b5d22c14c0d5980b6ff2b23efbad3fa316fee6d815e76415b",
 			"urls": [
-				"bzz-raw://ae521e219cf1365f233352c03857209c8479a643992b70876639b646716ef08d",
-				"dweb:/ipfs/QmQYN19wMiUEqX2dmx2fBcWkViuFaczeVzeCmDZNFqTzMJ"
+				"bzz-raw://e8db09adb4b9dc676f6612d3299cc5cba833fbfaeafdfb6117774ba6a89c4635",
+				"dweb:/ipfs/QmTG1imMg7fW9jtq4GY4LEBvBXZNoH7yF1cCaXHGKpTMUU"
 			]
 		}
 	},

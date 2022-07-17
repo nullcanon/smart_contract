@@ -49,6 +49,11 @@
 						"internalType": "address[]",
 						"name": "accounts",
 						"type": "address[]"
+					},
+					{
+						"internalType": "uint32[]",
+						"name": "numbers",
+						"type": "uint32[]"
 					}
 				],
 				"name": "appendUser",
@@ -79,6 +84,25 @@
 				"name": "emergencyWithdrawToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -138,9 +162,9 @@
 				"name": "userList",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "uint32",
 						"name": "",
-						"type": "bool"
+						"type": "uint32"
 					}
 				],
 				"stateMutability": "view",
@@ -177,7 +201,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ex/MGCTeamAirdrop.sol": "MGCTeamAirdrop"
+			"smart_contract/ex/MGCVipAirdrop.sol": "MGCTeamAirdrop"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -191,11 +215,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ex/MGCTeamAirdrop.sol": {
-			"keccak256": "0x738a10e08e0f2b210000ef61a772a61acd7620f84f50140da752cb372de7ed09",
+		"smart_contract/ex/MGCVipAirdrop.sol": {
+			"keccak256": "0xac0649c746239094a37493a3602e167e50ac9790831f7dcb90c243b69a55a873",
 			"urls": [
-				"bzz-raw://ae521e219cf1365f233352c03857209c8479a643992b70876639b646716ef08d",
-				"dweb:/ipfs/QmQYN19wMiUEqX2dmx2fBcWkViuFaczeVzeCmDZNFqTzMJ"
+				"bzz-raw://429958e23e517b8fcdd3d395838c03d31cd1bdaba5207ca8af097e95f16a43f0",
+				"dweb:/ipfs/QmRc6WQhU1xAeEm5eafrK44Fe2sVq6b2Kzi8iVsq2eWdkg"
 			]
 		}
 	},
