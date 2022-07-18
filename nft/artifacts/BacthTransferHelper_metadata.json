@@ -43,6 +43,29 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "users",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "numbers",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "start",
+						"type": "uint256"
+					}
+				],
+				"name": "batchTransferWithNumber",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "nftMintAddress",
 				"outputs": [
@@ -147,10 +170,10 @@
 			]
 		},
 		"smart_contract/nft/ERC1155TransferHepler.sol": {
-			"keccak256": "0xcb48ffcf9fb9ce059ee6c96e88a9b57b9e28cbe9063014f0fe8cfacdc29bcaa9",
+			"keccak256": "0x192ac02179cd5304a3684c3dc5f3eb9de8c43d0b6528b59d5a54e846db4764c8",
 			"urls": [
-				"bzz-raw://620542ed886505cc70b4e0436fd5be405efa904219572fcd4cb7a682417b7d23",
-				"dweb:/ipfs/QmQWo7WoudxVMz8qkUukbSBHDJw6sMZR5gtQ9VbAiJGt1c"
+				"bzz-raw://7c81eecde5d78cb8044e53e8e18e51a190f5dfdea49d53b543fa105f694af096",
+				"dweb:/ipfs/QmSUvnb1cdLkx9cPTrosPNuFjmtPK5kH62jQi1UPLDJNsU"
 			]
 		},
 		"smart_contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
