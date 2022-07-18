@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ex/MGCVipAirdrop.sol": "Context"
+			"smart_contract/ex/MGCToken.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,11 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ex/MGCVipAirdrop.sol": {
-			"keccak256": "0x19594caa41fb066b5d22c14c0d5980b6ff2b23efbad3fa316fee6d815e76415b",
+		"smart_contract/ex/MGCToken.sol": {
+			"keccak256": "0x64217fc9d9df74dd971b6f979e01f66816dabac1ec30f27ad17aee6ee51b5476",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://e8db09adb4b9dc676f6612d3299cc5cba833fbfaeafdfb6117774ba6a89c4635",
-				"dweb:/ipfs/QmTG1imMg7fW9jtq4GY4LEBvBXZNoH7yF1cCaXHGKpTMUU"
+				"bzz-raw://e1bdf853f262e8d363e87e77723e51163beceb4837af4f7c5020ce4578371271",
+				"dweb:/ipfs/QmbcQBDaoy2yJf4V1DJLjTMcfFhZPDLgdazgQBMuUwKHz4"
 			]
 		}
 	},
