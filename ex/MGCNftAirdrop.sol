@@ -226,8 +226,11 @@ library LibArrayForUint256Utils {
 contract NFTAirdrop is Ownable , ERC1155Holder{
 
     mapping(address => uint32) public whiteList;
-    mapping(address => uint256[]) private nftIds;
+    mapping(address => uint256[]) public nftIds;
 
+    function mintable(address account) public view returns (uint32) {
+        return whiteList[account];
+    }
 
     function appendWhiteListWithNumber(address[] memory accounts, uint32 number) public onlyOwner {
         for (uint256 i = 0; i < accounts.length; i++) {

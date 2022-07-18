@@ -135,6 +135,49 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "mintable",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "nftIds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					},
@@ -348,11 +391,11 @@
 	},
 	"sources": {
 		"smart_contract/ex/MGCNftAirdrop.sol": {
-			"keccak256": "0x5d81c4ac9a7dca780efcd85c618271db1b36df0cdce9e78fdc9c9f4cd0b8083a",
+			"keccak256": "0x53a2a4098a8a04768e745e30cef7dfd527b7814b56c2aba5197a8dfbc006fccd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3404f9c1ef76f46b7273b4eb9423a2d6b4e0baaa297a6aa7c781908cba1d1520",
-				"dweb:/ipfs/QmX5BL9SDsyijyXLCHJh5j2PQhscK6NU38oRexvv1dRP2B"
+				"bzz-raw://16e0e8be25c897f92dae5428b7dd7fc41c8458e7ba40448b17e87bfebb9d1a8c",
+				"dweb:/ipfs/QmRnyM9MedhnB6brCwDbmNoCeujZjspqyese4xygFDwrpX"
 			]
 		},
 		"smart_contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
