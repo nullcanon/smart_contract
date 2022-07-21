@@ -142,6 +142,10 @@ contract StakingRewards is IStakingRewards, RewardsDistributionRecipient, Reentr
         emit RewardAdded(reward);
     }
 
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyRewardsDistribution {
+        IERC20(token).transfer(msg.sender, amount);
+    }
+
     /* ========== MODIFIERS ========== */
 
     modifier updateReward(address account) {

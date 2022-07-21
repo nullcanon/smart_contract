@@ -141,6 +141,26 @@
 			},
 			{
 				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "emergencyWithdrawToken",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
 				"inputs": [],
 				"name": "exit",
 				"outputs": [],
@@ -537,10 +557,10 @@
 			]
 		},
 		"liquidity-staker/StakingRewards.sol": {
-			"keccak256": "0x25f6b96fd64baae784d64b47b53022df29eebc6fcca38b3ca58d0c35b1013ec4",
+			"keccak256": "0xddb23f2f6524b37083b38a40d3f4c0eab25f87d59230578380636c374c6725a4",
 			"urls": [
-				"bzz-raw://03e2286afeea99176faa697f41f89c7ae01cb982f9badf1bf33c4ebbc1dee123",
-				"dweb:/ipfs/QmRprCtkcrkAZxUmqDzn6KMz4SYT8MXGpoHgM58WWSFyNW"
+				"bzz-raw://85f2e3a4d0457cb11c0f069172fc4c5d619f0b1cd405eb9866f3a0a12cd733b0",
+				"dweb:/ipfs/QmfLoLk2zKaBqjdzQf4zSjEjQRRRNasJA4ZqaJvEoY8rvF"
 			]
 		},
 		"liquidity-staker/interfaces/IStakingRewards.sol": {

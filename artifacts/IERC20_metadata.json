@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -229,7 +229,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ERC20.sol": "IERC20"
+			"ERC20.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -237,13 +237,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ERC20.sol": {
+		"ERC20.sol": {
 			"keccak256": "0x9db971e143730987045219204f13258472493db4b64672db3dcfda510c164179",
 			"license": "MIT",
 			"urls": [

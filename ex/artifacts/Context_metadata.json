@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ex/MGCToken.sol": "Context"
+			"ex/MGCPresell.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ex/MGCToken.sol": {
-			"keccak256": "0x64217fc9d9df74dd971b6f979e01f66816dabac1ec30f27ad17aee6ee51b5476",
+		"ex/MGCPresell.sol": {
+			"keccak256": "0x6db25c138cde63b87773a5e44133aa2755a904df91eb7a49da43fcddc8d0879f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1bdf853f262e8d363e87e77723e51163beceb4837af4f7c5020ce4578371271",
-				"dweb:/ipfs/QmbcQBDaoy2yJf4V1DJLjTMcfFhZPDLgdazgQBMuUwKHz4"
+				"bzz-raw://799279028047920288cdb067f5c53fbeeef1c890f26009b8bb6888cf7aa95280",
+				"dweb:/ipfs/QmPKUvozB7as3iSe2pJR62kLhoQ5w2QSa2HYdAiDjiAB1n"
 			]
 		}
 	},
