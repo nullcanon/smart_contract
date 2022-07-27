@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.0+commit.c7dfd78e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,9 +18,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ERC20.sol": "Context"
+			"BatchTransfer.sol": "Context"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -32,12 +32,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"ERC20.sol": {
-			"keccak256": "0x9db971e143730987045219204f13258472493db4b64672db3dcfda510c164179",
-			"license": "MIT",
+		"BatchTransfer.sol": {
+			"keccak256": "0xfc7857d01aae3095ecb8ef164f86062e3f2f1126bcbd42d81591ab070233f61b",
 			"urls": [
-				"bzz-raw://f9a299d396c78ae43b215e2d79cdce01471bd78617faeca7d619f61163ef5835",
-				"dweb:/ipfs/QmPK9ChqHBMrSUmNw8HzDcw2DQ3wZskNAoozVBgdpcbP7K"
+				"bzz-raw://5039ab94ea1c3d6112c4365986cda3de2cc5eeaf00506cae81d326d14a27971a",
+				"dweb:/ipfs/QmSjubPcqkNe49TKNCaD2XFh8GfYeZ15StxQZJMkM53in9"
 			]
 		}
 	},

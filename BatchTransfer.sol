@@ -266,4 +266,21 @@ contract ERC20Transfer {
             require(token.transfer(to[i], amount[i]), "transfer faild");
         }
     }
+
+
+    function batch_transfer_from(address _token, address[] memory to, uint256 amount) public {
+        ERC20 token = ERC20(_token);
+        for (uint i = 0; i < to.length; ++i) {
+            token.transferFrom(msg.sender, to[i], amount);
+        }
+    }
+
+    function batch_transfer_from2(address _token, address[] memory to, uint256[] memory amount) public {
+        require( (to.length == amount.length) && to.length >= 1, "length err");
+
+        ERC20 token = ERC20(_token);
+        for (uint i = 0; i < to.length; ++i) {
+            token.transferFrom(msg.sender, to[i], amount[i]);
+        }
+    }
 }

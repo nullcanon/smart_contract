@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.4+commit.c7e474f2"
+		"version": "0.8.0+commit.c7dfd78e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Msc.sol": "Address"
+			"BatchTransfer.sol": "Address"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -32,11 +32,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"Msc.sol": {
-			"keccak256": "0x36db5a2ad753ae7c858b235f1427552839c9ee0e6dc360a30f531e42a8235dac",
+		"BatchTransfer.sol": {
+			"keccak256": "0xfc7857d01aae3095ecb8ef164f86062e3f2f1126bcbd42d81591ab070233f61b",
 			"urls": [
-				"bzz-raw://66b5de975ed64b9a5741e57a85961e50454544c2de2485622e9c67cd28f1297b",
-				"dweb:/ipfs/QmccTEe6HStd9G8hM65hALVVaRDq66K5D4bDE5GpBKiDfc"
+				"bzz-raw://5039ab94ea1c3d6112c4365986cda3de2cc5eeaf00506cae81d326d14a27971a",
+				"dweb:/ipfs/QmSjubPcqkNe49TKNCaD2XFh8GfYeZ15StxQZJMkM53in9"
 			]
 		}
 	},
