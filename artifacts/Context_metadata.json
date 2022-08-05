@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.0+commit.c7dfd78e"
+		"version": "0.8.15+commit.e14f2714"
 	},
 	"language": "Solidity",
 	"output": {
@@ -20,7 +20,7 @@
 		"compilationTarget": {
 			"BatchTransfer.sol": "Context"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -33,10 +33,10 @@
 	},
 	"sources": {
 		"BatchTransfer.sol": {
-			"keccak256": "0xfc7857d01aae3095ecb8ef164f86062e3f2f1126bcbd42d81591ab070233f61b",
+			"keccak256": "0x85e91011a16aaf71b5f1d1cea7cf504b76635295a0fcc2a4f5403d48344e3e89",
 			"urls": [
-				"bzz-raw://5039ab94ea1c3d6112c4365986cda3de2cc5eeaf00506cae81d326d14a27971a",
-				"dweb:/ipfs/QmSjubPcqkNe49TKNCaD2XFh8GfYeZ15StxQZJMkM53in9"
+				"bzz-raw://8a8c8481e9a7b01b12200be3ac8bfdddc720623416dc79a3b3f6556240f237be",
+				"dweb:/ipfs/QmYqB2UKQWG6fCW62CHvkfkm4TSepy5rykqFSNcqYRakB9"
 			]
 		}
 	},

@@ -1,0 +1,474 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "version",
+						"type": "uint8"
+					}
+				],
+				"name": "Initialized",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "subtractedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "decreaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "addedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "increaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"allowance(address,address)": {
+					"details": "See {IERC20-allowance}."
+				},
+				"approve(address,uint256)": {
+					"details": "See {IERC20-approve}. NOTE: If `amount` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
+				},
+				"balanceOf(address)": {
+					"details": "See {IERC20-balanceOf}."
+				},
+				"constructor": {
+					"custom:oz-upgrades-unsafe-allow": "constructor"
+				},
+				"decimals()": {
+					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
+				},
+				"decreaseAllowance(address,uint256)": {
+					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
+				},
+				"increaseAllowance(address,uint256)": {
+					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
+				},
+				"name()": {
+					"details": "Returns the name of the token."
+				},
+				"symbol()": {
+					"details": "Returns the symbol of the token, usually a shorter version of the name."
+				},
+				"totalSupply()": {
+					"details": "See {IERC20-totalSupply}."
+				},
+				"transfer(address,uint256)": {
+					"details": "See {IERC20-transfer}. Requirements: - `to` cannot be the zero address. - the caller must have a balance of at least `amount`."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `amount`. - the caller must have allowance for ``from``'s tokens of at least `amount`."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"upgradeable/ERC20Updateable.sol": "MyTokenV1"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"node_modules/@openzeppelin-contracts-upgradeable/access/OwnableUpgradeable.sol": {
+			"keccak256": "0xcf4a2c2c1a8b1570ee9a7059c218de1efbc9050239b1111dcfc24081391d11b7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://567bb374cec704c71a8279236b98161c99d68c4e4d490c6ce5d7f5f2acd3d665",
+				"dweb:/ipfs/QmXHXmhmHc9c9ryUSvAoKjNYqn916H1wBFGpRUixWYw9Gp"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/interfaces/draft-IERC1822Upgradeable.sol": {
+			"keccak256": "0xa63f31ccb74383b73c47e617ab3d0848c2775d04e45d48623b4f7282fc00f1ce",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4c830dbffb8c23001fce1311eab2faf42d622e3907fcf86ce14a44e94f9eb45d",
+				"dweb:/ipfs/QmU4n7MJpCTizCVzC5fB8GoqQUcszA7eNRjKvxmBnLa1fn"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol": {
+			"keccak256": "0x20db54d070f5faa97267693b8d01afeb6785d8a2f449762505404f278891f98f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://68f458231d053e5f4c31569f35dcb7d8aca1eeeaf2d6ec620a238a3e75d57c8f",
+				"dweb:/ipfs/QmfEddjsgiHg2WQrUuVNMjpdXqZBv8oTzxZZuZsJ8LmyYB"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/proxy/beacon/IBeaconUpgradeable.sol": {
+			"keccak256": "0x52ee1221297fa7b84a8242b4976721a124debd033fc1d51d1e1ae2d005cfc233",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://225aa18e0ecd6484d070af3358372c933893b1434368732a429cb79b603d7786",
+				"dweb:/ipfs/QmVUnj8PjgFCfhLnwwGE1EZPW4BHqpnKLKj45ZPTCQQX5V"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/proxy/utils/Initializable.sol": {
+			"keccak256": "0x89d3edacd07d0f2df80f91f2b8bc0a53a638561ead828670441333d6915671bd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://653fb27aa67cf93b556d0664125719c16cb2a2852f5307b90f6f7ea9ac6d9196",
+				"dweb:/ipfs/QmWS7gFdrmrGsUA4pHqtQFn5uAvWiiUxoao1W2HrFAmAj8"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol": {
+			"keccak256": "0xe0481437b196cebbaf97d3039c400de9bf0aa2592ede76656146e36e99cdb4b5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d8dc9434ba73e2f3fcfcb90a9db731a9aa1bc60f91bde3cf45cf56bc8b81b017",
+				"dweb:/ipfs/QmSn23uEWcbj4HD2w4do9kbcHNhhCvTDBw1vimkFpi4Cbi"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol": {
+			"keccak256": "0x1d80b4eeb5e280428128cb596c2fe266a305be12afe34e04f8f1841e3a45f677",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9f23c96b26adbc4a00e928fcb667a9169e6a5a642912ce8b216e758bfedb6723",
+				"dweb:/ipfs/Qmb9Ky4Lz4bpqsEMDeduZF16zdueDDJGDXtpyUHc3gy6mV"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol": {
+			"keccak256": "0xffeed6b3cac845b2af4afb30d87cecbd45dec3c408360c157a3db08e28b45043",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f3d128cf6b67b0496353c536b227fb2c698c21ec86f3454a41ba50a63908bed",
+				"dweb:/ipfs/QmdAdMnJuqiXc4ccwBdq2wh7gg2rF8X4TrdZcZvc9GADGm"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol": {
+			"keccak256": "0x56492cd2e84fdbc5f39c722ebdbf4ec02a262ac026fdc40f2ad2eb0cda0c76b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b52b56a3db157dd2135a0520396282640b14d442327041355de80cb218ce8552",
+				"dweb:/ipfs/QmQ7pDQ66ZDhvZTnGBfJLVMBRhzu7CWz4cPDZkUe8WLYea"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/utils/AddressUpgradeable.sol": {
+			"keccak256": "0x53849a4d64d7b6a25a4f8cea2a16ccded9d5cf57e21d8d2ce24d40b0c2a71863",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://00f801f58c90aa307a563c301e895f371c1e1e8ef0e8645d9601a449a1e2752c",
+				"dweb:/ipfs/QmUtMkLnPxyoSx8bRiJdUwVGfxDacaHphp4UEcSKMWgY5b"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/utils/ContextUpgradeable.sol": {
+			"keccak256": "0x7ca50b2db181b128c3c202f67bbc2fc189628f41a8643027c445facc907a10b6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1baa3e4dd802cf1e2ed3634f79f3b1f86397f1bcb819f55811da1a9bf6a6189c",
+				"dweb:/ipfs/QmPmiK9Tj3P7fhnroK2REuendr4sjx4vjev7PRQJyxMob5"
+			]
+		},
+		"node_modules/@openzeppelin-contracts-upgradeable/utils/StorageSlotUpgradeable.sol": {
+			"keccak256": "0xc586a4a6ed2ea1f869835475190cbbcbe1f93aba6a532429edcc930d40eb5a0c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9bf80d4b7094c54644be2c7d2f986e0de998d0409597ca141f1b2cec723ab626",
+				"dweb:/ipfs/QmPrfihVYQHWtDNB3zv6LRfT9p8Hdff9B6PdHRXYKb3npo"
+			]
+		},
+		"upgradeable/ERC20Updateable.sol": {
+			"keccak256": "0x48cadc92238b9f160000bc15fae4827b983d921469ade4941381b9ad67d7ef8d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://044f3d28baa4a15b77b06e736d83486dd8fcd1d629c792d2aa68960c5d72e144",
+				"dweb:/ipfs/QmdKsExypyoUzgsR2VLkg34hgNBpRtkqmSsP7Ru3UfU7r7"
+			]
+		}
+	},
+	"version": 1
+}

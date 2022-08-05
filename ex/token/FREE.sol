@@ -10,7 +10,6 @@
 //
 // SAFUU PROTOCOL COPYRIGHT (C) 2022
 
-
 pragma solidity ^0.7.4;
 
 library SafeMathInt {

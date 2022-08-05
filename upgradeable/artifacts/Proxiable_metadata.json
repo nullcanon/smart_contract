@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.1+commit.df193b15"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "proxiableUUID",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"upgradeable/ERC20Updateable.sol": "Proxiable"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"upgradeable/ERC20Updateable.sol": {
+			"keccak256": "0xb776bca39e6bac3f56eb3c66c26b586bfa2de1416363ee7a6ca4176959afb84f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f30aaf308ec1ba094dda74ed8a37fa8b349502cf1f422a3789d2e1b3400d7801",
+				"dweb:/ipfs/QmWCPY43W3m76wF5spPqKUHT6rR4tSmwUoobgNGPNUKpzR"
+			]
+		}
+	},
+	"version": 1
+}

@@ -274,7 +274,7 @@ contract ERC20Transfer {
             token.transferFrom(msg.sender, to[i], amount);
         }
     }
-
+    
     function batch_transfer_from2(address _token, address[] memory to, uint256[] memory amount) public {
         require( (to.length == amount.length) && to.length >= 1, "length err");
 
