@@ -7,7 +7,7 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 
 
-contract MGCItems is  ERC1155 , Ownable{
+contract BEEItems is  ERC1155 , Ownable{
 
     uint256 public tokenSupply;
 
