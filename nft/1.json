@@ -1,0 +1,54 @@
+{
+  "name": "#1",
+  "description": "",
+  "external_url": "",
+  "image": "1.webp",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "4"
+    },
+    {
+      "trait_type": "face",
+      "value": "bee"
+    },
+    {
+      "trait_type": "shenti",
+      "value": "rainbow"
+    },
+    {
+      "trait_type": "tou",
+      "value": "1"
+    },
+    {
+      "trait_type": "fat",
+      "value": "2"
+    },
+    {
+      "trait_type": "eye",
+      "value": "3"
+    },
+    {
+      "trait_type": "glass",
+      "value": "8"
+    },
+    {
+      "trait_type": "paopao",
+      "value": "5"
+    },
+    {
+      "trait_type": "xianglian",
+      "value": "8"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "1.webp",
+        "type": "image/webp"
+      }
+    ],
+    "creators": []
+  },
+  "compiler": "https://nft-generator.art"
+}
