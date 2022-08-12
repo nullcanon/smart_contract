@@ -7,7 +7,7 @@ symbol = "FBEE"
 
 description = "Issued to celebrate the launch of the BEECapital APP, with a total of 10,000 pieces, each NFT style is unique and can be used as a status symbol in the BEECapital APP."
 
-image = ""
+image = "https://www.beecapital.org/ipfs/v1/"
 
 Background = {"bee":"Bee", "shandian":"Lightning", "keji":"Technology", "rainbow":"Rainbow", 
         "1":"Cartoon", "2":"Star", "3":"Rainbow bridge", "4":"Skull", "5":"Pink star", "6":"Pink dot",
@@ -53,7 +53,7 @@ for i in range(1, 2):
         new_dict["symbol"] = symbol
         new_dict["description"] = description
         new_dict["label"] = "#F" + str(i)
-        new_dict["image"] = image + str(i) + ".json"
+        new_dict["image"] = image + str(i) + ".png"
         attribute_list = []
         for attribute in load_dict["attributes"]:
                 error_key = attribute["trait_type"]
