@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.8.16+commit.07a7930e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"tools/BatchTransfer.sol": "SafeMath"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"tools/BatchTransfer.sol": {
+			"keccak256": "0x85e91011a16aaf71b5f1d1cea7cf504b76635295a0fcc2a4f5403d48344e3e89",
+			"urls": [
+				"bzz-raw://8a8c8481e9a7b01b12200be3ac8bfdddc720623416dc79a3b3f6556240f237be",
+				"dweb:/ipfs/QmYqB2UKQWG6fCW62CHvkfkm4TSepy5rykqFSNcqYRakB9"
+			]
+		}
+	},
+	"version": 1
+}

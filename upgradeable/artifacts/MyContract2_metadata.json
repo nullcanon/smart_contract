@@ -66,7 +66,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"upgradeable/ERC20Updateable.sol": "MyContract2"
+			"upgradeable/EIP-1822.sol": "MyContract2"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -80,7 +80,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"upgradeable/ERC20Updateable.sol": {
+		"upgradeable/EIP-1822.sol": {
 			"keccak256": "0xb776bca39e6bac3f56eb3c66c26b586bfa2de1416363ee7a6ca4176959afb84f",
 			"license": "MIT",
 			"urls": [
