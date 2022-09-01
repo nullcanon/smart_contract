@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -153,6 +153,19 @@
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
+					}
+				],
+				"name": "addWhiteList",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
 					},
 					{
 						"internalType": "uint256",
@@ -279,6 +292,19 @@
 					}
 				],
 				"name": "mintBatchWithNumber",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "mintWithWiteList",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -499,6 +525,25 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "whiteList",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -548,7 +593,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/NFTERC1155.sol": "BEEItems"
+			"ex/NFTERC1155Mint.sol": "BEEItems"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -562,11 +607,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/NFTERC1155.sol": {
-			"keccak256": "0x68d78189b0abdf969f3ad377abc44bb24f07cd2d9d1a977d789edad4eb884359",
+		"ex/NFTERC1155Mint.sol": {
+			"keccak256": "0xc87ec4e27b16df1e963350907a8fe6902dbb60ae245aea1f51d5eaceabb949e0",
 			"urls": [
-				"bzz-raw://7142a8dcfc5abd89d711373dfbd2e71002a926c4f1c343c6e1b5597dcea67f13",
-				"dweb:/ipfs/QmRFU24c6BCxpp1Meaxmnq5cvWg2cj3JNW66UREewF7VyC"
+				"bzz-raw://3194d803417a78d2816d2fc954b25b3d69f625404e8c36c2216651286c3a0ae9",
+				"dweb:/ipfs/QmcExTejQwyGCGBkuWZYcaBU1VTAuiQLUbzgXvmv1J7zbS"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
