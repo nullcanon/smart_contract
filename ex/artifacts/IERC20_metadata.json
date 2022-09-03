@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -190,35 +190,8 @@
 			}
 		],
 		"devdoc": {
-			"events": {
-				"Approval(address,address,uint256)": {
-					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
-				},
-				"Transfer(address,address,uint256)": {
-					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
-				}
-			},
 			"kind": "dev",
-			"methods": {
-				"allowance(address,address)": {
-					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
-				},
-				"approve(address,uint256)": {
-					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
-				},
-				"balanceOf(address)": {
-					"details": "Returns the amount of tokens owned by `account`."
-				},
-				"totalSupply()": {
-					"details": "Returns the amount of tokens in existence."
-				},
-				"transfer(address,uint256)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				},
-				"transferFrom(address,address,uint256)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -229,7 +202,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCPresell.sol": "IERC20"
+			"ex/NFTCompound.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -237,18 +210,96 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCPresell.sol": {
-			"keccak256": "0x6db25c138cde63b87773a5e44133aa2755a904df91eb7a49da43fcddc8d0879f",
+		"ex/NFTCompound.sol": {
+			"keccak256": "0xc6b5ac1203859ce6082fd65b111d842a5f242f3eafe46674f1117d7bda4aeccf",
+			"urls": [
+				"bzz-raw://9f09fba27fcd6f146d3d5ac0f36d0c7ede8e210c2d91f2221d3d72e867f7ee23",
+				"dweb:/ipfs/QmRJiBvQ1WCihv4akcFfLM2DWDzFXPTwFhDpit1w6qGs9X"
+			]
+		},
+		"ex/NFTERC1155Mint.sol": {
+			"keccak256": "0x7d1de6a62bb8fb5d53685f0211f58691c1af870b314280f6850bd658c253b4c1",
+			"urls": [
+				"bzz-raw://d3fa8ab099767f862e813e7b997e8417d847fd161d8305a4d79724586839480f",
+				"dweb:/ipfs/QmdpMpLVEd62o3VnXL3rT8mzHNNRdaTPGdwzh6t635AyRt"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xd2bd30ee25ef65894d0a4f974eb71cc59907d62ab26fe1d2e96e5b4572178d8f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://799279028047920288cdb067f5c53fbeeef1c890f26009b8bb6888cf7aa95280",
-				"dweb:/ipfs/QmPKUvozB7as3iSe2pJR62kLhoQ5w2QSa2HYdAiDjiAB1n"
+				"bzz-raw://4a250ef83b73a9a8e4f89afdfc140f0dcf4443a1753b3d1456445dc9662a1198",
+				"dweb:/ipfs/QmavLfbnmjjSSWWjd6ouNok7mcj7XtCnX7DkLaDZP8qykj"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
+			"keccak256": "0xf285634186e8a51a7812b857dceca0fb7fee1395ed581c7a464a1b78d4221cef",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://492575bcc6e845831fb52117a228ae00d887ee895207d4fbf988f216adc73658",
+				"dweb:/ipfs/QmVTzq1oSfCbUHBc6uZk3e41czdsaAzhkvSbu2ZYgWUmcs"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+			"keccak256": "0x56929133c3d37641ae44d2fef6a4fba2c6fbc1faa1925ab777fae2e0be557bb2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dba2499fc4ad87a46c98a61ac2985c8754898132d789a16310628eea494e96e8",
+				"dweb:/ipfs/QmNNBSxw2tyPrZYEsbDFMQrt9ii4fCw32NobYwYTFDManz"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0x4ba2a338f978e2583504415d02a4b84a08d41080f94615f3e941582e4aab457c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3c00788cade853dbf1af82565877f5038e974fd599cb068497977588d893d2f1",
+				"dweb:/ipfs/QmQgDRFe1y9zzVN3RzoAxYFkFkpCER8FwbF3UgdyDpQvT4"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+			"keccak256": "0x2d6f48f294e6e798d26a8160091e39e173f955566f5ddce18ab15766356e4930",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9b84688ab411266e9a20e63c8ae9958a3ff8a1af9d031d5d907976e1f1b8e4f7",
+				"dweb:/ipfs/QmQpJ1697jCMMJ86BrkJfdJx9x7mV1gRmrywTcJoPZd7UD"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0x5ecc35dbdbecd0fb1ef55aaac24c52625952b288220eb19f828f8a09a9c10229",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f86c64d344a2826ceca37440c53159f5f9b298653c8d60edfeba50ecfe175878",
+				"dweb:/ipfs/QmSx7BqU1YDXLzafmUp6rAWiDMmR3vyJ1zM7hBWgvT5qxp"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x81d5fc973a522c8909d60be6a201869d46aa47b030b8813f60616404628c2b94",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9755b505799e622d964a843a8ed1fd60fedffca230178e5cb95ae9280df4dcd2",
+				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0x3d3fe7b1901114d50828f5c77ba7f09a2a6a65223620c837364d31b60e5982ac",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6751cee12592cb9c33be618057660d6c84cb0594bd0afa552009438e38d3dd02",
+				"dweb:/ipfs/QmWq8SxNw4q6n1B8i9sFZVaodB6wrcyBPsKPWMsaUyCECH"
+			]
+		},
+		"node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x540685d7ece3faa56f38253270ff11b18e63949fb8659c408123b1874674492e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5474839e19e2571c52eae3aab1dc6e6edf2b20bbba9895f59db6594a2678a3d5",
+				"dweb:/ipfs/QmVHocBeANMkq4TzVM7q9At5NSg1TEpT9D9vgJ5dGcvcPN"
 			]
 		}
 	},

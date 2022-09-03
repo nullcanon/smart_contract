@@ -25,25 +25,29 @@ interface IERC20 {
 }
 
 
-contract NFTMint is  Ownable{
+contract NFTCompound is  Ownable{
 
     address public nftAMint;
     address public nftBMint;
     address public nftCMint;
 
     address public feeTo;
-    address public feeToken;
-    uint256 public feeAmount;
+    address public feeTokenA;
+    uint256 public feeAmountA;
 
-    event CompoundNft(address indexed to, uint256 tokenId)
+    address public feeTokenB;
+    uint256 public feeAmountB;
+
+    event CompoundNft(address indexed to, uint256 tokenId);
 
     function compoundNft(uint256 nftAId, uint256 nftBId) public {
 
-        IERC20(feeToken).transferFrom(msg.sender, feeTo, feeAmount);
+        IERC20(feeTokenA).transferFrom(msg.sender, feeTo, feeAmountA);
+        IERC20(feeTokenB).transferFrom(msg.sender, feeTo, feeAmountB);
         uint256 token_id = NFTItems(nftCMint).mintWithWiteList(msg.sender);
 
-        BeeItems(nftAMint).brun(msg.sender, nftAId, 1);
-        BeeItems(nftBMint).brun(msg.sender, nftBId, 1);
+        NFTItems(nftAMint).brun(msg.sender, nftAId, 1);
+        NFTItems(nftBMint).brun(msg.sender, nftBId, 1);
         emit CompoundNft(msg.sender, token_id);
     }
 
@@ -53,8 +57,14 @@ contract NFTMint is  Ownable{
         nftCMint = C;
     }
 
-    function setFeeToken(address mint) public onlyOwner {
-        feeToken = mint;
+    function setFeeToken(address mintA, address mintB) public onlyOwner {
+        feeTokenA = mintA;
+        feeTokenB = mintB;
+    }
+
+    function setFeeAmount(uint256 amountA, uint256 amountB) public onlyOwner {
+        feeAmountA = amountA;
+        feeAmountB = amountB;
     }
 
     function setFeeTo(address to) public onlyOwner {

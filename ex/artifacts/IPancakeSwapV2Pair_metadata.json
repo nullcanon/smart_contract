@@ -670,7 +670,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"smart_contract/ex/MGCToken.sol": "IPancakeSwapV2Pair"
+			"ex/MGCToken.sol": "IPancakeSwapV2Pair"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -678,13 +678,13 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"smart_contract/ex/MGCToken.sol": {
+		"ex/MGCToken.sol": {
 			"keccak256": "0x64217fc9d9df74dd971b6f979e01f66816dabac1ec30f27ad17aee6ee51b5476",
 			"license": "MIT",
 			"urls": [
