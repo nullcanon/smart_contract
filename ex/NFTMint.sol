@@ -245,6 +245,7 @@ contract NFTMint is  Ownable, ERC1155Holder{
     address public feeTo;
     address public feeToken;
     uint256 public feeAmount;
+    mapping(address => uint256) public mintCount;
 
     mapping(address => mapping(address => uint)) public whiteList;
 
@@ -305,6 +306,7 @@ contract NFTMint is  Ownable, ERC1155Holder{
         } else {
             tokenid = NFTItems(nftContract).mintWithWiteList(msg.sender);
         }
+        mintCount[nftContract] += 1;
         emit MintNft(msg.sender, nftContract, tokenid);
     }
 
@@ -346,6 +348,10 @@ contract NFTMint is  Ownable, ERC1155Holder{
 
     function setFeeTo(address to) public onlyOwner {
         feeTo = to;
+    }
+
+    function getMintCount(address nft) view public returns (uint256) {
+        return mintCount[nft];
     }
 
     event MintNft(address indexed user, address indexed nft, uint256 tokenid);

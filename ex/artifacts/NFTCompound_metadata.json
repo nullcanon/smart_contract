@@ -316,10 +316,10 @@
 			]
 		},
 		"ex/NFTERC1155Mint.sol": {
-			"keccak256": "0x7d1de6a62bb8fb5d53685f0211f58691c1af870b314280f6850bd658c253b4c1",
+			"keccak256": "0xf56b60801d8bafea50085b8c7cee2cc6bc96c1e35db959cd2d4f19612f47372f",
 			"urls": [
-				"bzz-raw://d3fa8ab099767f862e813e7b997e8417d847fd161d8305a4d79724586839480f",
-				"dweb:/ipfs/QmdpMpLVEd62o3VnXL3rT8mzHNNRdaTPGdwzh6t635AyRt"
+				"bzz-raw://ae595314aa4bfe7545e89238d4246b30eeb456024f013886bf5acb904114e526",
+				"dweb:/ipfs/Qma2gJFB4tGAUaoD86U9ULRkvTQczjnRxAJ7qz2tiZRsqM"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {

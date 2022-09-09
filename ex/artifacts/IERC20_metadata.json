@@ -202,7 +202,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/NFTMint.sol": "IERC20"
+			"ex/NFTCompound.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -216,18 +216,18 @@
 		"remappings": []
 	},
 	"sources": {
+		"ex/NFTCompound.sol": {
+			"keccak256": "0xc6b5ac1203859ce6082fd65b111d842a5f242f3eafe46674f1117d7bda4aeccf",
+			"urls": [
+				"bzz-raw://9f09fba27fcd6f146d3d5ac0f36d0c7ede8e210c2d91f2221d3d72e867f7ee23",
+				"dweb:/ipfs/QmRJiBvQ1WCihv4akcFfLM2DWDzFXPTwFhDpit1w6qGs9X"
+			]
+		},
 		"ex/NFTERC1155Mint.sol": {
 			"keccak256": "0xf56b60801d8bafea50085b8c7cee2cc6bc96c1e35db959cd2d4f19612f47372f",
 			"urls": [
 				"bzz-raw://ae595314aa4bfe7545e89238d4246b30eeb456024f013886bf5acb904114e526",
 				"dweb:/ipfs/Qma2gJFB4tGAUaoD86U9ULRkvTQczjnRxAJ7qz2tiZRsqM"
-			]
-		},
-		"ex/NFTMint.sol": {
-			"keccak256": "0x61df9580cf9dd5d15b236e4d353094ca32b55e787aff672a83ea76605878aeb1",
-			"urls": [
-				"bzz-raw://e092baa4495ff62fea7459928e3fdc27be4cef7f2421d890baa568a2e8bbe862",
-				"dweb:/ipfs/QmXj15yKR9vKTGCAVV4hNiFmVh6K6Ba2sUATxjVXMzFTdF"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
@@ -268,22 +268,6 @@
 			"urls": [
 				"bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797",
 				"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw"
-			]
-		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
-			"keccak256": "0xc17dae2baabdf6f414ee129c3f07324309aaa8ae63297ab55cada28a6969a81b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://80777f3b7c186477704a96b29deb2bce56c281a6618aeda284a2a0f94d635c3c",
-				"dweb:/ipfs/QmPrbgsuseYdJ1hmLHZ2dnxdHfqiFHZBqBSZZANwCEjJQr"
-			]
-		},
-		"node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
-			"keccak256": "0x3dd5e1a66a56f30302108a1da97d677a42b1daa60e503696b2bcbbf3e4c95bcb",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://0808de0ae4918c664643c885ca7fa6503e8ef2bd75609dfc85152c0128a3422d",
-				"dweb:/ipfs/QmNrhFC1XgBKuuxfahFeiwi1MCdu3FLNpHj2uStgmf4iJj"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/utils/Address.sol": {

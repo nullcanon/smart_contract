@@ -40,10 +40,10 @@
 			]
 		},
 		"ex/NFTMint.sol": {
-			"keccak256": "0x61df9580cf9dd5d15b236e4d353094ca32b55e787aff672a83ea76605878aeb1",
+			"keccak256": "0x0a830c3b8997d20840d11f14d1a5587326785c1cc9f6e3c1b75f37320daaf6bf",
 			"urls": [
-				"bzz-raw://e092baa4495ff62fea7459928e3fdc27be4cef7f2421d890baa568a2e8bbe862",
-				"dweb:/ipfs/QmXj15yKR9vKTGCAVV4hNiFmVh6K6Ba2sUATxjVXMzFTdF"
+				"bzz-raw://813463a6d06428adb1a2b7b34e1d6aa57bfbb9dea24f1694c4c180b016de962d",
+				"dweb:/ipfs/QmVTXFGfDiHbXDKqe4SZU2ebbXLA5DG7N3WDLzPJVwzSpt"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {
