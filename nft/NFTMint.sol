@@ -288,13 +288,22 @@ contract MintNft is ERC1155Holder, Ownable {
         require(IERC20(feeTokenMintAddress).allowance(msg.sender, address(this)) >= feeAmount[nftContractAddress], "Token allowance too low");
         IERC20(feeTokenMintAddress).transferFrom(msg.sender, feeReceiveAddress, feeAmount[nftContractAddress]);
 
-
         (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(mintTokenId[nftContractAddress]);
         LibArrayForUint256Utils.removeByIndex(mintTokenId[nftContractAddress], index);
 
         IERC1155(nftContractAddress).safeTransferFrom( address(this) , msg.sender, minTokenId , 1 , "");
 
         emit mint(nftContractAddress, msg.sender);
+    }
+
+    function mbeeMint(
+        address nftContractAddress
+    ) public {
+
+        (uint256 minTokenId, uint256 index) = LibArrayForUint256Utils.min(mintTokenId[nftContractAddress]);
+        LibArrayForUint256Utils.removeByIndex(mintTokenId[nftContractAddress], index);
+
+        IERC1155(nftContractAddress).safeTransferFrom( address(this) , msg.sender, minTokenId , 1 , "");
     }
 
     //Continuously add NFT in batches

@@ -10,6 +10,7 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 contract NFTItems is  ERC1155 , Ownable{
 
     uint256 public tokenSupply;
+    uint256 public maxIndex = 1;
     mapping(address => bool) public whiteList;
 
 
@@ -26,6 +27,7 @@ contract NFTItems is  ERC1155 , Ownable{
         }
         _mintBatch(msg.sender, ids, amounts, "");
         tokenSupply = tokenSupply + idsNumber;
+        maxIndex = maxIndex + idsNumber;
     }
 
     function transferWithNumber(uint256 start, uint256 idsNumber, address to) public {
@@ -44,9 +46,10 @@ contract NFTItems is  ERC1155 , Ownable{
 
     function mintWithWiteList(address to) public returns (uint256){
         require(whiteList[msg.sender], "Not in white");
-        _mint(to, tokenSupply, 1, "");
+        _mint(to, maxIndex, 1, "");
+        maxIndex = maxIndex + 1;
         tokenSupply = tokenSupply + 1;
-        return tokenSupply - 1;
+        return maxIndex - 1;
     }
 
 
@@ -60,6 +63,7 @@ contract NFTItems is  ERC1155 , Ownable{
     {
         _mintBatch(to, ids, amounts, data);
         tokenSupply = tokenSupply + ids.length;
+        maxIndex = maxIndex + ids.length;
     }
 
     function totalSupply() public view returns (uint256) {
