@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.10+commit.fc410830"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"BatchTransfer.sol": "SafeMath"
+			"BeeToken.sol": "SafeMath"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -26,17 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"BatchTransfer.sol": {
-			"keccak256": "0x85e91011a16aaf71b5f1d1cea7cf504b76635295a0fcc2a4f5403d48344e3e89",
+		"BeeToken.sol": {
+			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://8a8c8481e9a7b01b12200be3ac8bfdddc720623416dc79a3b3f6556240f237be",
-				"dweb:/ipfs/QmYqB2UKQWG6fCW62CHvkfkm4TSepy5rykqFSNcqYRakB9"
+				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
+				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
 			]
 		}
 	},

@@ -356,7 +356,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract GSW is Context, IERC20, IERC20Metadata, Ownable{
+contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -365,21 +365,17 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public marketAddress = 0xCe2945A9ab65188F3BD4d01D4bD10d9e50F11293;
+    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
-    address public immutable uniswapV2Pair;
+    address public uniswapV2Pair;
+    address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
     bool inSwapAndLiquify;
-    bool public swapAndLiquifyEnabled;
+    bool public swapAndLiquifyEnabled = true;
+    mapping (address => bool) public isExcludeds;
     mapping (address=>bool) public DEXs;
     mapping (address => bool) public isPair;
 
     event SwapAndLiquifyEnabledUpdated(bool enabled);
-    event SwapAndLiquify(
-        uint256 tokensSwapped,
-        uint256 ethReceived,
-        uint256 tokensIntoLiqudity
-    );
-
 
     modifier lockTheSwap {
         inSwapAndLiquify = true;
@@ -389,25 +385,25 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
 
     
     constructor () {
-        _mint(_msgSender(), 7777777 * 1e18);
+        _mint(_msgSender(), 21000000 * 1e18);
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
-            .createPair(address(this), _uniswapV2Router.WETH());
+            .createPair(address(this), usdtAddress);
         uniswapV2Router = _uniswapV2Router;
         isPair[address(owner())] = true;
         DEXs[address(uniswapV2Pair)] = true;
     }
 
     function name() public view virtual override returns (string memory) {
-        return "Golden State Warriors";
+        return "Sugar Baby";
     }
 
     function symbol() public view virtual override returns (string memory) {
-        return "GSW";
+        return "BABY";
     }
 
     function decimals() public view virtual override returns (uint8) {
@@ -444,7 +440,7 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
         _transfer(sender, recipient, amount);
 
         uint currentAllowance = _allowances[sender][_msgSender()];
-        require(currentAllowance >= amount, "GSW: transfer amount exceeds allowance");
+        require(currentAllowance >= amount, "SugarBaby: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
@@ -458,7 +454,7 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
 
     function decreaseAllowance(address spender, uint subtractedValue) public virtual returns (bool) {
         uint currentAllowance = _allowances[_msgSender()][spender];
-        require(currentAllowance >= subtractedValue, "GSW: decreased allowance below zero");
+        require(currentAllowance >= subtractedValue, "SugarBaby: decreased allowance below zero");
         unchecked {
             _approve(_msgSender(), spender, currentAllowance - subtractedValue);
         }
@@ -483,19 +479,21 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
         address recipient,
         uint amount
     ) internal virtual {
-        require(sender != address(0), "GSW: transfer from the zero address");
-        require(recipient != address(0), "GSW: transfer to the zero address");
+        require(sender != address(0), "SugarBaby: transfer from the zero address");
+        require(recipient != address(0), "SugarBaby: transfer to the zero address");
         uint senderBalance = _balances[sender];
-        require(senderBalance >= amount, "GSW: transfer amount exceeds balance");
+        require(senderBalance >= amount, "SugarBaby: transfer amount exceeds balance");
         uint _amount = amount;
 
         
         if ((( DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !inSwapAndLiquify &&
-            swapAndLiquifyEnabled) {
+            swapAndLiquifyEnabled &&
+            !isExcludeds[sender] &&
+            !isExcludeds[recipient] ) {
 
-            _balances[address(this)] += amount * 3 / 100;
-            emit Transfer(sender, address(this), amount * 3 / 100);
+            _balances[address(this)] += amount * 15 / 1000;
+            emit Transfer(sender, address(this), amount * 15 / 1000);
 
             uint256 contractTokenBalance = balanceOf(address(this));
                 if(contractTokenBalance >= _totalSupply)
@@ -509,9 +507,9 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
                         !DEXs[sender] &&
                         swapAndLiquifyEnabled
                     ) {
-                        swapTokensForEth(contractTokenBalance);
+                        swapTokensForUsdt(contractTokenBalance);
                 }
-            _amount = amount * 97 / 100;
+            _amount = amount * 985 / 1000;
             
         }
 
@@ -529,9 +527,9 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function _burn(address account, uint amount) internal virtual {
-        require(account != address(0), "GSW: burn from the zero address");
+        require(account != address(0), "SugarBaby: burn from the zero address");
         uint accountBalance = _balances[account];
-        require(accountBalance >= amount, "GSW: burn amount exceeds balance");
+        require(accountBalance >= amount, "SugarBaby: burn amount exceeds balance");
         unchecked {
             _balances[account] = accountBalance - amount;
         }
@@ -552,19 +550,26 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
         emit Approval(owner, spender, amount);
     }
 
-    function swapTokensForEth(uint256 tokenAmount) private lockTheSwap{
+    function swapTokensForUsdt(uint256 tokenAmount) private lockTheSwap{
         address[] memory path = new address[](2);
         path[0] = address(this);
-        path[1] = uniswapV2Router.WETH();
+        path[1] = usdtAddress;
         _approve(address(this), address(uniswapV2Router), tokenAmount);
-        uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+        uniswapV2Router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
             tokenAmount,
             0, 
             path,
-            address(this),
+            marketAddress,
             block.timestamp
         );
-        payable(marketAddress).transfer(address(this).balance);
+    }
+
+    function setExcludeds(address addr) public onlyOwner {
+        if (isExcludeds[addr] == true) {
+            isExcludeds[addr] = false; 
+        } else {
+            isExcludeds[addr] = true;
+        }
     }
 
 
@@ -575,8 +580,11 @@ contract GSW is Context, IERC20, IERC20Metadata, Ownable{
 
     receive() external payable {}
 
-    // function emergencyWithdraw() external onlyOwner {
-    //     payable(owner()).send(address(this).balance);
-    // }
+    function emergencyWithdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
 
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
+    }
 }

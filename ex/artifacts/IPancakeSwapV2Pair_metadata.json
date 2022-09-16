@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -670,7 +670,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCToken.sol": "IPancakeSwapV2Pair"
+			"ex/exchangeUsdtToken.sol": "IPancakeSwapV2Pair"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -684,12 +684,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCToken.sol": {
-			"keccak256": "0x64217fc9d9df74dd971b6f979e01f66816dabac1ec30f27ad17aee6ee51b5476",
+		"ex/exchangeUsdtToken.sol": {
+			"keccak256": "0xf9e0aa55c0edce8495493a8736480c282143f59da88a52247bfa506dc12e81fe",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1bdf853f262e8d363e87e77723e51163beceb4837af4f7c5020ce4578371271",
-				"dweb:/ipfs/QmbcQBDaoy2yJf4V1DJLjTMcfFhZPDLgdazgQBMuUwKHz4"
+				"bzz-raw://96fb395b3a6bcd425df5396c704cd9612e8d1f2c058d3a10724b6ad6e03a4f74",
+				"dweb:/ipfs/QmbFxjwrAde6TV15p2wsUJDPfESFiGAtq5DsXyX9MA32dh"
 			]
 		}
 	},

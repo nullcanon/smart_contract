@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ex/test.sol": "GetWarp"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ex/test.sol": {
+			"keccak256": "0x5e01087b90f9f19337efa77ccad07abfb1377eadc0b602b5cd2577bde831b856",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f92284fb63626f52af479ef400bcfe4ffe0f6f7034acee2bef24eefbd1bc6e53",
+				"dweb:/ipfs/QmedojLFFhJYbymBHbxq3k87rE5Rhmb9c9TpebUd91V3CU"
+			]
+		}
+	},
+	"version": 1
+}

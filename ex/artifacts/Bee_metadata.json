@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -193,13 +193,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "closeTrading",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
@@ -232,19 +225,6 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_lp",
-						"type": "address"
-					}
-				],
-				"name": "deliver",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -296,13 +276,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "openTrading",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -523,7 +496,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/MGCToken.sol": "Bee"
+			"ex/test.sol": "Bee"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -531,18 +504,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ex/MGCToken.sol": {
-			"keccak256": "0x2bc7ae6f9ee00740fdefc3e344152bd4de6b3c18df038d77b82f202117c88005",
+		"ex/test.sol": {
+			"keccak256": "0x41e73283e43357de657314027111b8f9dd0ae8a58ce5d91ca24c038157750d3a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0a0652121fd3e7417256494c5d164e26b9b7a0e86362e8be4aa2033833e88899",
-				"dweb:/ipfs/QmYWEvx5TcdqAdgCWoK1yX6shDQFc6HYAcZS3BKt62CEPG"
+				"bzz-raw://ccd2c32298feaf36993e4b57d4ae40da40536e1d6db9061100cbcf1c1b7e63a9",
+				"dweb:/ipfs/QmRBj716qqEhoc2VsMrYjsb7wkyJFcCu3HDa8rTp55ahiN"
 			]
 		}
 	},
