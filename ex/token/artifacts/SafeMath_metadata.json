@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/token/Baby.sol": "SafeMath"
+			"ex/token/A.sol": "SafeMath"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/token/Baby.sol": {
-			"keccak256": "0xcf91a3eb1afb0fea61ae534f2bdc2a0362e3d80c468167c0b6351d5fb89ffe49",
+		"ex/token/A.sol": {
+			"keccak256": "0xa70dc42e388f2f97e42dd2064d5f0da21ca5e04e9844d373b2caec3252dc3977",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2858a3f1efbf94b277e2d24c9eea1b5ed40355ba48e48eee1cff90fd48557523",
-				"dweb:/ipfs/QmXzHnoMimk2FSKfATBsCBaNCR6RefAZCz7jNG8vY1F41f"
+				"bzz-raw://e1d3f40481363d962df0c146a88bd6202b3998985ad4e7ad9ae8c4c0e4bcdb78",
+				"dweb:/ipfs/QmZi4jcHd1hpi7ExbafgUzzuC4uC6k8fV2NoVv3VWDP4F4"
 			]
 		}
 	},

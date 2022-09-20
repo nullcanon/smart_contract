@@ -600,11 +600,11 @@
 	},
 	"sources": {
 		"ex/exchangeUsdtToken.sol": {
-			"keccak256": "0xf9e0aa55c0edce8495493a8736480c282143f59da88a52247bfa506dc12e81fe",
+			"keccak256": "0xeb2d33ec63adbe5c0306a20578f8e59f14ec58910ae4ccf66fcb1b38791af71c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://96fb395b3a6bcd425df5396c704cd9612e8d1f2c058d3a10724b6ad6e03a4f74",
-				"dweb:/ipfs/QmbFxjwrAde6TV15p2wsUJDPfESFiGAtq5DsXyX9MA32dh"
+				"bzz-raw://1d7a774e49c119826d2d3f0baf0890667172a8a5e86519039a5cffa12475ea76",
+				"dweb:/ipfs/QmXPh3jdUtTZb9FyDsWd1hrGfXjEFuG6PXP8yXEJxYpo5r"
 			]
 		}
 	},

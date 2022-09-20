@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/exchangeUsdtToken.sol": "Context"
+			"ex/BPresell.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -32,12 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/exchangeUsdtToken.sol": {
-			"keccak256": "0xf9e0aa55c0edce8495493a8736480c282143f59da88a52247bfa506dc12e81fe",
+		"ex/BPresell.sol": {
+			"keccak256": "0x43f05118ba4534da4ab0d148ef6161c85813a05d80b8fc168683606551235d99",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://96fb395b3a6bcd425df5396c704cd9612e8d1f2c058d3a10724b6ad6e03a4f74",
-				"dweb:/ipfs/QmbFxjwrAde6TV15p2wsUJDPfESFiGAtq5DsXyX9MA32dh"
+				"bzz-raw://24a41f9248a7f8e3ea1ca64a22721fcf359a8fb3d5e97b15c83a9ee06d01d1df",
+				"dweb:/ipfs/QmSf8wFZ4agrjK3k1BixmeDXyQYnEASEZWhBYZ9M9cyStF"
 			]
 		}
 	},

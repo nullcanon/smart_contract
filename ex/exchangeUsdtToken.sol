@@ -440,7 +440,7 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
         _transfer(sender, recipient, amount);
 
         uint currentAllowance = _allowances[sender][_msgSender()];
-        require(currentAllowance >= amount, "SugarBaby: transfer amount exceeds allowance");
+        require(currentAllowance >= amount, "BABY: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
@@ -454,7 +454,7 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
 
     function decreaseAllowance(address spender, uint subtractedValue) public virtual returns (bool) {
         uint currentAllowance = _allowances[_msgSender()][spender];
-        require(currentAllowance >= subtractedValue, "SugarBaby: decreased allowance below zero");
+        require(currentAllowance >= subtractedValue, "BABY: decreased allowance below zero");
         unchecked {
             _approve(_msgSender(), spender, currentAllowance - subtractedValue);
         }
@@ -479,10 +479,10 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
         address recipient,
         uint amount
     ) internal virtual {
-        require(sender != address(0), "SugarBaby: transfer from the zero address");
-        require(recipient != address(0), "SugarBaby: transfer to the zero address");
+        require(sender != address(0), "BABY: transfer from the zero address");
+        require(recipient != address(0), "BABY: transfer to the zero address");
         uint senderBalance = _balances[sender];
-        require(senderBalance >= amount, "SugarBaby: transfer amount exceeds balance");
+        require(senderBalance >= amount, "BABY: transfer amount exceeds balance");
         uint _amount = amount;
 
         
@@ -496,21 +496,23 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
             emit Transfer(sender, address(this), amount * 15 / 1000);
 
             uint256 contractTokenBalance = balanceOf(address(this));
-                if(contractTokenBalance >= _totalSupply)
-                    {
-                        contractTokenBalance = _totalSupply;
-                    }
-                    
-                    bool overMinTokenBalance = contractTokenBalance >= 1e18;
-                    if (
-                        overMinTokenBalance &&
-                        !DEXs[sender] &&
-                        swapAndLiquifyEnabled
-                    ) {
-                        swapTokensForUsdt(contractTokenBalance);
-                }
+            if(contractTokenBalance >= _totalSupply)
+            {
+                contractTokenBalance = _totalSupply;
+            }
+                
+            bool overMinTokenBalance = contractTokenBalance >= 1e18;
+            if (
+                overMinTokenBalance &&
+                !DEXs[sender] &&
+                swapAndLiquifyEnabled &&
+                sender != address(this) &&
+                recipient != address(this)
+            ) {
+                swapTokensForUsdt(contractTokenBalance);
+            }
+
             _amount = amount * 985 / 1000;
-            
         }
 
         unchecked {
@@ -527,9 +529,9 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function _burn(address account, uint amount) internal virtual {
-        require(account != address(0), "SugarBaby: burn from the zero address");
+        require(account != address(0), "BABY: burn from the zero address");
         uint accountBalance = _balances[account];
-        require(accountBalance >= amount, "SugarBaby: burn amount exceeds balance");
+        require(accountBalance >= amount, "BABY: burn amount exceeds balance");
         unchecked {
             _balances[account] = accountBalance - amount;
         }
