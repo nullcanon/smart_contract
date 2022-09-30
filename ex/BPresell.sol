@@ -93,27 +93,27 @@ contract BabyPresell is Ownable {
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
-    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
-    address public presellTokenMintAddress = 0xA3247B33baA9eA15b699C77237d5B16f5CFD822f;
-    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
+    address public presellTokenMintAddress = 0xB75088c332Db5EF4B6876E036d32270657026D00;
+    address public marketAddress = 0x3Ee8E26053649b3cF811625Dcd2Ade2b8eB81F47;
 
     // BSC testnet 1
     // BSC mainnet 500
-    uint256 private usdtAmount = 1 * 10 ** 18;
-    uint256 private preSellCoinPreAmount = 4500 * 10 ** 18;
-    uint32 private counter;
-    uint32 private withdrawCounter;
+    uint256 public usdtAmount = 500 * 10 ** 18;
+    uint256 public preSellCoinPreAmount = 5000 * 10 ** 18;
+    uint32 public counter;
+    uint32 public withdrawCounter;
 
     // BSC testnet 10
     // BSC mainnet 1024
-    uint32 private preMax = 10;
-    uint64 private startAt;
-    uint64 private endAt;
+    uint32 public preMax = 220;
+    uint64 public startAt;
+    uint64 public endAt;
     
     bool public disableWhiteList;
 
     IERC20 public immutable usdtToken;
-    IERC20 public immutable sellToken;
+    IERC20 public sellToken;
     mapping(address => uint256) public userPresellBalanceMap;
     mapping(address => bool) public hasBuy;
     mapping(address => bool) public whiteList;
@@ -146,9 +146,18 @@ contract BabyPresell is Ownable {
         preMax = amount;
     }
 
+    function setToken(address token) public  onlyOwner{
+        sellToken = IERC20(token);
+    }
+
 
     function getPreSellCoinAmount() public view returns (uint256) {
         return preSellCoinPreAmount;
+    }
+
+    
+    function setPreSellCoinAmount(uint256 amount) public onlyOwner {
+        preSellCoinPreAmount = amount;
     }
 
     function getUserPreSellCoinAmount(address user) public view returns (uint256) {

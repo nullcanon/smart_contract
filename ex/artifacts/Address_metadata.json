@@ -26,18 +26,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"ex/exchangeUsdtToken.sol": {
-			"keccak256": "0xeb2d33ec63adbe5c0306a20578f8e59f14ec58910ae4ccf66fcb1b38791af71c",
+			"keccak256": "0x604fbb4dca0c77595498bee29bb6b54050d00f2df51967312a0b91b0dba5c706",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1d7a774e49c119826d2d3f0baf0890667172a8a5e86519039a5cffa12475ea76",
-				"dweb:/ipfs/QmXPh3jdUtTZb9FyDsWd1hrGfXjEFuG6PXP8yXEJxYpo5r"
+				"bzz-raw://6d860ef3e099b4b7838d1c309deb5e5c1ac7a004fce6c9e9ad11c9ab3f3e520d",
+				"dweb:/ipfs/QmYaoaFFe7yFz52Tx4Jd14kZ41uXk4q8PxsQTTo86LdSes"
 			]
 		}
 	},
