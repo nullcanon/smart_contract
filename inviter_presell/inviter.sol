@@ -1,17 +1,17 @@
 pragma solidity ^0.8.16;
 
-import "./adminable.sol"
+import "./adminable.sol";
 
 
-contract invater is Adminable {
-    event AddUpper(address indexed user, address indexed upper)
+contract Invater is Adminable {
+    event AddUpper(address indexed user, address indexed upper);
 
     mapping(address => address) public userUpper;
     mapping(address => address[]) public upperUsers;
     
 
 
-    function addUpper(address user, address upper) public onlyAdmin {
+    function addUpper(address user, address upper) public virtual onlyAdmin {
         address curUpper = userUpper[user];
         for(uint32 i = 0; i < 12; ++i) {
             if(curUpper == address(0)) {
@@ -20,7 +20,11 @@ contract invater is Adminable {
             require(curUpper != user, "Repetition upper");
         }
         userUpper[user] = upper;
-        upperUsers[uppser].push(user);
+        upperUsers[upper].push(user);
         emit AddUpper(user, upper);
+    }
+
+    function lowerLv1Amount(address account) public view virtual returns (uint256) {
+        return upperUsers[account].length;
     }
 }
