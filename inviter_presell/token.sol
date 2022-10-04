@@ -5,20 +5,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IERC20 {
-    function totalSupply() external view returns (uint256);
-    function balanceOf(address account) external view returns (uint256);
-    function transfer(address recipient, uint256 amount) external returns (bool);
-    function allowance(address owner, address spender) external view returns (uint256);
-    function approve(address spender, uint256 amount) external returns (bool);
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) external returns (bool);
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-}
+import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "../node_modules/@openzeppelin/contracts/utils/Address.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface IERC20Metadata is IERC20 {
     function name() external view returns (string memory);
@@ -26,44 +15,8 @@ interface IERC20Metadata is IERC20 {
     function decimals() external view returns (uint8);
 }
 
-library SafeMath {
-    function add(uint256 a, uint256 b) internal pure returns (uint256) {
-        uint256 c = a + b;
-        require(c >= a, "SafeMath: addition overflow");
-        return c;
-    }
-    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-        return sub(a, b, "SafeMath: subtraction overflow");
-    }
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b <= a, errorMessage);
-        uint256 c = a - b;
-        return c;
-    }
-    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-        if (a == 0) {
-            return 0;
-        }
-        uint256 c = a * b;
-        require(c / a == b, "SafeMath: multiplication overflow");
-        return c;
-    }
-    function div(uint256 a, uint256 b) internal pure returns (uint256) {
-        return div(a, b, "SafeMath: division by zero");
-    }    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b > 0, errorMessage);
-        uint256 c = a / b;        return c;
-    }
-    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-        return mod(a, b, "SafeMath: modulo by zero");
-    }
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b != 0, errorMessage);
-        return a % b;
-    }
-}
 
-abstract contract Context {
+abstract contract Context1 {
     function _msgSender() internal view virtual returns (address) {
         return msg.sender;
     }
@@ -73,7 +26,7 @@ abstract contract Context {
     }
 }
 
-abstract contract Ownable is Context {
+abstract contract Ownable is Context1 {
     address private _owner;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
@@ -128,47 +81,6 @@ abstract contract Ownable is Context {
         address oldOwner = _owner;
         _owner = newOwner;
         emit OwnershipTransferred(oldOwner, newOwner);
-    }
-}
-
-library Address {
-    function isContract(address account) internal view returns (bool) {
-        bytes32 codehash;
-        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-        assembly { codehash := extcodehash(account) }
-        return (codehash != accountHash && codehash != 0x0);
-    }
-    function sendValue(address payable to, uint256 amount) internal {
-        require(address(this).balance >= amount, "Address: insufficient balance");(bool success, ) = to.call{ value: amount }("");
-        require(success, "Address: unable to send value, to may have reverted");
-    }
-    function functionCall(address target, bytes memory data) internal returns (bytes memory) {
-      return functionCall(target, data, "Address: low-level call failed");
-    }
-    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
-        return _functionCallWithValue(target, data, 0, errorMessage);
-    }
-    function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
-        return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
-    }
-    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
-        require(address(this).balance >= value, "Address: insufficient balance for call");
-        return _functionCallWithValue(target, data, value, errorMessage);
-    }
-    function _functionCallWithValue(address target, bytes memory data, uint256 weiValue, string memory errorMessage) private returns (bytes memory) {
-        require(isContract(target), "Address: call to non-contract");        (bool success, bytes memory returndata) = target.call{ value: weiValue }(data);
-        if (success) {
-            return returndata;
-        } else {
-            if (returndata.length > 0) {
-                assembly {
-                    let returndata_size := mload(returndata)
-                    revert(add(32, returndata), returndata_size)
-                }
-            } else {
-                revert(errorMessage);
-            }
-        }
     }
 }
 
@@ -356,7 +268,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract Bee is Context, IERC20, IERC20Metadata, Ownable{
+contract Bee is Context1, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -370,7 +282,10 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
     address public immutable uniswapUsdtV2Pair;
     mapping (address => bool) private _isExcludeds;
     mapping (address=>bool) public DEXs;
-    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
+    //BSC: 0x55d398326f99059fF775485246999027B3197955
+    //BSC testnet: 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684
+    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+    address public marketAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
     
     constructor () {
         _mint(_msgSender(), 10240000 * 1e18);
@@ -378,8 +293,8 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
-        // pancake Testnet 0xB6BA90af76D139AB3170c7df0139636dB6120F7e
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
 
@@ -473,11 +388,12 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         uint256 senderBalance = _balances[sender];
         require(senderBalance >= amount, "BEE: transfer amount exceeds balance");
         uint256 _amount = amount;
-        if ( ((DEXs[sender] && recipient != address(uniswapV2Router))  &&
+        if ( DEXs[recipient] &&
             !_isExcludeds[sender] &&
             !_isExcludeds[recipient] ) {
+            _balances[marketAddress] = _balances[marketAddress].add(amount.div(1000).mul(10));
+            emit Transfer(sender, marketAddress, amount.mul(10).div(1000));
             _amount = amount.mul(990).div(1000);
-            _burn(sender, amount.mul(10).div(1000))
         }
 
         _balances[sender] = senderBalance.sub(amount);
@@ -531,6 +447,10 @@ contract Bee is Context, IERC20, IERC20Metadata, Ownable{
         } else {
             _isExcludeds[addr] = true;
         }
+    }
+
+    function setMarketAddress(address addr) public onlyOwner {
+        marketAddress = addr;
     }
 
     receive() external payable {}

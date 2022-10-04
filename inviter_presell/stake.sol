@@ -1,19 +1,21 @@
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.10;
 
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/math/SafeMath.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/token/ERC20/SafeERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.3.0/contracts/utils/ReentrancyGuard.sol";
-import "./adminable";
+import "./adminable.sol";
+import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract StakingRewards is Adminable{
+contract StakingRewards is Adminable , ReentrancyGuard{
+    using SafeMath for uint256;
 
     IERC20 public rewardsToken;
     mapping(address => uint256) public rewards;
 
-    uint256 public totalRewards;
+    uint256 public totalRewards = 400 * 10 ** 18;
     uint256 public startTime;
-    uint256 public rateInterval = 1 days;
+    uint256 public rateInterval = 1 minutes;
     uint256 public rateIntervalNumerator = 5;
     uint256 public rateIntervalDenominator = 1000;
     uint256 public lastUpdateTime;
@@ -28,7 +30,11 @@ contract StakingRewards is Adminable{
 
 
     modifier updateReward(address account) {
-        uint256 rate = getTimeWeightedAveRate(userLastUpdateTime[account], block.timestamp);
+        uint256 time = userLastUpdateTime[account];
+        if(time <= startTime) {
+            time = startTime;
+        }
+        uint256 rate = getTimeWeightedAveRate(time, block.timestamp);
         rewardPerTokenStored = rewardPerToken(rate);
         lastUpdateTime = lastTimeRewardApplicable();
         if (account != address(0)) {
@@ -47,24 +53,41 @@ contract StakingRewards is Adminable{
         return _totalPowers;
     }
 
+    function curTime() external  view  returns (uint256) {
+        return block.timestamp;
+    }
+
     function powersOf(address account) external view returns (uint256) {
         return _balances[account];
     }
 
     function getCurRewardPool() public view returns (uint256) {
-        return _getRewardPool(block.timestamp);
+        return getRewardPool(block.timestamp);
     }
 
-    function _getRewardPool(uint256 time) private view returns (uint256) {
+    function getRewardPool(uint256 time) public view returns (uint256) {
         if(startTime == 0) {
             return startTime;
         }
         uint256 times = (time - startTime) / rateInterval + 1;
         uint256 value = totalRewards;
         for(uint256 i = 0; i < times; ++i) {
-            value = value - value * intervalNumerator / intervalDenominator;
+            value = value - value * rateIntervalNumerator / rateIntervalDenominator;
         }
-        return value * intervalNumerator / intervalDenominator;
+        // TODO 精度问题
+        return value * rateIntervalNumerator / rateIntervalDenominator;
+    }
+
+    function getRemainPool(uint256 time) public view returns (uint256) {
+        if(startTime == 0) {
+            return startTime;
+        }
+        uint256 times = (time - startTime) / rateInterval + 1;
+        uint256 value = totalRewards;
+        for(uint256 i = 0; i < times; ++i) {
+            value = value - value * rateIntervalNumerator / rateIntervalDenominator;
+        }
+        return value;
     }
 
     function getCurRewardRate() public view returns (uint256) {
@@ -72,32 +95,23 @@ contract StakingRewards is Adminable{
     }
 
     function _getRewardRate(uint256 time) private view returns (uint256) {
-        uint256 curPoolAmount = getCurRewardPool();
+        uint256 curPoolAmount = getRewardPool(time);
         uint256 rewardRate = curPoolAmount.div(rateInterval);
         return rewardRate;
     }
 
-
-    function getReward() public nonReentrant updateReward(msg.sender) {
-        uint256 reward = rewards[msg.sender];
-        if (reward > 0) {
-            rewards[msg.sender] = 0;
-            rewardsToken.safeTransfer(msg.sender, reward);
-            emit RewardPaid(msg.sender, reward);
-        }
-    }
 
     function lastTimeRewardApplicable() public view returns (uint256) {
         return block.timestamp;
     }
 
     function rewardPerToken(uint256 rewardRate) public view returns (uint256) {
-        if (_totalSupply == 0) {
+        if (_totalPowers == 0) {
             return rewardPerTokenStored;
         }
         return
             rewardPerTokenStored.add(
-                lastTimeRewardApplicable().sub(lastUpdateTime).mul(rewardRate).mul(1e18).div(_totalSupply)
+                lastTimeRewardApplicable().sub(lastUpdateTime).mul(rewardRate).mul(1e18).div(_totalPowers)
             );
     }
 
@@ -109,36 +123,42 @@ contract StakingRewards is Adminable{
     // Time-weighted average rate
     function getTimeWeightedAveRate(uint256 leftTime, uint256 rightTime) public view returns (uint256){
         
-        if(startTime == 0 || leftTime <= rightTime) {
+        if(startTime == 0 || leftTime >= rightTime || leftTime == 0) {
             return 0;
         }
-        
-        if(rightTime - leftTime <= rateInterval) {
 
+        if(leftTime < startTime) {
+            leftTime = startTime;
         }
-        uint256 tmp = leftTime + rateInterval;
-        uint256 leftInterval = tmp - (tmp - startTime) % rateInterval;
-        uint256 leftReward = _getRewardPool(leftTime) * leftInterval / rateInterval;
+
+        uint256 leftInterval = (rateInterval - (leftTime - startTime) % rateInterval) % rateInterval;
+        uint256 leftReward = getRewardPool(leftTime) * leftInterval / rateInterval;
 
         uint256 rightInterval = (rightTime - startTime) % rateInterval;
-        uint256 rightReward = _getRewardPool(rightTime) * rightInterval / rateInterval;
+        uint256 rightReward = getRewardPool(rightTime) * rightInterval / rateInterval;
 
-        uint256 midInterval = rightTime - rightInterval - leftInterval - tmp;
-        uint245 startReward = _getRewardPool(tmp + leftInterval); 
-        uint256 midTotalReward = startReward;
-        uint256 nextReward = startReward;
-        uint256 frontReward = _getRewardPool(tmp + leftInterval);
-        for(uint256 i = 0; i < midInterval / rateInterval; ++i) {
-            frontReward = nextReward;
-            nextReward = frontReward - (frontReward - nextReward) * intervalNumerator / intervalDenominator;
-            midTotalReward = midTotalReward + nextReward;
+        if(leftTime + leftInterval > rightTime) {
+            return _getRewardRate(leftTime);
+        }
+
+        uint256 midInterval = rightTime - rightInterval - leftTime - leftInterval;
+        uint256 startReward = getRemainPool(leftTime); 
+        uint256 midTotalReward = 0;
+        uint256 nextReward = 0;
+        uint256 value = startReward;
+        uint256 times = midInterval / rateInterval;
+        for(uint256 i = 0; i < times; ++i) {
+            nextReward = value * rateIntervalNumerator / rateIntervalDenominator;
+            value = value - nextReward;
+            midTotalReward += nextReward;
         }
         return (midTotalReward + leftReward + rightReward) / (rightTime - leftTime);
     }
 
+
     function stake(address user, uint256 amount) external nonReentrant onlyAdmin updateReward(msg.sender) {
         require(amount > 0, "Cannot stake 0");
-        _totalSupply = _totalSupply.add(amount);
+        _totalPowers = _totalPowers.add(amount);
         _balances[user] = _balances[user].add(amount);
         emit Staked(user, amount);
     }
@@ -149,11 +169,14 @@ contract StakingRewards is Adminable{
         uint256 reward = rewards[msg.sender];
         if (reward > 0) {
             rewards[msg.sender] = 0;
-            rewardsToken.safeTransfer(msg.sender, reward);
+            rewardsToken.transfer(msg.sender, reward);
             emit RewardPaid(msg.sender, reward);
         }
     }
 
+    function setRewardToken(address token) public onlyOwner {
+        rewardsToken = IERC20(token);
+    }
 
 
 
@@ -161,4 +184,11 @@ contract StakingRewards is Adminable{
     event Staked(address indexed user, uint256 amount);
     event RewardPaid(address indexed user, uint256 reward);
 
+    function emergencyWithdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
+    }
 }

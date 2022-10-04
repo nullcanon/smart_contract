@@ -1,19 +1,18 @@
 pragma solidity ^0.8.16;
 
-import "./adminable.sol";
 
 
-contract Invater is Adminable {
+abstract contract Inviter {
     event AddUpper(address indexed user, address indexed upper);
 
     mapping(address => address) public userUpper;
     mapping(address => address[]) public upperUsers;
-    
 
 
-    function addUpper(address user, address upper) public virtual onlyAdmin {
+    function addUpper(address user, address upper) internal virtual {
+        require(user != upper, "Can't invite self");
         address curUpper = userUpper[user];
-        for(uint32 i = 0; i < 12; ++i) {
+        for(uint32 i = 0; i < 11; ++i) {
             if(curUpper == address(0)) {
                 break;
             }
