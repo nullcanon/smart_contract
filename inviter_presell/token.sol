@@ -307,11 +307,11 @@ contract Bee is Context1, IERC20, IERC20Metadata, Ownable{
     }
 
     function name() public view virtual override returns (string memory) {
-        return "AIR TEST";
+        return "Lucky Bee";
     }
 
     function symbol() public view virtual override returns (string memory) {
-        return "AIRT";
+        return "LBEE";
     }
 
     function decimals() public view virtual override returns (uint8) {

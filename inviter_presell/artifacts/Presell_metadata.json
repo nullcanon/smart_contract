@@ -635,17 +635,17 @@
 			]
 		},
 		"inviter_presell/presell.sol": {
-			"keccak256": "0x0460b3336115e5398501788cef0fe9743b3541648287b8377a1b89af8f63fdc4",
+			"keccak256": "0xc905ff845c2fc93cb1e341c0f0b51c808678794f49a0ff836b456494f05455fb",
 			"urls": [
-				"bzz-raw://f85b8d105269c6de1ee0538a27dc05d33e43b847761dcbfdb9d3a6324f622521",
-				"dweb:/ipfs/QmTsiQAsyKMnuP4Rkx9vr8LZiK12wo55SgcVgo4NZ8wpi3"
+				"bzz-raw://595d8efeeefa3eca2f356bfdeabe665253c23851b1b15373e224b91cb469c94b",
+				"dweb:/ipfs/QmVDSbkikQAauNppqBTJ6qpLcaunMq6uBd2F7KBunkrRVk"
 			]
 		},
 		"inviter_presell/stake.sol": {
-			"keccak256": "0x17bc36a94b3cba5ebbb92276cd54fb5fa40176b9ba0141144b603d4a4e4d3637",
+			"keccak256": "0x1f0c21798dabb3ff2d2b7d9905d33f5a54f62b3beb74000396bb2257d1367d7a",
 			"urls": [
-				"bzz-raw://1300662e3d646da2fcdcc87e571832e66aa31a722c5518af10fb16ec25362173",
-				"dweb:/ipfs/QmTiHrLLiYqqkXx6omVEWapRJ5fYBQHheVM9i2421aKb5F"
+				"bzz-raw://213c00773aeb1b1abe4a6a7655bfb51a3f619f66bebc2a42aca57349d6d2db5a",
+				"dweb:/ipfs/QmR8vFTLq9fxVXWke8iNxmagzqrTke6xjmfvpdELyr99TU"
 			]
 		},
 		"inviter_presell/token.sol": {
