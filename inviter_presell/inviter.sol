@@ -26,4 +26,8 @@ abstract contract Inviter {
     function lowerLv1Amount(address account) public view virtual returns (uint256) {
         return upperUsers[account].length;
     }
+
+    function getLowersL1(address account) public  view virtual returns (address[] memory) {
+        return upperUsers[account];
+    }
 }

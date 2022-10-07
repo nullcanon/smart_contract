@@ -51,7 +51,9 @@ contract Presell is Inviter, Adminable{
     }
 
     function buyPowers(address upper) public {
+        // TODO 已经买了得不能再买了
         require(stakingRewards.powersOf(upper) > 0 || upper == supperUpper, "Upper not buy");
+        require(stakingRewards.powersOf(msg.sender) == 0 , "Has buy");
         addUpper(msg.sender, upper);
         hasBuyAmount = hasBuyAmount + 1;
         IERC20(usdtAddress).transferFrom(msg.sender, address(this), price);

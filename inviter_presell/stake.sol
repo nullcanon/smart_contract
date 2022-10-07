@@ -67,7 +67,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
 
     function getRewardPool(uint256 time) public view returns (uint256) {
         if(startTime == 0) {
-            return startTime;
+            return totalRewards;
         }
         uint256 times = (time - startTime) / rateInterval + 1;
         uint256 value = totalRewards;
@@ -76,6 +76,18 @@ contract StakingRewards is Adminable , ReentrancyGuard{
         }
         // TODO 精度问题
         return value * rateIntervalNumerator / rateIntervalDenominator;
+    }
+
+    function _getRemainPool(uint256 time) private view returns (uint256) {
+        if(startTime == 0) {
+            return startTime;
+        }
+        uint256 times = (time - startTime) / rateInterval + 1;
+        uint256 value = totalRewards;
+        for(uint256 i = 0; i < times; ++i) {
+            value = value - value * rateIntervalNumerator / rateIntervalDenominator;
+        }
+        return value;
     }
 
     function getRemainPool(uint256 time) public view returns (uint256) {

@@ -84,7 +84,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ERC20.sol": "Ownable"
+			"BeeToken.sol": "Ownable"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -92,18 +92,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"ERC20.sol": {
-			"keccak256": "0x9db971e143730987045219204f13258472493db4b64672db3dcfda510c164179",
+		"BeeToken.sol": {
+			"keccak256": "0xd7ea3c36bf7c17c0602315b2b83885163729119d6085a37754278c959a284928",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f9a299d396c78ae43b215e2d79cdce01471bd78617faeca7d619f61163ef5835",
-				"dweb:/ipfs/QmPK9ChqHBMrSUmNw8HzDcw2DQ3wZskNAoozVBgdpcbP7K"
+				"bzz-raw://4e01b34618c60911fa728603fd71e945f692d49ec81d81f6d3d35999964cc598",
+				"dweb:/ipfs/QmSas8874X8awhmyFmTTFcc6ELDMMMUgAqt8EF6djcS9eK"
 			]
 		}
 	},
