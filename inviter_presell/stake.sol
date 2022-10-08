@@ -13,9 +13,9 @@ contract StakingRewards is Adminable , ReentrancyGuard{
     IERC20 public rewardsToken;
     mapping(address => uint256) public rewards;
 
-    uint256 public totalRewards = 400 * 10 ** 18;
+    uint256 public totalRewards = 168000 * 10 ** 18;
     uint256 public startTime;
-    uint256 public rateInterval = 1 minutes;
+    uint256 public rateInterval = 10 minutes;
     uint256 public rateIntervalNumerator = 5;
     uint256 public rateIntervalDenominator = 1000;
     uint256 public lastUpdateTime;
@@ -45,7 +45,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
         _;
     }
 
-    function setStartTime(uint256 time) public onlyAdmin {
+    function setStartTime(uint256 time) external onlyAdmin {
         startTime = time;
     }
 
@@ -168,7 +168,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
     }
 
 
-    function stake(address user, uint256 amount) external nonReentrant onlyAdmin updateReward(msg.sender) {
+    function stake(address user, uint256 amount) external nonReentrant onlyAdmin updateReward(user) {
         require(amount > 0, "Cannot stake 0");
         _totalPowers = _totalPowers.add(amount);
         _balances[user] = _balances[user].add(amount);
@@ -177,7 +177,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
 
 
 
-    function getReward() public nonReentrant updateReward(msg.sender) {
+    function getReward() external nonReentrant updateReward(msg.sender) {
         uint256 reward = rewards[msg.sender];
         if (reward > 0) {
             rewards[msg.sender] = 0;
@@ -186,7 +186,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
         }
     }
 
-    function setRewardToken(address token) public onlyOwner {
+    function setRewardToken(address token) external onlyOwner {
         rewardsToken = IERC20(token);
     }
 

@@ -251,7 +251,7 @@
 		"evmVersion": "istanbul",
 		"libraries": {},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -321,10 +321,10 @@
 			]
 		},
 		"liquidity-staker/StakingRewards.sol": {
-			"keccak256": "0xd6e38b2ef65232cf59a7431cc1fb7d26c8b0b4f3cebb01d3e2d7e915a2a05a2a",
+			"keccak256": "0xddb23f2f6524b37083b38a40d3f4c0eab25f87d59230578380636c374c6725a4",
 			"urls": [
-				"bzz-raw://45aa9805f15bf19d520dead2bf9b2ec2cba0fce1fa690e9eba6487c917ae75da",
-				"dweb:/ipfs/QmcieAaUBNTVdfuBFN4Ys2sr2fhoFqC5goAJp4ZKVE5S2x"
+				"bzz-raw://85f2e3a4d0457cb11c0f069172fc4c5d619f0b1cd405eb9866f3a0a12cd733b0",
+				"dweb:/ipfs/QmfLoLk2zKaBqjdzQf4zSjEjQRRRNasJA4ZqaJvEoY8rvF"
 			]
 		},
 		"liquidity-staker/StakingRewardsFactory.sol": {

@@ -27,7 +27,7 @@ abstract contract Inviter {
         return upperUsers[account].length;
     }
 
-    function getLowersL1(address account) public  view virtual returns (address[] memory) {
+    function getLowersL1(address account) external view virtual returns (address[] memory) {
         return upperUsers[account];
     }
 }

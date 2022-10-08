@@ -268,7 +268,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract Bee is Context1, IERC20, IERC20Metadata, Ownable{
+contract LuckyBee is Context1, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -288,8 +288,7 @@ contract Bee is Context1, IERC20, IERC20Metadata, Ownable{
     address public marketAddress = 0xcBB44600F5828A15cF130Abb73Ce5E85ac49D08F;
     
     constructor () {
-        _mint(_msgSender(), 10240000 * 1e18);
-        emit Transfer(address(0), _msgSender(), 10240000 * 1e18);
+        _mint(_msgSender(), 210000 * 1e18);
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E

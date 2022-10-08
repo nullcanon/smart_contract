@@ -134,10 +134,10 @@
 	},
 	"sources": {
 		"inviter_presell/inviter.sol": {
-			"keccak256": "0xcd28f621c3387c9ea24ef0c6f0d0fabd2ab5f5e94816cf89e291ff020eb2f920",
+			"keccak256": "0x6de7c13433022419f7d0063ce1c142d285dc9eb0d5e4cd71525c0adcbb4677aa",
 			"urls": [
-				"bzz-raw://fb88b0ed132b1a7146a8e30a13e22170eea8bbbb29491900a5cfb2930a2fedd2",
-				"dweb:/ipfs/QmVfdk19GPJ78pPWXgmvFNa81Q7sTutoj5kEpqem3SDHip"
+				"bzz-raw://d4bb012a137608eebaf3fb160e5b6de814cca9160b3c61d93d2e3280f59eca71",
+				"dweb:/ipfs/QmYsQjw1jT5UQmZyEUG79xLDxWFEjVSVCy3BNqpT56NXCd"
 			]
 		}
 	},

@@ -9,9 +9,9 @@ import "./adminable.sol";
 
 contract Presell is Inviter, Adminable{
     uint256 public hasBuyAmount;
-    uint256 public launchAmount = 2;
+    uint256 public launchAmount = 6;
     uint256 public price = 3 * 10 ** 18;
-    uint256  public supperNodeAmount = 5 * 10 ** 16;
+    uint256  public supperNodeAmount = 5 * 10 ** 17;
     address public beeAddress = 0xf7eBDBF6E7bDAD3157B18480feB8Eb095CcC1BFD;
     address public beeMarket = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     IPancakeSwapV2Router02 public uniswapV2Router;
@@ -21,11 +21,11 @@ contract Presell is Inviter, Adminable{
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684
     address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
-    address public rewardTokenAddress = 0x84E96930F591394771d34AA154B578Af3f01D635;
-    uint256 public amountADesired = 20000 * 10 ** 18;
-    uint256 public amountBDesired = 1 * 10 ** 18;
-    uint256 public amountBuyBee = 1 * 10 ** 15;
-    uint256 public amountLunchBuy = 1 * 10 ** 18;
+    address public rewardTokenAddress = 0x8D84BE9665143E2cdfDe7BD71C33492b867d5e42;
+    uint256 public amountLunchBuy = 115 * 10 ** 16;
+    uint256 public amountADesired = 31500 * 10 ** 18;
+    uint256 public amountBDesired = amountLunchBuy * (launchAmount - 1);
+    uint256 public amountBuyBee = 5 * 10 ** 16;
     uint256 public amountUpperVlRewards = 5 * 10 ** 16;
     uint256 public amountUpperVlToV11Rewards = 1 * 10 ** 16;
 
@@ -43,7 +43,7 @@ contract Presell is Inviter, Adminable{
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
         uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
-        stakingRewards = StakingRewards(0x8f3D40e21a1331C7222D7627dA74049c0c5670b4);
+        stakingRewards = StakingRewards(0xA5B844A3BD01C32b17E66D5a6feBc9E67cC1af04);
     }
 
     function changeSupperUpper(address account) public onlyOwner {
@@ -71,7 +71,7 @@ contract Presell is Inviter, Adminable{
     }
 
  
-    function _launchAndBuyToken() private {
+    function _launchAndBuyToken() private  {
         IERC20(rewardTokenAddress).approve(address(uniswapV2Router), amountADesired);
         IERC20(usdtAddress).approve(address(uniswapV2Router), amountBDesired);
 
@@ -90,7 +90,7 @@ contract Presell is Inviter, Adminable{
         _buyToken(rewardTokenAddress, beeMarket, amountLunchBuy);
     }
 
-    function _buyToken(address tokenAddress, address to, uint256 tokenAmount) private {
+    function _buyToken(address tokenAddress, address to, uint256 tokenAmount) public {
         if(tokenAmount == 0) {
             return;
         }
@@ -128,7 +128,7 @@ contract Presell is Inviter, Adminable{
         }
     }
 
-    function withdrawInvaterReward() public {
+    function withdrawInvaterReward() external {
         require(block.timestamp > launchTime, "Not launched");
         uint256 amount = invaterRewards[msg.sender];
         require(amount > 0, "Not rewards");
