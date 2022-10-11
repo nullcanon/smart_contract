@@ -20,12 +20,12 @@ contract StakingRewards is Adminable , ReentrancyGuard{
     uint256 public rateIntervalDenominator = 1000;
     uint256 public lastUpdateTime;
     uint256 public rewardPerTokenStored;
+    uint256 private _totalPowers;
 
     mapping(address => uint256) public userRewardPerTokenPaid;
     mapping(address => uint256) public userLastUpdateTime;
-
-    uint256 private _totalPowers;
     mapping(address => uint256) private _balances;
+    mapping(address => uint256) public claimedBalances;
 
 
 
@@ -45,8 +45,15 @@ contract StakingRewards is Adminable , ReentrancyGuard{
         _;
     }
 
+    function setConfig(uint256 _rateInterval, uint256 _rateIntervalNumerator, uint256 _rateIntervalDenominator) external onlyOwner {
+        rateInterval = _rateInterval;
+        rateIntervalNumerator = _rateIntervalNumerator;
+        rateIntervalDenominator = _rateIntervalDenominator;
+    }
+
     function setStartTime(uint256 time) external onlyAdmin {
         startTime = time;
+        lastUpdateTime = time;
     }
 
     function totalPowers() external view returns (uint256) {
@@ -67,23 +74,29 @@ contract StakingRewards is Adminable , ReentrancyGuard{
 
     function getRewardPool(uint256 time) public view returns (uint256) {
         if(startTime == 0) {
-            return totalRewards;
+            return 0;
         }
-        uint256 times = (time - startTime) / rateInterval + 1;
+        if(time < startTime) {
+            return 0;
+        }
+        uint256 times = (time - startTime) / rateInterval;
         uint256 value = totalRewards;
         for(uint256 i = 0; i < times; ++i) {
             value = value - value * rateIntervalNumerator / rateIntervalDenominator;
         }
-        // TODO 精度问题
-        return value * rateIntervalNumerator / rateIntervalDenominator;
+        return value.mul(rateIntervalNumerator).div(rateIntervalDenominator);
     }
 
     function _getRemainPool(uint256 time) private view returns (uint256) {
         if(startTime == 0) {
-            return startTime;
+            return totalRewards;
         }
-        uint256 times = (time - startTime) / rateInterval + 1;
-        uint256 value = totalRewards;
+        if(time < startTime) {
+            return 0;
+        }
+
+        uint256 times = (time - startTime) / rateInterval;
+        uint256 value = totalRewards - totalRewards * rateIntervalNumerator / rateIntervalDenominator;
         for(uint256 i = 0; i < times; ++i) {
             value = value - value * rateIntervalNumerator / rateIntervalDenominator;
         }
@@ -93,6 +106,10 @@ contract StakingRewards is Adminable , ReentrancyGuard{
     function getRemainPool(uint256 time) public view returns (uint256) {
         if(startTime == 0) {
             return startTime;
+        }
+
+        if(time < startTime) {
+            return 0;
         }
         uint256 times = (time - startTime) / rateInterval + 1;
         uint256 value = totalRewards;
@@ -154,7 +171,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
         }
 
         uint256 midInterval = rightTime - rightInterval - leftTime - leftInterval;
-        uint256 startReward = getRemainPool(leftTime); 
+        uint256 startReward = _getRemainPool(leftTime); 
         uint256 midTotalReward = 0;
         uint256 nextReward = 0;
         uint256 value = startReward;
@@ -180,6 +197,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
     function getReward() external nonReentrant updateReward(msg.sender) {
         uint256 reward = rewards[msg.sender];
         if (reward > 0) {
+            claimedBalances[msg.sender] += reward;
             rewards[msg.sender] = 0;
             rewardsToken.transfer(msg.sender, reward);
             emit RewardPaid(msg.sender, reward);

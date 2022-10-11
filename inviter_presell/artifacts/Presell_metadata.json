@@ -118,29 +118,6 @@
 				"type": "event"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "tokenAddress",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "_buyToken",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "amountADesired",
 				"outputs": [
@@ -261,6 +238,32 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "changeStakeRewards",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "start",
+						"type": "uint256"
+					}
+				],
+				"name": "changeStartTime",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "account",
 						"type": "address"
 					}
@@ -268,6 +271,19 @@
 				"name": "changeSupperUpper",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deadAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -336,6 +352,19 @@
 					}
 				],
 				"name": "invaterRewards",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "inviteRewardTotal",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -475,6 +504,32 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"name": "setConfigAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					}
+				],
+				"name": "setConfigsAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "stakingRewards",
 				"outputs": [
@@ -482,6 +537,19 @@
 						"internalType": "contract StakingRewards",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -614,6 +682,19 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawMarket",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -658,17 +739,17 @@
 			]
 		},
 		"inviter_presell/presell.sol": {
-			"keccak256": "0x1bf2bc8feace171816b9edbb679ae18a2f954675cfcc8e65dbfc3e431ae9e938",
+			"keccak256": "0x55da59d1a035a0958045ea51ed389239657964dc340580141e87a6e7fd89c57a",
 			"urls": [
-				"bzz-raw://7d6049af72544720713e222b372025a8ddea29d11b1e4b9e2e1485dd53e1e359",
-				"dweb:/ipfs/QmRDCmxnzDjPU6dYFbrGD9qL9hD3hqodLzTDfv5ygxWjJw"
+				"bzz-raw://41082e8e6d5eb87892783a025790bf1585787bd7619eb8f0ef8a8270ce9b647d",
+				"dweb:/ipfs/QmT2YqBZZFsWwAfi8NXqrMkWY6HDz7p5bEhkrWEEjXVhWu"
 			]
 		},
 		"inviter_presell/stake.sol": {
-			"keccak256": "0xca2a03cdfd230180fd1aaefa3a34cc5938b7e9e70924166dd65c139106246859",
+			"keccak256": "0x0c8480935080b93f2f698bfb53865b3f0670b9e209efe377c95e18d417171568",
 			"urls": [
-				"bzz-raw://de29d21c4863ca9d87eeea6ab9b9f3e3037aa2dced8c5182c256cf5abfda271c",
-				"dweb:/ipfs/QmRaPQLx3XvzkSELaD2FkVTRaei5bL7q5UtX2KtVjn93xo"
+				"bzz-raw://15270b34426dc1a4f33139c32a5b0b1e043cf9e3a186bc8eeaa86e49781e748b",
+				"dweb:/ipfs/QmZfxbjMjGuQGVbCqoigUeBSqs8c9R1z3u1epFMbgoghVT"
 			]
 		},
 		"inviter_presell/token.sol": {

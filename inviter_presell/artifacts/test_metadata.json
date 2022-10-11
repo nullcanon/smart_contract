@@ -48,10 +48,10 @@
 			]
 		},
 		"inviter_presell/stake.sol": {
-			"keccak256": "0x49572cd31acafb4aef6d8dc1cb19d3df0b72cdd06b107be08b77ba6f84bdf016",
+			"keccak256": "0xca2a03cdfd230180fd1aaefa3a34cc5938b7e9e70924166dd65c139106246859",
 			"urls": [
-				"bzz-raw://4f95515b89bb1227526ac01bb48beb8710f9f2b32fcbf522f6fd1ae2502261a3",
-				"dweb:/ipfs/QmXpPFGz2gC94SzmfBj3KUmDoSqvuUbybui8PBC6TRtiUt"
+				"bzz-raw://de29d21c4863ca9d87eeea6ab9b9f3e3037aa2dced8c5182c256cf5abfda271c",
+				"dweb:/ipfs/QmRaPQLx3XvzkSELaD2FkVTRaei5bL7q5UtX2KtVjn93xo"
 			]
 		},
 		"inviter_presell/test.sol": {

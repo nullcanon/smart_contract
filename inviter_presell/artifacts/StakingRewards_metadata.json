@@ -88,6 +88,25 @@
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "claimedBalances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "curTime",
 				"outputs": [
@@ -447,6 +466,29 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_rateInterval",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_rateIntervalNumerator",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_rateIntervalDenominator",
+						"type": "uint256"
+					}
+				],
+				"name": "setConfig",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "token",
 						"type": "address"
@@ -614,10 +656,10 @@
 			]
 		},
 		"inviter_presell/stake.sol": {
-			"keccak256": "0xca2a03cdfd230180fd1aaefa3a34cc5938b7e9e70924166dd65c139106246859",
+			"keccak256": "0x0c8480935080b93f2f698bfb53865b3f0670b9e209efe377c95e18d417171568",
 			"urls": [
-				"bzz-raw://de29d21c4863ca9d87eeea6ab9b9f3e3037aa2dced8c5182c256cf5abfda271c",
-				"dweb:/ipfs/QmRaPQLx3XvzkSELaD2FkVTRaei5bL7q5UtX2KtVjn93xo"
+				"bzz-raw://15270b34426dc1a4f33139c32a5b0b1e043cf9e3a186bc8eeaa86e49781e748b",
+				"dweb:/ipfs/QmZfxbjMjGuQGVbCqoigUeBSqs8c9R1z3u1epFMbgoghVT"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
