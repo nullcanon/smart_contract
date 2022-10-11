@@ -11,7 +11,8 @@ contract Presell is Inviter, Adminable{
     uint256 public hasBuyAmount;
     uint256 public launchAmount = 6;
     uint256 public price = 3 * 10 ** 18;
-    uint256  public supperNodeAmount = 5 * 10 ** 17;
+    uint256  public supperNodeAmount = 3 * 10 ** 17;
+    uint256  public supperNodeAmountTotal;
     address public beeAddress = 0xf7eBDBF6E7bDAD3157B18480feB8Eb095CcC1BFD;
     address public beeMarket = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     address public withdrawMarket = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
@@ -22,7 +23,7 @@ contract Presell is Inviter, Adminable{
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684
     address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
-    address public rewardTokenAddress = 0x2707E4479b657019c552C4eFD1063cC1b8a3A7A6;
+    address public rewardTokenAddress = 0x4B00388ECBE12a295CB3f21197C49A4526511a36;
     uint256 public amountLunchBuy = 115 * 10 ** 16;
     uint256 public amountADesired = 31500 * 10 ** 18;
     uint256 public amountBDesired = amountLunchBuy * (launchAmount - 1);
@@ -37,6 +38,7 @@ contract Presell is Inviter, Adminable{
      
     address public supperUpper = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     address public deadAddress = 0x000000000000000000000000000000000000dEaD;
+    address public lpAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     
 
 
@@ -47,7 +49,7 @@ contract Presell is Inviter, Adminable{
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
         uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
-        stakingRewards = StakingRewards(0x902be98A0246668b63bbA7EDD8856C544D78220C);
+        stakingRewards = StakingRewards(0xdbcDAbe44Bf78E40371B676CB5019DB36a134A44);
         startTime = block.timestamp;
     }
 
@@ -63,6 +65,10 @@ contract Presell is Inviter, Adminable{
         startTime = start;
     }
 
+    function changeHasBuy(uint256 amount) public onlyOwner {
+        hasBuyAmount = amount;
+    }
+
     function buyPowers(address upper) public {
         require(startTime < block.timestamp, "Not start");
         require(stakingRewards.powersOf(upper) > 0 || upper == supperUpper, "Upper not buy");
@@ -70,7 +76,8 @@ contract Presell is Inviter, Adminable{
         addUpper(msg.sender, upper);
         hasBuyAmount = hasBuyAmount + 1;
         IERC20(usdtAddress).transferFrom(msg.sender, address(this), price);
-        IERC20(usdtAddress).transfer(superNode, supperNodeAmount);
+        // IERC20(usdtAddress).transfer(superNode, supperNodeAmount);
+        supperNodeAmountTotal += supperNodeAmount;
         if(hasBuyAmount == launchAmount) {
             _launchAndBuyToken();
         }  
@@ -92,6 +99,7 @@ contract Presell is Inviter, Adminable{
         rewardTokenAddress = addresses[4];
         supperUpper = addresses[5];
         withdrawMarket = addresses[6];
+        lpAddress = addresses[7];
     }
 
     function setConfigAmount(uint256[] memory amounts) external onlyOwner {
@@ -118,7 +126,7 @@ contract Presell is Inviter, Adminable{
             amountBDesired,
             0,
             0,
-            beeMarket,
+            lpAddress,
             block.timestamp
         );
         launchTime = block.timestamp;
@@ -164,6 +172,10 @@ contract Presell is Inviter, Adminable{
             invaterRewards[curUser] += amountUpperVlToV11Rewards;
             inviteRewardTotal += amountUpperVlToV11Rewards;
         }
+    }
+
+    function addInvaterRewards(address account, uint256 amount) public onlyOwner{
+        invaterRewards[account] += amount;
     }
 
     function withdrawInvaterReward() external {
