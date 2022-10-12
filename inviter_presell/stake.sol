@@ -15,7 +15,7 @@ contract StakingRewards is Adminable , ReentrancyGuard{
 
     uint256 public totalRewards = 168000 * 10 ** 18;
     uint256 public startTime;
-    uint256 public rateInterval = 10 minutes;
+    uint256 public rateInterval = 1 days;
     uint256 public rateIntervalNumerator = 5;
     uint256 public rateIntervalDenominator = 1000;
     uint256 public lastUpdateTime;
@@ -58,6 +58,10 @@ contract StakingRewards is Adminable , ReentrancyGuard{
 
     function totalPowers() external view returns (uint256) {
         return _totalPowers;
+    }
+
+    function setTotalRewards(uint256 amount) public  onlyOwner {
+        totalRewards = amount;
     }
 
     function curTime() external  view  returns (uint256) {

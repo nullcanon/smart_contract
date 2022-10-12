@@ -9,36 +9,36 @@ import "./adminable.sol";
 
 contract Presell is Inviter, Adminable{
     uint256 public hasBuyAmount;
-    uint256 public launchAmount = 6;
-    uint256 public price = 3 * 10 ** 18;
-    uint256  public supperNodeAmount = 3 * 10 ** 17;
+    uint256 public launchAmount = 501;
+    uint256 public price = 300 * 10 ** 18;
+    uint256  public supperNodeAmount = 3 * 10 ** 18;
     uint256  public supperNodeAmountTotal;
-    address public beeAddress = 0xf7eBDBF6E7bDAD3157B18480feB8Eb095CcC1BFD;
-    address public beeMarket = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
-    address public withdrawMarket = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public beeAddress = 0xE070ccA5cdFB3F2B434fB91eAF67FA2084f324D7;
+    address public beeMarket = 0x0968e6cCda9A3FAC4f4769eaD4CAe9230Be5a51A;
+    address public withdrawMarket = 0x2030d215b5c1A7821EE9a99dE25f7fa65839EE16;
     IPancakeSwapV2Router02 public uniswapV2Router;
     StakingRewards public stakingRewards;
-    address public superNode = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public superNode = 0xC08cAB7ea58802Fdd0111821C25E08a37Ec9a46B;
     uint256 public launchTime;
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684
-    address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
-    address public rewardTokenAddress = 0x4B00388ECBE12a295CB3f21197C49A4526511a36;
-    uint256 public amountLunchBuy = 115 * 10 ** 16;
+    address public usdtAddress = 0x55d398326f99059fF775485246999027B3197955;
+    address public rewardTokenAddress = 0x6AD2C901B3e2ceD94FaA84B4d01d0A588a14B6C3;
+    uint256 public amountLunchBuy = 115 * 10 ** 18;
     uint256 public amountADesired = 31500 * 10 ** 18;
-    uint256 public amountBDesired = amountLunchBuy * (launchAmount - 1);
-    uint256 public amountBuyBee = 5 * 10 ** 16;
-    uint256 public amountUpperVlRewards = 5 * 10 ** 16;
-    uint256 public amountUpperVlToV11Rewards = 1 * 10 ** 16;
+    uint256 public amountBDesired = 57500 * 10 ** 18;
+    uint256 public amountBuyBee = 5 * 10 ** 18;
+    uint256 public amountUpperVlRewards = 50 * 10 ** 18;
+    uint256 public amountUpperVlToV11Rewards = 10 * 10 ** 18;
     uint256 public inviteRewardTotal;
     uint256 public startTime;
 
     mapping(address => uint256) public invaterRewards;
 
      
-    address public supperUpper = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public supperUpper = 0xC08cAB7ea58802Fdd0111821C25E08a37Ec9a46B;
     address public deadAddress = 0x000000000000000000000000000000000000dEaD;
-    address public lpAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public lpAddress = 0x08517DF88fE9BFAd6274099f4270119EEA81942e;
     
 
 
@@ -48,8 +48,8 @@ contract Presell is Inviter, Adminable{
     constructor() {
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
-        uniswapV2Router = IPancakeSwapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
-        stakingRewards = StakingRewards(0xdbcDAbe44Bf78E40371B676CB5019DB36a134A44);
+        uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        stakingRewards = StakingRewards(0x3641FFd20D9563C581772E5fE0CbE48024c6149a);
         startTime = block.timestamp;
     }
 

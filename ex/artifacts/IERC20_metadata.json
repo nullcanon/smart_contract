@@ -6,56 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "value",
-						"type": "uint256"
-					}
-				],
-				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "value",
-						"type": "uint256"
-					}
-				],
-				"name": "Transfer",
-				"type": "event"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -88,7 +38,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "usdtAmount",
 						"type": "uint256"
 					}
 				],
@@ -123,28 +73,15 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "totalSupply",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "recipient",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -163,17 +100,17 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "sender",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "recipient",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -202,7 +139,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/exchangeUsdtToken.sol": "IERC20"
+			"ex/BPresell.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -216,12 +153,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/exchangeUsdtToken.sol": {
-			"keccak256": "0x604fbb4dca0c77595498bee29bb6b54050d00f2df51967312a0b91b0dba5c706",
+		"ex/BPresell.sol": {
+			"keccak256": "0xc8e967769da9d277149d2d481a0f040f9048042ed59864a6bffd6cdc9f23c2ee",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6d860ef3e099b4b7838d1c309deb5e5c1ac7a004fce6c9e9ad11c9ab3f3e520d",
-				"dweb:/ipfs/QmYaoaFFe7yFz52Tx4Jd14kZ41uXk4q8PxsQTTo86LdSes"
+				"bzz-raw://199318e6960a6ac6b20f26fcf6c17bf9ea4941bb545dca3278567ef8060ba6c6",
+				"dweb:/ipfs/QmWUMuQtKF9fEs13grHHvgVAJKAK8gkqSvcVYZX8JQNpDE"
 			]
 		}
 	},
