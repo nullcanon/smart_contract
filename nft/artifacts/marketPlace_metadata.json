@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -35,12 +35,6 @@
 						"indexed": false,
 						"internalType": "address",
 						"name": "seller",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "owner",
 						"type": "address"
 					},
 					{
@@ -284,24 +278,6 @@
 						"type": "address"
 					},
 					{
-						"internalType": "uint256",
-						"name": "itemId",
-						"type": "uint256"
-					}
-				],
-				"name": "createMarketSaleErc1155",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "nftContract",
-						"type": "address"
-					},
-					{
 						"internalType": "address",
 						"name": "moneyMintAddress",
 						"type": "address"
@@ -348,6 +324,188 @@
 				"name": "createMarketSaleWithTokenErc1155",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "fetchMarketItems",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "itemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "moneyMintAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum marketPlace.Status",
+								"name": "sold",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct marketPlace.MarketItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "start",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "offset",
+						"type": "uint256"
+					}
+				],
+				"name": "fetchMarketItemsLimit",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "itemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "moneyMintAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum marketPlace.Status",
+								"name": "sold",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct marketPlace.MarketItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "fetchMarketItemsWithUser",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "itemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "nftContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address payable",
+								"name": "seller",
+								"type": "address"
+							},
+							{
+								"internalType": "address payable",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "moneyMintAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum marketPlace.Status",
+								"name": "sold",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct marketPlace.MarketItem[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -658,7 +816,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/NFTMarketAitd.sol": "marketPlace"
+			"nft/NFTMarketTransferToken.sol": "marketPlace"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -666,42 +824,42 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
-			"keccak256": "0x9ceac6c134cbbeac2d7c1e004f633bf1fefbb153038fe14528f333d0b274ec19",
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c50b739378e58a7da6997c3b91884abd66cc2f56e57fc3987c64250e19b5905d",
-				"dweb:/ipfs/QmNYoiy86D7SLeNLzmuGdBMKKTK9cmsrAuxYVRxKHi9Ans"
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol": {
-			"keccak256": "0x0e9621f60b2faabe65549f7ed0f24e8853a45c1b7990d47e8160e523683f3935",
+			"keccak256": "0x4f2c7c1826779a4f444e5b36553102e4cff85ddb7d1ff65c15a6d6e978dcc8c8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://287a2f8d5814dd0f05f22b740f18ca8321acc21c9bd03a6cb2203ea626e2f3f2",
-				"dweb:/ipfs/QmZRQv9iuwU817VuqkA2WweiaibKii69x9QxYBBEfbNEud"
+				"bzz-raw://aa48b04a7f9b986687fc4e6984db2fd5760b5827d537c019d351b95414f8394e",
+				"dweb:/ipfs/QmeDbBY8M8dgeornLuB8m99gu915mRTZQ1Ggenio9BRHf2"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xef45c6e91816b76a362f5999eb20e4088762fce894bbe6bf7708e9c38155c105",
+			"keccak256": "0xe720b214fc3173cebcba734efb258dd89ae27733f18f5abc4deca28e33a05854",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://76ac1500779adc277dd8a02f14a24d5ca9f34c6469f7f5503474e71add35ac37",
-				"dweb:/ipfs/QmQzV3mYkuQP6qXJCetb4PyJKLWAWrC5gAr8kKULGHGjSk"
+				"bzz-raw://fec2446774323fe4d3979f42f9abef398e4258b3064aa4f2752ca1a4abf8964d",
+				"dweb:/ipfs/Qmc8Yhvd3C3N1HwA9WbWwb2RELtkChUErwQMuZBg9fmEGR"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
-			"keccak256": "0x2d8cce2900ea5e213b5728ac6d02c139a5be5a112b12b9a187e042fc1134f560",
+			"keccak256": "0x6392f2cfe3a5ee802227fe7a2dfd47096d881aec89bddd214b35c5b46d3cd941",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9e94e40f41fb4bcad96c4ec9051bd227aa082b203ec1f8da1db8c3bffcd19eaa",
-				"dweb:/ipfs/Qmad4iahn31rVrL4AAcFPpKW2PMNQ9apSF4r7ZvUbcTDSH"
+				"bzz-raw://bd9c47a375639888e726a99da718890ba16d17d7ad9eacb0ccc892d46d1b3ee0",
+				"dweb:/ipfs/Qmb41W5RUjy2sWg49A2rMnxekSeEk6SvGyJL5tyCCSr7un"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155Receiver.sol": {
@@ -737,11 +895,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol": {
-			"keccak256": "0xc5c89c86600a8b41ce60df163da74daa9f9269f2304990fd1bf01db32ca6c468",
+			"keccak256": "0x3270d2a7a042dda9cf85dddd16e6106c2c9ad784c0972315630b2a148215fa7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bf23edf8e3f74e865249e70112280026a41520bae7ddcbbbae9b92dca625e984",
-				"dweb:/ipfs/QmchNJQdGdz2qRRKWUJAWe1wH7M67sB6Fm9sdstQXvoJL2"
+				"bzz-raw://b394e20d57877a825c24c1841e219d6ab1e41decec060ea935422ac9b7a25f8a",
+				"dweb:/ipfs/QmVTaGCMR4Gi9w1LUVVcjEJHrHF2qcr1avFkLtsLD6sEAr"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol": {
@@ -761,19 +919,19 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol": {
-			"keccak256": "0x44d5161ff3fa1e06de859b4d12bfdc5b7738c174a49ed55aca435ae1a8e2d7a0",
+			"keccak256": "0x563955911f858071c56f3e8532daaf396187a9d7c19efa937dbfc5ae3102d63f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://17706155cf3e9bdc3ef7567ed1774436fd4e342f3bd68481c322d3cc3aa60ffc",
-				"dweb:/ipfs/QmV1DG4QqYVoxU6yV4Q6xreWg8YquvYjwEoUsK5VH2QEhh"
+				"bzz-raw://fa7a100d0db86a9228cc332fc5384e10d014cadb50205073cc2ecc413063eb3e",
+				"dweb:/ipfs/QmWkAeXzw3q6WY4g9Uwf4orSsUAJVzm3PimgyvZtnMMMY4"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol": {
-			"keccak256": "0x4d9bc5a736598b4f462eb92de0b766eb825d8b9a11f187e8ea6835da7e8b5034",
+			"keccak256": "0x086fbe904291497e1532ef340f1bd589078f49e3d4d0bbfd88f5e02fb89261eb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://36e9e7677fec57700ece7382411f5471ef2e419408cad94069e78bdac4f56b65",
-				"dweb:/ipfs/Qmdmi8LSLU6eTmGjozZ4wvwcdN4f7QfiLgRoqQFu97kcYc"
+				"bzz-raw://0df1e3e965b78a0d98dda2d1d6a6acde88f515b1d3a9ad02f505e93fa7babeda",
+				"dweb:/ipfs/QmW4cSbGriRAj7XRZu6zSaqspe4eyYWkF7WfJbj3rmmLbk"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721Receiver.sol": {
@@ -793,11 +951,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
-			"keccak256": "0xeecbec41bdb0eaa85bdd61c58db40d73cc9c77bf16586a0d79944d7a5af20a92",
+			"keccak256": "0xb94eac067c85cd79a4195c0a1f4a878e9827329045c12475a0199f1ae17b9700",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bfb3b58ffff7160ab25d647b712c61928cca998bd837645dd0239d9ac7fcaf9f",
-				"dweb:/ipfs/QmawPt42btqusmPGxf5htAXzQ5Pe1noysGUrEtnGdBjfcF"
+				"bzz-raw://2ad84b5dbf40ba9e944cc25bd0a98c51bafd49cff30efe5ef5aef921a70081de",
+				"dweb:/ipfs/Qme8iCeqe9VdNgWktTTsSxUfHcJEXuvPaJpshWDzoWj56V"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
@@ -817,11 +975,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol": {
-			"keccak256": "0xca92905e1626e8567483de21bc1208284865ed7be71d54ca320a140ac25fd290",
+			"keccak256": "0xbaa90c891304799f6aa4039eae4b59afc0b59ce3bcc647f3fc2bbf5a04b17f1e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://53c8d5bc6af499853ddf86eb2a6d7448f18a78313a04b8652a83007d04954577",
-				"dweb:/ipfs/QmQV6pF3FQoqR16kSK9FNg6bKfWLbcfHBTCKS7p2ERTkEF"
+				"bzz-raw://1cc3f5b077759f92f28ba4182d9410aa8fd586d7efc5f76bdd22228bf2d227f0",
+				"dweb:/ipfs/QmbLPLb31LxAyB7GWir5AssC1TYVHqhBsN6R7APj2UV9fv"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/introspection/ERC165.sol": {
@@ -840,6 +998,14 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/Math.sol": {
+			"keccak256": "0xbb9b373ec337797b9f8822171cb191095cb11e729a4fde4c207d25b8b642fb93",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6fba7f4448f95e3a42fba5305cc02403eee23aa62e742a0ae7bca609bdaf89da",
+				"dweb:/ipfs/QmSXV5FapsVemawU9Zzkx3u3DNLhCaS9MnwcZLsPpMSKnz"
+			]
+		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol": {
 			"keccak256": "0x0f633a0223d9a1dcccfcf38a64c9de0874dfcbfac0c6941ccf074d63a2ce0e1e",
 			"license": "MIT",
@@ -848,12 +1014,12 @@
 				"dweb:/ipfs/QmQJquTMtc6fgm5JQzGdsGpA2fqBe3MHWEdt2qzaLySMdN"
 			]
 		},
-		"nft/NFTMarketAitd.sol": {
-			"keccak256": "0x2246b2dcfad5ef091593c463b1864ed5fc9b9a86d83b9d51a942c4c3d8c4b4d5",
+		"nft/NFTMarketTransferToken.sol": {
+			"keccak256": "0x855823e94d668877a94ab943824fdf29181b99dbd9e94628186a98e7282e89e1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd30a91a8f172e213ba83c3e2c9549e8c54fd036dfee9d6c27fa399cf425a809",
-				"dweb:/ipfs/QmdRDCiWFHXiB9V1WAF4hU5qpGckXkE3Qfo2De23wphNbU"
+				"bzz-raw://3f3e969806652d94e852007f72d60e31fb4ba3317763ad9320cfc0410f16d0f6",
+				"dweb:/ipfs/QmTggEx9hJjZf37GgPYhnTyvn3QUoRaMwVgM9BXYsgLE77"
 			]
 		}
 	},

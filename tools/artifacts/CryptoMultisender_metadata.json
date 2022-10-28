@@ -1,0 +1,1901 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "affiliate",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "affiliateCode",
+						"type": "string"
+					}
+				],
+				"name": "AffiliatePartnershipRevoked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "CommissionPaid",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sentTo",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20TokensWithdrawn",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "by",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalTransfers",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ethValue",
+						"type": "uint256"
+					}
+				],
+				"name": "EthAirdrop",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newAffiliate",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "affiliateCode",
+						"type": "string"
+					}
+				],
+				"name": "NewAffiliatePartnership",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "premiumMember",
+						"type": "address"
+					}
+				],
+				"name": "NewPremiumMembership",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "by",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "nftAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalTransfers",
+						"type": "uint256"
+					}
+				],
+				"name": "NftAirdrop",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "from",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "to",
+						"type": "uint256"
+					}
+				],
+				"name": "RateChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalWei",
+						"type": "uint256"
+					}
+				],
+				"name": "RefundIssued",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "by",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalTransfers",
+						"type": "uint256"
+					}
+				],
+				"name": "TokenAirdrop",
+				"type": "event"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_code",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_percentage",
+						"type": "uint256"
+					}
+				],
+				"name": "addAffiliate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "affiliateCodeExists",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "affiliateCodeOfAddr",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "affiliateCodeToAddr",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_recipients",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_values",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_totalToSend",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "airdropNativeCurrency",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "becomeLifetimeMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "becomeOneDayMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "becomeOneMonthMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "becomeOneWeekMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfAffiliate",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_percentage",
+						"type": "uint256"
+					}
+				],
+				"name": "changeAffiliatePercentage",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					}
+				],
+				"name": "checkIsListedToken",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isListed",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "checkIsPremiumMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isMember",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "commissionPercentage",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deprecatedMultisenderAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "dropUnitPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfNFT",
+						"type": "address"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_recipients",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_optimized",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "erc1155Airdrop",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_recipients",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_values",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_totalToSend",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isDeflationary",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "_optimized",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "erc20Airdrop",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfNFT",
+						"type": "address"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_recipients",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_tokenIds",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_optimized",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "erc721Airdrop",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					}
+				],
+				"name": "getListingFeeForToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "fee",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fee",
+						"type": "uint256"
+					}
+				],
+				"name": "getPremiumMembershipFeeOfUser",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "fee",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfToken",
+						"type": "address"
+					}
+				],
+				"name": "getRemainingTokenTrialDrops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "remainingTrialDrops",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfUser",
+						"type": "address"
+					}
+				],
+				"name": "getRemainingUserTrialDrops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "remainingTrialDrops",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_addressOfToken",
+						"type": "address"
+					}
+				],
+				"name": "getTokenAllowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "allowance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "grantPremiumMembership",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					}
+				],
+				"name": "grantTokenListing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isAffiliate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isAffiliatedWith",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isGrantedListedToken",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isGrantedPremiumMember",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isListedToken",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_who",
+						"type": "address"
+					}
+				],
+				"name": "isMemberOfOldMultisender",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "lifetimeMembershipFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "membershipExpiryTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "oneDayMembershipFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "oneMonthMembershipFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "premiumMembershipDiscount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_afCode",
+						"type": "string"
+					}
+				],
+				"name": "purchaseTokenListing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "rate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "removeAffiliate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "revokeGrantedPremiumMembership",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					}
+				],
+				"name": "revokeGrantedTokenListing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "setDeprecatedMultisenderAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_oneDayFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_sevenDayFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_oneMonthFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_lifetimeFee",
+						"type": "uint256"
+					}
+				],
+				"name": "setMembershipFees",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_discount",
+						"type": "uint256"
+					}
+				],
+				"name": "setPremiumMembershipDiscount",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_newRate",
+						"type": "uint256"
+					}
+				],
+				"name": "setRate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_newFee",
+						"type": "uint256"
+					}
+				],
+				"name": "setTokenListingFee",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_tokenAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_discount",
+						"type": "uint256"
+					}
+				],
+				"name": "setTokenListingFeeDiscount",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sevenDayMembershipFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfToken",
+						"type": "address"
+					}
+				],
+				"name": "tokenHasFreeTrial",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "hasFreeTrial",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "tokenListingFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "tokenListingFeeDiscount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "tokenTrialDrops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "transferMembership",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfUser",
+						"type": "address"
+					}
+				],
+				"name": "userHasFreeTrial",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "hasFreeTrial",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userTrialDrops",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addressOfToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawERC20Tokens",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawFunds",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"addAffiliate(address,string,uint256)": {
+					"params": {
+						"_addr": "The address of the new affiliate partner.",
+						"_code": "The affiliate code. "
+					},
+					"returns": {
+						"success": "True if the affiliate has been added successfully. False otherwise. *"
+					}
+				},
+				"airdropNativeCurrency(address[],uint256[],uint256,string)": {
+					"params": {
+						"_afCode": "If the user is affiliated with a partner, they will provide this code so that  the parter is paid commission. ",
+						"_recipients": "The list of addresses which will receive tokens. ",
+						"_values": "The corresponding amounts that the recipients will receive "
+					},
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				},
+				"becomeLifetimeMember(string)": {
+					"params": {
+						"_afCode": "If a user has been refferred by an affiliate partner, they can provide  an affiliate code so the partner gets commission."
+					},
+					"returns": {
+						"success": "True if user successfully becomes premium member. False otherwise. *"
+					}
+				},
+				"becomeOneDayMember(string)": {
+					"params": {
+						"_afCode": "If a user has been refferred by an affiliate partner, they can provide  an affiliate code so the partner gets commission."
+					},
+					"returns": {
+						"success": "True if user successfully becomes premium member. False otherwise. *"
+					}
+				},
+				"becomeOneMonthMember(string)": {
+					"params": {
+						"_afCode": "If a user has been refferred by an affiliate partner, they can provide  an affiliate code so the partner gets commission."
+					},
+					"returns": {
+						"success": "True if user successfully becomes premium member. False otherwise. *"
+					}
+				},
+				"becomeOneWeekMember(string)": {
+					"params": {
+						"_afCode": "If a user has been refferred by an affiliate partner, they can provide  an affiliate code so the partner gets commission."
+					},
+					"returns": {
+						"success": "True if user successfully becomes premium member. False otherwise. *"
+					}
+				},
+				"changeAffiliatePercentage(address,uint256)": {
+					"params": {
+						"_addressOfAffiliate": "The wallet address of the affiliate partner.",
+						"_percentage": "The commission percentage the affiliate will receive. "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"checkIsListedToken(address)": {
+					"params": {
+						"_tokenAddr": "The address of the token to query. "
+					},
+					"returns": {
+						"isListed": "True if the token is listed, false otherwise.  "
+					}
+				},
+				"checkIsPremiumMember(address)": {
+					"params": {
+						"_addr": "The address of the user.  "
+					},
+					"returns": {
+						"isMember": "True if the user is a premium member, false otherwise. "
+					}
+				},
+				"erc1155Airdrop(address,address[],uint256[],uint256[],bool,string)": {
+					"params": {
+						"_addressOfNFT": "The contract address of an ERC1155 token contract.",
+						"_afCode": "If the user is affiliated with a partner, they will provide this code so that  the parter is paid commission. ",
+						"_amounts": "The amount of tokens to send from each token type.",
+						"_ids": "The corresponding IDs of the token collection which each address will receive.",
+						"_optimized": "Should only be enabled for ERC721 token collections with gas optimized distribution functions. ",
+						"_recipients": "The list of addresses which will receive tokens. "
+					},
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				},
+				"erc20Airdrop(address,address[],uint256[],uint256,bool,bool,string)": {
+					"params": {
+						"_addressOfToken": "The contract address of an ERC20 token.",
+						"_afCode": "If the user is affiliated with a partner, they will provide this code so that  the parter is paid commission. ",
+						"_optimized": "Should only be enabled for tokens with gas optimized distribution functions. ",
+						"_recipients": "The list of addresses which will receive tokens. ",
+						"_values": "The corresponding values of tokens which each address will receive."
+					},
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				},
+				"erc721Airdrop(address,address[],uint256[],bool,string)": {
+					"params": {
+						"_addressOfNFT": "The contract address of an ERC721 token collection.",
+						"_afCode": "If the user is affiliated with a partner, they will provide this code so that  the parter is paid commission. ",
+						"_optimized": "Should only be enabled for ERC721 token collections with gas optimized distribution functions. ",
+						"_recipients": "The list of addresses which will receive tokens. ",
+						"_tokenIds": "The corresponding IDs of the NFT collection which each address will receive."
+					},
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				},
+				"getListingFeeForToken(address)": {
+					"params": {
+						"_tokenAddr": "The address of the token.  "
+					},
+					"returns": {
+						"fee": "The listing fee for the token.  "
+					}
+				},
+				"getPremiumMembershipFeeOfUser(address,uint256)": {
+					"params": {
+						"_addr": "The address of the user.",
+						"_fee": "The default fee.  "
+					},
+					"returns": {
+						"fee": "The membership fee for the specified user.   "
+					}
+				},
+				"getRemainingTokenTrialDrops(address)": {
+					"params": {
+						"_addressOfToken": "the address of the token being queried. "
+					},
+					"returns": {
+						"remainingTrialDrops": "the total remaining free trial drops of a token. "
+					}
+				},
+				"getRemainingUserTrialDrops(address)": {
+					"params": {
+						"_addressOfUser": "the address of the user being queried. "
+					},
+					"returns": {
+						"remainingTrialDrops": "the total remaining free trial drops of a user. "
+					}
+				},
+				"getTokenAllowance(address,address)": {
+					"params": {
+						"_addr": "The address of the token's owner.",
+						"_addressOfToken": "The contract address of the ERC20 token. "
+					},
+					"returns": {
+						"allowance": "The ERC20 token allowance from token owner to this contract.  "
+					}
+				},
+				"grantPremiumMembership(address)": {
+					"params": {
+						"_addr": "The address of the user who is being granted premium membership."
+					},
+					"returns": {
+						"success": "True if premium membership is granted successfully. False otherwise. *"
+					}
+				},
+				"grantTokenListing(address)": {
+					"params": {
+						"_tokenAddr": "The address of the token being listed. "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"isMemberOfOldMultisender(address)": {
+					"params": {
+						"_who": "The address of the user. "
+					},
+					"returns": {
+						"_0": "True if the user is a member on the old SC, false otherwise. "
+					}
+				},
+				"purchaseTokenListing(address,string)": {
+					"params": {
+						"_afCode": "If the user is affiliated with a partner, they will provide this code so that  the parter is paid commission. ",
+						"_tokenAddr": "The address of the token that will be listed. "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"removeAffiliate(address)": {
+					"params": {
+						"_addr": "The address of the affiliate partner."
+					},
+					"returns": {
+						"success": "True if affiliate partner is removed successfully. False otherwise. *"
+					}
+				},
+				"revokeGrantedPremiumMembership(address)": {
+					"params": {
+						"_addr": "The address of the user whos membership is being revoked."
+					},
+					"returns": {
+						"success": "True if membership is revoked successfully. False otherwise. *"
+					}
+				},
+				"revokeGrantedTokenListing(address)": {
+					"params": {
+						"_tokenAddr": "The address of the token that is being delisted.  "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"setDeprecatedMultisenderAddress(address)": {
+					"params": {
+						"_addr": "The updated address. "
+					}
+				},
+				"setMembershipFees(uint256,uint256,uint256,uint256)": {
+					"params": {
+						"_lifetimeFee": "Fee for lifetime membership. ",
+						"_oneDayFee": "Fee for single day membership.",
+						"_oneMonthFee": "Fee for one month membership.",
+						"_sevenDayFee": "Fee for one week membership."
+					},
+					"returns": {
+						"success": "True if the fee is changed successfully. False otherwise. "
+					}
+				},
+				"setPremiumMembershipDiscount(address,uint256)": {
+					"params": {
+						"_addr": "The address of the user.",
+						"_discount": "The discount being granted. "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"setRate(uint256)": {
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				},
+				"setTokenListingFee(uint256)": {
+					"params": {
+						"_newFee": "The new fee for token listings.  "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"setTokenListingFeeDiscount(address,uint256)": {
+					"params": {
+						"_discount": "The discount that will be applied.  ",
+						"_tokenAddr": "The address of the token that will receive the discount. "
+					},
+					"returns": {
+						"success": "True if function executes successfully, false otherwise. "
+					}
+				},
+				"tokenHasFreeTrial(address)": {
+					"params": {
+						"_addressOfToken": "The address of the token being queried. "
+					},
+					"returns": {
+						"hasFreeTrial": "true if the token being queried has not used its 100 first free trial drops, false otherwise. "
+					}
+				},
+				"transferMembership()": {
+					"returns": {
+						"_0": "True if there is a membership to be transferred, false otherwise.  "
+					}
+				},
+				"transferOwnership(address)": {
+					"params": {
+						"_newOwner": "The address to be assigned new ownership. "
+					}
+				},
+				"userHasFreeTrial(address)": {
+					"params": {
+						"_addressOfUser": "The address of the user being queried. "
+					},
+					"returns": {
+						"hasFreeTrial": "true if the user address being queried has not used the first 100 free trial drops, false otherwise. "
+					}
+				},
+				"withdrawERC20Tokens(address,address,uint256)": {
+					"params": {
+						"_addressOfToken": "The contract address of an ERC20 token.",
+						"_recipient": "The address which will receive tokens. ",
+						"_value": "The amount of tokens to refund. "
+					},
+					"returns": {
+						"success": "true if function executes successfully, false otherwise. "
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"addAffiliate(address,string,uint256)": {
+					"notice": "Allows the owner of this contract to add an affiliate partner."
+				},
+				"airdropNativeCurrency(address[],uint256[],uint256,string)": {
+					"notice": "Allows for the distribution of Ether to be transferred to multiple recipients at  a time.  "
+				},
+				"becomeLifetimeMember(string)": {
+					"notice": "Allows users to become lifetime members."
+				},
+				"becomeOneDayMember(string)": {
+					"notice": "Allows users to become members for 1 day."
+				},
+				"becomeOneMonthMember(string)": {
+					"notice": "Allows users to become members for 1 month"
+				},
+				"becomeOneWeekMember(string)": {
+					"notice": "Allows users to become members for 7 days."
+				},
+				"changeAffiliatePercentage(address,uint256)": {
+					"notice": "Allows the owner of the contract to set a customised commission percentage for a given affiliate partner. "
+				},
+				"checkIsListedToken(address)": {
+					"notice": "Allows users to check whether or not a token is listed. "
+				},
+				"checkIsPremiumMember(address)": {
+					"notice": "Allows users to check if a user is a premium member or not.  "
+				},
+				"erc1155Airdrop(address,address[],uint256[],uint256[],bool,string)": {
+					"notice": "Allows for the distribution of ERC1155 tokens to be transferred to multiple recipients at  a time.  "
+				},
+				"erc20Airdrop(address,address[],uint256[],uint256,bool,bool,string)": {
+					"notice": "Allows for the distribution of an ERC20 token to be transferred to multiple recipients at  a time. This function facilitates batch transfers of differing values (i.e., all recipients can receive different amounts of tokens). "
+				},
+				"erc721Airdrop(address,address[],uint256[],bool,string)": {
+					"notice": "Allows for the distribution of ERC721 tokens to be transferred to multiple recipients at  a time.  "
+				},
+				"getListingFeeForToken(address)": {
+					"notice": "Allows users to query the listing fee for a token. This is useful to verify that a discount has been set.  "
+				},
+				"getPremiumMembershipFeeOfUser(address,uint256)": {
+					"notice": "Allows users to check VIP membership fees for a specific address. This is useful for validating if a discount has been granted for the specified user.  "
+				},
+				"getRemainingTokenTrialDrops(address)": {
+					"notice": "Checks how many remaining free trial drops a token has. "
+				},
+				"getRemainingUserTrialDrops(address)": {
+					"notice": "Checks how many remaining free trial drops a user has. "
+				},
+				"getTokenAllowance(address,address)": {
+					"notice": "Allows for the allowance of a token from its owner to this contract to be queried.   As part of the ERC20 standard all tokens which fall under this category have an allowance  function which enables owners of tokens to allow (or give permission) to another address  to spend tokens on behalf of the owner. This contract uses this as part of its protocol. Users must first give permission to the contract to transfer tokens on their behalf, however, this does not mean that the tokens will ever be transferrable without the permission of the  owner. This is a security feature which was implemented on this contract. It is not possible for the owner of this contract or anyone else to transfer the tokens which belong to others.  "
+				},
+				"grantPremiumMembership(address)": {
+					"notice": "Allows the owner of this contract to grant users with premium membership."
+				},
+				"grantTokenListing(address)": {
+					"notice": "Allows the owner of the contract to grant a token a free listing.  "
+				},
+				"isMemberOfOldMultisender(address)": {
+					"notice": "This function checks if a user address has a membership on the old SC. "
+				},
+				"purchaseTokenListing(address,string)": {
+					"notice": "Allows users to list a token of their choosing.  "
+				},
+				"removeAffiliate(address)": {
+					"notice": "Allows the owner of this contract to remove an affiliate partner. "
+				},
+				"revokeGrantedPremiumMembership(address)": {
+					"notice": "Allows the owner of this contract to revoke a granted membership."
+				},
+				"revokeGrantedTokenListing(address)": {
+					"notice": "Allows the owner of the contract to revoke a granted token listing.  "
+				},
+				"setDeprecatedMultisenderAddress(address)": {
+					"notice": "Allows the owner of the contract to set the contract address of the old multisender SC. "
+				},
+				"setMembershipFees(uint256,uint256,uint256,uint256)": {
+					"notice": "Allows the owner of this contract to change the fees for users to become premium members. "
+				},
+				"setPremiumMembershipDiscount(address,uint256)": {
+					"notice": "Allows the owner of the contract to grant a premium membership discount for a specified user. "
+				},
+				"setRate(uint256)": {
+					"notice": "Allows for the price of drops to be changed by the owner of the contract. Any attempt made by  any other account to invoke the function will result in a loss of gas and the price will remain  untampered. "
+				},
+				"setTokenListingFee(uint256)": {
+					"notice": "Allows the owner of the contract to modify the token listing fee.  "
+				},
+				"setTokenListingFeeDiscount(address,uint256)": {
+					"notice": "Allows the owner of the contract to set a listing discount for a specified token. "
+				},
+				"tokenHasFreeTrial(address)": {
+					"notice": "Checks whether or not an ERC20 token has used its free trial of 100 drops. This is a constant  function which does not alter the state of the contract and therefore does not require any gas  or a signature to be executed.  "
+				},
+				"transferMembership()": {
+					"notice": "Allows users to transfer their membership from the old SC to this SC.  "
+				},
+				"transferOwnership(address)": {
+					"notice": "Allows for the transfer of ownership to another address; "
+				},
+				"userHasFreeTrial(address)": {
+					"notice": "Checks whether or not a user has a free trial.  "
+				},
+				"withdrawERC20Tokens(address,address,uint256)": {
+					"notice": "Allows for any ERC20 tokens which have been mistakenly  sent to this contract to be returned  to the original sender by the owner of the contract. Any attempt made by any other account  to invoke the function will result in a loss of gas and no tokens will be transferred out. "
+				},
+				"withdrawFunds()": {
+					"notice": "Allows the owner of the contract to withdraw any funds that may reside on the contract address. "
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"tools/MultiSender.sol": "CryptoMultisender"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"tools/MultiSender.sol": {
+			"keccak256": "0xc89e9630b34e846888b9fe1b1e137aef628d0b0f2e98b414209293e0d8ff2303",
+			"urls": [
+				"bzz-raw://6637aa7878b64311b3865dd3181194ff02e7b8db9355805e0d313f21e3103962",
+				"dweb:/ipfs/Qmcc2bR23vLHxHp2QgcTkPr4xKMi1aojJ7En8Yc6Yy9kv2"
+			]
+		}
+	},
+	"version": 1
+}
