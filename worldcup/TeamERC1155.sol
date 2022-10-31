@@ -32,9 +32,9 @@ contract TeamERC1155 is  Ownable, ERC1155Supply {
         return maxIndex - 1;
     }
 
-    function mintTokenIdWithWitelist(address to, uint256 tokenid, uint256 amount) public {
+    function mintTokenIdWithWitelist(address to, uint256[] tokenids, uint256[] amounts) public {
         require(whiteList[msg.sender], "Not in white");
-        _mint(to, tokenid, amount, "");
+        _mintBatch(to, tokenids, amounts, "");
     }
 
     function mintBatchWithNumber(uint256 idsNumber, uint256 amount) public onlyOwner{

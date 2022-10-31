@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nft/NFTMarketTransferToken.sol": "LibArrayForUint256Utils"
+			"nft/NFTMarketAitd.sol": "LibArrayForUint256Utils"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -216,12 +216,12 @@
 				"dweb:/ipfs/QmQJquTMtc6fgm5JQzGdsGpA2fqBe3MHWEdt2qzaLySMdN"
 			]
 		},
-		"nft/NFTMarketTransferToken.sol": {
-			"keccak256": "0x855823e94d668877a94ab943824fdf29181b99dbd9e94628186a98e7282e89e1",
+		"nft/NFTMarketAitd.sol": {
+			"keccak256": "0x2246b2dcfad5ef091593c463b1864ed5fc9b9a86d83b9d51a942c4c3d8c4b4d5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3f3e969806652d94e852007f72d60e31fb4ba3317763ad9320cfc0410f16d0f6",
-				"dweb:/ipfs/QmTggEx9hJjZf37GgPYhnTyvn3QUoRaMwVgM9BXYsgLE77"
+				"bzz-raw://bd30a91a8f172e213ba83c3e2c9549e8c54fd036dfee9d6c27fa399cf425a809",
+				"dweb:/ipfs/QmdRDCiWFHXiB9V1WAF4hU5qpGckXkE3Qfo2De23wphNbU"
 			]
 		}
 	},
