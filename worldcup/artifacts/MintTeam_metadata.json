@@ -19,9 +19,59 @@
 						"internalType": "uint256",
 						"name": "tokenid",
 						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
 					}
 				],
 				"name": "MintBlindBox",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "oldState",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "newState",
+						"type": "bool"
+					}
+				],
+				"name": "ModificationAdmin",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
 				"type": "event"
 			},
 			{
@@ -40,49 +90,20 @@
 			{
 				"inputs": [
 					{
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
 					}
 				],
-				"name": "decodeData",
+				"name": "isAdmin",
 				"outputs": [
 					{
-						"internalType": "uint256",
-						"name": "left",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "right",
-						"type": "uint256"
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "left",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "right",
-						"type": "uint256"
-					}
-				],
-				"name": "encodeData",
-				"outputs": [
-					{
-						"internalType": "bytes",
-						"name": "results",
-						"type": "bytes"
-					}
-				],
-				"stateMutability": "pure",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -99,8 +120,52 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "quantity",
+						"type": "uint256"
+					}
+				],
+				"name": "mintWithBlindBox",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "state",
+						"type": "bool"
+					}
+				],
+				"name": "modificationAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "money",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -125,32 +190,90 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_bank",
+						"type": "address"
+					}
+				],
+				"name": "setBank",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "number",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "setBlindBoxPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "paymoney",
+						"type": "address"
+					}
+				],
+				"name": "setPayMoney",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_numbers",
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "nonce",
-						"type": "uint256"
-					}
-				],
-				"name": "random",
-				"outputs": [
+						"internalType": "uint256[]",
+						"name": "_lefts",
+						"type": "uint256[]"
+					},
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
+						"internalType": "uint256[]",
+						"name": "_rights",
+						"type": "uint256[]"
 					}
 				],
-				"stateMutability": "view",
+				"name": "setRange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nft",
+						"type": "address"
+					}
+				],
+				"name": "setTeamNft",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "team",
+				"name": "teamnft",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -159,6 +282,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -277,27 +413,18 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/structs/EnumerableMap.sol": {
-			"keccak256": "0xca1b8408f5137ff7f73ade1d303a723a00c83067392d43f343628deb7c98d3b4",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f5010f14b2d30cdaf813dab357250be63c250b11f79d4f9233887560ddd4d369",
-				"dweb:/ipfs/QmetSh6t7179Hv2fXynrKpp5uN9b1uKw8MuYjPKnqiDpUY"
-			]
-		},
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/structs/EnumerableSet.sol": {
-			"keccak256": "0x636eab608b4563c01e88042aba9330e6fe69af2c567fe1adf4d85731974ac81d",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://e35967fa779d58a99de2f6d7ac23ef489d09bc18a5668fd231753905e0a9f633",
-				"dweb:/ipfs/QmWUSbnhG7z4fDUYMbCuyJ4nyhqKwzL2jbeFEnVLDxo6R6"
-			]
-		},
 		"worldcup/Mint.sol": {
-			"keccak256": "0x17c7b33f19b859b374d5c9dee42b0fd2963f87e352fa098d70f4f1ffa5dbfdbc",
+			"keccak256": "0x45514a623ba7a854b8c79a0092ecfea293b2d7ed72db40f7d653db7503e538de",
 			"urls": [
-				"bzz-raw://c7b7c3dfcd1ce0678f4cc02a8bf31c6816caea2021b7ea70ed67436831075f27",
-				"dweb:/ipfs/QmXZravYaSi78YvvT9Tc8DuvDZHwV8ds28ohSQ7pEKKix6"
+				"bzz-raw://0096405cfe9bbf89cc447fdadfede2267cebf967112b54e36160cab4bcf09869",
+				"dweb:/ipfs/QmaSNSwLAmAKDKF3wkGRp6hYgHDRREWbFfEwDUjrvBywwa"
+			]
+		},
+		"worldcup/RandomId.sol": {
+			"keccak256": "0xe4b6788257276d95054c1024ec9d6805f808d2fb56c8cd4e7ef98011f87e412a",
+			"urls": [
+				"bzz-raw://3d90c901c9e07b1010e1a9c792f2dd38b17d21288d392cee5f30c1017daf5fb4",
+				"dweb:/ipfs/QmcdKU9S3poWhzar5Qeop6aAK8nBow26u5GnbZr6mSAMdh"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {

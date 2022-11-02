@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"worldcup/BallToken.sol": "Address"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"worldcup/BallToken.sol": {
+			"keccak256": "0xa5891509b4a991755a370255327a337791e95b14380c80b9304a071cca60b979",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://70307b10ecefa26b16327dd7ccad83647f26bfa199bd4f3dec157aed2c92989b",
+				"dweb:/ipfs/Qme35QzCRjQHPw9rxFbs1725WZjhoUA411aQ87nP7Q56FS"
+			]
+		}
+	},
+	"version": 1
+}

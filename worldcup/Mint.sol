@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 
 
 import "./TeamERC1155.sol";
+import "./RandomId.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/structs/EnumerableMap.sol";
 
 
 
@@ -60,16 +60,12 @@ abstract contract Adminable is Context {
 }
 
 
-contract MintTeam is Adminable{
-    address public team;
+contract MintTeam is Adminable, RandomId{
+    address public teamnft;
     address public money;
     address public bank;
     uint256 public price;
-    using EnumerableMap for EnumerableMap.UintToUintMap;
-    uint numbers = 36;
     uint256 public mintLimit = 10;
-    uint256[36] lefts = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
-    uint256[36] rights = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
 
 
     event MintBlindBox(address indexed user, uint256 tokenid, uint256 amount);
@@ -83,21 +79,21 @@ contract MintTeam is Adminable{
             rights[i] = _rights[i];
         }
     }
-    
 
-    function random(uint number, uint nonce) public view returns(uint256) {
-        return uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty,  
-            msg.sender, nonce))) % number + 1;
+    function setTeamNft(address nft) public onlyOwner {
+        teamnft = nft;
     }
 
-    function getRandomTokenid(uint nonce) private view returns (uint256) {
-        uint256 x = random(numbers, nonce);
-        for(uint256 i = 0; i < numbers; ++i) {
-            if(x > lefts[i] && x < rights[i]) {
-                return i + 1;
-            }
-        }
-        return 0;
+    function setPayMoney(address paymoney) public onlyOwner {
+        money = paymoney;
+    }
+
+    function setBank(address _bank) public onlyOwner {
+        bank = _bank;
+    }
+
+    function setBlindBoxPrice(uint256 _price) public onlyOwner {
+        price = _price;
     }
 
     function mintWithBlindBox(uint256 quantity) public  {
@@ -105,30 +101,16 @@ contract MintTeam is Adminable{
         uint256 amount = price * quantity;
         IERC20(money).transferFrom(msg.sender, bank, amount);
 
-        EnumerableMap.UintToUintMap storage tokens;
+        uint256[] memory ids = new uint256[](quantity);
+        uint256[] memory amounts = new uint256[](quantity);
 
         for(uint256 i = 0; i < quantity; ++i){
             uint256 tokenid = getRandomTokenid(i);
-            (bool success, uint256 value)  = tokens.tryGet(tokenid);
-            if(success == true) {
-                value = value + 1;
-                tokens.set(tokenid, value);
-            } else {
-                tokens.set(tokenid, 1);
-            }
+            ids[i] = tokenid;
+            amounts[i] = 1;
         }
 
-        uint256 length = tokens.length();
-        uint256[] memory ids = new uint256[](length);
-        uint256[] memory amounts = new uint256[](length);
-        for(uint256 i = 0; i < length; ++i) {
-            (uint256 id, uint256 amount1) = tokens.at(i);
-            ids[i] = id;
-            amounts[i] = amount1;
-            emit MintBlindBox(msg.sender, id, amount);
-        }
-
-        TeamERC1155(team).mintTokenIdWithWitelist(msg.sender, ids, amounts);
+        TeamERC1155(teamnft).mintTokenIdWithWitelist(msg.sender, ids, amounts);
     }
 
 }
