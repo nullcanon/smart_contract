@@ -23,35 +23,9 @@ contract TeamERC1155 is  Ownable, ERC1155Supply {
         whiteList[account] = true;
     }
 
-
-    function mintWithWiteList(address to) public returns (uint256){
-        require(whiteList[msg.sender], "Not in white");
-        _mint(to, maxIndex, 1, "");
-        maxIndex = maxIndex + 1;
-        tokenSupply = tokenSupply + 1;
-        return maxIndex - 1;
-    }
-
     function mintTokenIdWithWitelist(address to, uint256[] memory tokenids, uint256[] memory amounts) public {
         require(whiteList[msg.sender], "Not in white");
         _mintBatch(to, tokenids, amounts, "");
-    }
-
-    function mintBatchWithNumber(uint256 idsNumber, uint256 amount) public onlyOwner{
-        require(amount > 0, "amount must more than zero");
-        uint256[] memory ids = new uint256[](idsNumber);
-        uint256[] memory amounts = new uint256[](idsNumber);
-        uint256 addSupply;
-        for (uint256 i = tokenSupply; i < (idsNumber + tokenSupply); i++) {
-            ids[i - tokenSupply] = i;
-            amounts[i - tokenSupply] = amount;
-            if(!exists(i)) {
-                ++addSupply;
-            }
-        }
-        tokenSupply = tokenSupply + addSupply;
-        maxIndex = maxIndex + idsNumber;
-        _mintBatch(msg.sender, ids, amounts, "");
     }
 
     function transferWithNumber(uint256 start, uint256 idsNumber, uint256 amount, address to) public {
@@ -73,20 +47,9 @@ contract TeamERC1155 is  Ownable, ERC1155Supply {
         public
         onlyOwner
     {
-        uint256 addSupply;
-        for(uint256 i = 0; i < ids.length; ++i) {
-            if(!exists(ids[i])) {
-                ++addSupply;
-            }
-        }
-        tokenSupply = tokenSupply + addSupply;
         _mintBatch(to, ids, amounts, data);
-        maxIndex = maxIndex + ids.length;
     }
 
-    function getTokenSupply() public view returns (uint256) {
-        return tokenSupply;
-    }
 
     function brun(
         address account,
@@ -97,10 +60,18 @@ contract TeamERC1155 is  Ownable, ERC1155Supply {
             account == _msgSender() || isApprovedForAll(account, _msgSender()),
             "ERC1155: caller is not owner nor approved"
         );
-
         _burn(account, id, value);
-        if (totalSupply(id) == 0) {
-            --tokenSupply;
-        }
+    }
+
+    function brunBatch(
+        address account,
+        uint256[] memory ids,
+        uint256[] memory amounts) public {
+
+        require(
+            account == _msgSender() || isApprovedForAll(account, _msgSender()),
+            "ERC1155: caller is not owner nor approved"
+        );
+        _burnBatch(account, ids, amounts);
     }
 }
