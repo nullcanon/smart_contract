@@ -18,8 +18,10 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     uint256 public nftCost = 1 * 10 ** 18;
 
     enum Ctype {GROUP, KOUT} // 0 小组   1 淘汰
+    enum Target {NOMAL, LEFT, MIDDLE, RIGHT}
     struct Challenge {
         Ctype ctype; 
+        Target winnerTarget;
         uint16 id;
         uint256 startAt;
         uint256 endAt;
@@ -28,13 +30,16 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         uint256 tokenIdRight;
         uint256 leftTotalAmount;
         uint256 rightTotalAmount;
-        uint256 winnerTokenId;
+        uint256 leftMiddleTotalAmount;
+        uint256 rightMiddleTotalAmount;
     }
 
     struct UserInfo {
         uint16 challengeId;
         uint256 amountsLeft;
         uint256 amountsRight;
+        uint256 amountMiddleL;
+        uint256 amountMiddleR;
         bool isTakeReward;
     }
 
@@ -58,6 +63,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         challengeIdInex++;
         challenges[challengeIdInex] = Challenge(
             _ctype,
+            Target.NOMAL,
             challengeIdInex,
             _startAt,
             _endAt,
@@ -66,11 +72,12 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             _tokenIdRight,
             0,
             0,
+            0,
             0
         );
     }
 
-    function enterChallenge(uint16 _id, uint256 _tokenid, uint256 _amount) public {
+    function enterChallenge(uint16 _id, Target _target, uint256 _tokenid, uint256 _amount) public {
 
         require(_amount > 0, "Amount is zero");
         Challenge memory chage = challenges[_id];
@@ -80,30 +87,42 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         require(chage.endAt > block.timestamp, "Challenge is end");
         require(chage.startAt < chage.endAt, "Start time must less than end time");
         require(chage.tokenIdLeft == _tokenid || chage.tokenIdRight == _tokenid, "Token id not in challenge");
+        if(chage.ctype == Ctype.KOUT) {
+            require(_target == Target.LEFT || _target == Target.RIGHT, "Target error");
+        }
 
         IERC1155(teamNft).safeTransferFrom(msg.sender, address(this), _tokenid, _amount, "");
         UserInfo memory userinfo = userChallenges[msg.sender][_id];
         userinfo.challengeId = _id;
 
         userChallengeIds[msg.sender].push(_id);
-        if(chage.tokenIdLeft == _tokenid) {
+        if(_target == Target.LEFT) {
+            require(_tokenid == chage.tokenIdLeft, "Token id not much");
             challenges[_id].leftTotalAmount += _amount;
             userinfo.amountsLeft += _amount;
-        } else {
+        } else if (_target == Target.RIGHT){
             challenges[_id].rightTotalAmount += _amount;
             userinfo.amountsRight += _amount;
+        } else {
+            if(_tokenid == chage.tokenIdLeft) {
+                challenges[_id].leftMiddleTotalAmount += _amount;
+                userinfo.amountMiddleL += _amount;
+            } else {
+                challenges[_id].rightMiddleTotalAmount += _amount;
+                userinfo.amountMiddleR += _amount;  
+            }
         }
 
         userChallenges[msg.sender][_id] = userinfo;
     }
 
-    function openChallenge(uint16 challengeId, uint256 winnerTokenId) public onlyAdmin {
+    function openChallenge(uint16 challengeId, Target winnerTarget) public onlyAdmin {
         Challenge memory challenge = challenges[challengeId];
         require(challenge.id > 0, "Invalid challenge id");
         require(challenge.endAt < block.timestamp, "Challenge not end");
 
         challenge.openAt = block.timestamp;
-        challenge.winnerTokenId = winnerTokenId;
+        challenge.winnerTarget = winnerTarget;
         challenges[challengeId] = challenge;
         emit OpenChallenge(msg.sender, challengeId);
     }
@@ -114,24 +133,39 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         Challenge memory challenge = challenges[_challengeId];
         require(challenge.id > 0, "Invalid challenage");
         require(challenge.openAt < block.timestamp, "Challenage not opened");
+        userinfo.isTakeReward = true;
 
-        uint256 tokenid;
-        uint256 amount;
 
-        if(challenge.winnerTokenId == challenge.tokenIdLeft) {
-            tokenid = challenge.tokenIdLeft;
-            amount = userinfo.amountsLeft;
+        uint256 winAmount;
+        uint256 userWinAmount;
+        if(challenge.winnerTarget == Target.LEFT) {
+            userWinAmount = userinfo.amountsLeft;
+            winAmount = challenge.leftTotalAmount;
+            IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, challenge.tokenIdLeft, userWinAmount, "");
+        } else if (challenge.winnerTarget == Target.RIGHT){
+            userWinAmount = userinfo.amountsRight;
+            winAmount = challenge.rightTotalAmount;
+            IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, challenge.tokenIdRight, userWinAmount, "");
         } else {
-            tokenid = challenge.tokenIdRight;
-            amount = challenge.tokenIdRight;
-        } 
+            userWinAmount = userinfo.amountMiddleL + userinfo.amountMiddleR;
+            winAmount = challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount;
+            if(userinfo.amountMiddleL > 0) {
+                IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, challenge.tokenIdLeft, userinfo.amountMiddleL, "");
+            }
+
+            if(userinfo.amountMiddleR > 0) {
+                IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, challenge.tokenIdRight, userinfo.amountMiddleR, "");
+            }
+        }
+        uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
+
+        uint256 amount = (loseAmount * nftCost * 80 / 100) / winAmount * userWinAmount;
         require(amount > 0, "Winner token amount is zero");
 
-        uint256 winTokenAmount =  amount * nftCost * 80 / 100;
+        IERC20(rewardToken).transfer(msg.sender, amount);
 
-        IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, tokenid, amount, "");
-        IERC20(rewardToken).transfer(msg.sender, winTokenAmount);
-        emit WithdrawReward(msg.sender, challenge.id, winTokenAmount);
+        userChallenges[msg.sender][_challengeId] = userinfo;
+        emit WithdrawReward(msg.sender, challenge.id, amount);
     }
 
     function setTeamNft(address _nft) public onlyOwner {
@@ -144,20 +178,11 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
     function setNftCost(uint256 _amount) public onlyOwner{
         nftCost = _amount;
-    }
-
-    function _getWinnerTokenId(uint16 challengeId) private view returns(uint256) {
-        Challenge memory challenge = challenges[challengeId];
-        if(challenge.winnerTokenId == challenge.tokenIdLeft) {
-            return challenge.tokenIdLeft;
-        } else {
-            return challenge.tokenIdRight;
-        }
-    }
+    }           
 
     function getUserRewards(address account, uint16 challengeId) public view returns(uint256){
         Challenge memory challenge = challenges[challengeId];
-        if(challenge.id == 0) {
+        if(challenge.id == 0 || challenge.openAt == 0) {
             return 0;
         }
 
@@ -167,12 +192,19 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             return 0;
         }
         uint256 winAmount;
-        if(challenge.winnerTokenId == challenge.tokenIdLeft) {
-            winAmount = userinfo.amountsLeft;
+        uint256 userWinAmount;
+        if(challenge.winnerTarget == Target.LEFT) {
+            userWinAmount = userinfo.amountsLeft;
+            winAmount = challenge.leftTotalAmount;
+        } else if (challenge.winnerTarget == Target.RIGHT){
+            userWinAmount = userinfo.amountsRight;
+            winAmount = challenge.rightTotalAmount;
         } else {
-            winAmount = userinfo.amountsRight;
+            userWinAmount = userinfo.amountMiddleL + userinfo.amountMiddleR;
+            winAmount = challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount;
         }
-        return winAmount * nftCost * 80 / 100;
+        uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
+        return (loseAmount * nftCost * 80 / 100) / winAmount * userWinAmount;
     }
 
     function getUserChallenges(address account) public view returns(uint16[] memory) {
