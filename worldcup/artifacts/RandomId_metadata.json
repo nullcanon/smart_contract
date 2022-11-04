@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"worldcup/RandomId.sol": "RandomId"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"worldcup/RandomId.sol": {
+			"keccak256": "0x29be9cf7be13d9b93e6090de3b1df6b6017d5a263adaa99497085de10773c382",
+			"urls": [
+				"bzz-raw://7984b8d410840e1f5adea3f9ec96d716d3800aecb303561bf6fa7e6f44dfba6e",
+				"dweb:/ipfs/QmaRtLGk66dQssmcvT2KuwuUGx5fKihN6NRuo3edfUn1zm"
+			]
+		}
+	},
+	"version": 1
+}

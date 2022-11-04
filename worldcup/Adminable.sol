@@ -1,7 +1,7 @@
 
 pragma solidity ^0.8.10;
 
-abstract contract Context {
+abstract contract Contextq {
     function _msgSender() internal view virtual returns (address) {
         return msg.sender;
     }
@@ -12,7 +12,7 @@ abstract contract Context {
 }
 
 
-abstract contract Adminable is Context {
+abstract contract Adminable is Contextq {
     mapping(address => bool) private _admins;
     address private _owner;
 

@@ -17,7 +17,7 @@ contract MintTeam is Adminable, RandomId{
     uint256 public mintLimit = 10;
 
 
-    event MintBlindBox(address indexed user, uint256 tokenid, uint256 amount);
+    event MintBlindBox(address indexed user, uint256[] tokenids);
 
     function setRange(uint256 _numbers, uint256[] memory _lefts, uint256[] memory _rights) public onlyAdmin {
         require(_lefts.length == _numbers, "lefts length error");
@@ -60,6 +60,8 @@ contract MintTeam is Adminable, RandomId{
         }
 
         TeamERC1155(teamnft).mintTokenIdWithWitelist(msg.sender, ids, amounts);
+
+        emit MintBlindBox(msg.sender, ids);
     }
 
 }
