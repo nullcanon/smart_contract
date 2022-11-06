@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -577,18 +577,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"BeePresell.sol": {
-			"keccak256": "0xae04a8e14022cec9d1bd9486591e96fe26725c8f8ae97b27dc75a81585c77183",
+			"keccak256": "0x6924d1e61dc1dcd05fa97c2afc51f3b5e522fb436412c9ee611465219329b11a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://774f6bf6c685281111b96d6e115f2fad3e61701eaf6df8066ba92b47c8463da6",
-				"dweb:/ipfs/QmcDsvknWJrRMtW78odRe3uXU2wvYvXeMnbW3cqd93ZupT"
+				"bzz-raw://616eaaeb751ee7a0aeb0efb0f40d735c6f64faa6d71bbe2073788ee2c0203277",
+				"dweb:/ipfs/QmdbyraS7szH7LfVAyz5qpgGayZWPFUyF6VVDKwvkUitTP"
 			]
 		}
 	},

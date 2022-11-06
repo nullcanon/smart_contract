@@ -33,4 +33,12 @@ contract Synthesizer is RandomId, Ownable{
     function setTeamNft(address nft) public onlyOwner {
         teamNft = nft;
     }
+    
+    function setNumbers(uint32 _numbers) public onlyOwner{
+        compoundNumbers = _numbers;
+    }
+    
+    function setCompoundNumbers(uint256 numbers) public onlyOwner{
+        compoundNumbers = numbers;
+    }
 }

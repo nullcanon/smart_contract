@@ -26,17 +26,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"worldcup/RandomId.sol": {
-			"keccak256": "0x29be9cf7be13d9b93e6090de3b1df6b6017d5a263adaa99497085de10773c382",
+			"keccak256": "0x35afc1a0f9762d4239bbabe369f7f54596647c16de7b9fdfb2a5521ccf490c7e",
 			"urls": [
-				"bzz-raw://7984b8d410840e1f5adea3f9ec96d716d3800aecb303561bf6fa7e6f44dfba6e",
-				"dweb:/ipfs/QmaRtLGk66dQssmcvT2KuwuUGx5fKihN6NRuo3edfUn1zm"
+				"bzz-raw://85f50f1db698887d337bbc2e937d791c0bca449efc04c7dede68ae475d054281",
+				"dweb:/ipfs/Qma8LWc4ZPNLQVFGAFYwXPoZSiyZ79vR7qPQmD5FnETauS"
 			]
 		}
 	},

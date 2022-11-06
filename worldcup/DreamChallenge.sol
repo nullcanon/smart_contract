@@ -4,7 +4,7 @@ import "./Adminable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol";
-
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/structs/EnumerableSet.sol";
 
 // 1、添加梦幻挑战接口
 // 2、梦幻挑战质押
@@ -17,12 +17,16 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     uint16 public challengeIdInex;
     uint256 public nftCost = 1 * 10 ** 18;
 
+    using EnumerableSet for EnumerableSet.UintSet;
+
     enum Ctype {GROUP, KOUT} // 0 小组   1 淘汰
     enum Target {NOMAL, LEFT, MIDDLE, RIGHT}
     struct Challenge {
         Ctype ctype; 
         Target winnerTarget;
         uint16 id;
+        uint16 placeId;
+        uint16 matchId;
         uint256 startAt;
         uint256 endAt;
         uint256 openAt;
@@ -47,24 +51,31 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
     // user -> (challengeId -> userinfo)
     mapping(address => mapping(uint16 => UserInfo)) userChallenges;
-    mapping(address => uint16[]) userChallengeIds;
+    mapping(address => EnumerableSet.UintSet) userChallengeIds;
 
-    event AddChallenge(address indexed admin, Ctype ctype, uint16 challengeId, uint256 startAt, uint256 endAt, uint256 tokenIdLeft, uint256 tokenIdRigth);
+
+    event AddChallenge(address indexed admin, Ctype ctype, uint16 challengeId, uint16 placeId, uint16 matchId, uint256 startAt, 
+    uint256 endAt, uint256 tokenIdLeft, uint256 tokenIdRight);
+
+    event ModifyChallenge(address indexed admin, Ctype ctype, uint16 challengeId, uint16 placeId, uint16 matchId, uint256 startAt, 
+    uint256 endAt, uint256 tokenIdLeft, uint256 tokenIdRight);
     event EnterChallenge(address indexed user, uint16 challengeId, uint256 tokenid, uint256 amount);
-    event OpenChallenge(address indexed admin, uint16 challenageId);
+    event OpenChallenge(address indexed admin, uint16 challenageId, Target target, uint256 openTime);
     event WithdrawReward(address indexed user, uint16 challageId, uint256 amount);
 
 
-    function addChallenge(Ctype _ctype, uint256 _startAt, uint256 _endAt,
+    function addChallenge(Ctype _ctype, uint16 _placeId, uint16 _matchId, uint256 _startAt, uint256 _endAt,
         uint256 _tokenIdLeft, uint256 _tokenIdRight ) public onlyAdmin {
 
         require(_startAt > block.timestamp, "Start time must more than present time");
-        require(_tokenIdLeft <= 36 && _tokenIdRight <= 36, "Token id must less than 37");
+        require(_tokenIdLeft <= 32 && _tokenIdRight <= 32, "Token id must less than 37");
         challengeIdInex++;
         challenges[challengeIdInex] = Challenge(
             _ctype,
             Target.NOMAL,
             challengeIdInex,
+            _placeId,
+            _matchId,
             _startAt,
             _endAt,
             0,
@@ -75,11 +86,28 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             0,
             0
         );
+        emit AddChallenge(msg.sender, _ctype, challengeIdInex, _placeId, _matchId, _startAt, _endAt, _tokenIdLeft, _tokenIdRight);
+    }
+
+    function modifyChallenge(uint16 _cId, Ctype _ctype, uint16 _placeId, uint16 _matchId, uint256 _startAt, uint256 _endAt,
+        uint256 _tokenIdLeft, uint256 _tokenIdRight) public onlyAdmin{
+            Challenge memory challenge = challenges[_cId];
+            require(challenge.id > 0, "Challenge not found");
+            challenge.ctype = _ctype;
+            challenge.placeId = _placeId;
+            challenge.matchId = _matchId;
+            challenge.startAt = _startAt;
+            challenge.endAt = _endAt;
+            challenge.tokenIdLeft = _tokenIdLeft;
+            challenge.tokenIdRight = _tokenIdRight;
+            challenges[_cId] = challenge;
+            emit ModifyChallenge(msg.sender, _ctype, _cId, _placeId, _matchId, _startAt, _endAt, _tokenIdLeft, _tokenIdRight);
     }
 
     function enterChallenge(uint16 _id, Target _target, uint256 _tokenid, uint256 _amount) public {
 
         require(_amount > 0, "Amount is zero");
+        require(_target != Target.NOMAL, "Target cant NOMAL");
         Challenge memory chage = challenges[_id];
 
         require(chage.id != 0, "Id error");
@@ -95,7 +123,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         UserInfo memory userinfo = userChallenges[msg.sender][_id];
         userinfo.challengeId = _id;
 
-        userChallengeIds[msg.sender].push(_id);
+        userChallengeIds[msg.sender].add(_id);
         if(_target == Target.LEFT) {
             require(_tokenid == chage.tokenIdLeft, "Token id not much");
             challenges[_id].leftTotalAmount += _amount;
@@ -114,17 +142,24 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         }
 
         userChallenges[msg.sender][_id] = userinfo;
+
+        emit EnterChallenge(msg.sender, _id, _tokenid, _amount);
     }
 
-    function openChallenge(uint16 challengeId, Target winnerTarget) public onlyAdmin {
+
+    function openChallenge(uint16 challengeId, Target winnerTarget, uint256 time) public onlyAdmin {
         Challenge memory challenge = challenges[challengeId];
         require(challenge.id > 0, "Invalid challenge id");
         require(challenge.endAt < block.timestamp, "Challenge not end");
 
-        challenge.openAt = block.timestamp;
+        uint256 setTime = time;
+        if(setTime == 0) {
+            setTime = block.timestamp;
+        }
+        challenge.openAt = setTime;
         challenge.winnerTarget = winnerTarget;
         challenges[challengeId] = challenge;
-        emit OpenChallenge(msg.sender, challengeId);
+        emit OpenChallenge(msg.sender, challengeId, winnerTarget, setTime);
     }
 
     // reward token and stake nft.
@@ -207,8 +242,8 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         return (loseAmount * nftCost * 80 / 100) / winAmount * userWinAmount;
     }
 
-    function getUserChallenges(address account) public view returns(uint16[] memory) {
-        return userChallengeIds[account];
+    function getUserChallenges(address account) public view returns(uint[] memory) {
+        return userChallengeIds[account].values();
     }
 
     function getUserChallengeInfo(address account, uint16 challengeId) public view returns(UserInfo memory) {
@@ -217,5 +252,13 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
     function getChallengeInfo(uint16 challengeId) public view returns(Challenge memory) {
         return challenges[challengeId];
+    }
+
+    function withdraw(address nftContractAddress, uint256[] memory tokenids, uint256[] memory amounts) public onlyOwner {
+        IERC1155(nftContractAddress).safeBatchTransferFrom( address(this), msg.sender, tokenids, amounts, "");
+    }
+
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
     }
 }

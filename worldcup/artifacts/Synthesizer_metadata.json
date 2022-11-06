@@ -92,6 +92,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint32",
+						"name": "_numbers",
+						"type": "uint32"
+					}
+				],
+				"name": "setNumbers",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "nft",
 						"type": "address"
@@ -173,7 +186,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -260,24 +273,24 @@
 			]
 		},
 		"worldcup/Compound.sol": {
-			"keccak256": "0x974c6e34fedada59ebc6fa30509b6433553d7de9ff60b7970770e01533af9367",
+			"keccak256": "0x0fc09203fcc66366f099db3f2c985dfda0d85f6d8b3c871541bfb1f7a56682dd",
 			"urls": [
-				"bzz-raw://990f12d88e7a5dd0192fd96755c60b3c3fbe3ba39ecf9f4dad337094e156b213",
-				"dweb:/ipfs/QmZdZZnaWDM4Ptf1A5P5DRHMtDrbEzB1qnEVvfK18RX5KK"
+				"bzz-raw://993a3bf1d2b3f0674cfc8fd689b5a5c8a5a93a048832cdc461312852095f6bb8",
+				"dweb:/ipfs/QmS9JQA94y3Eo124VkDLfvBiZvCppfakkhhZVaFBVvrGJd"
 			]
 		},
 		"worldcup/RandomId.sol": {
-			"keccak256": "0x29be9cf7be13d9b93e6090de3b1df6b6017d5a263adaa99497085de10773c382",
+			"keccak256": "0x35afc1a0f9762d4239bbabe369f7f54596647c16de7b9fdfb2a5521ccf490c7e",
 			"urls": [
-				"bzz-raw://7984b8d410840e1f5adea3f9ec96d716d3800aecb303561bf6fa7e6f44dfba6e",
-				"dweb:/ipfs/QmaRtLGk66dQssmcvT2KuwuUGx5fKihN6NRuo3edfUn1zm"
+				"bzz-raw://85f50f1db698887d337bbc2e937d791c0bca449efc04c7dede68ae475d054281",
+				"dweb:/ipfs/Qma8LWc4ZPNLQVFGAFYwXPoZSiyZ79vR7qPQmD5FnETauS"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0xe2e647cf650d1f623e70ec01c0f529c6857a3862d6f9b47082c4bccd87fdf56a",
+			"keccak256": "0xf5890b8335d6647971a10c1e472e706a59d699a2d082af31cdfd29847063e9a2",
 			"urls": [
-				"bzz-raw://3e073293e2859c0d9db8fe1c36ff1e66ec816102f926a236344641e3c0e2d6a7",
-				"dweb:/ipfs/QmRkhZ9KKJQPxdGeV26VuvS4RNjQ5PuvVamU73uEkzYeG8"
+				"bzz-raw://a9edc21f9bba5dbae745bad913887d5b89ff67441a6df5b01ea7425cf73c6f7e",
+				"dweb:/ipfs/QmbpP9PEAEWWNWBySXZxA2NKQJ8xLiZ3Y4T7rnn8Xe2s4N"
 			]
 		}
 	},

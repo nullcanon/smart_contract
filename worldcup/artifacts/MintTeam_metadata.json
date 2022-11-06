@@ -16,15 +16,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "tokenid",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
+						"internalType": "uint256[]",
+						"name": "tokenids",
+						"type": "uint256[]"
 					}
 				],
 				"name": "MintBlindBox",
@@ -413,25 +407,32 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
-		"worldcup/Mint.sol": {
-			"keccak256": "0x45514a623ba7a854b8c79a0092ecfea293b2d7ed72db40f7d653db7503e538de",
+		"worldcup/Adminable.sol": {
+			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
 			"urls": [
-				"bzz-raw://0096405cfe9bbf89cc447fdadfede2267cebf967112b54e36160cab4bcf09869",
-				"dweb:/ipfs/QmaSNSwLAmAKDKF3wkGRp6hYgHDRREWbFfEwDUjrvBywwa"
+				"bzz-raw://0187eec6d54a3f629e6e24041e2104b33a8b9803fa7e9aa9c0c907b25498f6e9",
+				"dweb:/ipfs/QmVxeGVZBaUipEVyURS4AATr41xZJQJeRT1CeP4UMj5eWb"
+			]
+		},
+		"worldcup/Mint.sol": {
+			"keccak256": "0xa529ef326362eb00512515c54b6eb895897c5f97990de18018a85f82ee93cbd0",
+			"urls": [
+				"bzz-raw://6db829015661c706abd85be2dc30e6a51356124def5686e7891f7c0ca1d03773",
+				"dweb:/ipfs/QmRhPVFe6A8zjBrGrBnpMqNRadW6tbCVrh5Bd9gpsboGM2"
 			]
 		},
 		"worldcup/RandomId.sol": {
-			"keccak256": "0xe4b6788257276d95054c1024ec9d6805f808d2fb56c8cd4e7ef98011f87e412a",
+			"keccak256": "0x35afc1a0f9762d4239bbabe369f7f54596647c16de7b9fdfb2a5521ccf490c7e",
 			"urls": [
-				"bzz-raw://3d90c901c9e07b1010e1a9c792f2dd38b17d21288d392cee5f30c1017daf5fb4",
-				"dweb:/ipfs/QmcdKU9S3poWhzar5Qeop6aAK8nBow26u5GnbZr6mSAMdh"
+				"bzz-raw://85f50f1db698887d337bbc2e937d791c0bca449efc04c7dede68ae475d054281",
+				"dweb:/ipfs/Qma8LWc4ZPNLQVFGAFYwXPoZSiyZ79vR7qPQmD5FnETauS"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0x550b0ce8b636c6d785b9c8ea189958ae520331fda486f9bbd86c19489a2f2f14",
+			"keccak256": "0xf5890b8335d6647971a10c1e472e706a59d699a2d082af31cdfd29847063e9a2",
 			"urls": [
-				"bzz-raw://f2dcf23505f9450be4fc897a49fee6e42e0d354d7e28c71185e068531de8e8b8",
-				"dweb:/ipfs/Qma7CxWRK4d3nhQMFzTRWh96J6FBHt78HAuCtGDA9FqA4j"
+				"bzz-raw://a9edc21f9bba5dbae745bad913887d5b89ff67441a6df5b01ea7425cf73c6f7e",
+				"dweb:/ipfs/QmbpP9PEAEWWNWBySXZxA2NKQJ8xLiZ3Y4T7rnn8Xe2s4N"
 			]
 		}
 	},

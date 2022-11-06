@@ -28,6 +28,18 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "uint16",
+						"name": "placeId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "matchId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "startAt",
 						"type": "uint256"
@@ -47,7 +59,7 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "tokenIdRigth",
+						"name": "tokenIdRight",
 						"type": "uint256"
 					}
 				],
@@ -121,9 +133,82 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "enum DreamChallenge.Ctype",
+						"name": "ctype",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "challengeId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "placeId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "matchId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "startAt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "endAt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenIdLeft",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenIdRight",
+						"type": "uint256"
+					}
+				],
+				"name": "ModifyChallenge",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"indexed": false,
 						"internalType": "uint16",
 						"name": "challenageId",
 						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum DreamChallenge.Target",
+						"name": "target",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "openTime",
+						"type": "uint256"
 					}
 				],
 				"name": "OpenChallenge",
@@ -181,6 +266,16 @@
 						"type": "uint8"
 					},
 					{
+						"internalType": "uint16",
+						"name": "_placeId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "_matchId",
+						"type": "uint16"
+					},
+					{
 						"internalType": "uint256",
 						"name": "_startAt",
 						"type": "uint256"
@@ -217,6 +312,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "emergencyWithdrawToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -272,6 +385,16 @@
 							{
 								"internalType": "uint16",
 								"name": "id",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "placeId",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "matchId",
 								"type": "uint16"
 							},
 							{
@@ -395,9 +518,9 @@
 				"name": "getUserChallenges",
 				"outputs": [
 					{
-						"internalType": "uint16[]",
+						"internalType": "uint256[]",
 						"name": "",
-						"type": "uint16[]"
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -460,6 +583,54 @@
 					}
 				],
 				"name": "modificationAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "_cId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "enum DreamChallenge.Ctype",
+						"name": "_ctype",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint16",
+						"name": "_placeId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "_matchId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_startAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_endAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenIdLeft",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenIdRight",
+						"type": "uint256"
+					}
+				],
+				"name": "modifyChallenge",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -566,6 +737,11 @@
 						"internalType": "enum DreamChallenge.Target",
 						"name": "winnerTarget",
 						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
 					}
 				],
 				"name": "openChallenge",
@@ -693,6 +869,29 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "nftContractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "tokenids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint16",
 						"name": "_challengeId",
 						"type": "uint16"
@@ -729,7 +928,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -791,6 +990,14 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/structs/EnumerableSet.sol": {
+			"keccak256": "0x636eab608b4563c01e88042aba9330e6fe69af2c567fe1adf4d85731974ac81d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e35967fa779d58a99de2f6d7ac23ef489d09bc18a5668fd231753905e0a9f633",
+				"dweb:/ipfs/QmWUSbnhG7z4fDUYMbCuyJ4nyhqKwzL2jbeFEnVLDxo6R6"
+			]
+		},
 		"worldcup/Adminable.sol": {
 			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
 			"urls": [
@@ -799,10 +1006,10 @@
 			]
 		},
 		"worldcup/DreamChallenge.sol": {
-			"keccak256": "0x9b69508996b040c88b765c4c48958b2de7e115aefc9e7b8efc5f55f2417ef714",
+			"keccak256": "0x825bff6f7f51ab5e0be783a29ec45f5010657d8acb28b8658d869e241dbd29cd",
 			"urls": [
-				"bzz-raw://ab8a2b84c9f122b8b7d70ebcc5233283aeee383453e0ed614307c8930a6f754a",
-				"dweb:/ipfs/QmXgxSm8WnZi9TrkQUNCsVggmPGu26guEMsifjJHu7ikdB"
+				"bzz-raw://0e77f5dfa943199f8cb019744f231f39eabb8721819c9950ed09162b5f24704d",
+				"dweb:/ipfs/QmVDxkzapocv65E37oNp6QvjuRYCjvWRuEJvHxLArmeTAJ"
 			]
 		}
 	},

@@ -190,8 +190,35 @@
 			}
 		],
 		"devdoc": {
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"allowance(address,address)": {
+					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+				},
+				"approve(address,uint256)": {
+					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
+				},
+				"balanceOf(address)": {
+					"details": "Returns the amount of tokens owned by `account`."
+				},
+				"totalSupply()": {
+					"details": "Returns the amount of tokens in existence."
+				},
+				"transfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -217,11 +244,11 @@
 	},
 	"sources": {
 		"inviter_presell/token.sol": {
-			"keccak256": "0x95fe4eba26d7345562772a8ab3f3839db7225531fcebebe690af869781652e1c",
+			"keccak256": "0x01ff9de097cf49ec75f1e915ff9a9102f8fef29859e55eee22e723588a9eb350",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://935068d82c7006b7ba10b76b89de7dfafbfe83a1a9b141211954326cc2c1b2c2",
-				"dweb:/ipfs/QmQX3gmzYTBHq4RxGqP8UBW6XcTE5TirLneER47Mz9mSfE"
+				"bzz-raw://37cccfac40dcdae5cb3aaecca809b483d590ae786174d4f59bb1491732429e42",
+				"dweb:/ipfs/QmTvXNExn2iiJ4GiPHuisnptVcUUTWrQysxFCTc738hdNo"
 			]
 		}
 	},

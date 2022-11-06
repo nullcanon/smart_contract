@@ -33,11 +33,11 @@
 	},
 	"sources": {
 		"inviter_presell/token.sol": {
-			"keccak256": "0x95fe4eba26d7345562772a8ab3f3839db7225531fcebebe690af869781652e1c",
+			"keccak256": "0x01ff9de097cf49ec75f1e915ff9a9102f8fef29859e55eee22e723588a9eb350",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://935068d82c7006b7ba10b76b89de7dfafbfe83a1a9b141211954326cc2c1b2c2",
-				"dweb:/ipfs/QmQX3gmzYTBHq4RxGqP8UBW6XcTE5TirLneER47Mz9mSfE"
+				"bzz-raw://37cccfac40dcdae5cb3aaecca809b483d590ae786174d4f59bb1491732429e42",
+				"dweb:/ipfs/QmTvXNExn2iiJ4GiPHuisnptVcUUTWrQysxFCTc738hdNo"
 			]
 		}
 	},
