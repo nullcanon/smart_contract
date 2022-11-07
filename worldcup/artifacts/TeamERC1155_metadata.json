@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -670,7 +670,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -757,10 +757,10 @@
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0xf5890b8335d6647971a10c1e472e706a59d699a2d082af31cdfd29847063e9a2",
+			"keccak256": "0xe2e647cf650d1f623e70ec01c0f529c6857a3862d6f9b47082c4bccd87fdf56a",
 			"urls": [
-				"bzz-raw://a9edc21f9bba5dbae745bad913887d5b89ff67441a6df5b01ea7425cf73c6f7e",
-				"dweb:/ipfs/QmbpP9PEAEWWNWBySXZxA2NKQJ8xLiZ3Y4T7rnn8Xe2s4N"
+				"bzz-raw://3e073293e2859c0d9db8fe1c36ff1e66ec816102f926a236344641e3c0e2d6a7",
+				"dweb:/ipfs/QmRkhZ9KKJQPxdGeV26VuvS4RNjQ5PuvVamU73uEkzYeG8"
 			]
 		}
 	},

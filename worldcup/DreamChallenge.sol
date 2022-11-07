@@ -59,7 +59,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
     event ModifyChallenge(address indexed admin, Ctype ctype, uint16 challengeId, uint16 placeId, uint16 matchId, uint256 startAt, 
     uint256 endAt, uint256 tokenIdLeft, uint256 tokenIdRight);
-    event EnterChallenge(address indexed user, uint16 challengeId, uint256 tokenid, uint256 amount);
+    event EnterChallenge(address indexed user, uint16 challengeId, Target target, uint256 tokenid, uint256 amount);
     event OpenChallenge(address indexed admin, uint16 challenageId, Target target, uint256 openTime);
     event WithdrawReward(address indexed user, uint16 challageId, uint256 amount);
 
@@ -119,6 +119,14 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             require(_target == Target.LEFT || _target == Target.RIGHT, "Target error");
         }
 
+        if(_target == Target.LEFT) {
+            require(_tokenid == chage.tokenIdLeft, "tokenId and target not match");
+        }
+        
+        if(_target == Target.RIGHT) {
+            require(_tokenid == chage.tokenIdRight, "tokenId and target not match");
+        }
+
         IERC1155(teamNft).safeTransferFrom(msg.sender, address(this), _tokenid, _amount, "");
         UserInfo memory userinfo = userChallenges[msg.sender][_id];
         userinfo.challengeId = _id;
@@ -143,7 +151,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
         userChallenges[msg.sender][_id] = userinfo;
 
-        emit EnterChallenge(msg.sender, _id, _tokenid, _amount);
+        emit EnterChallenge(msg.sender, _id, _target, _tokenid, _amount);
     }
 
 

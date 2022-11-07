@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -80,6 +80,12 @@
 						"internalType": "uint16",
 						"name": "challengeId",
 						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum DreamChallenge.Target",
+						"name": "target",
+						"type": "uint8"
 					},
 					{
 						"indexed": false,
@@ -928,7 +934,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -999,17 +1005,17 @@
 			]
 		},
 		"worldcup/Adminable.sol": {
-			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
+			"keccak256": "0x7e68b2fa293ae9f09bd8731b024c0879440b82338e7a69faec65f0a3d647ac4d",
 			"urls": [
-				"bzz-raw://0187eec6d54a3f629e6e24041e2104b33a8b9803fa7e9aa9c0c907b25498f6e9",
-				"dweb:/ipfs/QmVxeGVZBaUipEVyURS4AATr41xZJQJeRT1CeP4UMj5eWb"
+				"bzz-raw://7e0ceac36d85ee1ae54b7c63385e1d9b72343042f2a082f66b28c256ff6c9d6a",
+				"dweb:/ipfs/QmTZgsZ8ctRqjyrFRrkjxd3MMLBdTaeER2nMGPRADCSESi"
 			]
 		},
 		"worldcup/DreamChallenge.sol": {
-			"keccak256": "0x825bff6f7f51ab5e0be783a29ec45f5010657d8acb28b8658d869e241dbd29cd",
+			"keccak256": "0x057c047c65df628f89fce82a54f8c30c2ed139a0ab7317f98e7dc5450254b879",
 			"urls": [
-				"bzz-raw://0e77f5dfa943199f8cb019744f231f39eabb8721819c9950ed09162b5f24704d",
-				"dweb:/ipfs/QmVDxkzapocv65E37oNp6QvjuRYCjvWRuEJvHxLArmeTAJ"
+				"bzz-raw://3d9aeb5a979de9285d8c454d323362895aaab15ab46690d0a81d88a35d3c2d1d",
+				"dweb:/ipfs/QmSeLTzuU4DaVZZwFrqjSgZMY6p7GhcqDLan29jCM2gJKE"
 			]
 		}
 	},
