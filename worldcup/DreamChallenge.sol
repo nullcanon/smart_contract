@@ -15,6 +15,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     address public teamNft;
     address public rewardToken;
     uint16 public challengeIdInex;
+    uint256 public rate = 80;
     uint256 public nftCost = 1 * 10 ** 18;
 
     using EnumerableSet for EnumerableSet.UintSet;
@@ -27,6 +28,8 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         uint16 id;
         uint16 placeId;
         uint16 matchId;
+        uint16 leftScore;
+        uint16 rightScore;
         uint256 startAt;
         uint256 endAt;
         uint256 openAt;
@@ -60,7 +63,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     event ModifyChallenge(address indexed admin, Ctype ctype, uint16 challengeId, uint16 placeId, uint16 matchId, uint256 startAt, 
     uint256 endAt, uint256 tokenIdLeft, uint256 tokenIdRight);
     event EnterChallenge(address indexed user, uint16 challengeId, Target target, uint256 tokenid, uint256 amount);
-    event OpenChallenge(address indexed admin, uint16 challenageId, Target target, uint256 openTime);
+    event OpenChallenge(address indexed admin, uint16 challenageId, uint16 leftScore, uint16 rightScore, Target target, uint256 openTime);
     event WithdrawReward(address indexed user, uint16 challageId, uint256 amount);
 
 
@@ -76,6 +79,8 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             challengeIdInex,
             _placeId,
             _matchId,
+            0,
+            0,
             _startAt,
             _endAt,
             0,
@@ -155,7 +160,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     }
 
 
-    function openChallenge(uint16 challengeId, Target winnerTarget, uint256 time) public onlyAdmin {
+    function openChallenge(uint16 challengeId, Target winnerTarget, uint16 leftScore, uint16 rightScore, uint256 time) public onlyAdmin {
         Challenge memory challenge = challenges[challengeId];
         require(challenge.id > 0, "Invalid challenge id");
         require(challenge.endAt < block.timestamp, "Challenge not end");
@@ -167,7 +172,9 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         challenge.openAt = setTime;
         challenge.winnerTarget = winnerTarget;
         challenges[challengeId] = challenge;
-        emit OpenChallenge(msg.sender, challengeId, winnerTarget, setTime);
+        challenge.leftScore = leftScore;
+        challenge.rightScore = rightScore;
+        emit OpenChallenge(msg.sender, challengeId, leftScore, rightScore, winnerTarget, setTime);
     }
 
     // reward token and stake nft.
@@ -213,6 +220,10 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
     function setTeamNft(address _nft) public onlyOwner {
         teamNft = _nft;
+    }
+
+    function setRate(uint256 _rate) public onlyOwner {
+        rate = _rate;
     }
 
     function setRewardToken(address _token) public onlyOwner {

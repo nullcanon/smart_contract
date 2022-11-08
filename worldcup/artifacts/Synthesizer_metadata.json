@@ -71,6 +71,64 @@
 			},
 			{
 				"inputs": [],
+				"name": "getLefts",
+				"outputs": [
+					{
+						"internalType": "uint256[32]",
+						"name": "",
+						"type": "uint256[32]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getRights",
+				"outputs": [
+					{
+						"internalType": "uint256[32]",
+						"name": "",
+						"type": "uint256[32]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "lefts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -87,6 +145,25 @@
 				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rights",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -273,17 +350,17 @@
 			]
 		},
 		"worldcup/Compound.sol": {
-			"keccak256": "0x0fc09203fcc66366f099db3f2c985dfda0d85f6d8b3c871541bfb1f7a56682dd",
+			"keccak256": "0x775edaa672e50a0d9fc8ae078e95a6b94e97d6a9d69cddaa62970513f8597abc",
 			"urls": [
-				"bzz-raw://993a3bf1d2b3f0674cfc8fd689b5a5c8a5a93a048832cdc461312852095f6bb8",
-				"dweb:/ipfs/QmS9JQA94y3Eo124VkDLfvBiZvCppfakkhhZVaFBVvrGJd"
+				"bzz-raw://61d3a69e7a0b74bc5d4cd24399a1e8cf703bbcc7e31252ea5a7d04212aed7ac5",
+				"dweb:/ipfs/QmPhFxSXFmkUjrqujrTvsvU3DLx7D2besHMe422mvoJZwC"
 			]
 		},
 		"worldcup/RandomId.sol": {
-			"keccak256": "0x35afc1a0f9762d4239bbabe369f7f54596647c16de7b9fdfb2a5521ccf490c7e",
+			"keccak256": "0x794268dff56423195e73bdda01b9dfc6f635fc70e93503d9ec1a78979eef4457",
 			"urls": [
-				"bzz-raw://85f50f1db698887d337bbc2e937d791c0bca449efc04c7dede68ae475d054281",
-				"dweb:/ipfs/Qma8LWc4ZPNLQVFGAFYwXPoZSiyZ79vR7qPQmD5FnETauS"
+				"bzz-raw://34681f7a42d36b2db52bae4f9387e633f7eb4692ad8517394b5f7af7b1eb9654",
+				"dweb:/ipfs/Qmc8fQiHBqfnjjLASJ3XXiPMmoa6ZXwxMnhJwweEL7DVqd"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {

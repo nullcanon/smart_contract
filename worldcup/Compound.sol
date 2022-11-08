@@ -38,7 +38,4 @@ contract Synthesizer is RandomId, Ownable{
         compoundNumbers = _numbers;
     }
     
-    function setCompoundNumbers(uint256 numbers) public onlyOwner{
-        compoundNumbers = numbers;
-    }
 }
