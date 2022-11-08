@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 
 abstract contract RandomId {
 
-    uint numbers = 32;
-    uint256[32] lefts = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-    uint256[32] rights = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32];
+    uint public numbers = 32;
+    uint256[32] public lefts = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+    uint256[32] public rights = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32];
 
 
     function random(uint number, uint nonce) internal virtual view returns(uint256) {
@@ -23,6 +23,12 @@ abstract contract RandomId {
         return 0;
     }
 
+    function getLefts() public  virtual view returns (uint256[32] memory) {
+        return lefts;
+    }
 
+    function getRights() public  virtual view returns (uint256[32] memory) {
+        return rights;
+    }
 
 }

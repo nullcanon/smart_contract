@@ -1,10 +1,88 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getLefts",
+				"outputs": [
+					{
+						"internalType": "uint256[32]",
+						"name": "",
+						"type": "uint256[32]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getRights",
+				"outputs": [
+					{
+						"internalType": "uint256[32]",
+						"name": "",
+						"type": "uint256[32]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "lefts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rights",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -26,17 +104,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"worldcup/RandomId.sol": {
-			"keccak256": "0x35afc1a0f9762d4239bbabe369f7f54596647c16de7b9fdfb2a5521ccf490c7e",
+			"keccak256": "0x16154601f4364d404738f43fd91015a8d80242cd856ffeb16ca894cda738ff27",
 			"urls": [
-				"bzz-raw://85f50f1db698887d337bbc2e937d791c0bca449efc04c7dede68ae475d054281",
-				"dweb:/ipfs/Qma8LWc4ZPNLQVFGAFYwXPoZSiyZ79vR7qPQmD5FnETauS"
+				"bzz-raw://226d7db99887d9670499c94d319f85c54cbf24896c8363d31b610a22558e5dd4",
+				"dweb:/ipfs/Qmf4GJbs2p7r7dpEojZjNmg1zAMFeCC7tJxjvtMbJxs2Y9"
 			]
 		}
 	},

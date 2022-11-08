@@ -99,11 +99,11 @@
 	},
 	"sources": {
 		"worldcup/BallToken.sol": {
-			"keccak256": "0xa5891509b4a991755a370255327a337791e95b14380c80b9304a071cca60b979",
+			"keccak256": "0x9085cbdb04c5d378c52066b71ada516fa3a0ac1c6f0670318f9f4a7f29a02892",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://70307b10ecefa26b16327dd7ccad83647f26bfa199bd4f3dec157aed2c92989b",
-				"dweb:/ipfs/Qme35QzCRjQHPw9rxFbs1725WZjhoUA411aQ87nP7Q56FS"
+				"bzz-raw://bf7c9a68e5bc645910c5211023858dd2a3e279bcae229a163c4af8abb2d82785",
+				"dweb:/ipfs/QmSqs9LmE3jdb4W2CyTCUxmKm6gLMeNsDE897RpFBHKouL"
 			]
 		}
 	},

@@ -11,14 +11,22 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 
 contract MintTeam is Adminable, RandomId{
-    address public teamnft;
-    address public money;
-    address public bank;
-    uint256 public price;
+    address public teamnft = 0x9D8f7aEA83ceCF102ab65e9A5b82106b07a68b28;
+    address public money = 0x58a944f9c44D08461A471A1F6C6D15De351d97B3;
+    address public bank = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public daedAddress = 0x000000000000000000000000000000000000dEaD;
+    uint256 public price = 300 * 10 ** 18;
     uint256 public mintLimit = 10;
+    uint256 public feeRateDenominator = 1000;
+    uint256 public feeRateNumerator = 50;
+    
 
+    event MintBlindBox(address indexed user, uint256 price, uint256 quantity, uint256[] tokenids);
 
-    event MintBlindBox(address indexed user, uint256[] tokenids);
+    function setFeeRate(uint256 _feeRateNumerator, uint256 _feeRateDenominator) public onlyOwner{
+        feeRateNumerator = _feeRateNumerator;
+        feeRateDenominator = _feeRateDenominator;
+    }
 
     function setRange(uint256 _numbers, uint256[] memory _lefts, uint256[] memory _rights) public onlyAdmin {
         require(_lefts.length == _numbers, "lefts length error");
@@ -49,7 +57,11 @@ contract MintTeam is Adminable, RandomId{
     function mintWithBlindBox(uint256 quantity) public  {
         require(quantity <= mintLimit, "Exceed the maximum limit");
         uint256 amount = price * quantity;
-        IERC20(money).transferFrom(msg.sender, bank, amount);
+
+        uint256 feeAmount = amount * feeRateNumerator / feeRateDenominator;
+
+        IERC20(money).transferFrom(msg.sender, bank, feeAmount);
+        IERC20(money).transferFrom(msg.sender, daedAddress, amount - feeAmount);
 
         uint256[] memory ids = new uint256[](quantity);
         uint256[] memory amounts = new uint256[](quantity);
@@ -62,7 +74,7 @@ contract MintTeam is Adminable, RandomId{
 
         TeamERC1155(teamnft).mintTokenIdWithWitelist(msg.sender, ids, amounts);
 
-        emit MintBlindBox(msg.sender, ids);
+        emit MintBlindBox(msg.sender, price, quantity, ids);
     }
 
 }
