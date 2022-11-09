@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -776,18 +776,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"worldcup/BallToken.sol": {
-			"keccak256": "0xba8c78cad5cc1ad17c3fef1dd3268a458b458916a423b5b3ea2613d823e106c5",
+			"keccak256": "0x9085cbdb04c5d378c52066b71ada516fa3a0ac1c6f0670318f9f4a7f29a02892",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://55b0b2549cf1b214b05d41d6593b53ac1f5a68824b65901ee028725567236eca",
-				"dweb:/ipfs/Qma8hwWLkuUVQ1RqMZdub6CQvyG8Ttrmy31zfMa5NzGEx2"
+				"bzz-raw://bf7c9a68e5bc645910c5211023858dd2a3e279bcae229a163c4af8abb2d82785",
+				"dweb:/ipfs/QmSqs9LmE3jdb4W2CyTCUxmKm6gLMeNsDE897RpFBHKouL"
 			]
 		}
 	},

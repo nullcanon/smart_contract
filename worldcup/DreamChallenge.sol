@@ -12,8 +12,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 contract DreamChallenge is Adminable, ERC1155Holder{
 
-    address public teamNft;
-    address public rewardToken;
+    address public teamNft = 0x9D8f7aEA83ceCF102ab65e9A5b82106b07a68b28;
+    address public rewardToken = 0x58a944f9c44D08461A471A1F6C6D15De351d97B3;
     uint16 public challengeIdInex;
     uint256 public rate = 80;
     uint256 public nftCost = 1 * 10 ** 18;
@@ -183,6 +183,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         Challenge memory challenge = challenges[_challengeId];
         require(challenge.id > 0, "Invalid challenage");
         require(challenge.openAt < block.timestamp, "Challenage not opened");
+        require(userinfo.isTakeReward == false, "Has take reward");
         userinfo.isTakeReward = true;
 
 
@@ -209,7 +210,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         }
         uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
 
-        uint256 amount = (loseAmount * nftCost * 80 / 100) / winAmount * userWinAmount;
+        uint256 amount = (loseAmount * nftCost * rate / 100) / winAmount * userWinAmount;
         require(amount > 0, "Winner token amount is zero");
 
         IERC20(rewardToken).transfer(msg.sender, amount);
@@ -242,7 +243,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
 
         UserInfo memory userinfo = userChallenges[account][challengeId];
 
-        if(userinfo.challengeId == 0) {
+        if(userinfo.challengeId == 0 || userinfo.isTakeReward == true) {
             return 0;
         }
         uint256 winAmount;
@@ -258,7 +259,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             winAmount = challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount;
         }
         uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
-        return (loseAmount * nftCost * 80 / 100) / winAmount * userWinAmount;
+        return (loseAmount * nftCost * rate / 100) / winAmount * userWinAmount;
     }
 
     function getUserChallenges(address account) public view returns(uint[] memory) {

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -992,7 +992,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -1063,17 +1063,17 @@
 			]
 		},
 		"worldcup/Adminable.sol": {
-			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
+			"keccak256": "0x7e68b2fa293ae9f09bd8731b024c0879440b82338e7a69faec65f0a3d647ac4d",
 			"urls": [
-				"bzz-raw://0187eec6d54a3f629e6e24041e2104b33a8b9803fa7e9aa9c0c907b25498f6e9",
-				"dweb:/ipfs/QmVxeGVZBaUipEVyURS4AATr41xZJQJeRT1CeP4UMj5eWb"
+				"bzz-raw://7e0ceac36d85ee1ae54b7c63385e1d9b72343042f2a082f66b28c256ff6c9d6a",
+				"dweb:/ipfs/QmTZgsZ8ctRqjyrFRrkjxd3MMLBdTaeER2nMGPRADCSESi"
 			]
 		},
 		"worldcup/DreamChallenge.sol": {
-			"keccak256": "0xa1417a2c2b5c23f5bdb65665c6b7c46746b4e087163733eefe036314f378c6ab",
+			"keccak256": "0x3f63c830e6de41c7febf80f5e2c22415e4fd76f9958986d58df53e82c1c84720",
 			"urls": [
-				"bzz-raw://dc3173146b7742eb64bb06f4d1f74dde784d3dbfbdc035c930684dfc257b8e7d",
-				"dweb:/ipfs/QmRASZK5CGixNE2UpJQWPovCdvS42wVMvHdVvAyb6g69S1"
+				"bzz-raw://bd659bb8686524e1c7cd3c9582200975f76f0e5987c6f857d3cc1d9854301e2d",
+				"dweb:/ipfs/QmRN31snbx2iQ6ZRP5VRethQTEn3avEFoUTFMfHCBuGA6A"
 			]
 		}
 	},
