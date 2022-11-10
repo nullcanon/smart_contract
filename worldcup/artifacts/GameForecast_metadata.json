@@ -1,0 +1,495 @@
+{
+	"compiler": {
+		"version": "0.8.13+commit.abaa5c0e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "oldState",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "newState",
+						"type": "bool"
+					}
+				],
+				"name": "ModificationAdmin",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "forecastId",
+						"type": "uint16"
+					}
+				],
+				"name": "claimForecastRewards",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cupNft",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8[8]",
+						"name": "_teams8",
+						"type": "uint8[8]"
+					},
+					{
+						"internalType": "uint8[4]",
+						"name": "_teams4",
+						"type": "uint8[4]"
+					},
+					{
+						"internalType": "uint8[2]",
+						"name": "_teams2",
+						"type": "uint8[2]"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_first",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_third",
+						"type": "uint8"
+					}
+				],
+				"name": "enterForecast",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "gameResult",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "first",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "third",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getGameResultFirst",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getGameResultTeams2",
+				"outputs": [
+					{
+						"internalType": "uint8[2]",
+						"name": "",
+						"type": "uint8[2]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getGameResultTeams4",
+				"outputs": [
+					{
+						"internalType": "uint8[4]",
+						"name": "",
+						"type": "uint8[4]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getGameResultTeams8",
+				"outputs": [
+					{
+						"internalType": "uint8[8]",
+						"name": "",
+						"type": "uint8[8]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getGameResultThird",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTeam16Tokenid",
+				"outputs": [
+					{
+						"internalType": "uint8[16]",
+						"name": "",
+						"type": "uint8[16]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "forecastId",
+						"type": "uint16"
+					}
+				],
+				"name": "getUserForecastRewards",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "forecastId",
+						"type": "uint16"
+					}
+				],
+				"name": "getUserHits",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isAdmin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "state",
+						"type": "bool"
+					}
+				],
+				"name": "modificationAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8[8]",
+						"name": "_teams8",
+						"type": "uint8[8]"
+					},
+					{
+						"internalType": "uint8[4]",
+						"name": "_teams4",
+						"type": "uint8[4]"
+					},
+					{
+						"internalType": "uint8[2]",
+						"name": "_teams2",
+						"type": "uint8[2]"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_first",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_third",
+						"type": "uint8"
+					}
+				],
+				"name": "openForecast",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "openTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8[16]",
+						"name": "_teams16",
+						"type": "uint8[16]"
+					}
+				],
+				"name": "setTeam16Tokenid",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "team16",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"name": "userForecastInfo",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "first",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "third",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userForecastNumbers",
+				"outputs": [
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"worldcup/GameForecast.sol": "GameForecast"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"worldcup/Adminable.sol": {
+			"keccak256": "0x7e68b2fa293ae9f09bd8731b024c0879440b82338e7a69faec65f0a3d647ac4d",
+			"urls": [
+				"bzz-raw://7e0ceac36d85ee1ae54b7c63385e1d9b72343042f2a082f66b28c256ff6c9d6a",
+				"dweb:/ipfs/QmTZgsZ8ctRqjyrFRrkjxd3MMLBdTaeER2nMGPRADCSESi"
+			]
+		},
+		"worldcup/GameForecast.sol": {
+			"keccak256": "0x0050a0baa77794ac881315fce94e34d6385d57dbe6fd077cced0dfddbb78e0d7",
+			"urls": [
+				"bzz-raw://0e024fdf44bb23e0f52a7f955b8a9eb6840318bba826e908fd075ae0373b6ea5",
+				"dweb:/ipfs/QmTgMS7DzbdncKqbP3nEHcd8YCX6sDXJHrRGDLwEQdP9MW"
+			]
+		}
+	},
+	"version": 1
+}

@@ -10,7 +10,6 @@ import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/acc
 
 contract TeamERC1155 is  Ownable, ERC1155Supply {
 
-    uint256 public tokenSupply;
     uint256 public maxIndex = 1;
     mapping(address => bool) public whiteList;
 
