@@ -1,10 +1,60 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "ClaimRewards",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8[]",
+						"name": "teams16",
+						"type": "uint8[]"
+					}
+				],
+				"name": "EnterForecast",
+				"type": "event"
+			},
 			{
 				"anonymous": false,
 				"inputs": [
@@ -28,6 +78,31 @@
 					}
 				],
 				"name": "ModificationAdmin",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oper",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8[]",
+						"name": "teams16",
+						"type": "uint8[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "opentime",
+						"type": "uint256"
+					}
+				],
+				"name": "OpenForecast",
 				"type": "event"
 			},
 			{
@@ -76,31 +151,37 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "cupTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "endTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
-						"internalType": "uint8[8]",
-						"name": "_teams8",
-						"type": "uint8[8]"
-					},
-					{
-						"internalType": "uint8[4]",
-						"name": "_teams4",
-						"type": "uint8[4]"
-					},
-					{
-						"internalType": "uint8[2]",
-						"name": "_teams2",
-						"type": "uint8[2]"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_first",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_third",
-						"type": "uint8"
+						"internalType": "uint8[]",
+						"name": "_teams16",
+						"type": "uint8[]"
 					}
 				],
 				"name": "enterForecast",
@@ -128,64 +209,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "getGameResultFirst",
+				"name": "getGameResults",
 				"outputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint8[16]",
 						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getGameResultTeams2",
-				"outputs": [
-					{
-						"internalType": "uint8[2]",
-						"name": "",
-						"type": "uint8[2]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getGameResultTeams4",
-				"outputs": [
-					{
-						"internalType": "uint8[4]",
-						"name": "",
-						"type": "uint8[4]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getGameResultTeams8",
-				"outputs": [
-					{
-						"internalType": "uint8[8]",
-						"name": "",
-						"type": "uint8[8]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getGameResultThird",
-				"outputs": [
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
+						"type": "uint8[16]"
 					}
 				],
 				"stateMutability": "view",
@@ -194,6 +223,30 @@
 			{
 				"inputs": [],
 				"name": "getTeam16Tokenid",
+				"outputs": [
+					{
+						"internalType": "uint8[16]",
+						"name": "",
+						"type": "uint8[16]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "forecastId",
+						"type": "uint16"
+					}
+				],
+				"name": "getUserForecastInfo",
 				"outputs": [
 					{
 						"internalType": "uint8[16]",
@@ -244,6 +297,25 @@
 				"name": "getUserHits",
 				"outputs": [
 					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"name": "hitsRewards",
+				"outputs": [
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
@@ -275,6 +347,43 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"name": "isRewards",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isSetReward",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "admin",
 						"type": "address"
 					},
@@ -292,29 +401,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint8[8]",
-						"name": "_teams8",
-						"type": "uint8[8]"
+						"internalType": "uint8[]",
+						"name": "_teams16",
+						"type": "uint8[]"
 					},
 					{
-						"internalType": "uint8[4]",
-						"name": "_teams4",
-						"type": "uint8[4]"
-					},
-					{
-						"internalType": "uint8[2]",
-						"name": "_teams2",
-						"type": "uint8[2]"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_first",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_third",
-						"type": "uint8"
+						"internalType": "uint256",
+						"name": "_openTime",
+						"type": "uint256"
 					}
 				],
 				"name": "openForecast",
@@ -356,6 +450,63 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "rewardToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "nft",
+						"type": "address"
+					}
+				],
+				"name": "setCupNft",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "setRewardToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16[]",
+						"name": "hitTimes",
+						"type": "uint16[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "rewards",
+						"type": "uint256[]"
+					}
+				],
+				"name": "setRewards",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint8[16]",
@@ -372,6 +523,37 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_endTime",
+						"type": "uint256"
+					}
+				],
+				"name": "setTime",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -382,6 +564,35 @@
 						"internalType": "uint8",
 						"name": "",
 						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8[]",
+						"name": "_teams16",
+						"type": "uint8[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "start",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "end",
+						"type": "uint256"
+					}
+				],
+				"name": "test",
+				"outputs": [
+					{
+						"internalType": "uint8[]",
+						"name": "",
+						"type": "uint8[]"
 					}
 				],
 				"stateMutability": "view",
@@ -470,24 +681,119 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"worldcup/Adminable.sol": {
-			"keccak256": "0x7e68b2fa293ae9f09bd8731b024c0879440b82338e7a69faec65f0a3d647ac4d",
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://7e0ceac36d85ee1ae54b7c63385e1d9b72343042f2a082f66b28c256ff6c9d6a",
-				"dweb:/ipfs/QmTZgsZ8ctRqjyrFRrkjxd3MMLBdTaeER2nMGPRADCSESi"
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
+			"keccak256": "0xd917747dc87f189c6779b894f367a028f9dca4be930283cccec8f312966af820",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7a5e5b99830cf233f77aa3b1bd1f57561faee103beeee88e6a6f86d044817bbb",
+				"dweb:/ipfs/QmREYidSDpHPig3AhxzsMHg3w2ZtMeGfRhcokXxEZyj6fC"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
+			"keccak256": "0x6392f2cfe3a5ee802227fe7a2dfd47096d881aec89bddd214b35c5b46d3cd941",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bd9c47a375639888e726a99da718890ba16d17d7ad9eacb0ccc892d46d1b3ee0",
+				"dweb:/ipfs/Qmb41W5RUjy2sWg49A2rMnxekSeEk6SvGyJL5tyCCSr7un"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec",
+				"dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/extensions/ERC1155Supply.sol": {
+			"keccak256": "0xe3deb5f3b0c9d12944f62ab680f041bbf1910d9d3ac6b545b4b8e399643c538d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e1f5bc920c2f9859b02dce02d7d0211608398287c643d42ad048555c9b204dc8",
+				"dweb:/ipfs/QmSu2MFkCSPNG6pRsXxMai7Do7EDqLwpnnHVDB7q2wHJnr"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+			"keccak256": "0xa66d18b9a85458d28fc3304717964502ae36f7f8a2ff35bc83f6f85d74b03574",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797",
+				"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
+			"keccak256": "0x68404b57d114b893554b0e54334b32f578f5d1abf61830025c83fb71dc1944ce",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d3d0a94b3c8afd92c2a9f03f3325e9ac22cec56e995b94ff212670ff3653f0d3",
+				"dweb:/ipfs/QmPqKWUysbo8QqKcqH5Lp7SQiL1LfjeoGCSa7iFWmAP8Mw"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d",
+				"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"worldcup/Adminable.sol": {
+			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
+			"urls": [
+				"bzz-raw://0187eec6d54a3f629e6e24041e2104b33a8b9803fa7e9aa9c0c907b25498f6e9",
+				"dweb:/ipfs/QmVxeGVZBaUipEVyURS4AATr41xZJQJeRT1CeP4UMj5eWb"
 			]
 		},
 		"worldcup/GameForecast.sol": {
-			"keccak256": "0x0050a0baa77794ac881315fce94e34d6385d57dbe6fd077cced0dfddbb78e0d7",
+			"keccak256": "0x3f15449e06cfc817b2b7c3cf3062a93783b43c61fd3260a88b9f403229a4b03d",
 			"urls": [
-				"bzz-raw://0e024fdf44bb23e0f52a7f955b8a9eb6840318bba826e908fd075ae0373b6ea5",
-				"dweb:/ipfs/QmTgMS7DzbdncKqbP3nEHcd8YCX6sDXJHrRGDLwEQdP9MW"
+				"bzz-raw://83944fd58f6dc57441a786351ffba5672caf3dfcec384ff9d11832507fd96ed3",
+				"dweb:/ipfs/QmQcD3NxhGVuBu6JF4DEnCtUmQYgGPa8wf5EGtgkQWbcpQ"
+			]
+		},
+		"worldcup/TeamERC1155.sol": {
+			"keccak256": "0x581876b6bb13154601d4d73f9df26825c647be99c70adec23de4f4181e3a5988",
+			"urls": [
+				"bzz-raw://7fa0c13683e27d6e99a15327d9ba431994c2b778087b319b132905e271691a0d",
+				"dweb:/ipfs/QmTAjCu6K4hRM9fXFc5b2LkvSHGtLyUcaN5bA52p2eX6hC"
 			]
 		}
 	},

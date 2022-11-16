@@ -16,7 +16,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
     address public rewardToken = 0x58a944f9c44D08461A471A1F6C6D15De351d97B3;
     uint16 public challengeIdInex;
     uint256 public rate = 80;
-    uint256 public nftCost = 1 * 10 ** 18;
+    uint256 public nftCost = 300 * 10 ** 18;
 
     using EnumerableSet for EnumerableSet.UintSet;
 
@@ -177,6 +177,7 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         emit OpenChallenge(msg.sender, challengeId, leftScore, rightScore, winnerTarget, setTime);
     }
 
+
     // reward token and stake nft.
     function withdrawReward(uint16 _challengeId) public {
         UserInfo memory userinfo = userChallenges[msg.sender][_challengeId];
@@ -211,9 +212,9 @@ contract DreamChallenge is Adminable, ERC1155Holder{
         uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
 
         uint256 amount = (loseAmount * nftCost * rate / 100) / winAmount * userWinAmount;
-        require(amount > 0, "Winner token amount is zero");
-
-        IERC20(rewardToken).transfer(msg.sender, amount);
+        if(amount > 0) {
+            IERC20(rewardToken).transfer(msg.sender, amount);
+        }
 
         userChallenges[msg.sender][_challengeId] = userinfo;
         emit WithdrawReward(msg.sender, challenge.id, amount);
