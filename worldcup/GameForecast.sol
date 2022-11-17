@@ -136,7 +136,7 @@ contract GameForecast is Adminable{
     function getGameResults() public view returns (uint8[16] memory) {
         TeamInfo memory _resultInfo =  gameResult;
         uint8[16] memory results;
-        if(openTime < block.timestamp) {
+        if(openTime > block.timestamp) {
             return results;
         }
 
@@ -175,10 +175,10 @@ contract GameForecast is Adminable{
     function claimForecastRewards(uint16 forecastId) public {
         require(block.timestamp > openTime && openTime > 0, "not open");
         require(isSetReward, "not set rewards");
-        require(isRewards[msg.sender][forecastId], "user has reward");
-        isRewards[msg.sender][forecastId] = true;
+        require(!isRewards[msg.sender][forecastId], "user has reward");
         uint256 amount = getUserForecastRewards(msg.sender, forecastId);
-        IERC20(rewardToken).transferFrom(address(this), msg.sender, amount);
+        IERC20(rewardToken).transfer( msg.sender, amount);
+        isRewards[msg.sender][forecastId] = true;
         emit ClaimRewards(msg.sender, amount, forecastId);
     }
 

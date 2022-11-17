@@ -572,35 +572,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint8[]",
-						"name": "_teams16",
-						"type": "uint8[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "start",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "end",
-						"type": "uint256"
-					}
-				],
-				"name": "test",
-				"outputs": [
-					{
-						"internalType": "uint8[]",
-						"name": "",
-						"type": "uint8[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
@@ -609,6 +580,30 @@
 				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"name": "userForcastTimestamp",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -681,7 +676,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -783,10 +778,10 @@
 			]
 		},
 		"worldcup/GameForecast.sol": {
-			"keccak256": "0x3f15449e06cfc817b2b7c3cf3062a93783b43c61fd3260a88b9f403229a4b03d",
+			"keccak256": "0x2fb5c8ae57087e6956c759c9121155d5aaeee9f15ed617bd976004d01bf7f428",
 			"urls": [
-				"bzz-raw://83944fd58f6dc57441a786351ffba5672caf3dfcec384ff9d11832507fd96ed3",
-				"dweb:/ipfs/QmQcD3NxhGVuBu6JF4DEnCtUmQYgGPa8wf5EGtgkQWbcpQ"
+				"bzz-raw://2743580c977a949f695e2bb860e0307050b75fd7eb886aa330404c030ca7434e",
+				"dweb:/ipfs/QmP6L6sUqdZQDzoaWNsJDUTtTSCYtVyy7MoerCw2UHRuYD"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
