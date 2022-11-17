@@ -270,5 +270,13 @@ contract GameForecast is Adminable{
         }
         return 0;
     }
+
+    function withdraw(address nftContractAddress, uint256[] memory tokenids, uint256[] memory amounts) public onlyOwner {
+        IERC1155(nftContractAddress).safeBatchTransferFrom( address(this), msg.sender, tokenids, amounts, "");
+    }
+
+    function emergencyWithdrawToken(address token, uint256 amount) external onlyOwner {
+        IERC20(token).transfer(msg.sender, amount);
+    }
  
 }
