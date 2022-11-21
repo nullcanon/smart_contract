@@ -657,7 +657,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -744,10 +744,10 @@
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0xb635310a6e6147cb734d9c9671bd34af3fec3a2fe0fdc551a244e1ec90187c28",
+			"keccak256": "0x581876b6bb13154601d4d73f9df26825c647be99c70adec23de4f4181e3a5988",
 			"urls": [
-				"bzz-raw://ded6c41c6cf5770dbb7146ccdce80d86cb90dcdd726473384c0e3f1e0f27d8b5",
-				"dweb:/ipfs/QmXEGwMPaZxPYMAnukD6EtbrfpLzVjKDLaddmJXq2wcxgW"
+				"bzz-raw://7fa0c13683e27d6e99a15327d9ba431994c2b778087b319b132905e271691a0d",
+				"dweb:/ipfs/QmTAjCu6K4hRM9fXFc5b2LkvSHGtLyUcaN5bA52p2eX6hC"
 			]
 		}
 	},

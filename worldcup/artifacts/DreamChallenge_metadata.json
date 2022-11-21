@@ -1070,10 +1070,10 @@
 			]
 		},
 		"worldcup/DreamChallenge.sol": {
-			"keccak256": "0xad9f5fd1dbeaa1997c79b79656d75ae5c9a2e3dc84cf822f8ef5353b14387922",
+			"keccak256": "0x2685f717893e403219dd307309ed0caf794737f1dcef696ef5331225cd099e32",
 			"urls": [
-				"bzz-raw://51ea243a2d9a9836981f1268cf6cd00554859d5ac93b0659145cf0da5df50be3",
-				"dweb:/ipfs/QmWULMx3P6MYU3ATegj1rEquAzm49Nwha5WoGsmZw3uwL3"
+				"bzz-raw://d51e0c7b27c44d0054a456fc38d3341e8ce8cb25e7be71e08e3a4af2b6de0837",
+				"dweb:/ipfs/QmZM5KCyopjL2fPyfKEwgN5FHGctKGyFnPiJmKP6y6hq1a"
 			]
 		}
 	},

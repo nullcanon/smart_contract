@@ -6,8 +6,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 contract GameForecast is Adminable{
 
-    address public cupNft;
-    address public rewardToken;
+    address public cupNft = 0x8398Cbb5d1fcb93A5704Db2b4e6bE70cA3b35F25;
+    address public rewardToken = 0x5439D37489Eef432979734e8ca7a36A826Cc1b58;
     uint256 public cupTokenId = 0;
 
     struct TeamInfo {

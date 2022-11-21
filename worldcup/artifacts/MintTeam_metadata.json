@@ -347,6 +347,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_dead",
+						"type": "address"
+					}
+				],
+				"name": "setDead",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_feeRateNumerator",
 						"type": "uint256"
@@ -459,7 +472,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -474,11 +487,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/ERC1155.sol": {
-			"keccak256": "0xe720b214fc3173cebcba734efb258dd89ae27733f18f5abc4deca28e33a05854",
+			"keccak256": "0xd917747dc87f189c6779b894f367a028f9dca4be930283cccec8f312966af820",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fec2446774323fe4d3979f42f9abef398e4258b3064aa4f2752ca1a4abf8964d",
-				"dweb:/ipfs/Qmc8Yhvd3C3N1HwA9WbWwb2RELtkChUErwQMuZBg9fmEGR"
+				"bzz-raw://7a5e5b99830cf233f77aa3b1bd1f57561faee103beeee88e6a6f86d044817bbb",
+				"dweb:/ipfs/QmREYidSDpHPig3AhxzsMHg3w2ZtMeGfRhcokXxEZyj6fC"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC1155/IERC1155.sol": {
@@ -514,11 +527,11 @@
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
-			"keccak256": "0xb94eac067c85cd79a4195c0a1f4a878e9827329045c12475a0199f1ae17b9700",
+			"keccak256": "0x68404b57d114b893554b0e54334b32f578f5d1abf61830025c83fb71dc1944ce",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2ad84b5dbf40ba9e944cc25bd0a98c51bafd49cff30efe5ef5aef921a70081de",
-				"dweb:/ipfs/Qme8iCeqe9VdNgWktTTsSxUfHcJEXuvPaJpshWDzoWj56V"
+				"bzz-raw://d3d0a94b3c8afd92c2a9f03f3325e9ac22cec56e995b94ff212670ff3653f0d3",
+				"dweb:/ipfs/QmPqKWUysbo8QqKcqH5Lp7SQiL1LfjeoGCSa7iFWmAP8Mw"
 			]
 		},
 		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
@@ -561,10 +574,10 @@
 			]
 		},
 		"worldcup/Mint.sol": {
-			"keccak256": "0xcb07dd19bec11c66f523a18754f5472242fc4445fb418c3cfe41501a1245707b",
+			"keccak256": "0x1efc3ac7e80c42fa88587c36c45cc6f1568e7ffea52d7e2e795950e46b850f0b",
 			"urls": [
-				"bzz-raw://d6cdb6b7ca9696fb2fd3c1e3817f466b237d45f7c059fbffe5298a29a727c012",
-				"dweb:/ipfs/QmeuxMHoQU2xXxHSpeWHmoPMnGdZYnRcqotfY7j7QKETz1"
+				"bzz-raw://ecc3eddb104bee6bfc7e8ccc30b99eab060441badef4512e7c544225dbc51147",
+				"dweb:/ipfs/QmZZ2TvCU1TZWYC2XUX31Tq62FyWSV78oQtDa8bJkXKzK8"
 			]
 		},
 		"worldcup/RandomId.sol": {
@@ -575,10 +588,10 @@
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0xf5890b8335d6647971a10c1e472e706a59d699a2d082af31cdfd29847063e9a2",
+			"keccak256": "0x581876b6bb13154601d4d73f9df26825c647be99c70adec23de4f4181e3a5988",
 			"urls": [
-				"bzz-raw://a9edc21f9bba5dbae745bad913887d5b89ff67441a6df5b01ea7425cf73c6f7e",
-				"dweb:/ipfs/QmbpP9PEAEWWNWBySXZxA2NKQJ8xLiZ3Y4T7rnn8Xe2s4N"
+				"bzz-raw://7fa0c13683e27d6e99a15327d9ba431994c2b778087b319b132905e271691a0d",
+				"dweb:/ipfs/QmTAjCu6K4hRM9fXFc5b2LkvSHGtLyUcaN5bA52p2eX6hC"
 			]
 		}
 	},

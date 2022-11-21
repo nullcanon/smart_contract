@@ -12,11 +12,11 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 contract DreamChallenge is Adminable, ERC1155Holder{
 
-    address public teamNft = 0x9D8f7aEA83ceCF102ab65e9A5b82106b07a68b28;
-    address public rewardToken = 0x58a944f9c44D08461A471A1F6C6D15De351d97B3;
+    address public teamNft = 0x8398Cbb5d1fcb93A5704Db2b4e6bE70cA3b35F25;
+    address public rewardToken = 0x5439D37489Eef432979734e8ca7a36A826Cc1b58;
     uint16 public challengeIdInex;
-    uint256 public rate = 80;
-    uint256 public nftCost = 300 * 10 ** 18;
+    uint256 public rate = 85;
+    uint256 public nftCost = 200000 * 10 ** 18;
 
     using EnumerableSet for EnumerableSet.UintSet;
 
@@ -209,8 +209,9 @@ contract DreamChallenge is Adminable, ERC1155Holder{
                 IERC1155(teamNft).safeTransferFrom(address(this), msg.sender, challenge.tokenIdRight, userinfo.amountMiddleR, "");
             }
         }
-        uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
 
+        uint256 loseAmount = challenge.leftTotalAmount + challenge.rightTotalAmount 
+            + challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount - winAmount;
         uint256 amount = (loseAmount * nftCost * rate / 100) / winAmount * userWinAmount;
         if(amount > 0) {
             IERC20(rewardToken).transfer(msg.sender, amount);
@@ -259,7 +260,8 @@ contract DreamChallenge is Adminable, ERC1155Holder{
             userWinAmount = userinfo.amountMiddleL + userinfo.amountMiddleR;
             winAmount = challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount;
         }
-        uint256 loseAmount = userinfo.amountsLeft + userinfo.amountsRight + userinfo.amountMiddleL + userinfo.amountMiddleR - winAmount;
+        uint256 loseAmount = challenge.leftTotalAmount + challenge.rightTotalAmount 
+            + challenge.leftMiddleTotalAmount + challenge.rightMiddleTotalAmount - winAmount;
         return (loseAmount * nftCost * rate / 100) / winAmount * userWinAmount;
     }
 

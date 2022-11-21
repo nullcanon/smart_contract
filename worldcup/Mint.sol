@@ -11,11 +11,11 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 
 contract MintTeam is Adminable, RandomId{
-    address public teamnft = 0x9D8f7aEA83ceCF102ab65e9A5b82106b07a68b28;
-    address public money = 0x58a944f9c44D08461A471A1F6C6D15De351d97B3;
-    address public bank = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
-    address public daedAddress = 0x000000000000000000000000000000000000dEaD;
-    uint256 public price = 300 * 10 ** 18;
+    address public teamnft = 0x8398Cbb5d1fcb93A5704Db2b4e6bE70cA3b35F25;
+    address public money = 0x5439D37489Eef432979734e8ca7a36A826Cc1b58;
+    address public bank = 0x6C27A881Aaed718067B2A284B5Ac2291D6caF6EE;
+    address public daedAddress = 0x6C27A881Aaed718067B2A284B5Ac2291D6caF6EE;
+    uint256 public price = 200000 * 10 ** 18;
     uint256 public mintLimit = 10;
     uint256 public feeRateDenominator = 1000;
     uint256 public feeRateNumerator = 50;
@@ -48,6 +48,10 @@ contract MintTeam is Adminable, RandomId{
 
     function setBank(address _bank) public onlyOwner {
         bank = _bank;
+    }
+
+    function setDead(address _dead) public onlyOwner {
+        daedAddress = _dead;
     }
 
     function setBlindBoxPrice(uint256 _price) public onlyOwner {

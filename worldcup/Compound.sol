@@ -10,7 +10,7 @@ contract Synthesizer is RandomId, Ownable{
 
     uint32 public compoundNumbers = 8;
     uint256 public worldcupTokenId = 0;
-    address public teamNft;
+    address public teamNft = 0x8398Cbb5d1fcb93A5704Db2b4e6bE70cA3b35F25;
 
     event CompoundNft(address indexed user, uint256[] tokenids);
 

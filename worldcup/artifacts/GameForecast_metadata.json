@@ -812,24 +812,24 @@
 			]
 		},
 		"worldcup/Adminable.sol": {
-			"keccak256": "0x7e68b2fa293ae9f09bd8731b024c0879440b82338e7a69faec65f0a3d647ac4d",
+			"keccak256": "0x671357a57887eca70a6c352407d80a318db075a81a959e8312edbc61144656a9",
 			"urls": [
-				"bzz-raw://7e0ceac36d85ee1ae54b7c63385e1d9b72343042f2a082f66b28c256ff6c9d6a",
-				"dweb:/ipfs/QmTZgsZ8ctRqjyrFRrkjxd3MMLBdTaeER2nMGPRADCSESi"
+				"bzz-raw://0187eec6d54a3f629e6e24041e2104b33a8b9803fa7e9aa9c0c907b25498f6e9",
+				"dweb:/ipfs/QmVxeGVZBaUipEVyURS4AATr41xZJQJeRT1CeP4UMj5eWb"
 			]
 		},
 		"worldcup/GameForecast.sol": {
-			"keccak256": "0xa8801219f40c1589bd3ad8d130ccaa5e0c69fbcb67b3ac9e789d4a761d46c3ed",
+			"keccak256": "0x6decaf007eef8e355e10c5275fb472934e0fc2bd0e1db13b3ec2acebd166c855",
 			"urls": [
-				"bzz-raw://8cd4e9e7b57db2ab38b8eba1b0eba98397f70299f73b6494318a4df493b519b3",
-				"dweb:/ipfs/QmTh9zasHpc9CZdMfpehWKdTpCYuiFkbsRJsvGSa2rnoUo"
+				"bzz-raw://3a48103e4e1eb411f2c78158e3111bb8b701965e7ade3034221e70f6d70de078",
+				"dweb:/ipfs/QmQLVuWqieADiW8nJHiyyRVcy8B8wKjDTP6Tyo4iDDVvpM"
 			]
 		},
 		"worldcup/TeamERC1155.sol": {
-			"keccak256": "0xb635310a6e6147cb734d9c9671bd34af3fec3a2fe0fdc551a244e1ec90187c28",
+			"keccak256": "0x581876b6bb13154601d4d73f9df26825c647be99c70adec23de4f4181e3a5988",
 			"urls": [
-				"bzz-raw://ded6c41c6cf5770dbb7146ccdce80d86cb90dcdd726473384c0e3f1e0f27d8b5",
-				"dweb:/ipfs/QmXEGwMPaZxPYMAnukD6EtbrfpLzVjKDLaddmJXq2wcxgW"
+				"bzz-raw://7fa0c13683e27d6e99a15327d9ba431994c2b778087b319b132905e271691a0d",
+				"dweb:/ipfs/QmTAjCu6K4hRM9fXFc5b2LkvSHGtLyUcaN5bA52p2eX6hC"
 			]
 		}
 	},
