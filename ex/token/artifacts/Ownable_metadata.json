@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -43,6 +38,13 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -51,13 +53,6 @@
 					}
 				],
 				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "waiveOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -76,7 +71,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ex/token/A.sol": "Ownable"
+			"ex/token/B.sol": "Ownable"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -90,12 +85,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ex/token/A.sol": {
-			"keccak256": "0xa70dc42e388f2f97e42dd2064d5f0da21ca5e04e9844d373b2caec3252dc3977",
+		"ex/token/B.sol": {
+			"keccak256": "0xbc29f6508e075d40021143ddb1e4488512a063494069af192ee7f37d05c1f874",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1d3f40481363d962df0c146a88bd6202b3998985ad4e7ad9ae8c4c0e4bcdb78",
-				"dweb:/ipfs/QmZi4jcHd1hpi7ExbafgUzzuC4uC6k8fV2NoVv3VWDP4F4"
+				"bzz-raw://c4b3a932a7b01e4b01463610d053ebbf58a72ece740b97fc96251bdc75a41534",
+				"dweb:/ipfs/QmVZbmFuTgmAy58N9WNYke94JSyojNyyJ8KiHcu9u2oUi6"
 			]
 		}
 	},

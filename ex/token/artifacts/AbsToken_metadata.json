@@ -707,11 +707,11 @@
 	},
 	"sources": {
 		"ex/token/B.sol": {
-			"keccak256": "0xcb68d99331ef3d0ee941215a020fc80f63fb7a43e2c4218ba28c83e5acdca050",
+			"keccak256": "0xbc29f6508e075d40021143ddb1e4488512a063494069af192ee7f37d05c1f874",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d66c1cf9863e966daccb99759e30f2c1ecd822be3878bc3fe19bb094f5089241",
-				"dweb:/ipfs/QmVSKvYJzDuMWvvZFnr2DinNrtDd1Gw3WGLEs5awz5LXTw"
+				"bzz-raw://c4b3a932a7b01e4b01463610d053ebbf58a72ece740b97fc96251bdc75a41534",
+				"dweb:/ipfs/QmVZbmFuTgmAy58N9WNYke94JSyojNyyJ8KiHcu9u2oUi6"
 			]
 		}
 	},

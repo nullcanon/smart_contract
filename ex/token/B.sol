@@ -113,7 +113,7 @@ abstract contract AbsToken is IERC20, Ownable {
 
     ISwapRouter public _swapRouter;
     address public _usdt = address(0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684);
-    address public _routeAddress= address(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);
+    address public _routeAddress= address(0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F);
     mapping(address => bool) public _swapPairList;
 
     bool private inSwap;

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.16+commit.07a7930e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -662,17 +662,17 @@
 	},
 	"sources": {
 		"inviter_presell/adminable.sol": {
-			"keccak256": "0x077c3b664bd79c85f8dcbcfb38594ca46e79324915b0db87e9adff3431025837",
+			"keccak256": "0x96b25677b35227bb9a030cf35090eda163392b81a98d2617318ad81444d95d40",
 			"urls": [
-				"bzz-raw://4a0d86ef7c9f4e8601f58977faa5232d325604963aebb0de4ff455f0bd5b893c",
-				"dweb:/ipfs/QmTr9KaGYYdn4FvWKq1RDJL3xY8wZcaJMoJubTDz5YWM2p"
+				"bzz-raw://86dc78f856ecb279123be827ebae289586c78f77ca648a8d9380c77987ec6b47",
+				"dweb:/ipfs/QmcHs1AnyUnRaYELz3kEtsFdeZxJYqyp1d9xHieAETYL3M"
 			]
 		},
 		"inviter_presell/stake.sol": {
-			"keccak256": "0x57d7fc37918b5dfbd0a82ee566c6f0cf28ce65ec4c36e48a5c916b7c75d21403",
+			"keccak256": "0xd33ed55389b521c622bcf7c8a7e82d468f510752a83ddbbc799d7620ea5f4303",
 			"urls": [
-				"bzz-raw://f29209a164bcdb9449f21bcc6b41bcaa889646a0fb4915311799d335177a82e3",
-				"dweb:/ipfs/QmYbBmEhD8eQPmU52u2tvyy19BRp9WsnwXTo7MqcGufx5b"
+				"bzz-raw://9f41a1a19dc74fad1c62145eec95ab5b1cfb72cd5daec65fd3e20d8d3ef742d9",
+				"dweb:/ipfs/QmPPTQAZXuGAtktdcJHNnE23n7uRLyKgvMhzRazhu8eLfJ"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
