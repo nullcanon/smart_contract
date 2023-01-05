@@ -356,6 +356,13 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
+contract TokenDistributor {
+    constructor (address token) {
+        IERC20(token).approve(msg.sender, uint(~uint256(0)));
+    }
+}
+
+
 contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
@@ -365,7 +372,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public marketAddress = 0xd3c0b6Aa1538d639912789be705F18b5Fd89fcE6;
+    address public marketAddress = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
     address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
@@ -375,6 +382,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     mapping (address=>bool) public DEXs;
     mapping (address => bool) public isPair;
     mapping (address => uint256) public tradeVolume;
+    TokenDistributor public _tokenDistributor;
+
 
     event SwapAndLiquifyEnabledUpdated(bool enabled);
 
@@ -397,6 +406,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         uniswapV2Router = _uniswapV2Router;
         isPair[address(owner())] = true;
         DEXs[address(uniswapV2Pair)] = true;
+        _tokenDistributor = new TokenDistributor(usdtAddress);
     }
 
     function name() public view virtual override returns (string memory) {
@@ -468,15 +478,19 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         } else {
             DEXs[_pair] = true;
         }
-       
     }
 
     function setMarket(address to) public onlyOwner {
         marketAddress = to;
     }
 
-    function getUsdtAmountOut(uint256 amount) public returns (uint256){
-        return amount;
+    function getUsdtAmountOut(uint256 amount) public view returns (uint256){
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = usdtAddress;
+        uint256[] memory amounts = uniswapV2Router.getAmountsOut(amount, path);
+        return amounts[1];
+
     }
 
     function _transfer(
@@ -490,19 +504,19 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         require(senderBalance >= amount, "CTF: transfer amount exceeds balance");
         uint _amount = amount;
 
-        if(DEXs[sender]) {
-            tradeVolume[recipient] += getUsdtAmountOut(_amount);
-        } 
-
-        if(DEXs[recipient]) {
-            tradeVolume[sender] += getUsdtAmountOut(_amount);
-        }
-        
         if ((( DEXs[sender] && recipient != address(uniswapV2Router)) || DEXs[recipient]) &&
             !inSwapAndLiquify &&
             swapAndLiquifyEnabled &&
             !isExcludeds[sender] &&
             !isExcludeds[recipient] ) {
+
+            if(DEXs[sender]) {
+                tradeVolume[recipient] += getUsdtAmountOut(_amount);
+            } 
+
+            if(DEXs[recipient]) {
+                tradeVolume[sender] += getUsdtAmountOut(_amount);
+            }
 
             _balances[address(this)] += amount * 15 / 1000;
             emit Transfer(sender, address(this), amount * 15 / 1000);
@@ -529,10 +543,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
                 processReward(500000);
             }            
-        }
-
             _amount = amount * 985 / 1000;
- 
+        }
 
         unchecked {
             _balances[sender] = senderBalance - amount;
@@ -580,7 +592,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             tokenAmount,
             0, 
             path,
-            address(this),
+            address(_tokenDistributor),
             block.timestamp
         );
     }
