@@ -583,7 +583,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         emit Approval(owner, spender, amount);
     }
 
-    function swapTokensForUsdt(uint256 tokenAmount) private lockTheSwap{
+    function swapTokensForUsdt(uint256 tokenAmount) public  lockTheSwap{
         address[] memory path = new address[](2);
         path[0] = address(this);
         path[1] = usdtAddress;
@@ -644,14 +644,14 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     uint256 private holderRewardCondition;
     uint256 private progressRewardBlock;
 
-    function processReward(uint256 gas) private {
+    function processReward(uint256 gas) public  {
         if (progressRewardBlock + 10 > block.number) {
             return;
         }
 
         IERC20 USDT = IERC20(usdtAddress);
 
-        uint256 balance = USDT.balanceOf(address(this));
+        uint256 balance = USDT.balanceOf(address(_tokenDistributor));
         if (balance < holderRewardCondition) {
             return;
         }
@@ -677,7 +677,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             if (tokenBalance > 0 && !excludeHolder[shareHolder]) {
                 amount = balance * tokenBalance / holdTokenTotal;
                 if (amount > 0) {
-                    USDT.transfer(shareHolder, amount);
+                    USDT.transferFrom(address(_tokenDistributor), shareHolder, amount);
                 }
             }
 
