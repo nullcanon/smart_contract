@@ -595,6 +595,10 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             address(_tokenDistributor),
             block.timestamp
         );
+
+        IERC20 USDT = IERC20(usdtAddress);
+        uint256 usdtBalance = USDT.balanceOf(address(_tokenDistributor));
+        USDT.transferFrom(address(_tokenDistributor), address(this), usdtBalance);
     }
 
     function setExcludeds(address addr) public onlyOwner {
@@ -622,9 +626,9 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     }
 
 
-    address[] private holders;
-    mapping(address => uint256) holderIndex;
-    mapping(address => bool) excludeHolder;
+    address[] public holders;
+    mapping(address => uint256) public holderIndex;
+    mapping(address => bool) public excludeHolder;
 
     function addHolder(address adr) private {
         uint256 size;
@@ -651,7 +655,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
         IERC20 USDT = IERC20(usdtAddress);
 
-        uint256 balance = USDT.balanceOf(address(_tokenDistributor));
+        uint256 balance = USDT.balanceOf(address(this));
         if (balance < holderRewardCondition) {
             return;
         }
@@ -677,7 +681,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             if (tokenBalance > 0 && !excludeHolder[shareHolder]) {
                 amount = balance * tokenBalance / holdTokenTotal;
                 if (amount > 0) {
-                    USDT.transferFrom(address(_tokenDistributor), shareHolder, amount);
+                    USDT.transfer(shareHolder, amount);
                 }
             }
 
@@ -692,4 +696,11 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
 
 
+}
+
+
+contract test {
+    function getBalance() public view returns (uint256) {
+        return IERC20(0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684).balanceOf(0x3681F31993d51A6C0788bb8d2cdC9F46F99d0DC3);
+    }
 }
