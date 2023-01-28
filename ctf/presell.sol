@@ -88,34 +88,34 @@ abstract contract Ownable is Context {
     }
 }
 
-contract BabyPresell is Ownable {
+contract CTFPresell is Ownable {
 
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
-    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
-    address public presellTokenMintAddress = 0xB75088c332Db5EF4B6876E036d32270657026D00;
-    address public marketAddress = 0x3Ee8E26053649b3cF811625Dcd2Ade2b8eB81F47;
+    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+    address public presellTokenMintAddress = 0x8E7c336aD3347b9F2Bc4cB09ec56E58685a50Cf6;
+    address public marketAddress = 0x7E82A1728B23372F3353Ce0EE42eE60904f89F8c;
 
     // BSC testnet 1
     // BSC mainnet 500
-    uint256 public usdtAmount = 500 * 10 ** 18;
-    uint256 public preSellCoinPreAmount = 5000 * 10 ** 18;
+    uint256 public usdtAmount = 200 * 10 ** 18;
+    uint256 public preSellCoinPreAmount = 66666666660000000000;
     uint32 public counter;
     uint32 public withdrawCounter;
 
     // BSC testnet 10
     // BSC mainnet 1024
-    uint32 public preMax = 220;
+    uint32 public preMax = 1500;
     uint64 public startAt;
     uint64 public endAt;
     
-    bool public disableWhiteList;
+    bool public disableWhiteList = true;
 
     IERC20 public immutable usdtToken;
     IERC20 public sellToken;
     mapping(address => uint256) public userPresellBalanceMap;
-    mapping(address => bool) public hasBuy;
+    mapping(address => uint256) public hasBuy;
     mapping(address => bool) public whiteList;
 
     event BuyTokens(address indexed user, uint256 umount, uint256 coinamount);
@@ -172,7 +172,7 @@ contract BabyPresell is Ownable {
         return endAt;
     }
 
-    function getUserHasBuy(address user) public view returns (bool) {
+    function getUserBuyTimestamp(address user) public view returns (uint256) {
         return hasBuy[user];
     }
 
@@ -185,7 +185,7 @@ contract BabyPresell is Ownable {
     }
 
     function buyTokens() public {
-        require(!disableWhiteList && whiteList[msg.sender], "not in whiteList");
+        // require(!disableWhiteList && whiteList[msg.sender], "not in whiteList");
 
         require(startAt < block.timestamp, "not start");
 
@@ -193,14 +193,14 @@ contract BabyPresell is Ownable {
 
         require(counter <= preMax, "Pre-orders are sold out");
 
-        require(!hasBuy[msg.sender],"already purchased");
+        require(hasBuy[msg.sender] == 0,"already purchased");
 
         require(usdtToken.allowance(msg.sender, address(this)) >= usdtAmount, "usdtToken allowance too low");
 
         bool sent = usdtToken.transferFrom(msg.sender, marketAddress, usdtAmount);
         require(sent, "Token transfer failed");
         userPresellBalanceMap[msg.sender] = preSellCoinPreAmount;
-        hasBuy[msg.sender] = true;
+        hasBuy[msg.sender] = block.timestamp;
         counter++;
         emit BuyTokens(msg.sender, usdtAmount, preSellCoinPreAmount);
     }
@@ -239,7 +239,6 @@ contract BabyPresell is Ownable {
     }
 
     function setTime(uint64 start, uint64 end) public onlyOwner {
-        require(start > block.timestamp && end > start, "The start time has passed or end time must more than start");
         startAt = start;
         endAt = end;
     }

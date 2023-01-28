@@ -372,7 +372,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public marketAddress = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
+    address public buyback = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
+    address public subtoken = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
     address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
@@ -381,11 +382,11 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     mapping (address => bool) public isExcludeds;
     mapping (address=>bool) public DEXs;
     mapping (address => bool) public isPair;
-    mapping (address => uint256) public tradeVolume;
     TokenDistributor public _tokenDistributor;
 
 
     event SwapAndLiquifyEnabledUpdated(bool enabled);
+    event ReceiveLpFee(address indexed account, uint256 amount);
 
     modifier lockTheSwap {
         inSwapAndLiquify = true;
@@ -395,7 +396,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
     
     constructor () {
-        _mint(_msgSender(), 21000000 * 1e18);
+        _mint(_msgSender(), 200000 * 1e18);
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
@@ -480,8 +481,9 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         }
     }
 
-    function setMarket(address to) public onlyOwner {
-        marketAddress = to;
+    function setMarket(address _buyback, address _subtoken) public onlyOwner {
+        buyback = _buyback;
+        subtoken = _subtoken;
     }
 
     function getUsdtAmountOut(uint256 amount) public view returns (uint256){
@@ -510,16 +512,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
             !isExcludeds[sender] &&
             !isExcludeds[recipient] ) {
 
-            if(DEXs[sender]) {
-                tradeVolume[recipient] += getUsdtAmountOut(_amount);
-            } 
-
-            if(DEXs[recipient]) {
-                tradeVolume[sender] += getUsdtAmountOut(_amount);
-            }
-
-            _balances[address(this)] += amount * 15 / 1000;
-            emit Transfer(sender, address(this), amount * 15 / 1000);
+            _balances[address(this)] += amount * 30 / 1000;
+            emit Transfer(sender, address(this), amount * 30 / 1000);
 
             uint256 contractTokenBalance = balanceOf(address(this));
             if(contractTokenBalance >= _totalSupply)
@@ -543,7 +537,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
                 processReward(500000);
             }            
-            _amount = amount * 985 / 1000;
+            _amount = amount * 970 / 1000;
         }
 
         unchecked {
@@ -598,7 +592,11 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
         IERC20 USDT = IERC20(usdtAddress);
         uint256 usdtBalance = USDT.balanceOf(address(_tokenDistributor));
+        uint256 buybackFee = usdtBalance * 5 / 1000;
+        uint256 subTokenFee = usdtBalance * 10 / 1000;
         USDT.transferFrom(address(_tokenDistributor), address(this), usdtBalance);
+        USDT.transferFrom(address(_tokenDistributor), buyback, buybackFee);
+        USDT.transferFrom(address(_tokenDistributor), subtoken, subTokenFee);
     }
 
     function setExcludeds(address addr) public onlyOwner {
@@ -682,6 +680,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
                 amount = balance * tokenBalance / holdTokenTotal;
                 if (amount > 0) {
                     USDT.transfer(shareHolder, amount);
+                    emit ReceiveLpFee(shareHolder, amount);
                 }
             }
 
