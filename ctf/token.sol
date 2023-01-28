@@ -486,15 +486,6 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         subtoken = _subtoken;
     }
 
-    function getUsdtAmountOut(uint256 amount) public view returns (uint256){
-        address[] memory path = new address[](2);
-        path[0] = address(this);
-        path[1] = usdtAddress;
-        uint256[] memory amounts = uniswapV2Router.getAmountsOut(amount, path);
-        return amounts[1];
-
-    }
-
     function _transfer(
         address sender,
         address recipient,
@@ -594,9 +585,9 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         uint256 usdtBalance = USDT.balanceOf(address(_tokenDistributor));
         uint256 buybackFee = usdtBalance * 5 / 1000;
         uint256 subTokenFee = usdtBalance * 10 / 1000;
-        USDT.transferFrom(address(_tokenDistributor), address(this), usdtBalance);
         USDT.transferFrom(address(_tokenDistributor), buyback, buybackFee);
         USDT.transferFrom(address(_tokenDistributor), subtoken, subTokenFee);
+        USDT.transferFrom(address(_tokenDistributor), address(this), usdtBalance - buybackFee - subTokenFee);
     }
 
     function setExcludeds(address addr) public onlyOwner {
@@ -695,11 +686,4 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
 
 
 
-}
-
-
-contract test {
-    function getBalance() public view returns (uint256) {
-        return IERC20(0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684).balanceOf(0x3681F31993d51A6C0788bb8d2cdC9F46F99d0DC3);
-    }
 }
