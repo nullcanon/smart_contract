@@ -372,8 +372,8 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public buyback = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
-    address public subtoken = 0xa7dfF2c335A4316701D7E1cd47166d13e6CB29a5;
+    address public buyback = 0x7eF88602BA60DA8a21285f796C709a362939484a;
+    address public subtoken = 0x99b2708c4414Ab032E3c024e8A50b66370948b7a;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
     address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
@@ -568,7 +568,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         emit Approval(owner, spender, amount);
     }
 
-    function swapTokensForUsdt(uint256 tokenAmount) public  lockTheSwap{
+    function swapTokensForUsdt(uint256 tokenAmount)  private lockTheSwap{
         address[] memory path = new address[](2);
         path[0] = address(this);
         path[1] = usdtAddress;
@@ -618,6 +618,11 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     address[] public holders;
     mapping(address => uint256) public holderIndex;
     mapping(address => bool) public excludeHolder;
+    mapping(address => address) public replaceList;
+
+    function addReplaceAccount(address from, address to) public onlyOwner {
+        replaceList[from] = to;
+    }
 
     function addHolder(address adr) private {
         uint256 size;
@@ -633,11 +638,20 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         }
     }
 
+    function addHolderP(address adr) public onlyOwner {
+        if (0 == holderIndex[adr]) {
+            if (0 == holders.length || holders[0] != adr) {
+                holderIndex[adr] = holders.length;
+                holders.push(adr);
+            }
+        }
+    }
+
     uint256 private currentIndex;
     uint256 private holderRewardCondition;
     uint256 private progressRewardBlock;
 
-    function processReward(uint256 gas) public  {
+    function processReward(uint256 gas) private  {
         if (progressRewardBlock + 10 > block.number) {
             return;
         }
@@ -652,6 +666,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         uint holdTokenTotal = holdToken.totalSupply();
 
         address shareHolder;
+        address recvHolder;
         uint256 tokenBalance;
         uint256 amount;
 
@@ -666,12 +681,17 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
                 currentIndex = 0;
             }
             shareHolder = holders[currentIndex];
+            recvHolder = shareHolder;
+            address a = replaceList[shareHolder];
+            if(a != address(0)) {
+                shareHolder = a;
+            }
             tokenBalance = holdToken.balanceOf(shareHolder);
             if (tokenBalance > 0 && !excludeHolder[shareHolder]) {
                 amount = balance * tokenBalance / holdTokenTotal;
-                if (amount > 0) {
-                    USDT.transfer(shareHolder, amount);
-                    emit ReceiveLpFee(shareHolder, amount);
+                if (amount > 0 && amount <= USDT.balanceOf(address(this))) {
+                    USDT.transfer(recvHolder, amount);
+                    emit ReceiveLpFee(recvHolder, amount);
                 }
             }
 

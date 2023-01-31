@@ -93,9 +93,9 @@ contract CTFPresell is Ownable {
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
-    address public usdtMintAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
     address public presellTokenMintAddress = 0x8E7c336aD3347b9F2Bc4cB09ec56E58685a50Cf6;
-    address public marketAddress = 0x7E82A1728B23372F3353Ce0EE42eE60904f89F8c;
+    address public marketAddress = 0xF4Cf77b898247b2cD51AF27287007bb8ecD5Bc52;
 
     // BSC testnet 1
     // BSC mainnet 500
