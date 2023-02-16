@@ -70,5 +70,11 @@
 		},
 		"methodIdentifiers": {}
 	},
-	"abi": []
+	"abi": [
+		{
+			"payable": true,
+			"stateMutability": "payable",
+			"type": "fallback"
+		}
+	]
 }

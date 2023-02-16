@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.13+commit.abaa5c0e"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -389,7 +389,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"msc_token/ERC20.sol": "USDT"
+			"ERC20.sol": "USDT"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -403,12 +403,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"msc_token/ERC20.sol": {
-			"keccak256": "0x9fc0b1cd978f317c14635b5c5907a875fcd9d3ff7288e3c24d760bca4803c55b",
+		"ERC20.sol": {
+			"keccak256": "0xa1a384ff041a4107fb4806deed7f968ddcff1c34ea5811d922e2ea25428d018b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://97af52c2e5af91a17bb1e74e27ed2fe9e3b83c47e16498c5a9217b1b423f0deb",
-				"dweb:/ipfs/QmeD65AzLPDuL45siZR6MTSfjSr9sNjc5kmUdvKV739VpK"
+				"bzz-raw://61d5a600184f5d9ece2c985640645a1436b20e09190fe70749ed40d8c12cf432",
+				"dweb:/ipfs/QmSVgQjkE4r6HKUii4nPRwXkpVMkdtRbfGKvbPamvYcviT"
 			]
 		}
 	},

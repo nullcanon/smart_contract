@@ -1,6 +1,4 @@
-/**
- *Submitted for verification at BscScan.com on 2022-01-30
-*/
+
 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
@@ -376,7 +374,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
     address public subtoken = 0x99b2708c4414Ab032E3c024e8A50b66370948b7a;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
-    address public usdtAddress = 0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684;
+    address public usdtAddress = 0x55d398326f99059fF775485246999027B3197955;
     bool inSwapAndLiquify;
     bool public swapAndLiquifyEnabled = true;
     mapping (address => bool) public isExcludeds;
@@ -401,7 +399,7 @@ contract CryptoTrendsFund is Context, IERC20, IERC20Metadata, Ownable{
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
         // pancake Testnet 0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F
-        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F);
+        IPancakeSwapV2Router02 _uniswapV2Router = IPancakeSwapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
         uniswapV2Pair = IPancakeSwapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), usdtAddress);
         uniswapV2Router = _uniswapV2Router;

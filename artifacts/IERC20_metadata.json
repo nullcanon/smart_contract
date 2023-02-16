@@ -237,18 +237,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"ERC20.sol": {
-			"keccak256": "0x23d401a4789a2b9da92088c843aba68adf228e2c66ad32ed9cc97887c947ccd4",
+			"keccak256": "0xa1a384ff041a4107fb4806deed7f968ddcff1c34ea5811d922e2ea25428d018b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://895c6cea3f74cdfb8740fb46befbef573b65eeae489b6be122a941e643045502",
-				"dweb:/ipfs/QmQRmgGtpDndKoAQRsaLSCW6iLs4LtR4YkXdeBLYB9xeUw"
+				"bzz-raw://61d5a600184f5d9ece2c985640645a1436b20e09190fe70749ed40d8c12cf432",
+				"dweb:/ipfs/QmSVgQjkE4r6HKUii4nPRwXkpVMkdtRbfGKvbPamvYcviT"
 			]
 		}
 	},
