@@ -1,5 +1,7 @@
 
-pragma solidity ^0.8.16;
+pragma solidity ^0.8.17;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol"
 
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
@@ -12,7 +14,7 @@ abstract contract Context {
 }
 
 
-abstract contract Adminable is Context {
+abstract contract AdminableUpdateable is Context, Initializable {
     mapping(address => bool) private _admins;
     address private _owner;
 
@@ -20,8 +22,8 @@ abstract contract Adminable is Context {
     event ModificationAdmin(address indexed admin, bool oldState, bool newState);
 
     constructor() {
-        _transferOwnership(_msgSender());
     }
+
 
     modifier onlyOwner() {
         require(owner() == _msgSender(), "Adminable: caller is not the owner");
@@ -31,6 +33,10 @@ abstract contract Adminable is Context {
     modifier onlyAdmin() {
         require(isAdmin(_msgSender()), "Adminable: caller is not the admin");
         _;
+    }
+
+    function initOwner() internal onlyInitializing {
+        _transferOwnership(_msgSender());
     }
 
     function owner() public view virtual returns (address) {
