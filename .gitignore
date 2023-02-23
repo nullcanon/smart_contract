@@ -9,3 +9,4 @@ tools/artifacts/
 upgradeable/artifacts/
 worldcup/artifacts/
 babypay/artifacts/
+.deps/

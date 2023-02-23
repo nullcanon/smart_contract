@@ -1,7 +1,7 @@
 
 pragma solidity ^0.8.17;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol"
+import "https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol";
 
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
