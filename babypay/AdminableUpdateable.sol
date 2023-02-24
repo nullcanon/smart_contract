@@ -1,7 +1,7 @@
 
 pragma solidity ^0.8.17;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol";
+// import "https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol";
 
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {
@@ -14,7 +14,7 @@ abstract contract Context {
 }
 
 
-abstract contract AdminableUpdateable is Context, Initializable {
+abstract contract AdminableUpdateable is Context {
     mapping(address => bool) private _admins;
     address private _owner;
 
@@ -35,7 +35,8 @@ abstract contract AdminableUpdateable is Context, Initializable {
         _;
     }
 
-    function initOwner() internal onlyInitializing {
+    function initOwner() internal {
+        require(_owner == address(0), "Already initalized");
         _transferOwnership(_msgSender());
     }
 

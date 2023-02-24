@@ -22,8 +22,8 @@ contract PayChannelUpdateable is AdminableUpdateable{
     address public signer;
     address public bankAddress = address(this);
 
-    uint256 public totalMaxLimit = 1000 * 10^18;
-    uint256 public totalMinLimit = 1 * 10^18;
+    mapping(address => uint256) public totalMinLimit;
+    mapping(address => uint256) public totalMaxLimit;
     
     mapping(uint256 => mapping(address => GameInfo)) public gameList;
 
@@ -34,28 +34,27 @@ contract PayChannelUpdateable is AdminableUpdateable{
     event PlayGamed(address indexed user, address indexed payMoney, uint256 gameId, uint256 resultId, uint256 amount);
     event RegisterGamed(address indexed payMoney, uint256 gameId, uint256 startTime, uint256 endTime,  string flag, uint256[] minLimit, uint256[] maxLimit);
     event ModifyGamed(address indexed payMoney, uint256 gameId, uint256 startTime, uint256 endTime, string flag, uint256[] minLimit, uint256[] maxLimit);
-    event MoneyChanged(address indexed money, bool status);
     event Claimed(address indexed account, address indexed payMoney, uint256 amount, uint256 nonce);
     event UrgentWithdraw(address indexed account, address indexed payMoney, uint256 amount);
     event BankChanged(address indexed oldBank, address indexed newBank);
-    event LimitChanged(uint256 oldMin, uint256 newMin, uint256 oldMax, uint256 newMax);
+    event LimitChanged(address indexed money, uint256 oldMin, uint256 newMin, uint256 oldMax, uint256 newMax);
     event ModifyGameLimit(address indexed money, uint256 gameid, uint256 index, uint256 min, uint256 max);
+    event ModifySingleData(address indexed money, uint256 gameId, uint256 startTime,uint256 resultId, uint256 minLimit,uint256 maxLimit);
 
     function initContract() public {
         bankAddress = address(this);
-        totalMaxLimit = 1000 * 10^18;
-        totalMinLimit = 1 * 10^18;
         initOwner();
     }
 
-    function getLimit() view public returns (uint256, uint256) {
-        return (totalMinLimit, totalMaxLimit);
+
+    function getLimit(address _money) view public returns (uint256, uint256) {
+        return (totalMinLimit[_money], totalMaxLimit[_money]);
     }
 
-    function setTotalLimit(uint256 _min, uint256 _max) public onlyAdmin {
-        emit LimitChanged(totalMinLimit, _min, totalMaxLimit, _max);
-        totalMinLimit = _min;
-        totalMaxLimit = _max;
+    function setTotalLimit(address _money, uint256 _min, uint256 _max) public onlyAdmin {
+        emit LimitChanged(_money, totalMinLimit[_money], _min, totalMaxLimit[_money], _max);
+        totalMinLimit[_money] = _min;
+        totalMaxLimit[_money] = _max;
     }
 
     function setBank(address _bank) public onlyOwner {
@@ -71,7 +70,9 @@ contract PayChannelUpdateable is AdminableUpdateable{
 
         GameInfo memory _info = gameList[_gameId][_payMoney];
         require(_info.isRegister, "Unregistered game");
-        require(_resultId <= _info.minLimit.length && _resultId != 0, "Result id error");
+        require(_resultId < _info.minLimit.length && _resultId != 0, "Result id error");
+        require(_info.startTime < block.timestamp && _info.endTime > block.timestamp, "Time error");
+        // TODO 时间限制
 
         if( _isPayETH(_payMoney) ) {
             payable(bankAddress).transfer(_amount);
@@ -86,7 +87,7 @@ contract PayChannelUpdateable is AdminableUpdateable{
         uint256[] memory _minLimit, uint256[] memory _maxLimit) public onlyAdmin {
         require(_minLimit.length == _maxLimit.length, "Limit array length error");
 
-        GameInfo memory _info =  gameList[_gameId][_payMoney];
+        GameInfo memory _info =  gameList[_gameId][_money];
         require(!_info.isRegister, "Game id has used");
         _info.isRegister = true;
         _info.startTime = _startTime;
@@ -94,7 +95,7 @@ contract PayChannelUpdateable is AdminableUpdateable{
         _info.flag = _flag;
         _info.minLimit = _minLimit;
         _info.maxLimit = _maxLimit;
-        gameList[_gameId] = _info;
+        gameList[_gameId][_money] = _info;
         emit RegisterGamed(_money, _gameId, _startTime, _endTime, _flag, _minLimit, _maxLimit);
     }
 
@@ -110,9 +111,21 @@ contract PayChannelUpdateable is AdminableUpdateable{
         _info.flag = _flag;
         _info.minLimit = _minLimit;
         _info.maxLimit = _maxLimit;
-        gameList[_gameId] = _info;
+        gameList[_gameId][_money] = _info;
         emit ModifyGamed(_money, _gameId, _startTime, _endTime, _flag, _minLimit, _maxLimit);
     }
+
+    function modifySingleData(address _money, uint256 _gameId, uint256 _startTime, uint256 _resultId, uint256 _minLimit, uint256 _maxLimit) public onlyAdmin {
+        GameInfo memory _info =  gameList[_gameId][_money];
+        require(_info.isRegister, "Game id not register");
+        require(_info.minLimit.length > _resultId, "Result id error");
+        _info.startTime = _startTime;
+        _info.minLimit[_resultId] = _minLimit;
+        _info.maxLimit[_resultId] = _maxLimit;
+        gameList[_gameId][_money] = _info;
+        emit ModifySingleData(_money, _gameId, _startTime, _resultId, _minLimit, _maxLimit);
+    }
+
 
    function getMessageHash(
         address _to,
@@ -207,15 +220,16 @@ contract PayChannelUpdateable is AdminableUpdateable{
         require(_deadline > block.timestamp, "Already expired");
         require(verify(_to, _payMoney, _amount, _deadline, _nonce, _signature), "signature verify faild");
         require(userNonce[_to] == _nonce, "nonce verify faild");
+        require(_to == msg.sender, "Only self can claim");
         userNonce[_to] = userNonce[_to] + 1;
 
         if( _isPayETH(_payMoney) ) {
-            payable(msg.sender).transfer(_amount);
+            payable(_to).transfer(_amount);
         } else {
-            IERC20(_payMoney).transfer(msg.sender, _amount);
+            IERC20(_payMoney).transfer(_to, _amount);
         }
 
-        emit Claimed(msg.sender, _payMoney, _amount, _nonce);
+        emit Claimed(_to, _payMoney, _amount, _nonce);
     }
 
     function setSigner(address _signer) public onlyOwner {

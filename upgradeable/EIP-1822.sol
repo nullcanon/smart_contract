@@ -83,7 +83,7 @@ contract MyContract2 {
     uint public myUint;
 
     function constructor1() public {
-        require(owner == address(0), "Already initalized");
+        require(owner == address(0), "Already initalized"); // 放弃权限后是否会出现重复初始化漏洞？
         owner = msg.sender;
     }
 
