@@ -51,6 +51,10 @@ contract PayChannelUpdateable is AdminableUpdateable{
         return (totalMinLimit[_money], totalMaxLimit[_money]);
     }
 
+    function getGameLimit(uint256 _gameId, address _money) view public returns (uint256[] memory, uint256[] memory) {
+        return (gameList[_gameId][_money].minLimit, gameList[_gameId][_money].maxLimit);
+    }
+
     function setTotalLimit(address _money, uint256 _min, uint256 _max) public onlyAdmin {
         emit LimitChanged(_money, totalMinLimit[_money], _min, totalMaxLimit[_money], _max);
         totalMinLimit[_money] = _min;
