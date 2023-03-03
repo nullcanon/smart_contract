@@ -369,6 +369,7 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
     address public usdtAddress = 0x55d398326f99059fF775485246999027B3197955;
+    address public destroyAddress = 0x000000000000000000000000000000000000dEaD;
     bool inSwapAndLiquify;
     bool public swapAndLiquifyEnabled = true;
     mapping (address => bool) public isExcludeds;
@@ -399,7 +400,7 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function name() public view virtual override returns (string memory) {
-        return "Sugar Baby";
+        return "Chat chain";
     }
 
     function symbol() public view virtual override returns (string memory) {
@@ -495,6 +496,9 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
             _balances[address(this)] += amount * 15 / 1000;
             emit Transfer(sender, address(this), amount * 15 / 1000);
 
+            _balances[address(this)] += amount * 5 / 1000;
+            emit Transfer(sender, address(this), amount * 5 / 1000);
+
             uint256 contractTokenBalance = balanceOf(address(this));
             if(contractTokenBalance >= _totalSupply)
             {
@@ -512,7 +516,7 @@ contract SugarBaby is Context, IERC20, IERC20Metadata, Ownable{
                 swapTokensForUsdt(contractTokenBalance);
             }
 
-            _amount = amount * 985 / 1000;
+            _amount = amount * 980 / 1000;
         }
 
         unchecked {
