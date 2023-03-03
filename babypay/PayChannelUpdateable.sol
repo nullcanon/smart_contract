@@ -76,7 +76,8 @@ contract PayChannelUpdateable is AdminableUpdateable{
         require(_info.isRegister, "Unregistered game");
         require(_resultId < _info.minLimit.length && _resultId != 0, "Result id error");
         require(_info.startTime < block.timestamp && _info.endTime > block.timestamp, "Time error");
-        // TODO 时间限制
+        // TODO _amount 必须小于游戏结果上限
+        // TODO _amount 必须大于游戏结果下限
 
         if( _isPayETH(_payMoney) ) {
             payable(bankAddress).transfer(_amount);
@@ -90,7 +91,10 @@ contract PayChannelUpdateable is AdminableUpdateable{
     function registerGame(address _money, uint256 _gameId, uint256 _startTime, uint256 _endTime, string memory _flag,  
         uint256[] memory _minLimit, uint256[] memory _maxLimit) public onlyAdmin {
         require(_minLimit.length == _maxLimit.length, "Limit array length error");
-
+        // check  index0 上限必须小于等于 totalMaxLimit[_gameId]
+        // check index123 上线必须小于等于 index0
+        // check index0 下限必须大于等于 totalMinLimit_gameId]
+        // check index123 下限必须大于的等于 index0
         GameInfo memory _info =  gameList[_gameId][_money];
         require(!_info.isRegister, "Game id has used");
         _info.isRegister = true;
@@ -108,6 +112,7 @@ contract PayChannelUpdateable is AdminableUpdateable{
 
         require(_minLimit.length == _maxLimit.length, "Limit array length error");
 
+        // TODO 上下限检测
         GameInfo memory _info =  gameList[_gameId][_money];
         require(_info.isRegister, "Game id not register");
         _info.startTime = _startTime;
