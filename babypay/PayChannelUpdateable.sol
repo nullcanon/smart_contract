@@ -34,7 +34,7 @@ contract PayChannelUpdateable is AdminableUpdateable{
     event PlayGamed(address indexed user, address indexed payMoney, uint256 gameId, uint256 resultId, uint256 amount);
     event RegisterGamed(address indexed payMoney, uint256 gameId, uint256 startTime, uint256 endTime,  string flag, uint256[] minLimit, uint256[] maxLimit);
     event ModifyGamed(address indexed payMoney, uint256 gameId, uint256 startTime, uint256 endTime, string flag, uint256[] minLimit, uint256[] maxLimit);
-    event Claimed(address indexed account, address indexed payMoney, uint256 amount, uint256 nonce);
+    event Claimed(address indexed account, address indexed payMoney, uint256 amount, uint256 nonce, uint256 infoid);
     event UrgentWithdraw(address indexed account, address indexed payMoney, uint256 amount);
     event BankChanged(address indexed oldBank, address indexed newBank);
     event LimitChanged(address indexed money, uint256 oldMin, uint256 newMin, uint256 oldMax, uint256 newMax);
@@ -141,9 +141,10 @@ contract PayChannelUpdateable is AdminableUpdateable{
         address _payMoney,
         uint256 _amount,
         uint256 _deadline,
-        uint _nonce
+        uint256 _nonce,
+        uint256 _infoid
     ) public pure returns (bytes32) {
-        return keccak256(abi.encodePacked(_to,_payMoney,  _amount, _deadline, _nonce));
+        return keccak256(abi.encodePacked(_to,_payMoney,  _amount, _deadline, _nonce, _infoid));
     }
 
     function getEthSignedMessageHash(bytes32 _messageHash)
@@ -176,10 +177,11 @@ contract PayChannelUpdateable is AdminableUpdateable{
         address _payMoney,
         uint256 _amount,
         uint256 _deadline,
-        uint _nonce,
+        uint256 _nonce,
+        uint256 _infoid,
         bytes memory signature
     ) public view returns (bool) {
-        bytes32 messageHash = getMessageHash(_to, _payMoney, _amount, _deadline, _nonce);
+        bytes32 messageHash = getMessageHash(_to, _payMoney, _amount, _deadline, _nonce, _infoid);
         bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
 
         return recoverSigner(ethSignedMessageHash, signature) == signer;
@@ -223,11 +225,12 @@ contract PayChannelUpdateable is AdminableUpdateable{
         address _payMoney,
         uint256 _amount,
         uint256 _deadline,
-        uint _nonce,
+        uint256 _nonce,
+        uint256 _infoid,
         bytes memory _signature
     ) public {
         require(_deadline > block.timestamp, "Already expired");
-        require(verify(_to, _payMoney, _amount, _deadline, _nonce, _signature), "signature verify faild");
+        require(verify(_to, _payMoney, _amount, _deadline, _nonce, _infoid, _signature), "signature verify faild");
         require(userNonce[_to] == _nonce, "nonce verify faild");
         require(_to == msg.sender, "Only self can claim");
         userNonce[_to] = userNonce[_to] + 1;
@@ -238,7 +241,7 @@ contract PayChannelUpdateable is AdminableUpdateable{
             IERC20(_payMoney).transfer(_to, _amount);
         }
 
-        emit Claimed(_to, _payMoney, _amount, _nonce);
+        emit Claimed(_to, _payMoney, _amount, userNonce[_to], _infoid);
     }
 
     function setSigner(address _signer) public onlyOwner {
