@@ -400,7 +400,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function name() public view virtual override returns (string memory) {
-        return "Chat chain";
+        return "Chat chain Coin";
     }
 
     function symbol() public view virtual override returns (string memory) {

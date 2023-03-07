@@ -365,10 +365,10 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     uint private _totalSupply;
     string private _name;
     string private _symbol;
-    address public marketAddress = 0x5e1d487af466d4dD78a46E359d99c5a0d583FD83;
+    address public marketAddress = 0x75d562c523952985db95de545b6B1149f9E52d51;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
-    address public usdtAddress = 0x8538D1641Ad855dB9E36fc1c7dc84236f104bB4a;
+    address public usdtAddress = 0x55d398326f99059fF775485246999027B3197955;
     address public destroyAddress = 0x000000000000000000000000000000000000dEaD;
     bool inSwapAndLiquify;
     bool public swapAndLiquifyEnabled = true;
@@ -400,7 +400,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function name() public view virtual override returns (string memory) {
-        return "Chat chain";
+        return "Chatchain Coin";
     }
 
     function symbol() public view virtual override returns (string memory) {
