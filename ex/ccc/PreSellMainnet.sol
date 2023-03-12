@@ -93,9 +93,9 @@ contract CCCPresell is Ownable {
 
     //BSC: 0x55d398326f99059fF775485246999027B3197955
     //BSC testnet: 0xEdA5dA0050e21e9E34fadb1075986Af1370c7BDb
-    address public usdtMintAddress = 0x8538D1641Ad855dB9E36fc1c7dc84236f104bB4a;
-    address public presellTokenMintAddress = 0x1c47CD6A9c2CfAEdEdda5E242c81aA93eBfc81BE;
-    address public marketAddress = 0xF4Cf77b898247b2cD51AF27287007bb8ecD5Bc52;
+    address public usdtMintAddress = 0x55d398326f99059fF775485246999027B3197955;
+    address public presellTokenMintAddress = 0x99b99009cbdd6447dc25FB747e89E55D75f414E4;
+    address public marketAddress = 0xf7DA3cE5f439Afc213A59A7692d5B6085F2F3C41;
 
 
     // BSC testnet 1
@@ -106,14 +106,14 @@ contract CCCPresell is Ownable {
     uint32 public withdrawCounter;
 
     // tesenet 600, mainnet 86400
-    uint256 private timeStep = 3600; // 1day
+    uint256 private timeStep = 86400; // 1day
 
     // mainnet 5 * 10 ** 18
     uint256 private priceStep = usdtAmount * 20 / 100;
 
     // BSC testnet 10
     // BSC mainnet 1024
-    uint32 public preMax = 10;
+    uint32 public preMax = 500;
     uint64 public startAt;
     uint64 public endAt;
     uint64 public startWithdraw;
