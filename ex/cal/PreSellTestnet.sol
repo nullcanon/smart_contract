@@ -159,18 +159,16 @@ contract CCCPresell is Ownable {
     }
 
 
-    function getStep() public view returns (uint256) {
-        uint curtime = block.timestamp;
-        if(curtime < startAt) {
-            return 0;
-        }
-        return (curtime - startAt) / timeStep;
-    }
+    // function getStep() public view returns (uint256) {
+    //     uint curtime = block.timestamp;
+    //     if(curtime < startAt) {
+    //         return 0;
+    //     }
+    //     return (curtime - startAt) / timeStep;
+    // }
 
     function getCurPrice() public view returns (uint256) {
-        uint256 step = getStep();
-        uint256 money = usdtAmount + step * priceStep;
-        return money;
+        return usdtAmount;
     }
 
 

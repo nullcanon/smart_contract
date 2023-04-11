@@ -356,7 +356,7 @@ interface IPancakeSwapV2Router02 is IPancakeSwapV2Router01 {
     ) external;
 }
 
-contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
+contract CoinAlchemy is Context, IERC20, IERC20Metadata, Ownable{
     using SafeMath for uint256;
     using Address for address;
 
@@ -366,6 +366,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     string private _name;
     string private _symbol;
     address public marketAddress = 0x5e1d487af466d4dD78a46E359d99c5a0d583FD83;
+    address public gameRewardAddress = 0x5e1d487af466d4dD78a46E359d99c5a0d583FD83;
     IPancakeSwapV2Router02 public immutable uniswapV2Router;
     address public uniswapV2Pair;
     address public usdtAddress = 0x8538D1641Ad855dB9E36fc1c7dc84236f104bB4a;
@@ -386,7 +387,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
 
     
     constructor () {
-        _mint(_msgSender(), 10000000 * 1e18);
+        _mint(_msgSender(), 1000000000 * 1e18);
         
         // uni 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
         // pancake 0x10ED43C718714eb63d5aA57B78B54704E256024E
@@ -400,11 +401,11 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function name() public view virtual override returns (string memory) {
-        return "Chat chain Coin";
+        return "Coin Alchemy";
     }
 
     function symbol() public view virtual override returns (string memory) {
-        return "CCC";
+        return "CA";
     }
 
     function decimals() public view virtual override returns (uint8) {
@@ -441,7 +442,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
         _transfer(sender, recipient, amount);
 
         uint currentAllowance = _allowances[sender][_msgSender()];
-        require(currentAllowance >= amount, "CCC: transfer amount exceeds allowance");
+        require(currentAllowance >= amount, "CoinAlchemy: transfer amount exceeds allowance");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
@@ -455,7 +456,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
 
     function decreaseAllowance(address spender, uint subtractedValue) public virtual returns (bool) {
         uint currentAllowance = _allowances[_msgSender()][spender];
-        require(currentAllowance >= subtractedValue, "CCC: decreased allowance below zero");
+        require(currentAllowance >= subtractedValue, "CoinAlchemy: decreased allowance below zero");
         unchecked {
             _approve(_msgSender(), spender, currentAllowance - subtractedValue);
         }
@@ -475,15 +476,19 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
         marketAddress = to;
     }
 
+    function setGameReward(address to) public onlyOwner {
+        gameRewardAddress = to;
+    }
+
     function _transfer(
         address sender,
         address recipient,
         uint amount
     ) internal virtual {
-        require(sender != address(0), "CCC: transfer from the zero address");
-        require(recipient != address(0), "CCC: transfer to the zero address");
+        require(sender != address(0), "CoinAlchemy: transfer from the zero address");
+        require(recipient != address(0), "CoinAlchemy: transfer to the zero address");
         uint senderBalance = _balances[sender];
-        require(senderBalance >= amount, "CCC: transfer amount exceeds balance");
+        require(senderBalance >= amount, "CoinAlchemy: transfer amount exceeds balance");
         uint _amount = amount;
 
         
@@ -493,11 +498,13 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
             !isExcludeds[sender] &&
             !isExcludeds[recipient] ) {
 
-            _balances[address(this)] += amount * 20 / 1000;
-            emit Transfer(sender, address(this), amount * 20 / 1000);
+            _balances[address(this)] += amount * 99 / 10000;
+            emit Transfer(sender, address(this), amount * 99 / 10000);
 
-            _balances[destroyAddress] += amount * 10 / 1000;
-            emit Transfer(sender,destroyAddress, amount * 10 / 1000);
+            _balances[gameRewardAddress] += amount * 100 / 10000;
+            emit Transfer(sender, gameRewardAddress, amount * 100 / 10000);
+
+            _burn(sender, amount * 200 / 10000);
 
             uint256 contractTokenBalance = balanceOf(address(this));
             if(contractTokenBalance >= _totalSupply)
@@ -516,7 +523,7 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
                 swapTokensForUsdt(contractTokenBalance);
             }
 
-            _amount = amount * 970 / 1000;
+            _amount = amount * 9501 / 10000;
         }
 
         unchecked {
@@ -533,9 +540,9 @@ contract ChatChain is Context, IERC20, IERC20Metadata, Ownable{
     }
 
     function _burn(address account, uint amount) internal virtual {
-        require(account != address(0), "CCC: burn from the zero address");
+        require(account != address(0), "CoinAlchemy: burn from the zero address");
         uint accountBalance = _balances[account];
-        require(accountBalance >= amount, "CCC: burn amount exceeds balance");
+        require(accountBalance >= amount, "CoinAlchemy: burn amount exceeds balance");
         unchecked {
             _balances[account] = accountBalance - amount;
         }
