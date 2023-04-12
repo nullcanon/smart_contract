@@ -33,10 +33,10 @@
 	},
 	"sources": {
 		"tools/BatchTransfer.sol": {
-			"keccak256": "0x85e91011a16aaf71b5f1d1cea7cf504b76635295a0fcc2a4f5403d48344e3e89",
+			"keccak256": "0x0f4115fd37a2102f4a587e61682e04149518e4a51ede7eb69bbf59190ea7340e",
 			"urls": [
-				"bzz-raw://8a8c8481e9a7b01b12200be3ac8bfdddc720623416dc79a3b3f6556240f237be",
-				"dweb:/ipfs/QmYqB2UKQWG6fCW62CHvkfkm4TSepy5rykqFSNcqYRakB9"
+				"bzz-raw://3fb2eb34c002e1bae3f9aaf4d46b7862b23fd803a69a1b646a93eb10f71c33c0",
+				"dweb:/ipfs/QmXjGMk85JAgVsfnP3keWQ6W9nguRR4fUYzQzv9Qb59P3D"
 			]
 		}
 	},

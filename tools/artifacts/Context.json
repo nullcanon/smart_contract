@@ -54,11 +54,5 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {}
 	},
-	"abi": [
-		{
-			"payable": true,
-			"stateMutability": "payable",
-			"type": "fallback"
-		}
-	]
+	"abi": []
 }
